@@ -1,0 +1,23 @@
+name: daily
+on:
+  schedule: [{ cron: "30 6 * * *" }]
+  workflow_dispatch:
+
+jobs:
+  tec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      # data/ is gitignored until cloud storage lands; the Actions cache carries the archive between runs
+      - uses: actions/cache@v4
+        with:
+          path: data
+          key: tec-data-${{ github.run_id }}
+          restore-keys: tec-data-
+      - run: uv run gridline fetch
+      - run: uv run gridline diff
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tec-data
+          path: data

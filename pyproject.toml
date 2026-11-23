@@ -1,0 +1,23 @@
+[project]
+name = "gridline"
+version = "0.1.0"
+description = "Open tracker for Great Britain's grid connections queue"
+authors = [
+    { name = "Anwar", email = "55035440+anwaroodin@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "polars>=2.1.0",
+]
+
+[project.scripts]
+gridline = "gridline:main"
+
+[build-system]
+requires = ["uv_build>=0.9.13,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
