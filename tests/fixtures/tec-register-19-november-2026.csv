@@ -1,0 +1,11 @@
+﻿Project Name,Customer Name,Connection Site,Stage,MW Connected,MW Increase / Decrease,Cumulative Total Capacity (MW),MW Effective From,Project Status,Agreement Type,HOST TO,Plant Type,Project ID,Project Number,Gate
+Aberarder Wind Farm,ABERARDER WIND FARM LLP,Aberarder Wind Farm 132/33kV Substation,,0.00,49.99,49.99,2026-08-31,Consents Approved,Direct Connection,SHET,Wind Onshore,a0l4L0000005ilHQAQ,PRO-000368,
+Al Boum Photo (Norton),AL BOUM PHOTO LTD,Norton 400kV Substation,,0.00,275.00,275.00,2031-10-31,Consents Approved,Direct Connection,NGET,Energy Storage System,a0l4L0000005ixrQAA,PRO-001651,
+Arbroath Battery Substation,ARBROATH LIMITED,Arbroath GSP,,0.00,35.00,35.00,2022-02-21,Consents Approved,Embedded,SHET,Energy Storage System,a0l4L0000005iSwQAI,PRO-000950,
+Artfield Forest Wind Farm,ARTFIELD FOREST WIND FARM LTD,Artfield Forest Wind Farm 132kV Substation,,0.00,85.80,85.80,2030-06-28,Consents Approved,Direct Connection,SPT,Wind Onshore,a0l8e0000011zPNAAY,PRO-003578,
+Barking BESS,O&G Solar (SPV 52) Limited,Barking West GSP,,0.00,99.90,99.90,2028-10-31,Consents Approved,Direct Connection,NGET,Energy Storage System,a0l8e0000011yTTAAY,PRO-003518,
+Beaw Field Wind Farm,BEAW FIELD SHETLAND LIMITED,Beaw Field 132/33kV Substation,,0.00,102.00,102.00,2032-10-29,Consents Approved,Direct Connection,SHET,Wind Onshore,a0l4L0000005iyaQAA,PRO-000026,
+BESS Harker,REWE 4 LIMITED,Harker 400kV Substation,,0.00,200.00,200.00,2031-05-30,Consents Approved,Direct Connection,NGET,Energy Storage System,a0l4L0000005ia7QAA,PRO-002010,
+Blarghour Wind,BLARGHOUR WIND FARM LIMITED,Blarghour Substation,,0.00,67.20,67.20,2029-04-01,Consents Approved,Direct Connection,SHET,Wind Onshore,a0l4L0000005itaQAA,PRO-000398,
+Zenobe Blackhillock 300 MW,ZENOBE BLACKHILLOCK LIMITED,Blackhillock 275kV Substation,1,200.00,0.00,200.00,,Built,Direct Connection,SHET,Energy Storage System,a0l4L0000005iNTQAY,PRO-001624-1,
+Zenobe Blackhillock 300 MW,ZENOBE BLACKHILLOCK LIMITED,Blackhillock 275kV Substation,2,0.00,100.00,300.00,2026-04-01,Consents Approved,Direct Connection,SHET,Energy Storage System,a0l4L0000005iNTQAY,PRO-001624-2,
