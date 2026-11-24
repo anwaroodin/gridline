@@ -12,11 +12,12 @@ jobs:
   tec:
     if: github.ref == 'refs/heads/main' # a manual run on another branch must not touch main
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
-      - run: uv run gridline fetch
-      - run: uv run gridline diff # only checks the archive still parses; data/ is not committed
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
+      - run: uv run --locked gridline fetch
+      - run: uv run --locked gridline diff # only checks the archive still parses; data/ is not committed
       - name: Commit new releases
         run: |
           git config user.name "github-actions[bot]"
