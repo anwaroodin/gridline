@@ -183,14 +183,31 @@ def kinds(snaps):
     return sorted((e["key"], e["event_type"]) for e in build(snaps)[0])
 
 
-def test_stage_change_is_a_new_key():
-    # pins today's behaviour (see the ponytail note in index())
+def test_stage_split_stays_one_project():
+    """tec-stage-split-*.csv: the real PRO-000366 rows. On 19 Nov it is one row with no
+    Stage; on 23 Nov the same Project ID has Stage 1 (1,365 MW, Built) and Stage 2
+    (1,400 MW, Scoping)."""
+    snaps = [
+        (p.stem, published_from_name(p.name), read_tec(p))
+        for p in sorted(FIX.glob("tec-stage-split-*.csv"))
+    ]
+    events, _ = build(snaps)
+    pid = "a0l4L0000005itwQAA"
+    assert [(e["event_type"], e["old_value"], e["new_value"]) for e in events] == [
+        ("stage_split", f"{pid}|", f"{pid}|1;{pid}|2")
+    ]
+    # a lone rename (blank -> "1") is not a split: still withdrawn + added
     d1, d2 = date(2026, 11, 19), date(2026, 12, 1)
     a = [row(project_id="X", stage=None)]
     b = [row(project_id="X", stage="1")]
     assert kinds([("s1", d1, a), ("s2", d2, b)]) == [
         ("X|", "withdrawn"),
         ("X|1", "added"),
+    ]
+    # ECR rows (no Stage) repeated under one ID are not a split
+    c = [row(project_id="S"), row(project_id="S")]
+    assert kinds([("s1", d1, [row(project_id="S")]), ("s2", d2, c)]) == [
+        ("S|#2", "added")
     ]
 
 

@@ -111,6 +111,7 @@ print(
 |---|---|
 | `added` | the row appears for the first time |
 | `withdrawn` | the row is no longer in the TEC register |
+| `stage_split` | a TEC Project ID that had one Stage now has several: it stays one project. `old_value` is the old key, `new_value` the new stage keys (`;`-separated), instead of `withdrawn` + `added` |
 | `removed_from_register` | the row is no longer in a DNO register. Not called withdrawn: under connections reform some projects moved to Gate 1 and were removed from ECRs |
 | `capacity_changed` | TEC: Cumulative Total Capacity (MW) changed. ECR: the registered capacity (accepted-to-connect, or already-connected once connected) changed |
 | `date_slipped` | TEC: MW Effective From moved. ECR: Target Energisation Date moved (NPg leaves it blank, so none there). `days` is positive when later, negative when brought forward |

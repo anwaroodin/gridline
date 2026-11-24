@@ -591,9 +591,9 @@ def index(rows: list[dict]) -> dict[str, dict]:
     base = []
     for r in rows:
         if r["project_id"]:
-            # ponytail: Stage is in the key, so a Stage change (blank -> "1") shows as
-            # `withdrawn` + `added`; drop it from the key once two real releases show
-            # whether one Project ID can carry several stages at once
+            # Stage stays in the key: one Project ID carries several stages at once
+            # (PRO-000366-1 and -2, 23 Nov 2026). A split is linked in build().
+            # ponytail: a lone rename (blank -> "1") still shows as withdrawn + added
             base.append(f"{r['project_id']}|{r['stage'] or ''}")
         else:
             base.append(name_key(r))
@@ -642,6 +642,24 @@ def changes(a: dict, b: dict) -> Iterator[tuple]:
         yield "connected", "mw_connected", a["mw_connected"], b["mw_connected"], None
 
 
+def stage_splits(prev: dict, cur: dict) -> dict[str, list[str]]:
+    """{old key: new keys} for a Project ID that had one Stage and now has several: the
+    project split into stages and stays one project, so build() links the new stage keys
+    to the old key with one `stage_split` instead of `withdrawn` + `added`."""
+    stages, keys = defaultdict(lambda: ({}, {})), {}
+    for side, rows in enumerate((prev, cur)):
+        for k, r in rows.items():
+            if r["project_id"]:
+                stages[r["project_id"]][side].setdefault(r["stage"], []).append(k)
+    for old, new in stages.values():
+        if len(old) == 1 and len(new) > 1:
+            (old_keys,) = old.values()
+            added = sorted(k for ks in new.values() for k in ks if k not in prev)
+            if len(old_keys) == 1 and added:
+                keys[old_keys[0]] = added
+    return keys
+
+
 def add_event(
     events: list[dict],
     where: dict,
@@ -688,9 +706,15 @@ def build(
             "published": published,
         }
         if prev is not None:
-            for k in sorted(cur.keys() - prev.keys()):
+            splits = stage_splits(prev, cur)
+            linked = {k for ks in splits.values() for k in ks}
+            for old, new in sorted(splits.items()):
+                add_event(
+                    events, where, prev[old], "stage_split", "key", old, ";".join(new)
+                )
+            for k in sorted(cur.keys() - prev.keys() - linked):
                 add_event(events, where, cur[k], "added")
-            for k in sorted(prev.keys() - cur.keys()):
+            for k in sorted(prev.keys() - cur.keys() - splits.keys()):
                 add_event(events, where, prev[k], gone)
             for k in sorted(cur.keys() & prev.keys()):
                 for c in changes(prev[k], cur[k]):
