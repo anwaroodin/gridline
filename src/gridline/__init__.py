@@ -19,7 +19,7 @@ import urllib.parse
 import urllib.request
 from collections import Counter
 from collections.abc import Iterator
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 import polars as pl
@@ -28,16 +28,17 @@ DATA = Path("data")  # derived Parquet, gitignored
 # archive/<source>/<sha256>.csv + snapshots.csv, committed: the registers keep no history
 ARCHIVE = Path("archive")
 CKAN = "https://api.neso.energy/api/3/action/package_show?id=transmission-entry-capacity-tec-register"
+SSEN_CKAN = "https://data-api.ssen.co.uk/api/3/action/package_show?id=embedded_capacity_register"
 
-# lower-cased CSV header -> our column name
+# norm(CSV header) -> our column name
 COLS = {
     "project name": "project_name",
     "customer name": "customer_name",
     "connection site": "connection_site",
     "stage": "stage",
     "mw connected": "mw_connected",
-    "mw increase / decrease": "mw_change",
-    "cumulative total capacity (mw)": "mw_total",
+    "mw increase decrease": "mw_change",
+    "cumulative total capacity mw": "mw_total",
     "mw effective from": "effective_from",
     # proposed rename (Ofgem consultation, Sept 2026)
     "planned connection date": "effective_from",
@@ -52,6 +53,38 @@ COLS = {
 # Older releases may lack project_id, project_number or gate; these must always be present.
 REQUIRED = {"project_name", "connection_site", "mw_total", "status", "effective_from"}
 NUM = ("mw_connected", "mw_change", "mw_total")
+
+# Embedded Capacity Registers (DNOs) share the ENA/DCUSA template; norm() lines up the
+# spellings (SSEN "Customer Site ", NPg "customer_site"). Mapped onto ROW_SCHEMA so build()
+# works unchanged: site -> project_name, Grid Supply Point -> connection_site, Target
+# Energisation Date -> effective_from, Energy Source 1-3 -> plant_type. The raw file keeps
+# every other column.
+ECR_COLS = {
+    "customer site": "project_name",
+    "customer name": "customer_name",
+    "grid supply point": "connection_site",
+    "connection status": "status",
+    "already connected registered capacity mw": "mw_connected",
+    "accepted to connect registered capacity mw": "mw_accepted",
+    "target energisation date": "effective_from",
+    "energy source 1": "plant_type",
+    "energy source 2": "source_2",
+    "energy source 3": "source_3",
+    "unique id": "project_id",  # SSEN
+}
+ECR_REQUIRED = set(ECR_COLS.values()) - {"customer_name"}
+# the template's many spellings of "no value", after norm()
+MISSING = {
+    "",
+    "data not available",
+    "data not applicable",
+    "not applicable",
+    "n a",
+    "na",
+    "tbc",
+    "to be confirmed",
+    "redacted",
+}
 ROW_SCHEMA = {
     "project_name": pl.String,
     "customer_name": pl.String,
@@ -129,6 +162,11 @@ def published_from_name(name: str) -> date | None:
 def parse_date(s: str | None) -> date | None:
     if not s:
         return None
+    if s.isdigit() and 20000 <= int(s) <= 80000:
+        # Excel serial day that leaked into a CSV (SSEN "46336")
+        return date(1899, 12, 30) + timedelta(days=int(s))
+    # drop a time part: "2024-03-07T00:00:00+00:00", "17/07/2026 00:00"
+    s = re.split(r"[T ]", s.strip())[0]
     for fmt in ("%Y-%m-%d", "%d/%m/%Y", "%d-%b-%Y", "%d/%m/%y"):
         try:
             return datetime.strptime(s, fmt).date()
@@ -150,32 +188,66 @@ def parse_num(s: str | None) -> float | None:
     return value if math.isfinite(value) else None
 
 
-def parse_tec(blob: bytes) -> list[dict]:
-    """Parse one TEC register CSV. Raises ValueError if a required column is missing."""
+def read_rows(blob: bytes, cols: dict, required: set, what: str) -> Iterator[dict]:
+    """CSV rows as {our column: stripped text or None}, blank rows dropped.
+    Raises ValueError if a required column is missing."""
     try:
         text = blob.decode("utf-8-sig")
     except UnicodeDecodeError:
         text = blob.decode("cp1252")
     reader = csv.DictReader(io.StringIO(text))
-    present = {COLS.get((h or "").strip().lower()) for h in reader.fieldnames or []}
-    missing = REQUIRED - present
+    present = {cols.get(norm(h)) for h in reader.fieldnames or []}
+    missing = required - present
     if missing:
-        raise ValueError(f"not a TEC register: missing columns {sorted(missing)}")
-    rows = []
+        raise ValueError(f"not a {what}: missing columns {sorted(missing)}")
     for raw in reader:
-        r = dict.fromkeys(ROW_SCHEMA)
+        r = dict.fromkeys(cols.values())
         for k, v in raw.items():
-            if k and k.strip().lower() in COLS:
+            col = cols.get(norm(k))
+            if col:
                 # two headers can map to one column (old + renamed date):
                 # a blank one must not wipe the filled one
-                col = COLS[k.strip().lower()]
                 r[col] = r[col] or (v or "").strip() or None
-        if not any(r.values()):
-            continue
+        if any(r.values()):
+            yield r
+
+
+def parse_tec(blob: bytes) -> list[dict]:
+    """Parse one TEC register CSV. Raises ValueError if a required column is missing."""
+    rows = []
+    for r in read_rows(blob, COLS, REQUIRED, "TEC register"):
+        r = {**dict.fromkeys(ROW_SCHEMA), **r}
         for c in NUM:
             r[c] = parse_num(r[c])
         r["effective_from"] = parse_date(r["effective_from"])
         rows.append(r)
+    return rows
+
+
+def parse_ecr(blob: bytes) -> list[dict]:
+    """Parse one Embedded Capacity Register CSV into ROW_SCHEMA rows."""
+    rows = []
+    for r in read_rows(blob, ECR_COLS, ECR_REQUIRED, "Embedded Capacity Register"):
+        r = {k: None if norm(v) in MISSING else v for k, v in r.items()}
+        sources = [r.pop("plant_type"), r.pop("source_2"), r.pop("source_3")]
+        accepted = parse_num(r.pop("mw_accepted"))
+        row = {**dict.fromkeys(ROW_SCHEMA), **r}
+        row["plant_type"] = ";".join(filter(None, sources)) or None
+        # spellings differ by DNO and by row ("ACCEPTED TO CONNECT", "Accepted To Connect")
+        row["status"] = r["status"] and r["status"].lower()
+        row["mw_connected"] = parse_num(r["mw_connected"])
+        # the register fills one capacity column per row, chosen by status
+        connected = row["status"] == "connected"
+        row["mw_total"] = row["mw_connected"] if connected else accepted
+        row["effective_from"] = parse_date(r["effective_from"])
+        # SSEN's "SSEN0001-1MW-CONNECTED" carries the status: keep the stable number.
+        # ponytail: Oct->Nov 2026 kept every number, but no row changed status that
+        # month; check the number survives connection once one does
+        if row["project_id"]:
+            row["project_id"] = re.sub(
+                r"-(1MW|50KW)-.*", "", row["project_id"], flags=re.IGNORECASE
+            )
+        rows.append(row)
     return rows
 
 
@@ -291,6 +363,13 @@ SOURCES = {
         "parse": lambda blob: parse_tec(blob),
         "stale_days": 14,  # NESO publishes about twice a week
         "gone": "withdrawn",
+    },
+    "ssen": {
+        "find": lambda: ckan(SSEN_CKAN, "_1mw_"),  # ssen_ecr_part_1_1mw_<month>_csv.csv
+        "parse": lambda blob: parse_ecr(blob),
+        "stale_days": 45,  # monthly, mid-month
+        # gone from a DNO register: often a reform move to Gate 1, not a cancellation
+        "gone": "removed_from_register",
     },
 }
 

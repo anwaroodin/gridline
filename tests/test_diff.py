@@ -9,10 +9,19 @@ import json
 from datetime import date
 from pathlib import Path
 
+import polars as pl
 import pytest
 
 import gridline
-from gridline import archive, build, parse_num, parse_tec, published_from_name, read_tec
+from gridline import (
+    archive,
+    build,
+    parse_ecr,
+    parse_num,
+    parse_tec,
+    published_from_name,
+    read_tec,
+)
 
 FIX = Path(__file__).parent / "fixtures"
 
@@ -129,17 +138,17 @@ def test_parsing_guards(tmp_path, monkeypatch):
         "http",
         lambda u: json.dumps(ckan).encode() if u == gridline.CKAN else real,
     )
-    gridline.fetch()
+    gridline.fetch(["tec"])
     assert gridline.manifest()["published"].to_list() == [published_from_name(url)]
     # an unrelated CSV in the dataset is skipped, not fatal
     guide = "https://x/download/tec-guidance-notes.csv"
     ckan["result"]["resources"].insert(0, {"format": "CSV", "url": guide})
-    gridline.fetch()
+    gridline.fetch(["tec"])
     assert gridline.manifest().height == 1
     # no date anywhere -> clear exit instead of a crash
     ckan["result"]["resources"][-1]["url"] = "https://x/download/tec-register.csv"
     with pytest.raises(SystemExit, match="no date"):
-        gridline.fetch()
+        gridline.fetch(["tec"])
 
 
 def test_archive_refuses_truncated_release(tmp_path, monkeypatch):
@@ -157,9 +166,9 @@ def test_archive_refuses_truncated_release(tmp_path, monkeypatch):
     with pytest.raises(SystemExit, match="usage"):
         gridline.main()
     # staleness: newest release is 1 Dec
-    gridline.check(date(2026, 12, 15))
+    gridline.check(date(2026, 12, 15), ["tec"])
     with pytest.raises(SystemExit, match="stale"):
-        gridline.check(date(2026, 12, 16))
+        gridline.check(date(2026, 12, 16), ["tec"])
     # Project ID column renamed: refuse rather than re-key every row by name
     no_ids = real.replace(b"Project ID", b"Official Project Ref")
     with pytest.raises(SystemExit, match="no Project IDs"):
@@ -204,3 +213,75 @@ def test_build_paths_across_three_releases():
     assert sorted(b, key=str) == [(d[0], d[1]), (d[2], None)]
     # A changed twice (gate, date), so three versions
     assert len([v for v in versions if v["key"] == "A|"]) == 3
+
+
+def test_ssen_ecr(tmp_path, monkeypatch):
+    """ssen-ecr-1mw-*.csv: 10 rows each of SSEN's real Oct and Nov 2026 >=1 MW CSVs, with
+    MPANs, customer name and address blanked. 7 sites are in both; 3 left, 3 arrived."""
+    oct_ = (FIX / "ssen-ecr-1mw-12-october-2026.csv").read_bytes()
+    nov = (FIX / "ssen-ecr-1mw-13-november-2026.csv").read_bytes()
+    rows = {r["project_id"]: r for r in parse_ecr(nov)}
+    assert len(rows) == 10
+    r = rows["SSEN0703"]  # "SSEN0703-1MW-ACCEPTED TO CONNECT"
+    assert (r["status"], r["mw_total"], r["effective_from"], r["connection_site"]) == (
+        "accepted to connect",
+        37.0,
+        date(2026, 9, 30),
+        "FETTERSSO GRID",
+    )
+    # connected: capacity from the other column; "DATA NOT AVAILABLE" date -> None
+    r = rows["SSEN0001"]
+    assert (r["status"], r["mw_total"], r["effective_from"]) == (
+        "connected",
+        4.275,
+        None,
+    )
+    assert rows["SSEN0714"]["plant_type"].startswith("SOLAR;STORED ENERGY")
+    assert gridline.parse_date("46336") == date(2026, 11, 10)
+    assert gridline.parse_date("2024-03-07T00:00:00+00:00") == date(2024, 3, 7)
+    assert gridline.parse_date("17/07/2026 00:00") == date(2026, 7, 17)
+
+    # fetch: only the >=1 MW CSVs, oldest first, dated by last_modified
+    url = "https://data-api.ssen.co.uk/dataset/x/resource/{}/download/{}".format
+    res = [
+        {
+            "format": "XLSX",
+            "url": url(1, "embedded-capacity-register-4.0_november_2026.xlsx"),
+        },
+        {
+            "format": "CSV",
+            "url": url(2, "ssen_ecr_part_1_1mw_november_2026_csv.csv"),
+            "last_modified": "2026-11-13T10:33:35.355884",
+        },
+        {"format": "CSV", "url": url(3, "ssen_ecr_part_1_50kw_november_2026_csv.csv")},
+        {
+            "format": "CSV",
+            "url": url(4, "ssen_ecr_part_1_1mw_october_2026_csv.csv"),
+            "last_modified": "2026-10-12T16:05:19.020109",
+        },
+        {"format": "CSV", "url": url(5, "embedded-capacity-register-attributes.csv")},
+    ]
+    blobs = {
+        gridline.SSEN_CKAN: json.dumps({"result": {"resources": res}}).encode(),
+        res[1]["url"]: nov,
+        res[3]["url"]: oct_,
+    }
+    monkeypatch.setattr(gridline, "http", blobs.__getitem__)
+    monkeypatch.chdir(tmp_path)
+    gridline.fetch(["ssen"])
+    assert gridline.manifest("ssen")["published"].to_list() == [
+        date(2026, 10, 12),
+        date(2026, 11, 13),
+    ]
+    gridline.diff()
+    ev = pl.read_parquet("data/event.parquet")
+    assert set(ev["register"]) == {"ssen"}
+    assert sorted(zip(ev["event_type"], ev["project_id"])) == [
+        ("added", "SSEN1514"),
+        ("added", "SSEN1515"),
+        ("added", "SSEN1516"),
+        ("removed_from_register", "SSEN0737"),
+        ("removed_from_register", "SSEN0756"),
+        ("removed_from_register", "SSEN1265"),
+    ]
+    assert not ev["low_confidence"].any()
