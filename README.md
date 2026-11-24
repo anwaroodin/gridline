@@ -13,13 +13,24 @@ New solar farms, wind farms and batteries in Great Britain can't be built until 
 connection, and the queue for those connections is the main bottleneck. The National Energy System
 Operator (NESO) publishes that queue as the Transmission Entry Capacity (TEC) register. The register
 only shows the current state: each new release overwrites the last, and NESO keeps no past releases.
+Smaller projects connect to the regional networks instead, and each Distribution Network Operator
+(DNO) publishes its own Embedded Capacity Register (ECR), monthly, again overwriting the last.
 In its September 2026 "Transforming Connections Data" consultation, Ofgem said stakeholders can't get
 a complete and consistent picture of the queue. Gridline keeps the history.
 
 ## What it does today
 
-- **Archives every TEC register release byte for byte**, named by its sha256, with a manifest of when
-  it was fetched and published.
+- **Archives every release byte for byte**, named by its sha256, with a manifest of when it was
+  fetched and published. Sources today:
+
+  | Source | Register | Cadence |
+  |---|---|---|
+  | `tec` | NESO [TEC Register](https://www.neso.energy/data-portal/transmission-entry-capacity-tec-register) | about twice a week |
+  | `ssen` | SSEN Distribution [Embedded Capacity Register](https://data.ssen.co.uk/dataset/655eb750-7b3f-4c55-93b6-9bc4c26a57ab), 1 MW and above | monthly |
+  | `npg` | Northern Powergrid [Embedded Capacity Register](https://northernpowergrid.opendatasoft.com/explore/dataset/embedded-capacity-register/), 1 MW and over | monthly |
+
+  The other four DNOs are planned: UKPN, SP Energy Networks and SP Electricity North West need an
+  API key, and NGED's licence for redistribution is being checked.
 - **Turns the differences between releases into typed events**: a project added or withdrawn, a
   capacity change, a connection date that slipped, a status change, a gate assigned, a first
   connection.
@@ -49,12 +60,13 @@ Example output, from the test fixtures (real rows with hand edits, **not real ch
 
 ```mermaid
 flowchart LR
-    A[NESO CKAN API] -->|gridline fetch| B[archive/tec/*.csv<br/>+ snapshots.csv]
+    A[NESO, SSEN, NPg APIs] -->|gridline fetch| B[archive/SOURCE/*.csv<br/>+ snapshots.csv]
     B -->|gridline diff| C[data/project_version.parquet]
     B -->|gridline diff| D[data/event.parquet]
 ```
 
-Rows are matched between releases on **Project ID + Stage**. A row without a Project ID falls back to
+TEC rows are matched between releases on **Project ID + Stage**; ECR rows on the DNO's own row ID
+(SSEN `Unique ID` without its status suffix, NPg `ecrid`). A row without a Project ID falls back to
 its normalised name, connection site, plant type and stage. Rows that this key can't match
 one-to-one (no Project ID, or a key repeated within one release) are kept and flagged
 `low_confidence` instead of being hidden.
@@ -66,8 +78,10 @@ Requires [uv](https://docs.astral.sh/uv/).
 ```sh
 git clone https://github.com/anwaroodin/gridline && cd gridline
 uv sync
-uv run gridline fetch   # archive the current release (skips one already archived)
+uv run gridline fetch   # archive each source's current release (skips ones already archived)
+uv run gridline fetch ssen   # or just some sources
 uv run gridline diff    # rebuild data/*.parquet from the whole archive
+uv run gridline check   # exit non-zero if a source has had no new release for too long
 uv run pytest
 ```
 
@@ -89,31 +103,38 @@ print(
 
 | Output | One row per |
 |---|---|
-| `archive/tec/snapshots.csv` (committed; also `data/source_snapshot.parquet`) | archived release: snapshot_id, source, fetched_at, published, sha256, raw_path, rows |
+| `archive/<source>/snapshots.csv` (committed; also `data/source_snapshot.parquet`) | archived release: snapshot_id, source, fetched_at, published, sha256, raw_path, rows |
 | `data/project_version.parquet` | version of a register row, valid from `valid_from` until `valid_to` (empty = current) |
 | `data/event.parquet` | change between two consecutive releases |
 
 | Event | Meaning |
 |---|---|
 | `added` | the row appears for the first time |
-| `withdrawn` | the row is no longer in the register |
-| `capacity_changed` | Cumulative Total Capacity (MW) changed |
-| `date_slipped` | MW Effective From moved; `days` is positive when later, negative when brought forward |
-| `status_changed` | Project Status changed (for example Scoping → Consents Approved) |
+| `withdrawn` | the row is no longer in the TEC register |
+| `removed_from_register` | the row is no longer in a DNO register. Not called withdrawn: under connections reform some projects moved to Gate 1 and were removed from ECRs |
+| `capacity_changed` | TEC: Cumulative Total Capacity (MW) changed. ECR: the registered capacity (accepted-to-connect, or already-connected once connected) changed |
+| `date_slipped` | TEC: MW Effective From moved. ECR: Target Energisation Date moved (NPg leaves it blank, so none there). `days` is positive when later, negative when brought forward |
+| `status_changed` | TEC: Project Status changed (for example Scoping → Consents Approved). ECR: accepted to connect → connected |
 | `gate_assigned` | the Gate column was set or changed (Gate 1 / Gate 2 under connections reform) |
-| `connected` | MW Connected rose above 0 for the first time |
+| `connected` | MW Connected (ECR: already-connected capacity) rose above 0 for the first time |
 
-Every event carries `low_confidence`, `project_id`, `project_number`, `old_value` and `new_value`.
+Every event carries `register` (`tec`, `ssen`, `npg`), `low_confidence`, `project_id`, `project_number`, `old_value` and `new_value`.
 
 ## Data and archive
 
-- Raw releases live in [`archive/tec/`](archive/tec/), committed to this repository. NESO keeps no past
-  releases, so this archive is the history.
+- Raw releases live in [`archive/<source>/`](archive/), committed to this repository. The registers
+  overwrite themselves, so this archive is the history. (SSEN and NPg also offer older
+  monthly workbooks; loading those is not built yet.)
 - `.gitattributes` marks the archive `-text`, so git never rewrites line endings. A changed byte
   would change the file's sha256.
 - A [daily GitHub Action](.github/workflows/daily.yml) runs `fetch` and `diff` and commits any new
-  release to `main`.
-- **History starts on 19 November 2026**, because NESO publishes no earlier files.
+  release to `main`, one commit per source. One failing source doesn't stop the others; the run
+  still fails afterwards so someone notices.
+- A release is refused, and nothing is written, if it has no data rows (a login-gated portal returns
+  just the header), under half the rows of the latest release (a cut-off download), or no IDs when
+  the latest release had them (a renamed ID column).
+- **History starts on 19 November 2026** for TEC, because NESO publishes no earlier files, and in
+  October 2026 for SSEN.
 - If you hold older TEC register CSVs, `gridline backfill` loads them. The release date must be in the
   file name, for example `tec-register-28-february-2025.csv`:
 
@@ -126,7 +147,7 @@ Every event carries `low_confidence`, `project_id`, `project_number`, `old_value
 ## Roadmap
 
 - [x] Phase 0: TEC register archive and events
-- [ ] Planned: the six DNO Embedded Capacity Registers
+- [ ] Phase 1: the six DNO Embedded Capacity Registers (SSEN and NPg done)
 - [ ] Planned: cross-register project matching
 - [ ] Planned: REST API
 - [ ] Planned: web app with map, project history and reform view
@@ -142,6 +163,18 @@ Every event carries `low_confidence`, `project_id`, `project_number`, `old_value
 
 Code: [Apache-2.0](LICENSE).
 
-Data: Contains data from the National Energy System Operator (NESO), published under the
-[NESO Open Data Licence](https://www.neso.energy/data-portal/neso-open-licence). Source:
-[TEC Register](https://www.neso.energy/data-portal/transmission-entry-capacity-tec-register).
+Data, by source:
+
+- **NESO (`tec`):** Contains data from the National Energy System Operator (NESO), published under
+  the [NESO Open Data Licence](https://www.neso.energy/data-portal/neso-open-licence). Source:
+  [TEC Register](https://www.neso.energy/data-portal/transmission-entry-capacity-tec-register).
+- **SSEN (`ssen`):** Contains data from SSEN Distribution, licensed under
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Source:
+  [Embedded Capacity Register](https://data.ssen.co.uk/dataset/655eb750-7b3f-4c55-93b6-9bc4c26a57ab).
+  The raw files in `archive/ssen/` are unchanged; the derived data in `data/` was changed by
+  Gridline (columns renamed and reduced, values normalised, events computed between releases).
+- **Northern Powergrid (`npg`):** Supported by Northern Powergrid Open Data, under the
+  [Northern Powergrid Open Data Licence](https://northernpowergrid.opendatasoft.com/p/opendatalicence/).
+  Source: [Embedded Capacity Register](https://northernpowergrid.opendatasoft.com/explore/dataset/embedded-capacity-register/).
+  Its export includes derived location fields: Contains OS data © Crown copyright and database
+  right. Office for National Statistics licensed under the Open Government Licence v.3.0.
