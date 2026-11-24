@@ -4,8 +4,9 @@ Flow: `fetch` downloads each source's current release (SOURCES), and `archive` s
 bytes as archive/<source>/<sha256>.csv plus a row in archive/<source>/snapshots.csv (both
 committed). `diff` replays every archived release in publication order and writes
 data/project_version.parquet (each row with valid_from / valid_to) and data/event.parquet (typed
-changes between releases). Rows are matched on Project ID + Stage. `low_confidence` marks rows that key cannot match
-one-to-one: no Project ID (name-based fallback key) or a key repeated within one release.
+changes between releases). TEC rows are matched on Project ID + Stage, ECR rows on the DNO's
+row ID. `low_confidence` marks rows that key cannot match one-to-one: no ID (name-based fallback
+key) or a key repeated within one release.
 """
 
 import csv
@@ -374,20 +375,20 @@ def opendatasoft(dataset: str) -> list[tuple[str, date]]:
 SOURCES = {
     "tec": {
         "find": lambda: ckan(CKAN, "tec-register"),
-        "parse": lambda blob: parse_tec(blob),
+        "parse": parse_tec,
         "stale_days": 14,  # NESO publishes about twice a week
         "gone": "withdrawn",
     },
     "ssen": {
         "find": lambda: ckan(SSEN_CKAN, "_1mw_"),  # ssen_ecr_part_1_1mw_<month>_csv.csv
-        "parse": lambda blob: parse_ecr(blob),
+        "parse": parse_ecr,
         "stale_days": 45,  # monthly, mid-month
         # gone from a DNO register: often a reform move to Gate 1, not a cancellation
         "gone": "removed_from_register",
     },
     "npg": {
         "find": lambda: opendatasoft(NPG),  # the 1 MW and over register
-        "parse": lambda blob: parse_ecr(blob),
+        "parse": parse_ecr,
         "stale_days": 45,  # monthly, by the 10th working day
         "gone": "removed_from_register",
     },
