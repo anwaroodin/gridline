@@ -28,6 +28,8 @@ DATA = Path("data")  # derived Parquet, gitignored
 # raw releases + manifest, committed: NESO keeps no past releases
 RAW = Path("archive") / "tec"
 MANIFEST = RAW / "snapshots.csv"
+# NESO publishes about twice a week; a gap this long means the archiver or the source broke
+STALE_DAYS = 14
 CKAN = "https://api.neso.energy/api/3/action/package_show?id=transmission-entry-capacity-tec-register"
 
 # lower-cased CSV header -> our column name
@@ -286,6 +288,16 @@ def backfill(sources: list[str], force: bool = False) -> None:
         )
 
 
+def check(today: date | None = None) -> None:
+    """Exit non-zero when the newest archived release is older than STALE_DAYS."""
+    snaps = manifest()
+    newest = None if snaps is None else snaps["published"].max()
+    age = None if newest is None else ((today or date.today()) - newest).days
+    if age is None or age > STALE_DAYS:
+        sys.exit(f"stale: newest TEC release is {newest} ({age} days old)")
+    print(f"ok: newest TEC release is {newest} ({age} days old)")
+
+
 def norm(s: str | None) -> str:
     return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
 
@@ -449,7 +461,9 @@ def main() -> None:
         backfill([a for a in args if a != "--force"], "--force" in args)
     elif cmd == "diff":
         diff()
+    elif cmd == "check":
+        check()
     else:
         sys.exit(
-            "usage: gridline fetch | gridline backfill [--force] FILE_OR_URL ... | gridline diff"
+            "usage: gridline fetch | gridline backfill [--force] FILE_OR_URL ... | gridline diff | gridline check"
         )

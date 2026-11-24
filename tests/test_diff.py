@@ -146,6 +146,10 @@ def test_archive_refuses_truncated_release(tmp_path, monkeypatch):
     assert gridline.manifest().height == 1
     archive(short, "short", published_from_name("1-december-2026"), force=True)
     assert gridline.manifest()["rows"].to_list() == [10, 2]
+    # staleness: newest release is 1 Dec
+    gridline.check(date(2026, 12, 15))
+    with pytest.raises(SystemExit, match="stale"):
+        gridline.check(date(2026, 12, 16))
     # Project ID column renamed: refuse rather than re-key every row by name
     no_ids = real.replace(b"Project ID", b"Official Project Ref")
     with pytest.raises(SystemExit, match="no Project IDs"):

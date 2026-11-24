@@ -26,3 +26,4 @@ jobs:
           git diff --quiet --cached || git commit -m "archive: TEC register $(date -u +%F)"
           # main may have moved (a merged PR) while this ran; PRs never touch archive/
           git pull --rebase && git push
+      - run: uv run --locked gridline check # fail loudly if no new release for too long
