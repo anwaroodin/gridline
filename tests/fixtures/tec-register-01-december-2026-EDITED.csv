@@ -5,8 +5,8 @@ Arbroath Battery Substation,ARBROATH LIMITED,Arbroath GSP,,35.00,35.00,35.00,202
 Barking BESS,O&G Solar (SPV 52) Limited,Barking West GSP,,0.00,99.90,99.90,2028-10-31,Consents Approved,Direct Connection,NGET,Energy Storage System,a0l8e0000011yTTAAY,PRO-003518,2
 Beaw Field Wind Farm,BEAW FIELD SHETLAND LIMITED,Beaw Field 132/33kV Substation,,0.00,102.00,102.00,2032-10-29,Under Construction/Commissioning,Direct Connection,SHET,Wind Onshore,a0l4L0000005iyaQAA,PRO-000026,
 BESS Harker,REWE 4 LIMITED,Harker 400kV Substation,,0.00,200.00,200.00,2031-05-30,Consents Approved,Direct Connection,NGET,Energy Storage System,a0l4L0000005ia7QAA,PRO-002010,
-Blarghour Wind,BLARGHOUR WIND FARM LIMITED,Blarghour Substation,,0.00,67.20,67.20,2029-04-01,Consents Approved,Direct Connection,SHET,Wind Onshore,a0l4L0000005itaQAA,PRO-000398,
-Zenobe Blackhillock 300 MW,ZENOBE BLACKHILLOCK LIMITED,Blackhillock 275kV Substation,1,200.00,0.00,200.00,,Built,Direct Connection,SHET,Energy Storage System,a0l4L0000005iNTQAY,PRO-001624-1,
+Blarghour Wind,BLARGHOUR WIND FARM LIMITED,Blarghour Substation,,0.00,TBC,67.20,2029-04-01,Built,Direct Connection,SHET,Wind Onshore,a0l4L0000005itaQAA,PRO-000398,
+Zenobe Blackhillock 300 MW,ZENOBE BLACKHILLOCK LIMITED,Blackhillock 275kV Substation,1,250.00,0.00,200.00,,Built,Direct Connection,SHET,Energy Storage System,a0l4L0000005iNTQAY,PRO-001624-1,
 Zenobe Blackhillock 300 MW,ZENOBE BLACKHILLOCK LIMITED,Blackhillock 275kV Substation,2,0.00,100.00,300.00,2026-04-01,Consents Approved,Direct Connection,SHET,Energy Storage System,a0l4L0000005iNTQAY,PRO-001624-2,
 BESS Harker,REWE 4 LIMITED,Harker 400kV Substation,,0.00,200.00,200.00,2031-05-30,Consents Approved,Direct Connection,NGET,PV Array (Photo Voltaic/solar),a0l4L0000005ia7QAA,PRO-002010,
-Example New Solar,BLARGHOUR WIND FARM LIMITED,Harker 132kV Substation,,0.00,67.20,50.00,2029-04-01,Consents Approved,Direct Connection,SHET,Wind Onshore,,,
+Example New Solar,BLARGHOUR WIND FARM LIMITED,Harker 132kV Substation,,0.00,67.20,50.00,2029-04-01,Consents Approved,Direct Connection,SHET,PV Array (Photo Voltaic/solar),,,
