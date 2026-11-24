@@ -115,7 +115,8 @@ def http(url: str) -> bytes:
 
 def published_from_name(name: str) -> date | None:
     """'tec-register-19-november-2026.csv' -> 2026-11-19."""
-    m = re.search(r"(\d{1,2})[-_ ]+([a-z]+)[-_ ]+(\d{4})", name.lower())
+    name = re.sub(r"sept(?!ember)", "sep", name.lower())  # strptime has no "sept"
+    m = re.search(r"(\d{1,2})[-_ ]+([a-z]+)[-_ ]+(\d{4})", name)
     if not m:
         return None
     for fmt in ("%d %B %Y", "%d %b %Y"):
@@ -259,7 +260,8 @@ def fetch() -> None:
     for res in json.loads(http(CKAN))["result"]["resources"]:
         url = res["url"]
         name = Path(urllib.parse.urlparse(url).path).name
-        if res["format"].upper() != "CSV" or "tec-register" not in name.lower():
+        is_csv = (res.get("format") or "").upper() == "CSV"
+        if not is_csv or "tec-register" not in name.lower():
             print(f"skip {url}: not a TEC register CSV")
             continue
         published = published_from_name(name)
@@ -457,7 +459,7 @@ def main() -> None:
     cmd, *args = sys.argv[1:] or ["help"]
     if cmd == "fetch":
         fetch()
-    elif cmd == "backfill":
+    elif cmd == "backfill" and set(args) - {"--force"}:
         backfill([a for a in args if a != "--force"], "--force" in args)
     elif cmd == "diff":
         diff()
