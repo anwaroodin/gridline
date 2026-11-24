@@ -25,9 +25,8 @@ from pathlib import Path
 import polars as pl
 
 DATA = Path("data")  # derived Parquet, gitignored
-RAW = (
-    Path("archive") / "tec"
-)  # raw releases + manifest, committed: NESO keeps no past releases
+# raw releases + manifest, committed: NESO keeps no past releases
+RAW = Path("archive") / "tec"
 MANIFEST = RAW / "snapshots.csv"
 CKAN = "https://api.neso.energy/api/3/action/package_show?id=transmission-entry-capacity-tec-register"
 
@@ -41,7 +40,8 @@ COLS = {
     "mw increase / decrease": "mw_change",
     "cumulative total capacity (mw)": "mw_total",
     "mw effective from": "effective_from",
-    "planned connection date": "effective_from",  # proposed rename (Ofgem consultation, Sept 2026)
+    # proposed rename (Ofgem consultation, Sept 2026)
+    "planned connection date": "effective_from",
     "project status": "status",
     "agreement type": "agreement_type",
     "host to": "host_to",
@@ -132,7 +132,8 @@ def parse_date(s: str | None) -> date | None:
             return datetime.strptime(s, fmt).date()
         except ValueError:
             pass
-    return None  # ponytail: unparseable dates become null; the raw file keeps the original text
+    # ponytail: unparseable dates become null; the raw file keeps the original text
+    return None
 
 
 def parse_num(s: str | None) -> float | None:
@@ -141,10 +142,10 @@ def parse_num(s: str | None) -> float | None:
     try:
         value = float(s.replace(",", ""))
     except ValueError:
-        return None  # e.g. "TBC"; the raw file keeps the original text
-    return (
-        value if math.isfinite(value) else None
-    )  # NaN != NaN would fake a change every diff
+        # e.g. "TBC"; the raw file keeps the original text
+        return None
+    # NaN != NaN would fake a change on every diff
+    return value if math.isfinite(value) else None
 
 
 def parse_tec(blob: bytes) -> list[dict]:
@@ -193,7 +194,9 @@ def save(name: str, rows: list | pl.DataFrame, schema: dict) -> None:
 
 
 def archive(blob: bytes, source: str, published: date | None) -> None:
-    """Store a release unless its hash is known. Refuses anything that isn't a non-empty TEC register."""
+    """Store a release unless its hash is known.
+
+    Refuses anything that isn't a non-empty TEC register."""
     sha = hashlib.sha256(blob).hexdigest()
     snaps = manifest()
     if snaps is not None and sha in snaps["sha256"].to_list():
@@ -223,7 +226,9 @@ def archive(blob: bytes, source: str, published: date | None) -> None:
 
 
 def fetch() -> None:
-    """Archive every CSV resource the CKAN dataset currently lists (NESO only exposes the latest release)."""
+    """Archive every CSV resource the CKAN dataset lists.
+
+    NESO only exposes the latest release."""
     for res in json.loads(http(CKAN))["result"]["resources"]:
         if res["format"].upper() != "CSV":
             continue
@@ -270,7 +275,8 @@ def index(rows: list[dict]) -> dict[str, dict]:
     total, seen, out = Counter(base), Counter(), {}
     for k, r in zip(base, rows):
         seen[k] += 1
-        # ponytail: repeated keys are paired across releases by file order; Splink-style matching is a later phase
+        # ponytail: repeated keys are paired across releases by file order;
+        # Splink-style matching is a later phase
         key = k if seen[k] == 1 else f"{k}#{seen[k]}"
         out[key] = {
             **r,
@@ -301,8 +307,10 @@ def changes(a: dict, b: dict) -> Iterator[tuple]:
         yield "status_changed", "status", a["status"], b["status"], None
     if b["gate"] and a["gate"] != b["gate"]:
         yield "gate_assigned", "gate", a["gate"], b["gate"], None
-    # first energisation only: status Built alone is not enough (live rows are Built with 0 MW), later rises aren't new
-    # ponytail: a row that drops back to 0 MW and rises again emits a second `connected`; track history if it happens
+    # first energisation only: status Built alone is not enough (live rows are Built
+    # with 0 MW), and later rises are not new.
+    # ponytail: a row that drops back to 0 MW and rises again emits a second
+    # `connected`; track history if it happens
     if (a["mw_connected"] or 0) <= 0 < (b["mw_connected"] or 0):
         yield "connected", "mw_connected", a["mw_connected"], b["mw_connected"], None
 
