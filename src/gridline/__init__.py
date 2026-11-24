@@ -240,14 +240,18 @@ def archive(
 
 
 def fetch() -> None:
-    """Archive every CSV resource the CKAN dataset lists.
+    """Archive every TEC register CSV the CKAN dataset lists.
 
-    NESO only exposes the latest release."""
+    NESO only exposes the latest release. Other files in the dataset are skipped, so a
+    new guidance CSV can't stop the archiver; a register file that fails the checks
+    still stops it."""
     for res in json.loads(http(CKAN))["result"]["resources"]:
-        if res["format"].upper() != "CSV":
-            continue
         url = res["url"]
-        published = published_from_name(Path(urllib.parse.urlparse(url).path).name)
+        name = Path(urllib.parse.urlparse(url).path).name
+        if res["format"].upper() != "CSV" or "tec-register" not in name.lower():
+            print(f"skip {url}: not a TEC register CSV")
+            continue
+        published = published_from_name(name)
         if not published and res.get("last_modified"):
             published = date.fromisoformat(res["last_modified"][:10])
         if not published:

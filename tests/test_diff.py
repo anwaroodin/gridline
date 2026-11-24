@@ -121,8 +121,13 @@ def test_parsing_guards(tmp_path, monkeypatch):
     )
     gridline.fetch()
     assert gridline.manifest()["published"].to_list() == [published_from_name(url)]
+    # an unrelated CSV in the dataset is skipped, not fatal
+    guide = "https://x/download/tec-guidance-notes.csv"
+    ckan["result"]["resources"].insert(0, {"format": "CSV", "url": guide})
+    gridline.fetch()
+    assert gridline.manifest().height == 1
     # no date anywhere -> clear exit instead of a crash
-    ckan["result"]["resources"][0]["url"] = "https://x/download/tec-register.csv"
+    ckan["result"]["resources"][-1]["url"] = "https://x/download/tec-register.csv"
     with pytest.raises(SystemExit, match="no date"):
         gridline.fetch()
 
