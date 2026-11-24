@@ -95,6 +95,8 @@ def test_parsing_guards(tmp_path, monkeypatch):
     # a required column missing is an error, not silent nulls
     with pytest.raises(ValueError, match="status"):
         parse_tec(real.replace(b"Project Status", b"Status Of Project"))
+    assert published_from_name("ecr-19-sept-2026.csv") == date(2026, 9, 19)
+    assert published_from_name("ecr-19-september-2026.csv") == date(2026, 9, 19)
     assert (
         parse_num("nan") is None
         and parse_num("inf") is None
@@ -115,7 +117,12 @@ def test_parsing_guards(tmp_path, monkeypatch):
     # fetch: date comes from the URL file name, not the resource UUID; null last_modified is fine
     url = "https://x/dataset/1d2e/resource/9f8a/download/tec-register-19-november-2026.csv"
     ckan = {
-        "result": {"resources": [{"format": "CSV", "url": url, "last_modified": None}]}
+        "result": {
+            "resources": [
+                {"format": None, "url": "https://x/readme"},
+                {"format": "CSV", "url": url, "last_modified": None},
+            ]
+        }
     }
     monkeypatch.setattr(
         gridline,
@@ -146,6 +153,9 @@ def test_archive_refuses_truncated_release(tmp_path, monkeypatch):
     assert gridline.manifest().height == 1
     archive(short, "short", published_from_name("1-december-2026"), force=True)
     assert gridline.manifest()["rows"].to_list() == [10, 2]
+    monkeypatch.setattr(gridline.sys, "argv", ["gridline", "backfill"])
+    with pytest.raises(SystemExit, match="usage"):
+        gridline.main()
     # staleness: newest release is 1 Dec
     gridline.check(date(2026, 12, 15))
     with pytest.raises(SystemExit, match="stale"):
