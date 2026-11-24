@@ -1,10 +1,10 @@
-"""Gridline Phase 0: track the NESO TEC register over time.
+"""Gridline: track GB grid-connection registers over time.
 
-Flow: `fetch` downloads the current release from the NESO CKAN API, and `archive` stores its raw
-bytes as archive/tec/<sha256>.csv plus a row in archive/tec/snapshots.csv (both committed).
-`diff` replays every archived release in publication order and writes data/project_version.parquet
-(each row with valid_from / valid_to) and data/event.parquet (typed changes between releases).
-Rows are matched on Project ID + Stage. `low_confidence` marks rows that key cannot match
+Flow: `fetch` downloads each source's current release (SOURCES), and `archive` stores its raw
+bytes as archive/<source>/<sha256>.csv plus a row in archive/<source>/snapshots.csv (both
+committed). `diff` replays every archived release in publication order and writes
+data/project_version.parquet (each row with valid_from / valid_to) and data/event.parquet (typed
+changes between releases). Rows are matched on Project ID + Stage. `low_confidence` marks rows that key cannot match
 one-to-one: no Project ID (name-based fallback key) or a key repeated within one release.
 """
 
@@ -25,11 +25,8 @@ from pathlib import Path
 import polars as pl
 
 DATA = Path("data")  # derived Parquet, gitignored
-# raw releases + manifest, committed: NESO keeps no past releases
-RAW = Path("archive") / "tec"
-MANIFEST = RAW / "snapshots.csv"
-# NESO publishes about twice a week; a gap this long means the archiver or the source broke
-STALE_DAYS = 14
+# archive/<source>/<sha256>.csv + snapshots.csv, committed: the registers keep no history
+ARCHIVE = Path("archive")
 CKAN = "https://api.neso.energy/api/3/action/package_show?id=transmission-entry-capacity-tec-register"
 
 # lower-cased CSV header -> our column name
@@ -82,6 +79,7 @@ SNAP_SCHEMA = {
     "rows": pl.Int64,
 }
 EVENT_SCHEMA = {
+    "register": pl.String,
     "snapshot_id": pl.String,
     "prev_snapshot_id": pl.String,
     "published": pl.Date,
@@ -98,6 +96,7 @@ EVENT_SCHEMA = {
     "low_confidence": pl.Boolean,
 }
 VERSION_SCHEMA = {
+    "register": pl.String,
     "key": pl.String,
     **ROW_SCHEMA,
     "low_confidence": pl.Boolean,
@@ -184,8 +183,9 @@ def read_tec(path: str | Path) -> list[dict]:
     return parse_tec(Path(path).read_bytes())
 
 
-def manifest() -> pl.DataFrame | None:
-    return pl.read_csv(MANIFEST, schema=SNAP_SCHEMA) if MANIFEST.exists() else None
+def manifest(source: str = "tec") -> pl.DataFrame | None:
+    path = ARCHIVE / source / "snapshots.csv"
+    return pl.read_csv(path, schema=SNAP_SCHEMA) if path.exists() else None
 
 
 def save(name: str, rows: list | pl.DataFrame, schema: dict) -> None:
@@ -200,46 +200,53 @@ def save(name: str, rows: list | pl.DataFrame, schema: dict) -> None:
 
 
 def archive(
-    blob: bytes, source: str, published: date | None, force: bool = False
+    blob: bytes,
+    url: str,
+    published: date | None,
+    source: str = "tec",
+    force: bool = False,
 ) -> None:
-    """Store a release unless its hash is known.
+    """Store a release of `source` unless its hash is known.
 
-    Refuses anything that isn't a non-empty TEC register, and (unless `force`) a release
+    Refuses anything its parser rejects or that has 0 rows, and (unless `force`) a release
     with under half the rows of the latest one: a truncated download would otherwise be
     committed forever and replayed as mass `withdrawn` events, or one that lost the
     Project IDs the latest one had."""
+    parse = SOURCES[source]["parse"]
     sha = hashlib.sha256(blob).hexdigest()
-    snaps = manifest()
+    snaps = manifest(source)
     if snaps is not None and sha in snaps["sha256"].to_list():
-        print(f"skip {source}: already archived as {sha[:12]}")
+        print(f"skip {url}: already archived as {sha[:12]}")
         return
     try:
-        rows = parse_tec(blob)
+        rows = parse(blob)
     except ValueError as e:
-        sys.exit(f"refusing {source}: {e}")
+        sys.exit(f"refusing {url}: {e}")
     if not rows:
-        sys.exit(f"refusing {source}: 0 data rows")
+        sys.exit(f"refusing {url}: 0 data rows")
     if snaps is not None and not force:
         last = snaps.sort("published", "fetched_at").row(-1, named=True)
         if len(rows) < last["rows"] / 2:
             sys.exit(
-                f"refusing {source}: {len(rows)} rows, under half of the latest release"
+                f"refusing {url}: {len(rows)} rows, under half of the latest release"
                 f" ({last['rows']}); use `backfill --force` if it is real"
             )
         # a renamed or dropped Project ID column would re-key every row by name:
         # every project `withdrawn` and `added` again
-        had_ids = any(r["project_id"] for r in read_tec(last["raw_path"]))
+        last_rows = parse(Path(last["raw_path"]).read_bytes())
+        had_ids = any(r["project_id"] for r in last_rows)
         if had_ids and not any(r["project_id"] for r in rows):
             sys.exit(
-                f"refusing {source}: no Project IDs, but the latest release had them;"
+                f"refusing {url}: no Project IDs, but the latest release had them;"
                 " use `backfill --force` if it is real"
             )
-    RAW.mkdir(parents=True, exist_ok=True)
-    path = RAW / f"{sha}.csv"
+    raw = ARCHIVE / source
+    raw.mkdir(parents=True, exist_ok=True)
+    path = raw / f"{sha}.csv"
     path.write_bytes(blob)
     row = {
         "snapshot_id": sha[:12],
-        "source": source,
+        "source": url,
         "fetched_at": datetime.now(UTC).replace(tzinfo=None),
         "published": published,
         "sha256": sha,
@@ -247,31 +254,61 @@ def archive(
         "rows": len(rows),
     }
     new = pl.DataFrame([row], schema=SNAP_SCHEMA)
-    (new if snaps is None else pl.concat([snaps, new])).write_csv(MANIFEST)
-    print(f"archived {source} -> {path} ({len(rows)} rows, published {published})")
+    (new if snaps is None else pl.concat([snaps, new])).write_csv(raw / "snapshots.csv")
+    print(f"archived {url} -> {path} ({len(rows)} rows, published {published})")
 
 
-def fetch() -> None:
-    """Archive every TEC register CSV the CKAN dataset lists.
-
-    NESO only exposes the latest release. Other files in the dataset are skipped, so a
-    new guidance CSV can't stop the archiver; a register file that fails the checks
-    still stops it."""
-    for res in json.loads(http(CKAN))["result"]["resources"]:
+def ckan(api: str, pattern: str) -> list[tuple[str, date]]:
+    """(url, published) of each CSV resource whose file name contains `pattern`, oldest
+    first. Other files in the dataset are skipped, so a new guidance CSV can't stop the
+    archiver; a matching file that fails the checks still does."""
+    found, skipped = [], 0
+    for res in json.loads(http(api))["result"]["resources"]:
         url = res["url"]
         name = Path(urllib.parse.urlparse(url).path).name
         is_csv = (res.get("format") or "").upper() == "CSV"
-        if not is_csv or "tec-register" not in name.lower():
-            print(f"skip {url}: not a TEC register CSV")
+        if not is_csv or pattern not in name.lower():
+            skipped += 1
             continue
         published = published_from_name(name)
         if not published and res.get("last_modified"):
+            # ponytail: an old resource re-uploaded later would be dated by the upload;
+            # order by the month in its name if that ever happens
             published = date.fromisoformat(res["last_modified"][:10])
         if not published:
             sys.exit(
                 f"{url}: no date in the file name and no last_modified, cannot order this release"
             )
-        archive(http(url), url, published)
+        found.append((url, published))
+    print(f"{len(found)} files match {pattern!r}, {skipped} other resources skipped")
+    return sorted(found, key=lambda f: f[1])
+
+
+# name -> how to find its releases (oldest first), parse them, and when it is stale
+SOURCES = {
+    "tec": {
+        "find": lambda: ckan(CKAN, "tec-register"),
+        "parse": lambda blob: parse_tec(blob),
+        "stale_days": 14,  # NESO publishes about twice a week
+        "gone": "withdrawn",
+    },
+}
+
+
+def fetch(sources: list[str] | None = None) -> None:
+    """Archive new releases of each source. One failing source doesn't stop the others;
+    the run exits non-zero at the end, after the rest are archived."""
+    failed = []
+    for name in sources or SOURCES:
+        try:
+            for url, published in SOURCES[name]["find"]():
+                archive(http(url), url, published, name)
+        # archive() refuses with sys.exit; that must not skip the next source
+        except (OSError, ValueError, KeyError, SystemExit) as e:
+            print(f"FAILED {name}: {e}", file=sys.stderr)
+            failed.append(f"{name}: {e}")
+    if failed:
+        sys.exit("\n".join(failed))
 
 
 def backfill(sources: list[str], force: bool = False) -> None:
@@ -286,18 +323,23 @@ def backfill(sources: list[str], force: bool = False) -> None:
             http(src) if src.startswith("http") else Path(src).read_bytes(),
             src,
             published,
-            force,
+            force=force,
         )
 
 
-def check(today: date | None = None) -> None:
-    """Exit non-zero when the newest archived release is older than STALE_DAYS."""
-    snaps = manifest()
-    newest = None if snaps is None else snaps["published"].max()
-    age = None if newest is None else ((today or date.today()) - newest).days
-    if age is None or age > STALE_DAYS:
-        sys.exit(f"stale: newest TEC release is {newest} ({age} days old)")
-    print(f"ok: newest TEC release is {newest} ({age} days old)")
+def check(today: date | None = None, sources: list[str] | None = None) -> None:
+    """Exit non-zero when a source's newest release is older than its stale_days."""
+    stale = []
+    for name in sources or SOURCES:
+        snaps = manifest(name)
+        newest = None if snaps is None else snaps["published"].max()
+        age = None if newest is None else ((today or date.today()) - newest).days
+        msg = f"{name}: newest release {newest} ({age} days old)"
+        print(msg)
+        if age is None or age > SOURCES[name]["stale_days"]:
+            stale.append(msg)
+    if stale:
+        sys.exit("stale: " + "; ".join(stale))
 
 
 def norm(s: str | None) -> str:
@@ -391,9 +433,10 @@ def add_event(
 
 
 def build(
-    snapshots: list[tuple[str, date, list[dict]]],
+    snapshots: list[tuple[str, date, list[dict]]], gone: str = "withdrawn"
 ) -> tuple[list[dict], list[dict]]:
-    """snapshots: (snapshot_id, published, rows) in publication order -> (events, versions)."""
+    """snapshots: (snapshot_id, published, rows) in publication order -> (events, versions).
+    `gone` names the event for a row that disappears."""
     events, versions, open_versions = [], [], {}
     prev, prev_id = None, None
     for sid, published, rows in snapshots:
@@ -407,7 +450,7 @@ def build(
             for k in sorted(cur.keys() - prev.keys()):
                 add_event(events, where, cur[k], "added")
             for k in sorted(prev.keys() - cur.keys()):
-                add_event(events, where, prev[k], "withdrawn")
+                add_event(events, where, prev[k], gone)
             for k in sorted(cur.keys() & prev.keys()):
                 for c in changes(prev[k], cur[k]):
                     lc = prev[k]["low_confidence"]
@@ -437,16 +480,28 @@ def build(
 
 
 def diff() -> None:
-    snaps = manifest()
-    if snaps is None:
+    """Rebuild data/*.parquet from every source's archive; `register` names the source."""
+    all_snaps, events, versions = [], [], []
+    for name, src in SOURCES.items():
+        snaps = manifest(name)
+        if snaps is None:
+            continue
+        snaps = snaps.sort("published", "fetched_at")
+        all_snaps.append(snaps.with_columns(register=pl.lit(name)))
+        snapshots = [
+            (
+                s["snapshot_id"],
+                s["published"],
+                src["parse"](Path(s["raw_path"]).read_bytes()),
+            )
+            for s in snaps.iter_rows(named=True)
+        ]
+        e, v = build(snapshots, src["gone"])
+        events += [{**x, "register": name} for x in e]
+        versions += [{**x, "register": name} for x in v]
+    if not all_snaps:
         sys.exit("no snapshots yet, run `gridline fetch` first")
-    snaps = snaps.sort("published", "fetched_at")
-    save("source_snapshot", snaps, SNAP_SCHEMA)
-    snapshots = [
-        (s["snapshot_id"], s["published"], read_tec(s["raw_path"]))
-        for s in snaps.iter_rows(named=True)
-    ]
-    events, versions = build(snapshots)
+    save("source_snapshot", pl.concat(all_snaps), SNAP_SCHEMA)
     save("event", [[e[c] for c in EVENT_SCHEMA] for e in events], EVENT_SCHEMA)
     save(
         "project_version",
@@ -458,14 +513,14 @@ def diff() -> None:
 def main() -> None:
     cmd, *args = sys.argv[1:] or ["help"]
     if cmd == "fetch":
-        fetch()
+        fetch(args)
     elif cmd == "backfill" and set(args) - {"--force"}:
         backfill([a for a in args if a != "--force"], "--force" in args)
     elif cmd == "diff":
         diff()
     elif cmd == "check":
-        check()
+        check(sources=args)
     else:
         sys.exit(
-            "usage: gridline fetch | gridline backfill [--force] FILE_OR_URL ... | gridline diff | gridline check"
+            "usage: gridline fetch [SOURCE ...] | gridline backfill [--force] FILE_OR_URL ... | gridline diff | gridline check [SOURCE ...]"
         )
