@@ -132,7 +132,8 @@ Every event carries `register` (`tec`, `ssen`, `npg`), `low_confidence`, `projec
   still fails afterwards so someone notices.
 - A release is refused, and nothing is written, if it has no data rows (a login-gated portal returns
   just the header), under half the rows of the latest release (a cut-off download), or no IDs when
-  the latest release had them (a renamed ID column).
+  the latest release had them (a renamed ID column). If the drop is real, `gridline fetch --force
+  SOURCE` archives it anyway.
 - **History starts on 19 November 2026** for TEC, because NESO publishes no earlier files, and in
   October 2026 for SSEN.
 - If you hold older TEC register CSVs, `gridline backfill` loads them. The release date must be in the

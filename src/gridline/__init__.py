@@ -304,7 +304,7 @@ def archive(
         if len(rows) < last["rows"] / 2:
             sys.exit(
                 f"refusing {url}: {len(rows)} rows, under half of the latest release"
-                f" ({last['rows']}); use `backfill --force` if it is real"
+                f" ({last['rows']}); rerun with --force if it is real"
             )
         # a renamed or dropped Project ID column would re-key every row by name:
         # every project `withdrawn` and `added` again
@@ -313,7 +313,7 @@ def archive(
         if had_ids and not any(r["project_id"] for r in rows):
             sys.exit(
                 f"refusing {url}: no Project IDs, but the latest release had them;"
-                " use `backfill --force` if it is real"
+                " rerun with --force if it is real"
             )
     raw = ARCHIVE / source
     raw.mkdir(parents=True, exist_ok=True)
@@ -395,16 +395,17 @@ SOURCES = {
 }
 
 
-def fetch(sources: list[str] | None = None) -> None:
+def fetch(sources: list[str] | None = None, force: bool = False) -> None:
     """Archive new releases of each source. One failing source doesn't stop the others;
     the run exits non-zero at the end, after the rest are archived."""
     failed = []
     for name in sources or SOURCES:
         try:
             for url, published in SOURCES[name]["find"]():
-                archive(http(url), url, published, name)
-        # archive() refuses with sys.exit; that must not skip the next source
-        except (OSError, ValueError, KeyError, SystemExit) as e:
+                archive(http(url), url, published, name, force)
+        # anything one source throws (refusal, HTTP error, odd JSON) must not skip the
+        # next source: a missed release is lost for good
+        except (Exception, SystemExit) as e:  # noqa: BLE001
             print(f"FAILED {name}: {e}", file=sys.stderr)
             failed.append(f"{name}: {e}")
     if failed:
@@ -612,15 +613,16 @@ def diff() -> None:
 
 def main() -> None:
     cmd, *args = sys.argv[1:] or ["help"]
+    force, args = "--force" in args, [a for a in args if a != "--force"]
     if cmd == "fetch":
-        fetch(args)
-    elif cmd == "backfill" and set(args) - {"--force"}:
-        backfill([a for a in args if a != "--force"], "--force" in args)
+        fetch(args, force)
+    elif cmd == "backfill" and args:
+        backfill(args, force)
     elif cmd == "diff":
         diff()
     elif cmd == "check":
         check(sources=args)
     else:
         sys.exit(
-            "usage: gridline fetch [SOURCE ...] | gridline backfill [--force] FILE_OR_URL ... | gridline diff | gridline check [SOURCE ...]"
+            "usage: gridline fetch [--force] [SOURCE ...] | gridline backfill [--force] FILE_OR_URL ... | gridline diff | gridline check [SOURCE ...]"
         )
