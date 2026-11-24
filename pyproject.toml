@@ -2,6 +2,8 @@
 name = "gridline"
 version = "0.1.0"
 description = "Open tracker for Great Britain's grid connections queue"
+readme = "README.md"
+license = "Apache-2.0"
 authors = [
     { name = "Anwar", email = "55035440+anwaroodin@users.noreply.github.com" }
 ]
