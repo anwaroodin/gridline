@@ -23,7 +23,7 @@ Derived outputs, in gitignored `data/` (rebuilt by `diff`):
 - `source_snapshot.parquet`: copy of the manifest
 - `project_version.parquet`: each register row with `valid_from` / `valid_to` publication dates
 - `event.parquet`: `added`, `withdrawn`, `capacity_changed`, `date_slipped` (`days`; negative means brought forward),
-  `stage_changed` (Project Status), `gate_assigned`, `connected` (MW Connected first rises above 0)
+  `status_changed` (Project Status), `gate_assigned`, `connected` (MW Connected first rises above 0)
 
 Rows are keyed on `Project ID` + `Stage`. A row without a Project ID falls back to its normalised name, site,
 plant type and stage. Rows whose key repeats within a release, or that have no Project ID, are flagged `low_confidence`.
