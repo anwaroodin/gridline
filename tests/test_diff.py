@@ -314,8 +314,15 @@ def test_npg_ecr(tmp_path, monkeypatch):
         gridline.fetch(["npg"])
     blobs[export] = blob
     gridline.fetch(["npg"])
-    snaps = gridline.manifest("npg")
-    assert (snaps["published"].to_list(), snaps["rows"].to_list()) == (
-        [date(2026, 11, 13)],
-        [10],
-    )
+    # a real shrink (e.g. projects moved to Gate 1) is refused, then forced through
+    blobs[export] = b"\r\n".join(blob.splitlines()[:4])
+    blobs[gridline.NPG] = json.dumps(meta).replace("11-13", "12-11").encode()
+    with pytest.raises(SystemExit, match="under half"):
+        gridline.fetch(["npg"])
+    monkeypatch.setattr(gridline.sys, "argv", ["gridline", "fetch", "--force", "npg"])
+    gridline.main()
+    assert gridline.manifest("npg")["rows"].to_list() == [10, 3]
+    # a crash inside one source is reported, not raised past the others
+    blobs[gridline.NPG] = b"[]"  # TypeError, not caught before
+    with pytest.raises(SystemExit, match="npg: list indices"):
+        gridline.fetch(["npg"])
