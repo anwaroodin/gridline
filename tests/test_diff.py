@@ -169,3 +169,24 @@ def test_stage_change_is_a_new_key():
         ("X|", "withdrawn"),
         ("X|1", "added"),
     ]
+
+
+def test_build_paths_across_three_releases():
+    d = [date(2026, 11, 19), date(2026, 11, 22), date(2026, 11, 26)]
+    snaps = [
+        ("s1", d[0], [row(project_id="A", gate="2"), row(project_id="B")]),
+        # A: gate removed, date set from blank (neither emits today); B gone
+        ("s2", d[1], [row(project_id="A", effective_from=d[2])]),
+        # B back again; A's date cleared (emits nothing)
+        ("s3", d[2], [row(project_id="A"), row(project_id="B")]),
+    ]
+    events, versions = build(snaps)
+    assert [(e["snapshot_id"], e["key"], e["event_type"]) for e in events] == [
+        ("s2", "B|", "withdrawn"),
+        ("s3", "B|", "added"),
+    ]
+    # B has two closed-off intervals, not one spanning its absence
+    b = [(v["valid_from"], v["valid_to"]) for v in versions if v["key"] == "B|"]
+    assert sorted(b, key=str) == [(d[0], d[1]), (d[2], None)]
+    # A changed twice (gate, date), so three versions
+    assert len([v for v in versions if v["key"] == "A|"]) == 3
