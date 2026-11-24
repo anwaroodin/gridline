@@ -196,10 +196,14 @@ def save(name: str, rows: list | pl.DataFrame, schema: dict) -> None:
     print(f"wrote {DATA / name}.parquet ({df.height} rows)")
 
 
-def archive(blob: bytes, source: str, published: date | None) -> None:
+def archive(
+    blob: bytes, source: str, published: date | None, force: bool = False
+) -> None:
     """Store a release unless its hash is known.
 
-    Refuses anything that isn't a non-empty TEC register."""
+    Refuses anything that isn't a non-empty TEC register, and (unless `force`) a release
+    with under half the rows of the latest one: a truncated download would otherwise be
+    committed forever and replayed as mass `withdrawn` events."""
     sha = hashlib.sha256(blob).hexdigest()
     snaps = manifest()
     if snaps is not None and sha in snaps["sha256"].to_list():
@@ -211,6 +215,13 @@ def archive(blob: bytes, source: str, published: date | None) -> None:
         sys.exit(f"refusing {source}: {e}")
     if not rows:
         sys.exit(f"refusing {source}: 0 data rows")
+    if snaps is not None and not force:
+        last = snaps.sort("published", "fetched_at").row(-1, named=True)
+        if len(rows) < last["rows"] / 2:
+            sys.exit(
+                f"refusing {source}: {len(rows)} rows, under half of the latest release"
+                f" ({last['rows']}); use `backfill --force` if it is real"
+            )
     RAW.mkdir(parents=True, exist_ok=True)
     path = RAW / f"{sha}.csv"
     path.write_bytes(blob)
@@ -246,7 +257,7 @@ def fetch() -> None:
         archive(http(url), url, published)
 
 
-def backfill(sources: list[str]) -> None:
+def backfill(sources: list[str], force: bool = False) -> None:
     """Archive past releases from local files or URLs; the release date must be in the file name."""
     for src in sources:
         published = published_from_name(Path(src).name)
@@ -258,6 +269,7 @@ def backfill(sources: list[str]) -> None:
             http(src) if src.startswith("http") else Path(src).read_bytes(),
             src,
             published,
+            force,
         )
 
 
@@ -418,10 +430,10 @@ def main() -> None:
     if cmd == "fetch":
         fetch()
     elif cmd == "backfill":
-        backfill(args) if args else fetch()
+        backfill([a for a in args if a != "--force"], "--force" in args)
     elif cmd == "diff":
         diff()
     else:
         sys.exit(
-            "usage: gridline fetch | gridline backfill [FILE_OR_URL ...] | gridline diff"
+            "usage: gridline fetch | gridline backfill [--force] FILE_OR_URL ... | gridline diff"
         )

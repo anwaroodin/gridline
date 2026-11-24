@@ -125,3 +125,16 @@ def test_parsing_guards(tmp_path, monkeypatch):
     ckan["result"]["resources"][0]["url"] = "https://x/download/tec-register.csv"
     with pytest.raises(SystemExit, match="no date"):
         gridline.fetch()
+
+
+def test_archive_refuses_truncated_release(tmp_path, monkeypatch):
+    real = (FIX / "tec-register-19-november-2026.csv").read_bytes()
+    monkeypatch.chdir(tmp_path)
+    archive(real, "full", published_from_name("19-november-2026"))
+    # 2 of 10 rows: a cut-off download, not 8 withdrawals
+    short = b"".join(real.splitlines(keepends=True)[:3])
+    with pytest.raises(SystemExit, match="under half"):
+        archive(short, "short", published_from_name("1-december-2026"))
+    assert gridline.manifest().height == 1
+    archive(short, "short", published_from_name("1-december-2026"), force=True)
+    assert gridline.manifest()["rows"].to_list() == [10, 2]
