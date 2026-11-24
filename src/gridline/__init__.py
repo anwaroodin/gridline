@@ -203,7 +203,8 @@ def archive(
 
     Refuses anything that isn't a non-empty TEC register, and (unless `force`) a release
     with under half the rows of the latest one: a truncated download would otherwise be
-    committed forever and replayed as mass `withdrawn` events."""
+    committed forever and replayed as mass `withdrawn` events, or one that lost the
+    Project IDs the latest one had."""
     sha = hashlib.sha256(blob).hexdigest()
     snaps = manifest()
     if snaps is not None and sha in snaps["sha256"].to_list():
@@ -221,6 +222,14 @@ def archive(
             sys.exit(
                 f"refusing {source}: {len(rows)} rows, under half of the latest release"
                 f" ({last['rows']}); use `backfill --force` if it is real"
+            )
+        # a renamed or dropped Project ID column would re-key every row by name:
+        # every project `withdrawn` and `added` again
+        had_ids = any(r["project_id"] for r in read_tec(last["raw_path"]))
+        if had_ids and not any(r["project_id"] for r in rows):
+            sys.exit(
+                f"refusing {source}: no Project IDs, but the latest release had them;"
+                " use `backfill --force` if it is real"
             )
     RAW.mkdir(parents=True, exist_ok=True)
     path = RAW / f"{sha}.csv"
