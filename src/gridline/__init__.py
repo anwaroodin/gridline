@@ -29,6 +29,7 @@ DATA = Path("data")  # derived Parquet, gitignored
 ARCHIVE = Path("archive")
 CKAN = "https://api.neso.energy/api/3/action/package_show?id=transmission-entry-capacity-tec-register"
 SSEN_CKAN = "https://data-api.ssen.co.uk/api/3/action/package_show?id=embedded_capacity_register"
+NPG = "https://northernpowergrid.opendatasoft.com/api/explore/v2.1/catalog/datasets/embedded-capacity-register"
 
 # norm(CSV header) -> our column name
 COLS = {
@@ -71,6 +72,7 @@ ECR_COLS = {
     "energy source 2": "source_2",
     "energy source 3": "source_3",
     "unique id": "project_id",  # SSEN
+    "ecrid": "project_id",  # NPg
 }
 ECR_REQUIRED = set(ECR_COLS.values()) - {"customer_name"}
 # the template's many spellings of "no value", after norm()
@@ -356,6 +358,18 @@ def ckan(api: str, pattern: str) -> list[tuple[str, date]]:
     return sorted(found, key=lambda f: f[1])
 
 
+def opendatasoft(dataset: str) -> list[tuple[str, date]]:
+    """The dataset's whole-table CSV export, dated by its last data change. A portal that
+    wants a login answers with the header only, which archive() refuses as 0 rows."""
+    meta = json.loads(http(dataset))["metas"]["default"]
+    return [
+        (
+            f"{dataset}/exports/csv?delimiter=%2C",
+            date.fromisoformat(meta["data_processed"][:10]),
+        )
+    ]
+
+
 # name -> how to find its releases (oldest first), parse them, and when it is stale
 SOURCES = {
     "tec": {
@@ -369,6 +383,12 @@ SOURCES = {
         "parse": lambda blob: parse_ecr(blob),
         "stale_days": 45,  # monthly, mid-month
         # gone from a DNO register: often a reform move to Gate 1, not a cancellation
+        "gone": "removed_from_register",
+    },
+    "npg": {
+        "find": lambda: opendatasoft(NPG),  # the 1 MW and over register
+        "parse": lambda blob: parse_ecr(blob),
+        "stale_days": 45,  # monthly, by the 10th working day
         "gone": "removed_from_register",
     },
 }

@@ -285,3 +285,37 @@ def test_ssen_ecr(tmp_path, monkeypatch):
         ("removed_from_register", "SSEN1265"),
     ]
     assert not ev["low_confidence"].any()
+
+
+def test_npg_ecr(tmp_path, monkeypatch):
+    """npg-ecr-1mw-13-november-2026.csv: 5 connected + 5 accepted rows of NPg's real
+    Nov 2026 export (1 MW and over), with MPANs, customer name and address blanked."""
+    blob = (FIX / "npg-ecr-1mw-13-november-2026.csv").read_bytes()
+    rows = {r["project_id"]: r for r in parse_ecr(blob)}
+    assert len(rows) == 10
+    r = rows["NPg15-000863"]
+    assert (r["project_name"], r["status"], r["mw_total"], r["connection_site"]) == (
+        "Maiden Hill Farm BESS",
+        "accepted to connect",
+        99.4,
+        "Stella South",
+    )
+    assert rows["NPg23-001124"]["mw_total"] == 18.07
+    # NPg never fills Target Energisation Date ("Data Not Available")
+    assert all(r["effective_from"] is None for r in rows.values())
+
+    meta = {"metas": {"default": {"data_processed": "2026-11-13T16:54:55+00:00"}}}
+    export = f"{gridline.NPG}/exports/csv?delimiter=%2C"
+    blobs = {gridline.NPG: json.dumps(meta).encode(), export: blob.splitlines()[0]}
+    monkeypatch.setattr(gridline, "http", blobs.__getitem__)
+    monkeypatch.chdir(tmp_path)
+    # a login-gated portal answers HTTP 200 with the header only
+    with pytest.raises(SystemExit, match="0 data rows"):
+        gridline.fetch(["npg"])
+    blobs[export] = blob
+    gridline.fetch(["npg"])
+    snaps = gridline.manifest("npg")
+    assert (snaps["published"].to_list(), snaps["rows"].to_list()) == (
+        [date(2026, 11, 13)],
+        [10],
+    )
