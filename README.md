@@ -13,18 +13,22 @@ uv run gridline diff                  # rebuild data/project_version.parquet and
 uv run pytest
 ```
 
-Outputs, all in `data/` (gitignored for now):
+The raw archive is committed, because NESO keeps no past releases:
 
-- `raw/tec/<sha256>.csv`: each release byte for byte
-- `source_snapshot.parquet`: one row per archived release (id, source, fetched_at, published, sha256, raw_path, rows)
+- `archive/tec/<sha256>.csv`: each release byte for byte (`-text` in `.gitattributes`, so git never rewrites line endings)
+- `archive/tec/snapshots.csv`: one row per archived release (snapshot_id, source, fetched_at, published, sha256, raw_path, rows)
+
+Derived outputs, in gitignored `data/` (rebuilt by `diff`):
+
+- `source_snapshot.parquet`: copy of the manifest
 - `project_version.parquet`: each register row with `valid_from` / `valid_to` publication dates
 - `event.parquet`: `added`, `withdrawn`, `capacity_changed`, `date_slipped` (`days`; negative means brought forward),
-  `stage_changed` (Project Status), `gate_assigned`, `connected`
+  `stage_changed` (Project Status), `gate_assigned`, `connected` (MW Connected first rises above 0)
 
 Rows are keyed on `Project ID` + `Stage`. A row without a Project ID falls back to its normalised name, site,
 plant type and stage. Rows whose key repeats within a release, or that have no Project ID, are flagged `low_confidence`.
 
-A GitHub Action (`.github/workflows/daily.yml`) runs fetch and diff every day.
+A GitHub Action (`.github/workflows/daily.yml`) runs fetch and diff every day and commits new files under `archive/` to main.
 
 ## Data licence
 

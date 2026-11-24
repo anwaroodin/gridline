@@ -1,0 +1,3 @@
+# Raw releases are named by sha256: git must never touch their bytes (CRLF, BOM).
+archive/** -text
+tests/fixtures/** -text

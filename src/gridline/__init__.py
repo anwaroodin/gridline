@@ -13,8 +13,9 @@ from pathlib import Path
 
 import polars as pl
 
-DATA = Path("data")
-RAW = DATA / "raw" / "tec"
+DATA = Path("data")  # derived Parquet, gitignored
+RAW = Path("archive") / "tec"  # raw releases + manifest, committed: NESO keeps no past releases
+MANIFEST = RAW / "snapshots.csv"
 CKAN = "https://api.neso.energy/api/3/action/package_show?id=transmission-entry-capacity-tec-register"
 
 # lower-cased CSV header -> our column name
@@ -63,6 +64,13 @@ def parse_date(s: str | None) -> date | None:
     return None  # ponytail: unparseable dates become null; the raw file keeps the original text
 
 
+def parse_num(s: str | None) -> float | None:
+    try:
+        return float(s.replace(",", "")) if s else None
+    except ValueError:
+        return None  # e.g. "TBC"; the raw file keeps the original text
+
+
 def read_tec(path) -> list[dict]:
     b = Path(path).read_bytes()
     try:
@@ -78,15 +86,14 @@ def read_tec(path) -> list[dict]:
         if not any(r.values()):
             continue
         for c in NUM:
-            r[c] = float(r[c].replace(",", "")) if r[c] else None
+            r[c] = parse_num(r[c])
         r["effective_from"] = parse_date(r["effective_from"])
         rows.append(r)
     return rows
 
 
-def load(name: str) -> pl.DataFrame | None:
-    p = DATA / f"{name}.parquet"
-    return pl.read_parquet(p) if p.exists() else None
+def manifest() -> pl.DataFrame | None:
+    return pl.read_csv(MANIFEST, schema=SNAP_SCHEMA) if MANIFEST.exists() else None
 
 
 def save(name: str, rows, schema) -> None:
@@ -98,7 +105,7 @@ def save(name: str, rows, schema) -> None:
 
 def archive(blob: bytes, source: str, published: date | None) -> None:
     sha = hashlib.sha256(blob).hexdigest()
-    snaps = load("source_snapshot")
+    snaps = manifest()
     if snaps is not None and sha in snaps["sha256"].to_list():
         print(f"skip {source}: already archived as {sha[:12]}")
         return
@@ -108,7 +115,7 @@ def archive(blob: bytes, source: str, published: date | None) -> None:
     row = {"snapshot_id": sha[:12], "source": source, "fetched_at": datetime.now(timezone.utc).replace(tzinfo=None),
            "published": published, "sha256": sha, "raw_path": path.as_posix(), "rows": len(read_tec(path))}
     new = pl.DataFrame([row], schema=SNAP_SCHEMA)
-    save("source_snapshot", new if snaps is None else pl.concat([snaps, new]), SNAP_SCHEMA)
+    (new if snaps is None else pl.concat([snaps, new])).write_csv(MANIFEST)
     print(f"archived {source} -> {path} ({row['rows']} rows, published {published})")
 
 
@@ -159,7 +166,9 @@ def changes(a: dict, b: dict):
         yield "stage_changed", "status", a["status"], b["status"], None
     if b["gate"] and a["gate"] != b["gate"]:
         yield "gate_assigned", "gate", a["gate"], b["gate"], None
-    if (b["status"] == "Built" and a["status"] != "Built") or (b["mw_connected"] or 0) > (a["mw_connected"] or 0):
+    # first energisation only: status Built alone is not enough (live rows are Built with 0 MW), later rises aren't new
+    # ponytail: a row that drops back to 0 MW and rises again emits a second `connected`; track history if it happens
+    if (a["mw_connected"] or 0) <= 0 < (b["mw_connected"] or 0):
         yield "connected", "mw_connected", a["mw_connected"], b["mw_connected"], None
 
 
@@ -201,10 +210,11 @@ def build(snapshots: list[tuple[str, date, list[dict]]]):
 
 
 def diff() -> None:
-    snaps = load("source_snapshot")
+    snaps = manifest()
     if snaps is None:
         sys.exit("no snapshots yet, run `gridline fetch` first")
     snaps = snaps.sort("published", "fetched_at")
+    save("source_snapshot", snaps, SNAP_SCHEMA)
     events, versions = build([(s["snapshot_id"], s["published"], read_tec(s["raw_path"]))
                               for s in snaps.iter_rows(named=True)])
     save("event", [[e[c] for c in EVENT_SCHEMA] for e in events], EVENT_SCHEMA)
