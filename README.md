@@ -29,8 +29,14 @@ a complete and consistent picture of the queue. Gridline keeps the history.
   | `ssen` | SSEN Distribution [Embedded Capacity Register](https://data.ssen.co.uk/dataset/655eb750-7b3f-4c55-93b6-9bc4c26a57ab), 1 MW and above | monthly |
   | `npg` | Northern Powergrid [Embedded Capacity Register](https://northernpowergrid.opendatasoft.com/explore/dataset/embedded-capacity-register/), 1 MW and over | monthly |
 
-  The other four DNOs are planned: UKPN, SP Energy Networks and SP Electricity North West need an
-  API key, and NGED's licence for redistribution is being checked.
+  | `ukpn` | UK Power Networks Embedded Capacity Register, 1 MW and above | monthly, needs `UKPN_API_KEY` |
+  | `spen` | SP Energy Networks Embedded Capacity Register, over 1 MW | monthly, needs `SPEN_API_KEY` |
+  | `enwl` | SP Electricity North West Embedded Capacity Register, 1 MW and above | monthly, needs `ENWL_API_KEY` |
+
+  The last three need a free account on each network's data portal. Put the API key in the named
+  environment variable (a repository secret for the daily Action); without it the source is
+  skipped with a notice. NGED is deferred: its register's licence doesn't clearly allow
+  redistribution.
 - **Turns the differences between releases into typed events**: a project added or withdrawn, a
   capacity change, a connection date that slipped, a status change, a gate assigned, a first
   connection.
@@ -85,6 +91,9 @@ uv run gridline check   # exit non-zero if a source has had no new release for t
 uv run pytest
 ```
 
+The package is named `gridline-uk` (`gridline` is taken on PyPI). It isn't published yet; once it
+is, `pip install gridline-uk` installs the same `gridline` command.
+
 Read the events with polars:
 
 ```python
@@ -111,6 +120,7 @@ print(
 |---|---|
 | `added` | the row appears for the first time |
 | `withdrawn` | the row is no longer in the TEC register |
+| `stage_split` | a TEC Project ID that had one Stage now has several: it stays one project. `old_value` is the old key, `new_value` the new stage keys (`;`-separated), instead of `withdrawn` + `added` |
 | `removed_from_register` | the row is no longer in a DNO register. Not called withdrawn: under connections reform some projects moved to Gate 1 and were removed from ECRs |
 | `capacity_changed` | TEC: Cumulative Total Capacity (MW) changed. ECR: the registered capacity (accepted-to-connect, or already-connected once connected) changed |
 | `date_slipped` | TEC: MW Effective From moved. ECR: Target Energisation Date moved (NPg leaves it blank, so none there). `days` is positive when later, negative when brought forward |
@@ -123,8 +133,14 @@ Every event carries `register` (`tec`, `ssen`, `npg`), `low_confidence`, `projec
 ## Data and archive
 
 - Raw releases live in [`archive/<source>/`](archive/), committed to this repository. The registers
-  overwrite themselves, so this archive is the history. (SSEN and NPg also offer older
-  monthly workbooks; loading those is not built yet.)
+  overwrite themselves, so this archive is the history.
+- **Older ECR history lives in a GitHub Release**, not in git: SSEN's monthly workbooks from August
+  2023 and NPg's from January 2022 (release
+  [`history-ecr-2022-2026`](https://github.com/anwaroodin/gridline/releases/tag/history-ecr-2022-2026)).
+  Their manifest rows are committed and point at the Release asset; `gridline diff` downloads each
+  file once into `data/cache/` and refuses it if its sha256 differs from the manifest. Workbooks
+  have no row ID, so a history row takes the ID of the row with the same site, GSP and technology
+  in the current CSVs where exactly one matches (`low_confidence`); the rest are matched by name.
 - `.gitattributes` marks the archive `-text`, so git never rewrites line endings. A changed byte
   would change the file's sha256.
 - A [daily GitHub Action](.github/workflows/daily.yml) runs `fetch` and `diff` and commits any new
@@ -134,8 +150,8 @@ Every event carries `register` (`tec`, `ssen`, `npg`), `low_confidence`, `projec
   just the header), under half the rows of the latest release (a cut-off download), or no IDs when
   the latest release had them (a renamed ID column). If the drop is real, `gridline fetch --force
   SOURCE` archives it anyway.
-- **History starts on 19 November 2026** for TEC, because NESO publishes no earlier files, and in
-  October 2026 for SSEN.
+- **History starts on 19 November 2026** for TEC, because NESO publishes no earlier files, in
+  August 2023 for SSEN and in January 2022 for NPg.
 - If you hold older TEC register CSVs, `gridline backfill` loads them. The release date must be in the
   file name, for example `tec-register-28-february-2025.csv`:
 
@@ -148,7 +164,8 @@ Every event carries `register` (`tec`, `ssen`, `npg`), `low_confidence`, `projec
 ## Roadmap
 
 - [x] Phase 0: TEC register archive and events
-- [ ] Phase 1: the six DNO Embedded Capacity Registers (SSEN and NPg done)
+- [ ] Phase 1: the six DNO Embedded Capacity Registers (SSEN and NPg with history; UKPN, SPEN and
+  ENWL waiting for API keys; NGED deferred until its licence allows redistribution)
 - [ ] Planned: cross-register project matching
 - [ ] Planned: REST API
 - [ ] Planned: web app with map, project history and reform view

@@ -1,5 +1,5 @@
 [project]
-name = "gridline"
+name = "gridline-uk"
 version = "0.1.0"
 description = "Open tracker for Great Britain's grid connections queue"
 readme = "README.md"
@@ -9,11 +9,16 @@ authors = [
 ]
 requires-python = ">=3.12"
 dependencies = [
+    "fastexcel>=0.21.0",
     "polars>=2.1.0",
 ]
 
 [project.scripts]
 gridline = "gridline:main"
+
+[tool.uv.build-backend]
+# the distribution is gridline-uk (gridline is taken on PyPI); import and CLI stay gridline
+module-name = "gridline"
 
 [build-system]
 requires = ["uv_build>=0.9.13,<0.10.0"]

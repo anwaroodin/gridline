@@ -136,7 +136,7 @@ def test_parsing_guards(tmp_path, monkeypatch):
     monkeypatch.setattr(
         gridline,
         "http",
-        lambda u: json.dumps(ckan).encode() if u == gridline.CKAN else real,
+        lambda u, h=None: json.dumps(ckan).encode() if u == gridline.CKAN else real,
     )
     gridline.fetch(["tec"])
     assert gridline.manifest()["published"].to_list() == [published_from_name(url)]
@@ -183,14 +183,31 @@ def kinds(snaps):
     return sorted((e["key"], e["event_type"]) for e in build(snaps)[0])
 
 
-def test_stage_change_is_a_new_key():
-    # pins today's behaviour (see the ponytail note in index())
+def test_stage_split_stays_one_project():
+    """tec-stage-split-*.csv: the real PRO-000366 rows. On 19 Nov it is one row with no
+    Stage; on 23 Nov the same Project ID has Stage 1 (1,365 MW, Built) and Stage 2
+    (1,400 MW, Scoping)."""
+    snaps = [
+        (p.stem, published_from_name(p.name), read_tec(p))
+        for p in sorted(FIX.glob("tec-stage-split-*.csv"))
+    ]
+    events, _ = build(snaps)
+    pid = "a0l4L0000005itwQAA"
+    assert [(e["event_type"], e["old_value"], e["new_value"]) for e in events] == [
+        ("stage_split", f"{pid}|", f"{pid}|1;{pid}|2")
+    ]
+    # a lone rename (blank -> "1") is not a split: still withdrawn + added
     d1, d2 = date(2026, 11, 19), date(2026, 12, 1)
     a = [row(project_id="X", stage=None)]
     b = [row(project_id="X", stage="1")]
     assert kinds([("s1", d1, a), ("s2", d2, b)]) == [
         ("X|", "withdrawn"),
         ("X|1", "added"),
+    ]
+    # ECR rows (no Stage) repeated under one ID are not a split
+    c = [row(project_id="S"), row(project_id="S")]
+    assert kinds([("s1", d1, [row(project_id="S")]), ("s2", d2, c)]) == [
+        ("S|#2", "added")
     ]
 
 
@@ -266,7 +283,7 @@ def test_ssen_ecr(tmp_path, monkeypatch):
         res[1]["url"]: nov,
         res[3]["url"]: oct_,
     }
-    monkeypatch.setattr(gridline, "http", blobs.__getitem__)
+    monkeypatch.setattr(gridline, "http", lambda u, h=None: blobs[u])
     monkeypatch.chdir(tmp_path)
     gridline.fetch(["ssen"])
     assert gridline.manifest("ssen")["published"].to_list() == [
@@ -307,7 +324,7 @@ def test_npg_ecr(tmp_path, monkeypatch):
     meta = {"metas": {"default": {"data_processed": "2026-11-13T16:54:55+00:00"}}}
     export = f"{gridline.NPG}/exports/csv?delimiter=%2C"
     blobs = {gridline.NPG: json.dumps(meta).encode(), export: blob.splitlines()[0]}
-    monkeypatch.setattr(gridline, "http", blobs.__getitem__)
+    monkeypatch.setattr(gridline, "http", lambda u, h=None: blobs[u])
     monkeypatch.chdir(tmp_path)
     # a login-gated portal answers HTTP 200 with the header only
     with pytest.raises(SystemExit, match="0 data rows"):
@@ -326,3 +343,60 @@ def test_npg_ecr(tmp_path, monkeypatch):
     blobs[gridline.NPG] = b"[]"  # TypeError, not caught before
     with pytest.raises(SystemExit, match="npg: list indices"):
         gridline.fetch(["npg"])
+
+
+def test_ssen_xlsx_matches_csv():
+    """ssen-ecr-1mw-13-november-2026.xlsx: the same 10 rows as the CSV fixture, taken from
+    SSEN's real Nov 2026 workbook (sheet "Register Part 1 - >=1MW", title row above the
+    header, typed cells), personal fields blanked. The workbook has no Unique ID column."""
+    xlsx = parse_ecr((FIX / "ssen-ecr-1mw-13-november-2026.xlsx").read_bytes())
+    csv_ = parse_ecr((FIX / "ssen-ecr-1mw-13-november-2026.csv").read_bytes())
+    assert [{**r, "project_id": None} for r in csv_] == xlsx
+
+
+def test_release_hosted_snapshot_wrong_hash_is_refused(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    blob = (FIX / "ssen-ecr-1mw-13-november-2026.xlsx").read_bytes()
+    url = "https://github.com/o/r/releases/download/h/ssen-ecr-13-november-2026.xlsx"
+    monkeypatch.setattr(gridline, "http", lambda u, h=None: blob)
+    good = {"raw_path": url, "sha256": gridline.hashlib.sha256(blob).hexdigest()}
+    assert gridline.raw(good) == blob  # downloaded, verified, cached
+    with pytest.raises(ValueError, match="sha256"):
+        gridline.raw({"raw_path": url, "sha256": "0" * 64})
+    assert sorted(p.name for p in (tmp_path / "data" / "cache").iterdir()) == [
+        good["sha256"]
+    ]
+
+
+def test_history_without_ids_borrows_them():
+    # workbook month (no IDs) then CSV month (IDs): one project, not removed + added
+    d1, d2 = date(2026, 9, 14), date(2026, 10, 12)
+    site = {"project_name": "Three Lochs Hydro", "connection_site": "GRUDIE BRIDGE"}
+    old = [row(**site, mw_total=2.0), row(project_name="Gone", mw_total=1.0)]
+    new = [row(**site, mw_total=2.5, project_id="SSEN0711")]
+    events, _ = build([("x", d1, old), ("c", d2, new)])
+    assert [(e["key"], e["event_type"], e["low_confidence"]) for e in events] == [
+        ("n:gone|||", "withdrawn", True),
+        ("SSEN0711|", "capacity_changed", True),
+    ]
+
+
+def test_key_gated_sources(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    calls = []
+    blob = (FIX / "npg-ecr-1mw-13-november-2026.csv").read_bytes()
+    meta = {"metas": {"default": {"data_processed": "2026-11-13T11:07:15+00:00"}}}
+
+    def http(url, headers=None):
+        calls.append((url, headers))
+        return json.dumps(meta).encode() if url == gridline.UKPN else blob
+
+    monkeypatch.setattr(gridline, "http", http)
+    monkeypatch.delenv("UKPN_API_KEY", raising=False)
+    gridline.fetch(["ukpn"])  # no key: skipped, not failed
+    gridline.check(date(2026, 11, 24), ["ukpn"])
+    assert calls == [] and gridline.manifest("ukpn") is None
+    monkeypatch.setenv("UKPN_API_KEY", "secret-123")
+    gridline.fetch(["ukpn"])
+    assert {h["Authorization"] for _, h in calls} == {"Apikey secret-123"}
+    assert "secret-123" not in gridline.manifest("ukpn")["source"][0]

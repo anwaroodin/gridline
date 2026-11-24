@@ -14,15 +14,17 @@ import hashlib
 import io
 import json
 import math
+import os
 import re
 import sys
 import urllib.parse
 import urllib.request
-from collections import Counter
+from collections import Counter, defaultdict
 from collections.abc import Iterator
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
+import fastexcel
 import polars as pl
 
 DATA = Path("data")  # derived Parquet, gitignored
@@ -31,6 +33,11 @@ ARCHIVE = Path("archive")
 CKAN = "https://api.neso.energy/api/3/action/package_show?id=transmission-entry-capacity-tec-register"
 SSEN_CKAN = "https://data-api.ssen.co.uk/api/3/action/package_show?id=embedded_capacity_register"
 NPG = "https://northernpowergrid.opendatasoft.com/api/explore/v2.1/catalog/datasets/embedded-capacity-register"
+# 1 MW+ registers behind a free portal account; the key goes in a header, never the URL
+# (the URL lands in the committed manifest)
+UKPN = "https://ukpowernetworks.opendatasoft.com/api/explore/v2.1/catalog/datasets/ukpn-embedded-capacity-register"
+SPEN = "https://spenergynetworks.opendatasoft.com/api/explore/v2.1/catalog/datasets/embedded-capacity-register"
+ENWL = "https://electricitynorthwest.opendatasoft.com/api/explore/v2.1/catalog/datasets/enwl-embedded-capacity-register-2-1mw-and-above"
 
 # norm(CSV header) -> our column name
 COLS = {
@@ -75,7 +82,8 @@ ECR_COLS = {
     "unique id": "project_id",  # SSEN
     "ecrid": "project_id",  # NPg
 }
-ECR_REQUIRED = set(ECR_COLS.values()) - {"customer_name"}
+# no ID column in the XLSX history; archive() still refuses a release that loses IDs
+ECR_REQUIRED = set(ECR_COLS.values()) - {"customer_name", "project_id"}
 # the template's many spellings of "no value", after norm()
 MISSING = {
     "",
@@ -142,8 +150,10 @@ VERSION_SCHEMA = {
 }
 
 
-def http(url: str) -> bytes:
-    req = urllib.request.Request(url, headers={"User-Agent": "gridline/0.1"})
+def http(url: str, headers: dict | None = None) -> bytes:
+    req = urllib.request.Request(
+        url, headers={"User-Agent": "gridline/0.1", **(headers or {})}
+    )
     with urllib.request.urlopen(req, timeout=120) as r:
         return r.read()
 
@@ -227,8 +237,31 @@ def parse_tec(blob: bytes) -> list[dict]:
     return rows
 
 
+def xlsx_csv(blob: bytes) -> bytes:
+    """An ECR workbook's 1 MW+ register sheet as CSV, so one parser reads both formats.
+    Older templates have one "Register" sheet; the header row is the one holding
+    "Customer Site" (rows above it are section titles)."""
+    book = fastexcel.read_excel(blob)
+    sheets = [s for s in book.sheet_names if "≥1MW" in s] or [
+        s for s in book.sheet_names if norm(s).startswith("register part 1")
+    ]
+    sheets = sheets or [s for s in book.sheet_names if norm(s) == "register"]
+    if not sheets:
+        raise ValueError(f"no register sheet in {book.sheet_names}")
+    df = book.load_sheet(sheets[0], header_row=None, dtypes="string").to_polars()
+    rows = [list(r) for r in df.iter_rows()]
+    top = next((i for i, r in enumerate(rows) if "customer site" in map(norm, r)), None)
+    if top is None:
+        raise ValueError(f"no Customer Site header in sheet {sheets[0]!r}")
+    out = io.StringIO()
+    csv.writer(out).writerows(rows[top:])
+    return out.getvalue().encode()
+
+
 def parse_ecr(blob: bytes) -> list[dict]:
-    """Parse one Embedded Capacity Register CSV into ROW_SCHEMA rows."""
+    """Parse one Embedded Capacity Register (CSV, or XLSX workbook) into ROW_SCHEMA rows."""
+    if blob[:4] == b"PK\x03\x04":
+        blob = xlsx_csv(blob)
     rows = []
     for r in read_rows(blob, ECR_COLS, ECR_REQUIRED, "Embedded Capacity Register"):
         r = {k: None if norm(v) in MISSING else v for k, v in r.items()}
@@ -238,7 +271,12 @@ def parse_ecr(blob: bytes) -> list[dict]:
         row["plant_type"] = ";".join(filter(None, sources)) or None
         # spellings differ by DNO and by row ("ACCEPTED TO CONNECT", "Accepted To Connect")
         row["status"] = r["status"] and r["status"].lower()
+        # SSEN's CSV rounds MW to 3 dp and its workbook doesn't: round both, or the
+        # switch from XLSX history to CSV would look like a capacity change
         row["mw_connected"] = parse_num(r["mw_connected"])
+        if row["mw_connected"] is not None:
+            row["mw_connected"] = round(row["mw_connected"], 3)
+        accepted = None if accepted is None else round(accepted, 3)
         # the register fills one capacity column per row, chosen by status
         connected = row["status"] == "connected"
         row["mw_total"] = row["mw_connected"] if connected else accepted
@@ -256,6 +294,26 @@ def parse_ecr(blob: bytes) -> list[dict]:
 
 def read_tec(path: str | Path) -> list[dict]:
     return parse_tec(Path(path).read_bytes())
+
+
+def raw(snap: dict) -> bytes:
+    """A snapshot's bytes: from archive/, or for Release-hosted history downloaded once and
+    cached in data/cache/ (gitignored). Refuses bytes whose sha256 isn't the manifest's."""
+    path, cached = snap["raw_path"], DATA / "cache" / snap["sha256"]
+    if not path.startswith("http"):
+        blob = Path(path).read_bytes()
+    elif cached.exists():
+        blob = cached.read_bytes()
+    else:
+        blob = http(path)
+    if hashlib.sha256(blob).hexdigest() != snap["sha256"]:
+        raise ValueError(
+            f"{path}: sha256 differs from the manifest, refusing to parse it"
+        )
+    if path.startswith("http") and not cached.exists():
+        cached.parent.mkdir(parents=True, exist_ok=True)
+        cached.write_bytes(blob)
+    return blob
 
 
 def manifest(source: str = "tec") -> pl.DataFrame | None:
@@ -280,13 +338,15 @@ def archive(
     published: date | None,
     source: str = "tec",
     force: bool = False,
+    hosted: str | None = None,
 ) -> None:
-    """Store a release of `source` unless its hash is known.
+    """Store a release of `source` unless its hash is known. With `hosted` (a GitHub
+    Release asset URL) only the manifest row is written and raw_path points there.
 
     Refuses anything its parser rejects or that has 0 rows, and (unless `force`) a release
-    with under half the rows of the latest one: a truncated download would otherwise be
-    committed forever and replayed as mass `withdrawn` events, or one that lost the
-    Project IDs the latest one had."""
+    with under half the rows of the release before it: a truncated download would
+    otherwise be committed forever and replayed as mass `withdrawn` events, or one that
+    lost the Project IDs the release before it had."""
     parse = SOURCES[source]["parse"]
     sha = hashlib.sha256(blob).hexdigest()
     snaps = manifest(source)
@@ -299,38 +359,44 @@ def archive(
         sys.exit(f"refusing {url}: {e}")
     if not rows:
         sys.exit(f"refusing {url}: 0 data rows")
-    if snaps is not None and not force:
-        last = snaps.sort("published", "fetched_at").row(-1, named=True)
+    # compare with the release just before this one, so backfilling old releases works
+    before = None if snaps is None else snaps.filter(pl.col("published") <= published)
+    if before is not None and before.height and not force:
+        last = before.sort("published", "fetched_at").row(-1, named=True)
         if len(rows) < last["rows"] / 2:
             sys.exit(
-                f"refusing {url}: {len(rows)} rows, under half of the latest release"
+                f"refusing {url}: {len(rows)} rows, under half of the release before it"
                 f" ({last['rows']}); rerun with --force if it is real"
             )
         # a renamed or dropped Project ID column would re-key every row by name:
         # every project `withdrawn` and `added` again
-        last_rows = parse(Path(last["raw_path"]).read_bytes())
-        had_ids = any(r["project_id"] for r in last_rows)
+        had_ids = any(r["project_id"] for r in parse(raw(last)))
         if had_ids and not any(r["project_id"] for r in rows):
             sys.exit(
-                f"refusing {url}: no Project IDs, but the latest release had them;"
+                f"refusing {url}: no Project IDs, but the release before it had them;"
                 " rerun with --force if it is real"
             )
-    raw = ARCHIVE / source
-    raw.mkdir(parents=True, exist_ok=True)
-    path = raw / f"{sha}.csv"
-    path.write_bytes(blob)
+    folder = ARCHIVE / source
+    folder.mkdir(parents=True, exist_ok=True)
+    path = folder / f"{sha}.csv"
+    if not hosted:
+        path.write_bytes(blob)
     row = {
         "snapshot_id": sha[:12],
         "source": url,
         "fetched_at": datetime.now(UTC).replace(tzinfo=None),
         "published": published,
         "sha256": sha,
-        "raw_path": path.as_posix(),
+        "raw_path": hosted or path.as_posix(),
         "rows": len(rows),
     }
     new = pl.DataFrame([row], schema=SNAP_SCHEMA)
-    (new if snaps is None else pl.concat([snaps, new])).write_csv(raw / "snapshots.csv")
-    print(f"archived {url} -> {path} ({len(rows)} rows, published {published})")
+    (new if snaps is None else pl.concat([snaps, new])).write_csv(
+        folder / "snapshots.csv"
+    )
+    print(
+        f"archived {url} -> {row['raw_path']} ({len(rows)} rows, published {published})"
+    )
 
 
 def ckan(api: str, pattern: str) -> list[tuple[str, date]]:
@@ -359,10 +425,23 @@ def ckan(api: str, pattern: str) -> list[tuple[str, date]]:
     return sorted(found, key=lambda f: f[1])
 
 
-def opendatasoft(dataset: str) -> list[tuple[str, date]]:
+def apikey(env: str | None) -> dict:
+    """Opendatasoft auth header from an env var (a repository secret in the Action)."""
+    return (
+        {"Authorization": f"Apikey {os.environ[env]}"}
+        if os.environ.get(env or "")
+        else {}
+    )
+
+
+def opendatasoft(dataset: str, key: str | None = None) -> list[tuple[str, date]]:
     """The dataset's whole-table CSV export, dated by its last data change. A portal that
-    wants a login answers with the header only, which archive() refuses as 0 rows."""
-    meta = json.loads(http(dataset))["metas"]["default"]
+    wants a login answers with the header only, which archive() refuses as 0 rows.
+    With `key` (an env var name) unset, the source is skipped with a notice."""
+    if key and not os.environ.get(key):
+        print(f"skip {dataset}: set {key} to fetch it")
+        return []
+    meta = json.loads(http(dataset, apikey(key)))["metas"]["default"]
     return [
         (
             f"{dataset}/exports/csv?delimiter=%2C",
@@ -392,6 +471,27 @@ SOURCES = {
         "stale_days": 45,  # monthly, by the 10th working day
         "gone": "removed_from_register",
     },
+    "ukpn": {
+        "find": lambda: opendatasoft(UKPN, "UKPN_API_KEY"),
+        "key": "UKPN_API_KEY",
+        "parse": parse_ecr,
+        "stale_days": 45,
+        "gone": "removed_from_register",
+    },
+    "spen": {
+        "find": lambda: opendatasoft(SPEN, "SPEN_API_KEY"),  # rows carry `unique_id`
+        "key": "SPEN_API_KEY",
+        "parse": parse_ecr,
+        "stale_days": 45,
+        "gone": "removed_from_register",
+    },
+    "enwl": {  # SP Electricity North West
+        "find": lambda: opendatasoft(ENWL, "ENWL_API_KEY"),
+        "key": "ENWL_API_KEY",
+        "parse": parse_ecr,
+        "stale_days": 45,
+        "gone": "removed_from_register",
+    },
 }
 
 
@@ -402,7 +502,8 @@ def fetch(sources: list[str] | None = None, force: bool = False) -> None:
     for name in sources or SOURCES:
         try:
             for url, published in SOURCES[name]["find"]():
-                archive(http(url), url, published, name, force)
+                blob = http(url, apikey(SOURCES[name].get("key")))
+                archive(blob, url, published, name, force)
         # anything one source throws (refusal, HTTP error, odd JSON) must not skip the
         # next source: a missed release is lost for good
         except (Exception, SystemExit) as e:  # noqa: BLE001
@@ -412,9 +513,16 @@ def fetch(sources: list[str] | None = None, force: bool = False) -> None:
         sys.exit("\n".join(failed))
 
 
-def backfill(sources: list[str], force: bool = False) -> None:
-    """Archive past releases from local files or URLs; the release date must be in the file name."""
-    for src in sources:
+def backfill(
+    files: list[str],
+    force: bool = False,
+    source: str = "tec",
+    release: str | None = None,
+) -> None:
+    """Archive past releases from local files or URLs; the release date must be in the file
+    name. With `release` (a GitHub Release download URL ending in /) the files are meant to
+    be uploaded there: only their manifest rows are committed, pointing at release + name."""
+    for src in files:
         published = published_from_name(Path(src).name)
         if not published:
             sys.exit(
@@ -424,7 +532,9 @@ def backfill(sources: list[str], force: bool = False) -> None:
             http(src) if src.startswith("http") else Path(src).read_bytes(),
             src,
             published,
-            force=force,
+            source,
+            force,
+            release and release + Path(src).name,
         )
 
 
@@ -432,6 +542,10 @@ def check(today: date | None = None, sources: list[str] | None = None) -> None:
     """Exit non-zero when a source's newest release is older than its stale_days."""
     stale = []
     for name in sources or SOURCES:
+        key = SOURCES[name].get("key")
+        if key and not os.environ.get(key):
+            print(f"{name}: not checked, {key} is not set")
+            continue
         snaps = manifest(name)
         newest = None if snaps is None else snaps["published"].max()
         age = None if newest is None else ((today or date.today()) - newest).days
@@ -447,19 +561,42 @@ def norm(s: str | None) -> str:
     return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
 
 
+def name_key(r: dict) -> str:
+    """Fallback key for a row without an ID."""
+    fields = ("project_name", "connection_site", "plant_type", "stage")
+    return "n:" + "|".join(norm(r[c]) for c in fields)
+
+
+def borrow_ids(snapshots: list[tuple[str, date, list[dict]]]) -> None:
+    """Give a row without an ID the ID of the row with the same name key in another
+    release, when exactly one ID has that key. The SSEN and NPg workbooks (history) have
+    no ID column while their CSVs do, so without this every project would look removed and
+    re-added the month the format changed. Borrowed IDs are low_confidence.
+    ponytail: exact-key match only; Splink-style matching is Phase 2."""
+    ids = defaultdict(set)
+    for _, _, rows in snapshots:
+        for r in rows:
+            if r["project_id"]:
+                ids[name_key(r)].add(r["project_id"])
+    for _, _, rows in snapshots:
+        for r in rows:
+            found = ids.get(name_key(r), ()) if not r["project_id"] else ()
+            if len(found) == 1:
+                r["project_id"], r["borrowed_id"] = next(iter(found)), True
+
+
 def index(rows: list[dict]) -> dict[str, dict]:
     """Key each row. Project ID is case-sensitive (per NESO), so it is not lower-cased.
     Rows without a Project ID, or whose key repeats inside one release, are low_confidence."""
     base = []
     for r in rows:
         if r["project_id"]:
-            # ponytail: Stage is in the key, so a Stage change (blank -> "1") shows as
-            # `withdrawn` + `added`; drop it from the key once two real releases show
-            # whether one Project ID can carry several stages at once
+            # Stage stays in the key: one Project ID carries several stages at once
+            # (PRO-000366-1 and -2, 23 Nov 2026). A split is linked in build().
+            # ponytail: a lone rename (blank -> "1") still shows as withdrawn + added
             base.append(f"{r['project_id']}|{r['stage'] or ''}")
         else:
-            fields = ("project_name", "connection_site", "plant_type", "stage")
-            base.append("n:" + "|".join(norm(r[c]) for c in fields))
+            base.append(name_key(r))
     total, seen, out = Counter(base), Counter(), {}
     for k, r in zip(base, rows):
         seen[k] += 1
@@ -469,7 +606,9 @@ def index(rows: list[dict]) -> dict[str, dict]:
         out[key] = {
             **r,
             "key": key,
-            "low_confidence": total[k] > 1 or not r["project_id"],
+            "low_confidence": total[k] > 1
+            or not r["project_id"]
+            or r.get("borrowed_id", False),
         }
     return out
 
@@ -501,6 +640,24 @@ def changes(a: dict, b: dict) -> Iterator[tuple]:
     # `connected`; track history if it happens
     if (a["mw_connected"] or 0) <= 0 < (b["mw_connected"] or 0):
         yield "connected", "mw_connected", a["mw_connected"], b["mw_connected"], None
+
+
+def stage_splits(prev: dict, cur: dict) -> dict[str, list[str]]:
+    """{old key: new keys} for a Project ID that had one Stage and now has several: the
+    project split into stages and stays one project, so build() links the new stage keys
+    to the old key with one `stage_split` instead of `withdrawn` + `added`."""
+    stages, keys = defaultdict(lambda: ({}, {})), {}
+    for side, rows in enumerate((prev, cur)):
+        for k, r in rows.items():
+            if r["project_id"]:
+                stages[r["project_id"]][side].setdefault(r["stage"], []).append(k)
+    for old, new in stages.values():
+        if len(old) == 1 and len(new) > 1:
+            (old_keys,) = old.values()
+            added = sorted(k for ks in new.values() for k in ks if k not in prev)
+            if len(old_keys) == 1 and added:
+                keys[old_keys[0]] = added
+    return keys
 
 
 def add_event(
@@ -538,6 +695,7 @@ def build(
 ) -> tuple[list[dict], list[dict]]:
     """snapshots: (snapshot_id, published, rows) in publication order -> (events, versions).
     `gone` names the event for a row that disappears."""
+    borrow_ids(snapshots)
     events, versions, open_versions = [], [], {}
     prev, prev_id = None, None
     for sid, published, rows in snapshots:
@@ -548,9 +706,15 @@ def build(
             "published": published,
         }
         if prev is not None:
-            for k in sorted(cur.keys() - prev.keys()):
+            splits = stage_splits(prev, cur)
+            linked = {k for ks in splits.values() for k in ks}
+            for old, new in sorted(splits.items()):
+                add_event(
+                    events, where, prev[old], "stage_split", "key", old, ";".join(new)
+                )
+            for k in sorted(cur.keys() - prev.keys() - linked):
                 add_event(events, where, cur[k], "added")
-            for k in sorted(prev.keys() - cur.keys()):
+            for k in sorted(prev.keys() - cur.keys() - splits.keys()):
                 add_event(events, where, prev[k], gone)
             for k in sorted(cur.keys() & prev.keys()):
                 for c in changes(prev[k], cur[k]):
@@ -593,7 +757,7 @@ def diff() -> None:
             (
                 s["snapshot_id"],
                 s["published"],
-                src["parse"](Path(s["raw_path"]).read_bytes()),
+                src["parse"](raw(s)),
             )
             for s in snaps.iter_rows(named=True)
         ]
@@ -614,15 +778,20 @@ def diff() -> None:
 def main() -> None:
     cmd, *args = sys.argv[1:] or ["help"]
     force, args = "--force" in args, [a for a in args if a != "--force"]
+    release = None
+    if "--release" in args:
+        i = args.index("--release")
+        release, args = args[i + 1], args[:i] + args[i + 2 :]
     if cmd == "fetch":
         fetch(args, force)
     elif cmd == "backfill" and args:
-        backfill(args, force)
+        source = args.pop(0) if args[0] in SOURCES else "tec"
+        backfill(args, force, source, release)
     elif cmd == "diff":
         diff()
     elif cmd == "check":
         check(sources=args)
     else:
         sys.exit(
-            "usage: gridline fetch [--force] [SOURCE ...] | gridline backfill [--force] FILE_OR_URL ... | gridline diff | gridline check [SOURCE ...]"
+            "usage: gridline fetch [--force] [SOURCE ...] | gridline backfill [--force] [--release URL/] [SOURCE] FILE_OR_URL ... | gridline diff | gridline check [SOURCE ...]"
         )
