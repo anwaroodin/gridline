@@ -136,7 +136,7 @@ def test_parsing_guards(tmp_path, monkeypatch):
     monkeypatch.setattr(
         gridline,
         "http",
-        lambda u: json.dumps(ckan).encode() if u == gridline.CKAN else real,
+        lambda u, h=None: json.dumps(ckan).encode() if u == gridline.CKAN else real,
     )
     gridline.fetch(["tec"])
     assert gridline.manifest()["published"].to_list() == [published_from_name(url)]
@@ -266,7 +266,7 @@ def test_ssen_ecr(tmp_path, monkeypatch):
         res[1]["url"]: nov,
         res[3]["url"]: oct_,
     }
-    monkeypatch.setattr(gridline, "http", blobs.__getitem__)
+    monkeypatch.setattr(gridline, "http", lambda u, h=None: blobs[u])
     monkeypatch.chdir(tmp_path)
     gridline.fetch(["ssen"])
     assert gridline.manifest("ssen")["published"].to_list() == [
@@ -307,7 +307,7 @@ def test_npg_ecr(tmp_path, monkeypatch):
     meta = {"metas": {"default": {"data_processed": "2026-11-13T16:54:55+00:00"}}}
     export = f"{gridline.NPG}/exports/csv?delimiter=%2C"
     blobs = {gridline.NPG: json.dumps(meta).encode(), export: blob.splitlines()[0]}
-    monkeypatch.setattr(gridline, "http", blobs.__getitem__)
+    monkeypatch.setattr(gridline, "http", lambda u, h=None: blobs[u])
     monkeypatch.chdir(tmp_path)
     # a login-gated portal answers HTTP 200 with the header only
     with pytest.raises(SystemExit, match="0 data rows"):
@@ -341,7 +341,7 @@ def test_release_hosted_snapshot_wrong_hash_is_refused(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     blob = (FIX / "ssen-ecr-1mw-13-november-2026.xlsx").read_bytes()
     url = "https://github.com/o/r/releases/download/h/ssen-ecr-13-november-2026.xlsx"
-    monkeypatch.setattr(gridline, "http", lambda u: blob)
+    monkeypatch.setattr(gridline, "http", lambda u, h=None: blob)
     good = {"raw_path": url, "sha256": gridline.hashlib.sha256(blob).hexdigest()}
     assert gridline.raw(good) == blob  # downloaded, verified, cached
     with pytest.raises(ValueError, match="sha256"):
@@ -362,3 +362,24 @@ def test_history_without_ids_borrows_them():
         ("n:gone|||", "withdrawn", True),
         ("SSEN0711|", "capacity_changed", True),
     ]
+
+
+def test_key_gated_sources(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    calls = []
+    blob = (FIX / "npg-ecr-1mw-13-november-2026.csv").read_bytes()
+    meta = {"metas": {"default": {"data_processed": "2026-11-13T11:07:15+00:00"}}}
+
+    def http(url, headers=None):
+        calls.append((url, headers))
+        return json.dumps(meta).encode() if url == gridline.UKPN else blob
+
+    monkeypatch.setattr(gridline, "http", http)
+    monkeypatch.delenv("UKPN_API_KEY", raising=False)
+    gridline.fetch(["ukpn"])  # no key: skipped, not failed
+    gridline.check(date(2026, 11, 24), ["ukpn"])
+    assert calls == [] and gridline.manifest("ukpn") is None
+    monkeypatch.setenv("UKPN_API_KEY", "secret-123")
+    gridline.fetch(["ukpn"])
+    assert {h["Authorization"] for _, h in calls} == {"Apikey secret-123"}
+    assert "secret-123" not in gridline.manifest("ukpn")["source"][0]

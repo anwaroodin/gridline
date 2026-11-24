@@ -14,6 +14,7 @@ import hashlib
 import io
 import json
 import math
+import os
 import re
 import sys
 import urllib.parse
@@ -32,6 +33,11 @@ ARCHIVE = Path("archive")
 CKAN = "https://api.neso.energy/api/3/action/package_show?id=transmission-entry-capacity-tec-register"
 SSEN_CKAN = "https://data-api.ssen.co.uk/api/3/action/package_show?id=embedded_capacity_register"
 NPG = "https://northernpowergrid.opendatasoft.com/api/explore/v2.1/catalog/datasets/embedded-capacity-register"
+# 1 MW+ registers behind a free portal account; the key goes in a header, never the URL
+# (the URL lands in the committed manifest)
+UKPN = "https://ukpowernetworks.opendatasoft.com/api/explore/v2.1/catalog/datasets/ukpn-embedded-capacity-register"
+SPEN = "https://spenergynetworks.opendatasoft.com/api/explore/v2.1/catalog/datasets/embedded-capacity-register"
+ENWL = "https://electricitynorthwest.opendatasoft.com/api/explore/v2.1/catalog/datasets/enwl-embedded-capacity-register-2-1mw-and-above"
 
 # norm(CSV header) -> our column name
 COLS = {
@@ -144,8 +150,10 @@ VERSION_SCHEMA = {
 }
 
 
-def http(url: str) -> bytes:
-    req = urllib.request.Request(url, headers={"User-Agent": "gridline/0.1"})
+def http(url: str, headers: dict | None = None) -> bytes:
+    req = urllib.request.Request(
+        url, headers={"User-Agent": "gridline/0.1", **(headers or {})}
+    )
     with urllib.request.urlopen(req, timeout=120) as r:
         return r.read()
 
@@ -417,10 +425,23 @@ def ckan(api: str, pattern: str) -> list[tuple[str, date]]:
     return sorted(found, key=lambda f: f[1])
 
 
-def opendatasoft(dataset: str) -> list[tuple[str, date]]:
+def apikey(env: str | None) -> dict:
+    """Opendatasoft auth header from an env var (a repository secret in the Action)."""
+    return (
+        {"Authorization": f"Apikey {os.environ[env]}"}
+        if os.environ.get(env or "")
+        else {}
+    )
+
+
+def opendatasoft(dataset: str, key: str | None = None) -> list[tuple[str, date]]:
     """The dataset's whole-table CSV export, dated by its last data change. A portal that
-    wants a login answers with the header only, which archive() refuses as 0 rows."""
-    meta = json.loads(http(dataset))["metas"]["default"]
+    wants a login answers with the header only, which archive() refuses as 0 rows.
+    With `key` (an env var name) unset, the source is skipped with a notice."""
+    if key and not os.environ.get(key):
+        print(f"skip {dataset}: set {key} to fetch it")
+        return []
+    meta = json.loads(http(dataset, apikey(key)))["metas"]["default"]
     return [
         (
             f"{dataset}/exports/csv?delimiter=%2C",
@@ -450,6 +471,27 @@ SOURCES = {
         "stale_days": 45,  # monthly, by the 10th working day
         "gone": "removed_from_register",
     },
+    "ukpn": {
+        "find": lambda: opendatasoft(UKPN, "UKPN_API_KEY"),
+        "key": "UKPN_API_KEY",
+        "parse": parse_ecr,
+        "stale_days": 45,
+        "gone": "removed_from_register",
+    },
+    "spen": {
+        "find": lambda: opendatasoft(SPEN, "SPEN_API_KEY"),  # rows carry `unique_id`
+        "key": "SPEN_API_KEY",
+        "parse": parse_ecr,
+        "stale_days": 45,
+        "gone": "removed_from_register",
+    },
+    "enwl": {  # SP Electricity North West
+        "find": lambda: opendatasoft(ENWL, "ENWL_API_KEY"),
+        "key": "ENWL_API_KEY",
+        "parse": parse_ecr,
+        "stale_days": 45,
+        "gone": "removed_from_register",
+    },
 }
 
 
@@ -460,7 +502,8 @@ def fetch(sources: list[str] | None = None, force: bool = False) -> None:
     for name in sources or SOURCES:
         try:
             for url, published in SOURCES[name]["find"]():
-                archive(http(url), url, published, name, force)
+                blob = http(url, apikey(SOURCES[name].get("key")))
+                archive(blob, url, published, name, force)
         # anything one source throws (refusal, HTTP error, odd JSON) must not skip the
         # next source: a missed release is lost for good
         except (Exception, SystemExit) as e:  # noqa: BLE001
@@ -499,6 +542,10 @@ def check(today: date | None = None, sources: list[str] | None = None) -> None:
     """Exit non-zero when a source's newest release is older than its stale_days."""
     stale = []
     for name in sources or SOURCES:
+        key = SOURCES[name].get("key")
+        if key and not os.environ.get(key):
+            print(f"{name}: not checked, {key} is not set")
+            continue
         snaps = manifest(name)
         newest = None if snaps is None else snaps["published"].max()
         age = None if newest is None else ((today or date.today()) - newest).days
