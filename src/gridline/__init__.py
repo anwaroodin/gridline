@@ -164,7 +164,10 @@ def parse_tec(blob: bytes) -> list[dict]:
         r = dict.fromkeys(ROW_SCHEMA)
         for k, v in raw.items():
             if k and k.strip().lower() in COLS:
-                r[COLS[k.strip().lower()]] = (v or "").strip() or None
+                # two headers can map to one column (old + renamed date):
+                # a blank one must not wipe the filled one
+                col = COLS[k.strip().lower()]
+                r[col] = r[col] or (v or "").strip() or None
         if not any(r.values()):
             continue
         for c in NUM:

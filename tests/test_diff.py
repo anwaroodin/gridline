@@ -19,7 +19,7 @@ FIX = Path(__file__).parent / "fixtures"
 def test_events_between_fixtures():
     snaps = [
         (p.stem, published_from_name(p.name), read_tec(p))
-        for p in sorted(FIX.glob("*.csv"), key=lambda p: published_from_name(p.name))
+        for p in sorted(FIX.glob("tec-register-*.csv"), key=lambda p: published_from_name(p.name))
     ]
     events, versions = build(snaps)
     got = {
@@ -79,6 +79,14 @@ def test_parsing_guards(tmp_path, monkeypatch):
     # renamed date column (Ofgem proposal) still maps to effective_from
     renamed = parse_tec(real.replace(b"MW Effective From", b"Planned Connection Date"))
     assert [r["effective_from"] for r in renamed] == [
+        r["effective_from"] for r in parse_tec(real)
+    ]
+    # both date headers during the rename: the blank one must not wipe the filled one
+    lines = real.split(b"\r\n")
+    both = b"\r\n".join(
+        [lines[0] + b",Planned Connection Date"] + [ln + b"," for ln in lines[1:] if ln]
+    )
+    assert [r["effective_from"] for r in parse_tec(both)] == [
         r["effective_from"] for r in parse_tec(real)
     ]
     # a required column missing is an error, not silent nulls
