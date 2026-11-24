@@ -9,21 +9,34 @@ permissions:
 concurrency: { group: archive, cancel-in-progress: false }
 
 jobs:
-  tec:
+  archive:
     if: github.ref == 'refs/heads/main' # a manual run on another branch must not touch main
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
-      - run: uv run --locked gridline fetch
-      - run: uv run --locked gridline diff # only checks the archive still parses; data/ is not committed
+      # every source is tried even if one fails; the failure is raised at the end,
+      # after whatever succeeded is committed
+      - id: fetch
+        run: uv run --locked gridline fetch
+        continue-on-error: true
       - name: Commit new releases
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add archive/
-          git diff --quiet --cached || git commit -m "archive: TEC register $(date -u +%F)"
+          for dir in archive/*/; do
+            source=$(basename "$dir")
+            git add "$dir"
+            # newest manifest row: snapshot_id,source,fetched_at,published,...
+            published=$(tail -n 1 "$dir/snapshots.csv" | cut -d, -f4)
+            git diff --quiet --cached || git commit -m "archive: $source $published"
+          done
           # main may have moved (a merged PR) while this ran; PRs never touch archive/
           git pull --rebase && git push
-      - run: uv run --locked gridline check # fail loudly if no new release for too long
+      - run: uv run --locked gridline diff # only checks the archive still parses; data/ is not committed
+      - run: uv run --locked gridline check # fail loudly if a source has no new release for too long
+      - if: steps.fetch.outcome == 'failure'
+        run: |
+          echo "::error::gridline fetch failed for at least one source; see the fetch step"
+          exit 1
