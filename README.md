@@ -78,7 +78,11 @@ import polars as pl
 
 events = pl.read_parquet("data/event.parquet")
 print(events.group_by("event_type").len())
-print(events.filter(pl.col("event_type") == "date_slipped").sort("days", descending=True).head())
+print(
+    events.filter(pl.col("event_type") == "date_slipped")
+    .sort("days", descending=True)
+    .head()
+)
 ```
 
 ## Data model
