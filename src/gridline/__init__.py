@@ -18,7 +18,7 @@ import re
 import sys
 import urllib.parse
 import urllib.request
-from collections import Counter
+from collections import Counter, defaultdict
 from collections.abc import Iterator
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
@@ -514,6 +514,30 @@ def norm(s: str | None) -> str:
     return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
 
 
+def name_key(r: dict) -> str:
+    """Fallback key for a row without an ID."""
+    fields = ("project_name", "connection_site", "plant_type", "stage")
+    return "n:" + "|".join(norm(r[c]) for c in fields)
+
+
+def borrow_ids(snapshots: list[tuple[str, date, list[dict]]]) -> None:
+    """Give a row without an ID the ID of the row with the same name key in another
+    release, when exactly one ID has that key. The SSEN and NPg workbooks (history) have
+    no ID column while their CSVs do, so without this every project would look removed and
+    re-added the month the format changed. Borrowed IDs are low_confidence.
+    ponytail: exact-key match only; Splink-style matching is Phase 2."""
+    ids = defaultdict(set)
+    for _, _, rows in snapshots:
+        for r in rows:
+            if r["project_id"]:
+                ids[name_key(r)].add(r["project_id"])
+    for _, _, rows in snapshots:
+        for r in rows:
+            found = ids.get(name_key(r), ()) if not r["project_id"] else ()
+            if len(found) == 1:
+                r["project_id"], r["borrowed_id"] = next(iter(found)), True
+
+
 def index(rows: list[dict]) -> dict[str, dict]:
     """Key each row. Project ID is case-sensitive (per NESO), so it is not lower-cased.
     Rows without a Project ID, or whose key repeats inside one release, are low_confidence."""
@@ -525,8 +549,7 @@ def index(rows: list[dict]) -> dict[str, dict]:
             # whether one Project ID can carry several stages at once
             base.append(f"{r['project_id']}|{r['stage'] or ''}")
         else:
-            fields = ("project_name", "connection_site", "plant_type", "stage")
-            base.append("n:" + "|".join(norm(r[c]) for c in fields))
+            base.append(name_key(r))
     total, seen, out = Counter(base), Counter(), {}
     for k, r in zip(base, rows):
         seen[k] += 1
@@ -536,7 +559,9 @@ def index(rows: list[dict]) -> dict[str, dict]:
         out[key] = {
             **r,
             "key": key,
-            "low_confidence": total[k] > 1 or not r["project_id"],
+            "low_confidence": total[k] > 1
+            or not r["project_id"]
+            or r.get("borrowed_id", False),
         }
     return out
 
@@ -605,6 +630,7 @@ def build(
 ) -> tuple[list[dict], list[dict]]:
     """snapshots: (snapshot_id, published, rows) in publication order -> (events, versions).
     `gone` names the event for a row that disappears."""
+    borrow_ids(snapshots)
     events, versions, open_versions = [], [], {}
     prev, prev_id = None, None
     for sid, published, rows in snapshots:

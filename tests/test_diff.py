@@ -349,3 +349,16 @@ def test_release_hosted_snapshot_wrong_hash_is_refused(tmp_path, monkeypatch):
     assert sorted(p.name for p in (tmp_path / "data" / "cache").iterdir()) == [
         good["sha256"]
     ]
+
+
+def test_history_without_ids_borrows_them():
+    # workbook month (no IDs) then CSV month (IDs): one project, not removed + added
+    d1, d2 = date(2026, 9, 14), date(2026, 10, 12)
+    site = {"project_name": "Three Lochs Hydro", "connection_site": "GRUDIE BRIDGE"}
+    old = [row(**site, mw_total=2.0), row(project_name="Gone", mw_total=1.0)]
+    new = [row(**site, mw_total=2.5, project_id="SSEN0711")]
+    events, _ = build([("x", d1, old), ("c", d2, new)])
+    assert [(e["key"], e["event_type"], e["low_confidence"]) for e in events] == [
+        ("n:gone|||", "withdrawn", True),
+        ("SSEN0711|", "capacity_changed", True),
+    ]
