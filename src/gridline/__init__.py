@@ -296,6 +296,9 @@ def index(rows: list[dict]) -> dict[str, dict]:
     base = []
     for r in rows:
         if r["project_id"]:
+            # ponytail: Stage is in the key, so a Stage change (blank -> "1") shows as
+            # `withdrawn` + `added`; drop it from the key once two real releases show
+            # whether one Project ID can carry several stages at once
             base.append(f"{r['project_id']}|{r['stage'] or ''}")
         else:
             fields = ("project_name", "connection_site", "plant_type", "stage")

@@ -6,6 +6,7 @@ PRO-000398 -> Built with 0 MW (no `connected`) and MW Increase "TBC"; PRO-003578
 PRO-002010 gets a second line with the same Project ID and blank Stage; one new PV row with no Project ID."""
 
 import json
+from datetime import date
 from pathlib import Path
 
 import pytest
@@ -19,7 +20,9 @@ FIX = Path(__file__).parent / "fixtures"
 def test_events_between_fixtures():
     snaps = [
         (p.stem, published_from_name(p.name), read_tec(p))
-        for p in sorted(FIX.glob("tec-register-*.csv"), key=lambda p: published_from_name(p.name))
+        for p in sorted(
+            FIX.glob("tec-register-*.csv"), key=lambda p: published_from_name(p.name)
+        )
     ]
     events, versions = build(snaps)
     got = {
@@ -147,3 +150,22 @@ def test_archive_refuses_truncated_release(tmp_path, monkeypatch):
     no_ids = real.replace(b"Project ID", b"Official Project Ref")
     with pytest.raises(SystemExit, match="no Project IDs"):
         archive(no_ids, "renamed", published_from_name("2-december-2026"))
+
+
+def row(**kw):
+    return {**dict.fromkeys(gridline.ROW_SCHEMA), "project_name": "P", **kw}
+
+
+def kinds(snaps):
+    return sorted((e["key"], e["event_type"]) for e in build(snaps)[0])
+
+
+def test_stage_change_is_a_new_key():
+    # pins today's behaviour (see the ponytail note in index())
+    d1, d2 = date(2026, 11, 19), date(2026, 12, 1)
+    a = [row(project_id="X", stage=None)]
+    b = [row(project_id="X", stage="1")]
+    assert kinds([("s1", d1, a), ("s2", d2, b)]) == [
+        ("X|", "withdrawn"),
+        ("X|1", "added"),
+    ]
