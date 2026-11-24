@@ -85,6 +85,9 @@ uv run gridline check   # exit non-zero if a source has had no new release for t
 uv run pytest
 ```
 
+The package is named `gridline-uk` (`gridline` is taken on PyPI). It isn't published yet; once it
+is, `pip install gridline-uk` installs the same `gridline` command.
+
 Read the events with polars:
 
 ```python
