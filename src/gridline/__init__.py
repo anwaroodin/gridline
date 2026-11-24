@@ -23,6 +23,7 @@ from collections.abc import Iterator
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
+import fastexcel
 import polars as pl
 
 DATA = Path("data")  # derived Parquet, gitignored
@@ -75,7 +76,8 @@ ECR_COLS = {
     "unique id": "project_id",  # SSEN
     "ecrid": "project_id",  # NPg
 }
-ECR_REQUIRED = set(ECR_COLS.values()) - {"customer_name"}
+# no ID column in the XLSX history; archive() still refuses a release that loses IDs
+ECR_REQUIRED = set(ECR_COLS.values()) - {"customer_name", "project_id"}
 # the template's many spellings of "no value", after norm()
 MISSING = {
     "",
@@ -227,8 +229,31 @@ def parse_tec(blob: bytes) -> list[dict]:
     return rows
 
 
+def xlsx_csv(blob: bytes) -> bytes:
+    """An ECR workbook's 1 MW+ register sheet as CSV, so one parser reads both formats.
+    Older templates have one "Register" sheet; the header row is the one holding
+    "Customer Site" (rows above it are section titles)."""
+    book = fastexcel.read_excel(blob)
+    sheets = [s for s in book.sheet_names if "≥1MW" in s] or [
+        s for s in book.sheet_names if norm(s).startswith("register part 1")
+    ]
+    sheets = sheets or [s for s in book.sheet_names if norm(s) == "register"]
+    if not sheets:
+        raise ValueError(f"no register sheet in {book.sheet_names}")
+    df = book.load_sheet(sheets[0], header_row=None, dtypes="string").to_polars()
+    rows = [list(r) for r in df.iter_rows()]
+    top = next((i for i, r in enumerate(rows) if "customer site" in map(norm, r)), None)
+    if top is None:
+        raise ValueError(f"no Customer Site header in sheet {sheets[0]!r}")
+    out = io.StringIO()
+    csv.writer(out).writerows(rows[top:])
+    return out.getvalue().encode()
+
+
 def parse_ecr(blob: bytes) -> list[dict]:
-    """Parse one Embedded Capacity Register CSV into ROW_SCHEMA rows."""
+    """Parse one Embedded Capacity Register (CSV, or XLSX workbook) into ROW_SCHEMA rows."""
+    if blob[:4] == b"PK\x03\x04":
+        blob = xlsx_csv(blob)
     rows = []
     for r in read_rows(blob, ECR_COLS, ECR_REQUIRED, "Embedded Capacity Register"):
         r = {k: None if norm(v) in MISSING else v for k, v in r.items()}
@@ -238,7 +263,12 @@ def parse_ecr(blob: bytes) -> list[dict]:
         row["plant_type"] = ";".join(filter(None, sources)) or None
         # spellings differ by DNO and by row ("ACCEPTED TO CONNECT", "Accepted To Connect")
         row["status"] = r["status"] and r["status"].lower()
+        # SSEN's CSV rounds MW to 3 dp and its workbook doesn't: round both, or the
+        # switch from XLSX history to CSV would look like a capacity change
         row["mw_connected"] = parse_num(r["mw_connected"])
+        if row["mw_connected"] is not None:
+            row["mw_connected"] = round(row["mw_connected"], 3)
+        accepted = None if accepted is None else round(accepted, 3)
         # the register fills one capacity column per row, chosen by status
         connected = row["status"] == "connected"
         row["mw_total"] = row["mw_connected"] if connected else accepted
@@ -256,6 +286,26 @@ def parse_ecr(blob: bytes) -> list[dict]:
 
 def read_tec(path: str | Path) -> list[dict]:
     return parse_tec(Path(path).read_bytes())
+
+
+def raw(snap: dict) -> bytes:
+    """A snapshot's bytes: from archive/, or for Release-hosted history downloaded once and
+    cached in data/cache/ (gitignored). Refuses bytes whose sha256 isn't the manifest's."""
+    path, cached = snap["raw_path"], DATA / "cache" / snap["sha256"]
+    if not path.startswith("http"):
+        blob = Path(path).read_bytes()
+    elif cached.exists():
+        blob = cached.read_bytes()
+    else:
+        blob = http(path)
+    if hashlib.sha256(blob).hexdigest() != snap["sha256"]:
+        raise ValueError(
+            f"{path}: sha256 differs from the manifest, refusing to parse it"
+        )
+    if path.startswith("http") and not cached.exists():
+        cached.parent.mkdir(parents=True, exist_ok=True)
+        cached.write_bytes(blob)
+    return blob
 
 
 def manifest(source: str = "tec") -> pl.DataFrame | None:
@@ -280,13 +330,15 @@ def archive(
     published: date | None,
     source: str = "tec",
     force: bool = False,
+    hosted: str | None = None,
 ) -> None:
-    """Store a release of `source` unless its hash is known.
+    """Store a release of `source` unless its hash is known. With `hosted` (a GitHub
+    Release asset URL) only the manifest row is written and raw_path points there.
 
     Refuses anything its parser rejects or that has 0 rows, and (unless `force`) a release
-    with under half the rows of the latest one: a truncated download would otherwise be
-    committed forever and replayed as mass `withdrawn` events, or one that lost the
-    Project IDs the latest one had."""
+    with under half the rows of the release before it: a truncated download would
+    otherwise be committed forever and replayed as mass `withdrawn` events, or one that
+    lost the Project IDs the release before it had."""
     parse = SOURCES[source]["parse"]
     sha = hashlib.sha256(blob).hexdigest()
     snaps = manifest(source)
@@ -299,38 +351,44 @@ def archive(
         sys.exit(f"refusing {url}: {e}")
     if not rows:
         sys.exit(f"refusing {url}: 0 data rows")
-    if snaps is not None and not force:
-        last = snaps.sort("published", "fetched_at").row(-1, named=True)
+    # compare with the release just before this one, so backfilling old releases works
+    before = None if snaps is None else snaps.filter(pl.col("published") <= published)
+    if before is not None and before.height and not force:
+        last = before.sort("published", "fetched_at").row(-1, named=True)
         if len(rows) < last["rows"] / 2:
             sys.exit(
-                f"refusing {url}: {len(rows)} rows, under half of the latest release"
+                f"refusing {url}: {len(rows)} rows, under half of the release before it"
                 f" ({last['rows']}); rerun with --force if it is real"
             )
         # a renamed or dropped Project ID column would re-key every row by name:
         # every project `withdrawn` and `added` again
-        last_rows = parse(Path(last["raw_path"]).read_bytes())
-        had_ids = any(r["project_id"] for r in last_rows)
+        had_ids = any(r["project_id"] for r in parse(raw(last)))
         if had_ids and not any(r["project_id"] for r in rows):
             sys.exit(
-                f"refusing {url}: no Project IDs, but the latest release had them;"
+                f"refusing {url}: no Project IDs, but the release before it had them;"
                 " rerun with --force if it is real"
             )
-    raw = ARCHIVE / source
-    raw.mkdir(parents=True, exist_ok=True)
-    path = raw / f"{sha}.csv"
-    path.write_bytes(blob)
+    folder = ARCHIVE / source
+    folder.mkdir(parents=True, exist_ok=True)
+    path = folder / f"{sha}.csv"
+    if not hosted:
+        path.write_bytes(blob)
     row = {
         "snapshot_id": sha[:12],
         "source": url,
         "fetched_at": datetime.now(UTC).replace(tzinfo=None),
         "published": published,
         "sha256": sha,
-        "raw_path": path.as_posix(),
+        "raw_path": hosted or path.as_posix(),
         "rows": len(rows),
     }
     new = pl.DataFrame([row], schema=SNAP_SCHEMA)
-    (new if snaps is None else pl.concat([snaps, new])).write_csv(raw / "snapshots.csv")
-    print(f"archived {url} -> {path} ({len(rows)} rows, published {published})")
+    (new if snaps is None else pl.concat([snaps, new])).write_csv(
+        folder / "snapshots.csv"
+    )
+    print(
+        f"archived {url} -> {row['raw_path']} ({len(rows)} rows, published {published})"
+    )
 
 
 def ckan(api: str, pattern: str) -> list[tuple[str, date]]:
@@ -412,9 +470,16 @@ def fetch(sources: list[str] | None = None, force: bool = False) -> None:
         sys.exit("\n".join(failed))
 
 
-def backfill(sources: list[str], force: bool = False) -> None:
-    """Archive past releases from local files or URLs; the release date must be in the file name."""
-    for src in sources:
+def backfill(
+    files: list[str],
+    force: bool = False,
+    source: str = "tec",
+    release: str | None = None,
+) -> None:
+    """Archive past releases from local files or URLs; the release date must be in the file
+    name. With `release` (a GitHub Release download URL ending in /) the files are meant to
+    be uploaded there: only their manifest rows are committed, pointing at release + name."""
+    for src in files:
         published = published_from_name(Path(src).name)
         if not published:
             sys.exit(
@@ -424,7 +489,9 @@ def backfill(sources: list[str], force: bool = False) -> None:
             http(src) if src.startswith("http") else Path(src).read_bytes(),
             src,
             published,
-            force=force,
+            source,
+            force,
+            release and release + Path(src).name,
         )
 
 
@@ -593,7 +660,7 @@ def diff() -> None:
             (
                 s["snapshot_id"],
                 s["published"],
-                src["parse"](Path(s["raw_path"]).read_bytes()),
+                src["parse"](raw(s)),
             )
             for s in snaps.iter_rows(named=True)
         ]
@@ -614,15 +681,20 @@ def diff() -> None:
 def main() -> None:
     cmd, *args = sys.argv[1:] or ["help"]
     force, args = "--force" in args, [a for a in args if a != "--force"]
+    release = None
+    if "--release" in args:
+        i = args.index("--release")
+        release, args = args[i + 1], args[:i] + args[i + 2 :]
     if cmd == "fetch":
         fetch(args, force)
     elif cmd == "backfill" and args:
-        backfill(args, force)
+        source = args.pop(0) if args[0] in SOURCES else "tec"
+        backfill(args, force, source, release)
     elif cmd == "diff":
         diff()
     elif cmd == "check":
         check(sources=args)
     else:
         sys.exit(
-            "usage: gridline fetch [--force] [SOURCE ...] | gridline backfill [--force] FILE_OR_URL ... | gridline diff | gridline check [SOURCE ...]"
+            "usage: gridline fetch [--force] [SOURCE ...] | gridline backfill [--force] [--release URL/] [SOURCE] FILE_OR_URL ... | gridline diff | gridline check [SOURCE ...]"
         )

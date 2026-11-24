@@ -326,3 +326,26 @@ def test_npg_ecr(tmp_path, monkeypatch):
     blobs[gridline.NPG] = b"[]"  # TypeError, not caught before
     with pytest.raises(SystemExit, match="npg: list indices"):
         gridline.fetch(["npg"])
+
+
+def test_ssen_xlsx_matches_csv():
+    """ssen-ecr-1mw-13-november-2026.xlsx: the same 10 rows as the CSV fixture, taken from
+    SSEN's real Nov 2026 workbook (sheet "Register Part 1 - >=1MW", title row above the
+    header, typed cells), personal fields blanked. The workbook has no Unique ID column."""
+    xlsx = parse_ecr((FIX / "ssen-ecr-1mw-13-november-2026.xlsx").read_bytes())
+    csv_ = parse_ecr((FIX / "ssen-ecr-1mw-13-november-2026.csv").read_bytes())
+    assert [{**r, "project_id": None} for r in csv_] == xlsx
+
+
+def test_release_hosted_snapshot_wrong_hash_is_refused(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    blob = (FIX / "ssen-ecr-1mw-13-november-2026.xlsx").read_bytes()
+    url = "https://github.com/o/r/releases/download/h/ssen-ecr-13-november-2026.xlsx"
+    monkeypatch.setattr(gridline, "http", lambda u: blob)
+    good = {"raw_path": url, "sha256": gridline.hashlib.sha256(blob).hexdigest()}
+    assert gridline.raw(good) == blob  # downloaded, verified, cached
+    with pytest.raises(ValueError, match="sha256"):
+        gridline.raw({"raw_path": url, "sha256": "0" * 64})
+    assert sorted(p.name for p in (tmp_path / "data" / "cache").iterdir()) == [
+        good["sha256"]
+    ]
