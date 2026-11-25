@@ -121,6 +121,7 @@ print(
 | `added` | the row appears for the first time |
 | `withdrawn` | the row is no longer in the TEC register |
 | `stage_split` | a TEC Project ID that had one Stage now has several: it stays one project. `old_value` is the old key, `new_value` the new stage keys (`;`-separated), instead of `withdrawn` + `added` |
+| `renamed` | a DNO register row continues under another name (same export meter number, a near-identical name at the same GSP, or a placeholder name such as "49.9MW BATTERY" replaced by the site name). `old_value` and `new_value` are the names. Always `low_confidence` |
 | `removed_from_register` | the row is no longer in a DNO register. Not called withdrawn: under connections reform some projects moved to Gate 1 and were removed from ECRs |
 | `capacity_changed` | TEC: Cumulative Total Capacity (MW) changed. ECR: the registered capacity (accepted-to-connect, or already-connected once connected) changed |
 | `date_slipped` | TEC: MW Effective From moved. ECR: Target Energisation Date moved (NPg leaves it blank, so none there). `days` is positive when later, negative when brought forward |
@@ -143,6 +144,11 @@ Every event carries `register` (`tec`, `ssen`, `npg`), `low_confidence`, `projec
   technology in the current CSVs where exactly one matches, or the one with the same capacity
   when a site name repeats (`low_confidence`); the rest are matched by name. NPg workbooks from
   May 2026 carry the ID as "Unique Site Identifier".
+- A row without an ID that leaves a release while another arrives is checked before calling it
+  removed: the same export meter number (MPAN), else the same GSP and a name at least 85% alike
+  with the same numbers in it (so *Farm 2* is never *Farm 3*), else the only row each side with
+  the same GSP, technology, capacity, date and status. A match continues the old row, with a
+  `renamed` event if the name changed. Two rows that both carry their own ID are never joined.
 - GSP names are compared by GSP ID from [`reference/gsp.csv`](reference/gsp.csv): NESO's GSP
   lookup plus aliases for other spellings, so a register that renames its GSPs (SSEN switched from
   codes such as `MELK` to names such as `MELKSHAM GSP` in October 2023) keeps its rows' keys.

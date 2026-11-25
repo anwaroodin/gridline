@@ -430,3 +430,47 @@ def test_npg_workbook_site_id_and_repeated_names():
     old = [a, b]
     new = [{**b, "project_id": "N2"}, {**a, "project_id": "N1"}]
     assert kinds([("s1", d1, old), ("s2", d2, new)]) == []
+
+
+def test_renamed_rows_continue_as_one():
+    d = [date(2024, 6, 15), date(2024, 7, 10), date(2024, 8, 8)]
+    site = {"connection_site": "Knaresborough", "plant_type": "Waste", "mw_total": 2.0}
+    a = row(project_name="Alne Material Recycling Facility", **site)
+    b = row(project_name="Alne Materials Recycling Facility", **site)
+    # a respelt name continues the row, and the next release keeps its key
+    events, versions = build([("s1", d[0], [a]), ("s2", d[1], [b]), ("s3", d[2], [b])])
+    assert [(e["event_type"], e["new_value"], e["low_confidence"]) for e in events] == [
+        ("renamed", "Alne Materials Recycling Facility", True)
+    ]
+    assert len({v["key"] for v in versions}) == 1
+    # the same export meter links two unrelated-looking names
+    old = [row(project_name="Kingspan", mpan="2380000303419", **site)]
+    new = [row(project_name="Hurricane Park", mpan="2380000303419", **site)]
+    assert [
+        e["event_type"] for e in build([("s1", d[0], old), ("s2", d[1], new)])[0]
+    ] == ["renamed"]
+    # a placeholder name replaced by the site name: same GSP, technology, MW, date, status
+    old = [row(project_name="49.9MW BATTERY", effective_from=d[2], **site)]
+    new = [row(project_name="Drum Farm BESS", effective_from=d[2], **site)]
+    assert [
+        e["event_type"] for e in build([("s1", d[0], old), ("s2", d[1], new)])[0]
+    ] == ["renamed"]
+
+
+def test_different_projects_are_not_relinked():
+    d1, d2 = date(2024, 6, 15), date(2024, 7, 10)
+    site = {"connection_site": "CARRADALE", "plant_type": "WIND", "mw_total": 47.5}
+    # another phase number is another project, even when everything else matches
+    old = [row(project_name="Beinn an Tuirc 2", **site)]
+    new = [row(project_name="Beinn an Tuirc 3", **site)]
+    assert kinds([("s1", d1, old), ("s2", d2, new)]) == [
+        ("n:beinn an tuirc 2|CAAD_P|wind|", "withdrawn"),
+        ("n:beinn an tuirc 3|CAAD_P|wind|", "added"),
+    ]
+    # two rows with their own IDs: the IDs decide, however alike the rest is
+    old = [row(project_name="Glen Farm", project_id="SSEN0001", **site)]
+    new = [row(project_name="Glen Farm", project_id="SSEN0002", **site)]
+    assert kinds([("s1", d1, old), ("s2", d2, new)]) == [
+        ("SSEN0001|", "withdrawn"),
+        ("SSEN0002|", "added"),
+    ]
