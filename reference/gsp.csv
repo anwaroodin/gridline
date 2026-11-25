@@ -1,0 +1,425 @@
+name,gsp_id,dno,source
+Abernethy,ABNE_P,ssen,neso
+Aberthaw,ABTH_1,nged,neso
+Abham,ABHA1,nged,neso
+Alness,ALNE_P,ssen,neso
+Alverdiscott,ALVE1,nged,neso
+Amersham Main,AMEM_1,ukpn,neso
+Arbroath,ARBR_P,ssen,neso
+Ardkinglas,ARDK_P,ssen,neso
+Ardmore,ARMO_P,ssen,neso
+Axminster,AXMI1,nged,neso
+Ayr,AYRR,spen,neso
+Bainsford,BAIN,spen,neso
+Bathgate,BAGA,spen,neso
+Beauly,BEAU_P,ssen,neso
+Beddington (_C),BEDDT1,ukpn,neso
+Beddington (_J),BEDD_1,ukpn,neso
+Berkswell,BESW_1,nged,neso
+Berwick,BERW,spen,neso
+Bicker Fen,BICF_1,nged,neso
+Birkenhead,BIRK_1,spen,neso
+Bishops Wood,BISW_1,nged,neso
+Blyth 132kV,BLYTH132,npg,neso
+Blyth 66kV,BLYTB1,npg,neso
+Boat of Garten,BOAG_P,ssen,neso
+Bolney,BOLN_1,ukpn,neso
+Bonnybridge,BONN,spen,neso
+Botley Wood,BOTW_1,ssen,neso
+Braco West,BRAC_P,ssen,neso
+Bradford West,BRAW_1,npg,neso
+Braehead Park,BRAP,spen,neso
+Braintree,BRAI_1,ukpn,neso
+Bramford,BRFO_1,ukpn,neso
+Bramley,BRLE_1,ssen,neso
+Bredbury,BRED_1,enwl,neso
+Bridge of Dun,BRID_P,ssen,neso
+Bridgewater,BRWA1,nged,neso
+Brimsdown,BRIM_1,ukpn,neso
+Broadford,BROA_P,ssen,neso
+Brora,BROR_P,ssen,neso
+Broxburn,BROX,spen,neso
+Burghmuir,BUMU_P,ssen,neso
+Burwell Main,BURM_1,ukpn,neso
+Bushbury,BUSH_1,nged,neso
+Bustleholme,BUST_1,nged,neso
+Camblesforth,CAMB_01,npg,neso
+Canterbury,CANTN1,ukpn,neso
+Capenhurst,CAPEA1,spen,neso
+Cardiff East,CARE_1,nged,neso
+Carntyne,CATY,spen,neso
+Carradale,CAAD_P,ssen,neso
+Carrington,CARR_1,enwl,neso
+Cassley,CASS_P,ssen,neso
+Ceannacroc,CEAN_P,ssen,neso
+Cellarhead,CELL_1,nged,neso
+Chapelcross,CHAP,spen,neso
+Charleston,CHAR_P,ssen,neso
+Charlotte Street,CHAS,spen,neso
+Chessington,CHSI_1,ukpn,neso
+Chesterfield,CHTE_1,nged,neso
+Chickerell,CHIC_1,ssen,neso
+City Road,CITR_1,ukpn,neso
+Clachan,CLAC_P,ssen,neso
+Clayhills,CLAY_P,ssen,neso
+Clyde’s Mill,CLYM,spen,neso
+Coatbridge,COAT,spen,neso
+Cockenzie,COCK,spen,neso
+Connahs Quay,CONQA1,spen,neso
+Coupar Angus,COUA_P,ssen,neso
+Coventry,COVE_1,nged,neso
+Cowley,COWL_1,ssen,neso
+Coylton,COYL,spen,neso
+Craigiebuckler,CRAI_P,ssen,neso
+Creyke Beck,CREB_1,npg,neso
+Crookston,CROO,spen,neso
+Cumbernauld,CUMB,spen,neso
+Cupar,CUPA,spen,neso
+Currie,CURR,spen,neso
+Dalmarnock,DALM3,spen,neso
+Devol Moor,DEVM,spen,neso
+Devonside,DEVO,spen,neso
+Dewar Place,DEWP,spen,neso
+Dounreay,DOUN_P,ssen,neso
+Drakelow,DRAK_1,nged,neso
+Drax,DRAX_1,npg,neso
+Drumchapel,DRUM,spen,neso
+Drumcross,DRCR,spen,neso
+Dudhope,DUDH_P,ssen,neso
+Dumfries,DUMF,spen,neso
+Dunbar,DUNB,spen,neso
+Dunbeath,DUBE_P,ssen,neso
+Dunfermline,DUNF,spen,neso
+Dunoon,DUNO_P,ssen,neso
+Dunvegan,DUGR_P,ssen,neso
+Dyce,DYCE_P,ssen,neso
+Ealing,EALI_6,ssen,neso
+East Claydon,ECLA_1,nged,neso
+East Kilbride,EKIL,spen,neso
+East Kilbride South,EKIS,spen,neso
+Easterhouse,EERH,spen,neso
+Eaton Socon,EASO_1,ukpn,neso
+Eccles,ECCL,spen,neso
+Elderslie,ELDE,spen,neso
+Elgin,ELGI_P,ssen,neso
+Elland,ELLA_1,npg,neso
+Elstree,ELST_1,ukpn,neso
+Enderby,ENDE_1,nged,neso
+Erskine,ERSK,spen,neso
+Exeter,EXET1,nged,neso
+Fasnakyle,FASN_P,ssen,neso
+Fawley,FAWL_1,ssen,neso
+Feckenham,FECK_6,nged,neso
+Ferrybridge (_F),FERRB1,npg,neso
+Ferrybridge (_M),FERRA2,npg,neso
+Fiddes,FIDD_P,ssen,neso
+Fiddlers Ferry,FIDF_1,spen,neso
+Finnieston,FINN,spen,neso
+Fleet,FLEE_1,ssen,neso
+Fort Augustus,FAUG_P,ssen,neso
+Fort William,FWIL_P,ssen,neso
+Fourstones,FOUR_1,npg,neso
+Fraserburgh,FRAS_P,ssen,neso
+Frodsham,FROD_1,spen,neso
+Galashiels,GALA,spen,neso
+Giffnock,GIFF,spen,neso
+Glenagnes,GLAG_P,ssen,neso
+Glenluce,GLLU,spen,neso
+Glenniston,GLNI,spen,neso
+Glenrothes,GLRO,spen,neso
+Gorgie,GORG,spen,neso
+Govan,GOVA,spen,neso
+Grangemouth,GRMO,spen,neso
+Grendon,GREN_1,nged,neso
+Grimsby West,GRIW_1,npg,neso
+Grudie Bridge,GRUB_P,ssen,neso
+Haggs Road,HAGR,spen,neso
+Hams Hall,HAMHC1,nged,neso
+Harker,HARK_1,enwl,neso
+Hart Moor,HARM_6,npg,neso
+Hawick,HAWI,spen,neso
+Hawthorn Pit,HAWP_6,npg,neso
+Helensburgh,HELE,spen,neso
+Hunterston Farm,HUER,spen,neso
+Hurst,HURS_1,ukpn,neso
+Hutton,HUTT_1,enwl,neso
+Imperial Park,IMPK_1,spen,neso
+Indian Queens,INDQ1,nged,neso
+Inverkeithing,INKE,spen,neso
+Inverness,INNE_P,ssen,neso
+Iron Acton,IROA1,nged,neso
+Ironbridge,IRONB1,nged,neso
+Iver 132kV,IVER_1,ssen,neso
+Iver 66kV,IVER_6,ssen,neso
+Johnstone,JOHN,spen,neso
+Jordanthorpe,JORD_3,npg,neso
+Kaimes,KAIM,spen,neso
+Keadby,KEAD_1,npg,neso
+Keith,KEIT_P,ssen,neso
+Kemsley,KEMS_1,ukpn,neso
+Kilbowie,KILB,spen,neso
+Killermont,KIER,spen,neso
+Killin,KIIN_P,ssen,neso
+Kilmarnock South,KILS,spen,neso
+Kilmarnock Town,KILT,spen,neso
+Kilwinning,KILW,spen,neso
+Kingsnorth,KINO_1,ukpn,neso
+Kinlochleven,KINL_P,ssen,neso
+Kintore,KINT_P,ssen,neso
+Kirkby (_D),KIBY_1,spen,neso
+Kirkby (_G),KIBY_G,enwl,neso
+Kirkstall,KIRKB1,npg,neso
+Kitwell,KITW_1,nged,neso
+Knaresborough,KNAR,npg,neso
+Lackenby,LACK_6,npg,neso
+Lairg,LAIR_P,ssen,neso
+Laleham,LALE1SG003,ssen,neso
+Landulph,LAND1,nged,neso
+Legacy,LEGA_1,spen,neso
+Leven,LEVE,spen,neso
+Linnmill,LINM,spen,neso
+Lister Drive,LISD_1,spen,neso
+Littlebrook (_C),LITT_C,ukpn,neso
+Littlebrook (_J),LITT_J,ukpn,neso
+Livingston East,LING,spen,neso
+Lodge Road,LODR_6,ukpn,neso
+Loudwater,LOUD_H,ssen,neso
+Lovedean,LOVE_1,ssen,neso
+Lunanhead,LUNA_P,ssen,neso
+Lyndhurst,LYND_P,ssen,neso
+Macclesfield,MACC_3,enwl,neso
+Macduff,MACD_P,ssen,neso
+Mannington,MANN_1,ssen,neso
+Margam,MAGA_6,nged,neso
+Maybole,MAYB,spen,neso
+Melksham,MELK_1,ssen,neso
+Mill Hill,MILH_1,ukpn,neso
+Milton of Craigie,MILC_P,ssen,neso
+Minety,MITY_1,ssen,neso
+Mybster,MYBS_P,ssen,neso
+Nairn,NAIR_P,ssen,neso
+Nechells,NECE_1,nged,neso
+Neepsend,NEEP_3,npg,neso
+New Cross,NEWX_6,ukpn,neso
+Newarthill,NEAR,spen,neso
+Newton Stewart,NETS,spen,neso
+Ninfield,NINF_1,ukpn,neso
+North Hyde,NHYD_6,ssen,neso
+Northfleet East,NFLE,ukpn,neso
+Norton,NORT_1,npg,neso
+Norton Lees,NORL_3,npg,neso
+Norwich Main,NORM_1,ukpn,neso
+Nursling,NURS_1,ssen,neso
+Ocker Hill,OCKH_1,nged,neso
+Offerton,OFFE_3,npg,neso
+Oldbury,OLDB_1,nged,neso
+Osbaldwick,OSBA_1,npg,neso
+Padiham,PADIB1,enwl,neso
+Paisley,PAIS,spen,neso
+Partick,PART,spen,neso
+Pelham,PELH_1,ukpn,neso
+Pembroke,PEMB_1,nged,neso
+Penn,PENN_1,nged,neso
+Pentir,PENT_1,spen,neso
+Persley,PERS_P,ssen,neso
+Peterhead Grange,PEHG_P,ssen,neso
+Peterhead Shell,PEHS_P,ssen,neso
+Pitsmoor,PITS_3,npg,neso
+Poppleton,POPP_3,npg,neso
+Port Ann,PORA_P,ssen,neso
+Port Dundas,PORD,spen,neso
+Portobello,POOB,spen,neso
+Pyle,PYLE_1,nged,neso
+Rainhill,RAIN_1,spen,neso
+Rannoch,RANN_P,ssen,neso
+Rassau,RASS_1,nged,neso
+Ratcliffe,RATS_1,nged,neso
+Ravenscraig,RAVE,spen,neso
+Rayleigh,RAYL_1,ukpn,neso
+Redbridge,REBR_3,ukpn,neso
+Redhouse,REDH,spen,neso
+Redmoss,REDM_P,ssen,neso
+Richborough,RICH1,ukpn,neso
+Rochdale,ROCH_1,enwl,neso
+Rugeley,RUGEB1,nged,neso
+Rye House,RYEH_1,ukpn,neso
+Saltcoats,SACO,spen,neso
+Saltend North,SALT_1,npg,neso
+Saltholme,SALH_1,npg,neso
+Seabank,SEAB1,nged,neso
+Sellindge,SELL_1,ukpn,neso
+Sheffield City,SHEC_3,npg,neso
+Shin,SHIN_P,ssen,neso
+Shrewsbury,SHRW_1,nged,neso
+Shrubhill,SHRU,spen,neso
+Sighthill,SIGH,spen,neso
+Skelton Grange,SKLGB1,npg,neso
+Sloy,SLOY_P,ssen,neso
+South Manchester,SMAN_1,enwl,neso
+South Shields,SSHI_3,npg,neso
+Spango Valley,SPAV,spen,neso
+Spennymoor,SPEN_1,npg,neso
+St Andrews Cross,SANX,spen,neso
+St Fergus Gas Terminal,SFEG_P,ssen,neso
+St Fillans,SFIL_P,ssen,neso
+St Johns Wood,SJOW_1,ukpn,neso
+Stalybridge,STAL_1,enwl,neso
+Stanah,STAH_1,enwl,neso
+Staythorpe,STAY_1,nged,neso
+Stella North,STEN_1,npg,neso
+Stella South,STES_1,npg,neso
+Stirling,STIR,spen,neso
+Stoke Bardolph,SBAR,nged,neso
+Strathaven,STHA,spen,neso
+Strathleven,STLE,spen,neso
+Strichen,STRI_P,ssen,neso
+Sundon,SUND_1,ukpn,neso
+Swansea North,SWAN_1,nged,neso
+Tarland,TARL_P,ssen,neso
+Taunton,TAUN1,nged,neso
+Taynuilt,TAYN_P,ssen,neso
+Telford Road,TELR,spen,neso
+Templeborough,TEMP_3,npg,neso
+Thorpe Marsh,THOM_6,npg,neso
+Thurcroft,THUR_6,npg,neso
+Thurso,THSO_P,ssen,neso
+Tilbury,TILBB_1,ukpn,neso
+Tongland,TONG,spen,neso
+Tottenham,TOTT_1,ukpn,neso
+Trawsfynydd,TRAW_1,spen,neso
+Tummel Bridge,TUMB_P,ssen,neso
+Walham,WALH_1,nged,neso
+Walpole (_A),WALP_1,ukpn,neso
+Walpole (_B),WALP_B,nged,neso
+Warley,WARL_1,ukpn,neso
+Washway Farm,WASF_1,enwl,neso
+Watford South,WATFS_1,ukpn,neso
+West Boldon,WBOL_6,npg,neso
+West Burton,WBUR_1,nged,neso
+West George Street,WGEO,spen,neso
+West Ham,WHAM_1,ukpn,neso
+West Melton,WMEL_1,npg,neso
+West Thurrock,WTHU31,ukpn,neso
+West Weybridge,WWEY_1,ukpn,neso
+Westfield,WFIE,spen,neso
+Whitegate,WHGA_1,enwl,neso
+Whitehouse,WHHO,spen,neso
+Willenhall,WIEN_1,nged,neso
+Willesden 132kV,WISD_1,ukpn,neso
+Willington,WILL_1,nged,neso
+Willowdale,WIOW_P,ssen,neso
+Wincobank,WIBA_3,npg,neso
+Wishaw,WISH,spen,neso
+Woodhill,WOHI_P,ssen,neso
+Wylfa,WYLF_1,spen,neso
+Wymondley,WYMOM_1,ukpn,neso
+ABNE,ABNE_P,ssen,alias
+ALNE,ALNE_P,ssen,alias
+AMEM,AMEM,ssen,alias
+AMERSHAM,AMEM,ssen,alias
+ARBR,ARBR_P,ssen,alias
+ARBROTH,ARBR_P,ssen,alias
+ARDK,ARDK_P,ssen,alias
+ARMO,ARMO_P,ssen,alias
+AXMI,AXMI1,nged,alias
+BEAU,BEAU_P,ssen,alias
+BERB2,BERB,ssen,alias
+BERRYBURN GRID,BERB,ssen,alias
+BOAG,BOAG_P,ssen,alias
+BOTW,BOTW_1,ssen,alias
+BRAC,BRAC,ssen,alias
+BRACO,BRAC,ssen,alias
+BRAMLEY (FLEE),FLEE,ssen,alias
+BRCW2,BRAC_P,ssen,alias
+BRID,BRID_P,ssen,alias
+BROA,BROA_P,ssen,alias
+BROR,BROR_P,ssen,alias
+BUMU,BUMU_P,ssen,alias
+CAAD,CAAD_P,ssen,alias
+CAIN2,CAIN,ssen,alias
+CAIRNFORD,CAIN,ssen,alias
+CASS,CASS_P,ssen,alias
+CEAN,CEAN_P,ssen,alias
+CHAR,CHAR_P,ssen,alias
+CHIC,CHIC_1,ssen,alias
+CLAC,CLAC_P,ssen,alias
+CLAY,CLAY_P,ssen,alias
+COUA,COUA_P,ssen,alias
+COWL,COWL_1,ssen,alias
+CRAI,CRAI_P,ssen,alias
+DAAS,DAAS,ssen,alias
+DALLAS,DAAS,ssen,alias
+DOUN1,DOUN_P,ssen,alias
+DUDH,DUDH_P,ssen,alias
+DUGR,DUGR_P,ssen,alias
+DUNO,DUNO_P,ssen,alias
+EALI,EALI_6,ssen,alias
+ECLA,ECLA_1,nged,alias
+ELGI,ELGI_P,ssen,alias
+FASN,FASN_P,ssen,alias
+FAUG,FAUG_P,ssen,alias
+FAWL,FAWL_1,ssen,alias
+Ferrybridge A,FERRA2,npg,alias
+Ferrybridge B,FERRB1,npg,alias
+FETT1,FETT,ssen,alias
+FETTERSSO GRID,FETT,ssen,alias
+FIDD,FIDD_P,ssen,alias
+FLEE,FLEE,ssen,alias
+FRAS,FRAS_P,ssen,alias
+FWIL,FWIL_P,ssen,alias
+GLAG,GLAG_P,ssen,alias
+GLENFARCLAS,GLFA,ssen,alias
+GLFA,GLFA,ssen,alias
+GREM,GREM,ssen,alias
+GREMISTA,GREM,ssen,alias
+GRUB,GRUB_P,ssen,alias
+INNE,INNE_P,ssen,alias
+IVER,IVER_1,ssen,alias
+IVES,IVER_1,ssen,alias
+KEIT,KEIT_P,ssen,alias
+KIIN,KIIN_P,ssen,alias
+KILO,KINL_P,ssen,alias
+KINT,KINT_P,ssen,alias
+Kirkstall B,KIRKB1,npg,alias
+LAIR,LAIR_P,ssen,alias
+LALE,LALE1SG003,ssen,alias
+LOVE,LOVE_1,ssen,alias
+LUNA,LUNA_P,ssen,alias
+LYND,LYND_P,ssen,alias
+MACD,MACD_P,ssen,alias
+MANN,MANN_1,ssen,alias
+MELK,MELK_1,ssen,alias
+MILC,MILC_P,ssen,alias
+MITY,MITY_1,ssen,alias
+MYBS,MYBS_P,ssen,alias
+NAIR,NAIR_P,ssen,alias
+NHYD,NHYD_6,ssen,alias
+NURS,NURS_1,ssen,alias
+ORRI,ORRI,ssen,alias
+ORRIN,ORRI,ssen,alias
+PEHG,PEHG_P,ssen,alias
+PERS,PERS_P,ssen,alias
+PORA,PORA_P,ssen,alias
+QUOI,QUOI,ssen,alias
+QUOICH,QUOI,ssen,alias
+RANN,RANN_P,ssen,alias
+REDM,REDM_P,ssen,alias
+ROTH4,ROTH,ssen,alias
+ROTHIENORMAN,ROTH,ssen,alias
+SFEG,SFEG,ssen,alias
+SFIL,SFIL_P,ssen,alias
+ST FERGUS GAS,SFEG,ssen,alias
+STHA,STLE,spen,alias
+STRI,STRI_P,ssen,alias
+TARL,TARL_P,ssen,alias
+TAYN,TAYN_P,ssen,alias
+THAT,THAT,ssen,alias
+THATCHAM,THAT,ssen,alias
+THSO,THSO_P,ssen,alias
+THURSO SOUTH GRID,THUS,ssen,alias
+THUS1,THUS,ssen,alias
+TUMB,TUMB_P,ssen,alias
+WILLESDEN GSP,WISD,ssen,alias
+WIOW,WIOW_P,ssen,alias
+WISD,WISD,ssen,alias
+WOHI,WOHI_P,ssen,alias
