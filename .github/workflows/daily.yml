@@ -38,7 +38,13 @@ jobs:
           done
           # main may have moved (a merged PR) while this ran; PRs never touch archive/
           git pull --rebase && git push
-      - run: uv run --locked gridline diff # only checks the archive still parses; data/ is not committed
+      # data/ is not committed; the ID ledger is, so project IDs survive every rebuild
+      - name: Rebuild and commit the project ID ledger
+        run: |
+          uv run --locked gridline diff
+          git add archive/project_ids.csv
+          git diff --quiet --cached || git commit -m "archive: project IDs $(date -u +%F)"
+          git pull --rebase && git push
       - run: uv run --locked gridline check # fail loudly if a source has no new release for too long
       - if: steps.fetch.outcome == 'failure'
         run: |

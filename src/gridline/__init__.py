@@ -4,13 +4,16 @@ Flow: `fetch` downloads each source's current release (SOURCES), and `archive` s
 bytes as archive/<source>/<sha256>.csv plus a row in archive/<source>/snapshots.csv (both
 committed). `diff` replays every archived release in publication order and writes
 data/project_version.parquet (each row with valid_from / valid_to) and data/event.parquet (typed
-changes between releases). TEC rows are matched on Project ID + Stage, ECR rows on the DNO's
+changes between releases), and groups the rows into projects: data/project.parquet, one row
+per project with a Gridline ID (`GL-` + 8 characters) kept stable by the committed ledger
+archive/project_ids.csv, and data/project_link.parquet, one row per register row. TEC rows are matched on Project ID + Stage, ECR rows on the DNO's
 row ID. `low_confidence` marks rows that key cannot match one-to-one: no ID (name-based fallback
 key) or a key repeated within one release. A row that leaves a release while another arrives
 with the same export meter number (MPAN) or a near-identical name at the same GSP continues as one
 row (`renamed` when its name changed), also low_confidence.
 """
 
+import base64
 import csv
 import difflib
 import hashlib
@@ -157,6 +160,48 @@ VERSION_SCHEMA = {
     "valid_from": pl.Date,
     "valid_to": pl.Date,
 }
+
+
+# The ledger: one row per register row (`register`, `key`) ever seen. `project_id` is the ID it
+# was first given and never changes; `merged_into` is the ID it carries now, when that differs.
+# `method` and `confidence` say how it joined a project other than its own; links are kept
+# (sticky) in later builds. `minted` is the date the row was first published.
+LEDGER = ARCHIVE / "project_ids.csv"
+LEDGER_COLS = (
+    "project_id",
+    "register",
+    "key",
+    "minted",
+    "merged_into",
+    "method",
+    "confidence",
+)
+PROJECT_SCHEMA = {
+    "project_id": pl.String,
+    "name": pl.String,
+    "plant_type": pl.String,
+    "mw_total": pl.Float64,
+    "status": pl.String,
+    "gate": pl.String,
+    "effective_from": pl.Date,
+    "gsp_id": pl.String,
+    "registers": pl.String,
+    "source_ids": pl.String,
+    "members": pl.Int64,
+    "first_seen": pl.Date,
+    "live": pl.Boolean,  # some row of it is in its register's newest release
+}
+LINK_SCHEMA = {
+    "project_id": pl.String,
+    "register": pl.String,
+    "key": pl.String,
+    "source_id": pl.String,
+    "method": pl.String,
+    "confidence": pl.Float64,
+    "evidence": pl.String,
+}
+# transmission-side registers: a project's name and status come from these first
+TRANSMISSION = ("tec",)
 
 
 def http(url: str, headers: dict | None = None) -> bytes:
@@ -338,7 +383,8 @@ def save(name: str, rows: list | pl.DataFrame, schema: dict) -> None:
         else pl.DataFrame(rows, schema=schema, orient="row")
     )
     df.write_parquet(DATA / f"{name}.parquet")
-    print(f"wrote {DATA / name}.parquet ({df.height} rows)")
+    df.write_csv(DATA / f"{name}.csv")
+    print(f"wrote {DATA / name}.parquet and .csv ({df.height} rows)")
 
 
 def archive(
@@ -887,6 +933,217 @@ def build(
     return events, versions
 
 
+def mint(seed: str, taken: set) -> str:
+    """A new Gridline ID from a seed (the project's first row), so a build with no ledger
+    gives the same IDs too; the ledger keeps them once minted."""
+    for n in range(1000):
+        h = hashlib.sha256(f"{seed}#{n}".encode()).digest()
+        pid = "GL-" + base64.b32encode(h).decode()[:8]
+        if pid not in taken:
+            return pid
+    raise RuntimeError("no free project ID")  # 32^8 IDs: never in practice
+
+
+def assign_ids(
+    minted: dict[tuple, date],
+    edges: list[tuple],
+    ledger: list[dict],
+    apart: set = frozenset(),
+) -> tuple[dict, dict, list[dict]]:
+    """Group register rows into projects and give each project an ID.
+
+    minted: {(register, key): first published}. edges: (row a, row b, method, confidence,
+    evidence), b joining a's project. ledger: rows of archive/project_ids.csv; rows that
+    share an ID there stay together (links are sticky), except rows in `apart` (an override
+    said separate) and rows a matched edge links now: that edge replaces the old link, so
+    a row the matcher moves to another project never merges the two. Returns ({row: ID},
+    {row: (method, confidence, evidence)}, new ledger).
+
+    A project keeps the oldest ID among its rows: two projects that merge keep the older ID,
+    and the other's rows record it as `merged_into`. When a project splits, the part holding
+    the row that had the ID first keeps it; the rest take back their own first ID or a new one."""
+    old = {(r["register"], r["key"]): r for r in ledger}
+    now = lambda r: r["merged_into"] or r["project_id"]
+    born = {}  # ID -> the date it was minted
+    for r in old.values():
+        born[r["project_id"]] = min(born.get(r["project_id"], r["minted"]), r["minted"])
+    parent = {k: k for k in minted}
+
+    def root(k):
+        while parent[k] != k:
+            parent[k] = parent[parent[k]]
+            k = parent[k]
+        return k
+
+    relinked = {b for _, b, method, *_ in edges if method != "id"}
+    how, sticky = {}, defaultdict(list)
+    for k in minted.keys() & old.keys() - apart - relinked:
+        sticky[now(old[k])].append(k)
+    for ks in sticky.values():
+        ks.sort(key=lambda k: (old[k]["minted"], k))
+        for k in ks[1:]:
+            if old[k]["method"]:
+                c = old[k]["confidence"]
+                how[k] = (
+                    old[k]["method"],
+                    float(c) if c else None,
+                    "kept from an earlier build",
+                )
+            parent[root(k)] = root(ks[0])
+    for a, b, method, confidence, evidence in edges:
+        if method != "id":
+            how[b] = (method, confidence, evidence)
+        parent[root(b)] = root(a)
+    groups = defaultdict(list)
+    for k in sorted(minted):
+        groups[root(k)].append(k)
+    # each group claims the IDs its rows carry now, then the IDs they were first given;
+    # oldest ID first, then the group whose row had it first
+    claims = []
+    for g, ks in groups.items():
+        known = [k for k in ks if k in old]
+        for pass_, ids in (
+            (0, {now(old[k]) for k in known}),
+            (1, {old[k]["project_id"] for k in known}),
+        ):
+            for pid in ids:
+                first = min(
+                    old[k]["minted"]
+                    for k in known
+                    if pid in (now(old[k]), old[k]["project_id"])
+                )
+                claims.append((pass_, born[pid], first, pid, g))
+    ids = {}
+    for *_, pid, g in sorted(claims):
+        if g not in ids and pid not in ids.values():
+            ids[g] = pid
+    taken = set(born)
+    for g, ks in groups.items():
+        if g not in ids:
+            ids[g] = mint(f"{ks[0][0]}:{ks[0][1]}", taken)
+            taken.add(ids[g])
+    out = {k: ids[g] for g, ks in groups.items() for k in ks}
+    rows = []
+    for k in sorted(old.keys() | out.keys()):
+        r = old.get(k) or {
+            "project_id": out[k],
+            "register": k[0],
+            "key": k[1],
+            "minted": minted[k],
+        }
+        if k in out:
+            method, confidence, _ = how.get(k, ("", None, None))
+            r = {
+                **r,
+                "merged_into": "" if out[k] == r["project_id"] else out[k],
+                "method": method,
+                "confidence": "" if confidence is None else confidence,
+            }
+        rows.append(r)
+    return out, how, rows
+
+
+def read_ledger() -> list[dict]:
+    if not LEDGER.exists():
+        return []
+    with LEDGER.open(encoding="utf-8", newline="") as f:
+        return [
+            {**r, "minted": date.fromisoformat(r["minted"])} for r in csv.DictReader(f)
+        ]
+
+
+def write_ledger(rows: list[dict]) -> None:
+    LEDGER.parent.mkdir(parents=True, exist_ok=True)
+    with LEDGER.open("w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, LEDGER_COLS, extrasaction="ignore", lineterminator="\n")
+        w.writeheader()
+        w.writerows(rows)
+
+
+def lineages(versions: list[dict]) -> dict[tuple, list[dict]]:
+    """{(register, key): that row's versions, oldest first}."""
+    out = defaultdict(list)
+    for v in versions:
+        out[v["register"], v["key"]].append(v)
+    for vs in out.values():
+        vs.sort(key=lambda v: v["valid_from"])
+    return out
+
+
+def projects(
+    versions: list[dict], edges: list[tuple] = (), apart: set = frozenset()
+) -> tuple[list, list, dict]:
+    """(project rows, project_link rows, {(register, key): project ID}) for every register
+    row in `versions`. Rows of one register with the same official ID (a TEC Project ID with
+    several stages) are one project; `edges` link rows across registers. Reads and rewrites
+    the ledger."""
+    lineage = lineages(versions)
+    minted = {k: vs[0]["valid_from"] for k, vs in lineage.items()}
+    by_id = defaultdict(list)
+    for k, vs in sorted(lineage.items()):
+        if vs[-1]["project_id"]:
+            by_id[k[0], vs[-1]["project_id"]].append(k)
+    same = [(ks[0], k, "id", None, None) for ks in by_id.values() for k in ks[1:]]
+    ids, how, ledger = assign_ids(minted, same + list(edges), read_ledger(), apart)
+    write_ledger(ledger)
+    links, members = [], defaultdict(list)
+    for k, vs in sorted(lineage.items()):
+        method, confidence, evidence = how.get(k, ("id", None, None))
+        links.append(
+            {
+                "project_id": ids[k],
+                "register": k[0],
+                "key": k[1],
+                "source_id": vs[-1]["project_id"],
+                "method": method,
+                "confidence": confidence,
+                "evidence": evidence,
+            }
+        )
+        members[ids[k]].append(k)
+    out = []
+    for pid, ks in sorted(members.items()):
+        last = {k: lineage[k][-1] for k in ks}
+        # the transmission row first, else the row still live, seen most recently
+        best = max(
+            ks,
+            key=lambda k: (
+                k[0] in TRANSMISSION,
+                last[k]["valid_to"] is None,
+                last[k]["valid_from"],
+                k,
+            ),
+        )
+        b = last[best]
+        out.append(
+            {
+                "project_id": pid,
+                "name": b["project_name"],
+                "plant_type": b["plant_type"],
+                "mw_total": b["mw_total"],
+                "status": b["status"],
+                "gate": b["gate"],
+                "effective_from": b["effective_from"],
+                "gsp_id": gsp(b["connection_site"]) or None,
+                "registers": ";".join(sorted({k[0] for k in ks})),
+                "source_ids": ";".join(
+                    sorted(
+                        {
+                            f"{k[0]}:{last[k]['project_id']}"
+                            for k in ks
+                            if last[k]["project_id"]
+                        }
+                    )
+                )
+                or None,
+                "members": len(ks),
+                "first_seen": min(minted[k] for k in ks),
+                "live": any(v["valid_to"] is None for v in last.values()),
+            }
+        )
+    return out, links, ids
+
+
 def diff() -> None:
     """Rebuild data/*.parquet from every source's archive; `register` names the source."""
     all_snaps, events, versions = [], [], []
@@ -909,13 +1166,21 @@ def diff() -> None:
         versions += [{**x, "register": name} for x in v]
     if not all_snaps:
         sys.exit("no snapshots yet, run `gridline fetch` first")
+    project, links, ids = projects(versions)
     save("source_snapshot", pl.concat(all_snaps), SNAP_SCHEMA)
-    save("event", [[e[c] for c in EVENT_SCHEMA] for e in events], EVENT_SCHEMA)
-    save(
-        "project_version",
-        [[v[c] for c in VERSION_SCHEMA] for v in versions],
-        VERSION_SCHEMA,
-    )
+    save("project", [[p[c] for c in PROJECT_SCHEMA] for p in project], PROJECT_SCHEMA)
+    save("project_link", [[x[c] for c in LINK_SCHEMA] for x in links], LINK_SCHEMA)
+    # `project_id` is now the Gridline ID; the register's own ID becomes `source_id`
+    for name, rows, schema in (
+        ("event", events, EVENT_SCHEMA),
+        ("project_version", versions, VERSION_SCHEMA),
+    ):
+        df = pl.DataFrame(
+            [[r[c] for c in schema] for r in rows], schema=schema, orient="row"
+        )
+        gl = pl.Series([ids[r["register"], r["key"]] for r in rows], dtype=pl.String)
+        df = df.rename({"project_id": "source_id"}).with_columns(project_id=gl)
+        save(name, df.select("project_id", pl.exclude("project_id")), schema)
 
 
 def main() -> None:
