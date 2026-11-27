@@ -69,6 +69,7 @@ flowchart LR
     A[NESO, SSEN, NPg APIs] -->|gridline fetch| B[archive/SOURCE/*.csv<br/>+ snapshots.csv]
     B -->|gridline diff| C[data/project_version.parquet]
     B -->|gridline diff| D[data/event.parquet]
+    B -->|gridline diff| E[data/project.parquet<br/>+ project_link.parquet]
 ```
 
 TEC rows are matched between releases on **Project ID + Stage**; ECR rows on the DNO's own row ID
@@ -115,6 +116,11 @@ print(
 | `archive/<source>/snapshots.csv` (committed; also `data/source_snapshot.parquet`) | archived release: snapshot_id, source, fetched_at, published, sha256, raw_path, rows |
 | `data/project_version.parquet` | version of a register row, valid from `valid_from` until `valid_to` (empty = current) |
 | `data/event.parquet` | change between two consecutive releases |
+| `data/project.parquet` | project, under a Gridline ID (`GL-` + 8 characters) that never changes: name, technology, MW, status, gate and date from its TEC row if it has one, else its newest register row |
+| `data/project_link.parquet` | register row (`register` + `key`) and the project it belongs to, with `method` (`id`: its own row or a shared official ID) |
+| `archive/project_ids.csv` (committed) | the ID ledger: every register row ever seen and the ID it was given, so rebuilds keep IDs. Two projects that merge keep the older ID; the other is kept as `merged_into` |
+
+Every output is also written as CSV beside the Parquet file (`data/event.csv`, ...).
 
 | Event | Meaning |
 |---|---|
@@ -129,7 +135,7 @@ print(
 | `gate_assigned` | the Gate column was set or changed (Gate 1 / Gate 2 under connections reform) |
 | `connected` | MW Connected (ECR: already-connected capacity) rose above 0 for the first time |
 
-Every event carries `register` (`tec`, `ssen`, `npg`), `low_confidence`, `project_id`, `project_number`, `old_value` and `new_value`.
+Every event and version carries `project_id` (the Gridline ID), `register` (`tec`, `ssen`, `npg`), `key`, `source_id` (the register's own ID, such as a TEC Project ID or SSEN Unique ID) and `low_confidence`; events also carry `project_number`, `old_value` and `new_value`.
 
 ## Data and archive
 

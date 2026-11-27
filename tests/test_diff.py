@@ -293,7 +293,7 @@ def test_ssen_ecr(tmp_path, monkeypatch):
     gridline.diff()
     ev = pl.read_parquet("data/event.parquet")
     assert set(ev["register"]) == {"ssen"}
-    assert sorted(zip(ev["event_type"], ev["project_id"])) == [
+    assert sorted(zip(ev["event_type"], ev["source_id"])) == [
         ("added", "SSEN1514"),
         ("added", "SSEN1515"),
         ("added", "SSEN1516"),
@@ -302,6 +302,15 @@ def test_ssen_ecr(tmp_path, monkeypatch):
         ("removed_from_register", "SSEN1265"),
     ]
     assert not ev["low_confidence"].any()
+    # every row is a project of its own, under an ID that a rebuild keeps
+    links = pl.read_parquet("data/project_link.parquet")
+    assert links.height == pl.read_parquet("data/project.parquet").height == 13
+    assert set(ev["project_id"]) <= set(links["project_id"])
+    ledger = Path("archive/project_ids.csv").read_text()
+    gridline.diff()
+    assert Path("archive/project_ids.csv").read_text() == ledger
+    assert pl.read_parquet("data/project_link.parquet").equals(links)
+    assert Path("data/event.csv").exists()
 
 
 def test_npg_ecr(tmp_path, monkeypatch):
@@ -474,3 +483,37 @@ def test_different_projects_are_not_relinked():
         ("SSEN0001|", "withdrawn"),
         ("SSEN0002|", "added"),
     ]
+
+
+def test_project_ids_are_stable():
+    d1, d2, d3 = date(2023, 8, 1), date(2024, 1, 1), date(2025, 1, 1)
+    minted = {("tec", "A|"): d2, ("ssen", "S1|"): d1, ("ssen", "S2|"): d3}
+    ids, _, ledger = gridline.assign_ids(minted, [], [])
+    assert len(set(ids.values())) == 3
+    # a second build reads the ledger and changes nothing; so does a build with no ledger
+    assert gridline.assign_ids(minted, [], ledger)[0] == ids
+    assert gridline.assign_ids(minted, [], [])[0] == ids
+    # TEC row A links to both SSEN rows: the merged project keeps the oldest ID (S1's)
+    edges = [
+        (("tec", "A|"), ("ssen", s), "rule", 0.9, "same name") for s in ("S1|", "S2|")
+    ]
+    merged, how, ledger2 = gridline.assign_ids(minted, edges, ledger)
+    assert set(merged.values()) == {ids["ssen", "S1|"]}
+    assert how["ssen", "S2|"] == ("rule", 0.9, "same name")
+    old = {r["key"]: r for r in ledger2}
+    assert (
+        old["A|"]["project_id"] == ids["tec", "A|"]
+    )  # the first ID is never forgotten
+    assert old["A|"]["merged_into"] == ids["ssen", "S1|"]
+    # the link is sticky: a later build without the edge keeps it
+    assert gridline.assign_ids(minted, [], ledger2)[0] == merged
+    # unless an override separates a row: it takes back its own first ID
+    apart, *_ = gridline.assign_ids(minted, [], ledger2, {("ssen", "S2|")})
+    assert apart["ssen", "S2|"] == ids["ssen", "S2|"]
+    assert apart["tec", "A|"] == merged["tec", "A|"]
+    # a row the matcher now links to another project moves: the two projects never merge
+    minted[("tec", "B|")] = d3
+    moved, *_ = gridline.assign_ids(
+        minted, [(("tec", "B|"), ("ssen", "S2|"), "rule", 0.9, "")], ledger2
+    )
+    assert moved["ssen", "S2|"] == moved["tec", "B|"] != moved["tec", "A|"]
