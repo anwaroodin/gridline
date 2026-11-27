@@ -1,0 +1,1005 @@
+request,model,asked,tec,ecr,p_different,p_related,p_same,tokens
+dd149e63ef9af5c60b7a304e33dd007b192d6040122e117bd43d9a7e46e7cc17,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:10mw pv 4 75mw battery|MELK_1|solar stored energy all stored energy irrespectve of the original energy source|,0.82,0.17,0.01,880
+d9ece0f21da54c751f774083095a11618059de0b29a9691284fd06a548625794,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:15mw solar 10mw bess|MELK_1|solar stored energy all stored energy irrespectve of the original energy source|,0.82,0.12,0.06,860
+4f16e81c1037cf952e2d48fd6ed9c193472143dc62fbc663cf0b7c6f0628637f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:40mw add cap|MELK_1|other|,0.69,0.15,0.16,831
+9f10340dc0e393bb018c786fdf38bf278bd8f2fee1e5e16b3e6db95db48f1716,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:70mw export|MELK_1|other|,0.65,0.25,0.1,850
+947dc1d6b66046afa88e21dd3c74c7b4b8c63edacabbe56f641d2e6a63e3019e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:99 9mw bess|MELK_1|stored energy all stored energy irrespectve of the original energy source|,0.57,0.31,0.12,882
+f0cc6fb70f3260547ef10fbed700437c9a3a7d48103dc05b50a186566e0a3b8a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:99 9mw energy storage|MELK_1|stored energy all stored energy irrespectve of the original energy source|,0.32,0.21,0.47,854
+f8347ee3bd24a557c7c03c49f5884fb164f1b11e7de50f19c8cc337be0749bd2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:99 9mw pv battery|MELK_1|solar stored energy all stored energy irrespectve of the original energy source|,0.75,0.18,0.07,888
+5a5935bc19bfd1377209901a08da0ee46dacdd3b009ddf5888babb5930714b87,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:norrington gate battery 150mw|MELK_1|stored energy all stored energy irrespectve of the original energy source|,0.09,0.03,0.88,890
+cb1e9b470ddf9f3d559ca40eea0181948b43437cc035abf855e9b5c2de563851,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:ready 25 3mw battery|MELK_1|stored energy all stored energy irrespectve of the original energy source|,0.66,0.3,0.04,888
+94e51e4b57432ebe38d87ef4d6bce785d2d7cd93f5f9ac4ed9d806f6706d121c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:snarlton lane|MELK_1|other|,0.91,0.08,0.01,864
+b6cf2e27a48ba82a423393a30b584d02ac9edab2cf3165cb53eda4514d545d2b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:solar pv and battery 18mw export 6mw import|MELK_1|solar stored energy all stored energy irrespectve of the original energy source|,0.91,0.07,0.02,879
+3e69f801b154dbb46c0dc76ac876457e0c11b3b487a79fdf9a7ddfef6e6effe7,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:solar pv and battery 50mw import 50mw export|MELK_1|solar stored energy all stored energy irrespectve of the original energy source|,0.89,0.09,0.02,901
+3f7715584657fd813af0142177548309bf3c27e7f4ad0fa6b3c9e29676e0a057,jev-1.14.0,2026-11-25,tec:a0l4L0000005iMFQAY|,ssen:n:|MELK_1|other|#2,0.55,0.28,0.17,839
+5093448c9a0f929071cf6248ee04d3b7963e5e2b4f0634a2d565fe9d01de6c37,jev-1.14.0,2026-11-25,tec:a0l4L0000005iNjQAI|,ssen:n:40mw wind|SHIN_P|wind|,0.79,0.17,0.04,877
+ba944e732c57c816c4c0b329192912c564532edfd004d71cde537fc72de9bcee,jev-1.14.0,2026-11-25,tec:a0l4L0000005iNjQAI|,ssen:n:50mw wind pv battery|SHIN_P|wind solar|,0.09,0.22,0.69,887
+b6d651d6bce271c5eb625f1fe176d0ef89a3809531a9fd1c64bf1717135c0502,jev-1.14.0,2026-11-25,tec:a0l4L0000005iNjQAI|,ssen:n:allt domhain wind farm|CAAD_P|wind|,0.89,0.07,0.04,869
+b0baba1e9c6b6cab094aaebaa4794e07f244fae7caf71e7f5755ed76ba639dd0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iNlQAI|,ssen:n:abdn farburn terrace battery|DYCE_P|stored energy all stored energy irrespectve of the original energy source|,0.16,0.11,0.73,895
+90a7328f7658d2798571c7c2132a0fe3aeb1a6563d35798fd031c6a88e24dec9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iNlQAI|,ssen:n:auth|DYCE_P|other|,0.57,0.15,0.28,857
+b24801b749d960c8bb8d9692396df6b0aa3a213ebe00ea64bcaf61b45324f857,jev-1.14.0,2026-11-25,tec:a0l4L0000005iNlQAI|,ssen:n:|DYCE_P|stored energy all stored energy irrespectve of the original energy source|,0.52,0.28,0.2,876
+02f7c9de51a5a3128be116fa4695b108015609ce15351d563811747e7dbca6bc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iNlQAI|,ssen:n:|DYCE_P||,0.79,0.1,0.11,832
+4cacdcf55e5825ad8ceab739c846c25be4ff42f7b18ef50d6a188502c017e874,jev-1.14.0,2026-11-25,tec:a0l4L0000005iNsQAI|,ssen:n:20mw pv battery|FIDD_P|solar stored energy all stored energy irrespectve of the original energy source|,0.29,0.64,0.07,855
+6be58d615698d0be257357f6b613203f2610ed30d278f1d45c2f1224c1792bbf,jev-1.14.0,2026-11-25,tec:a0l4L0000005iNsQAI|,ssen:n:50 mw bess|FIDD_P|stored energy all stored energy irrespectve of the original energy source|,0.3,0.22,0.48,854
+0222c8027fffadb593a04de7deffec58aa6b7d0e288dcabe4c767d03ddffde10,jev-1.14.0,2026-11-25,tec:a0l4L0000005iNsQAI|,ssen:n:laurencekirk 30mw battery|FIDD_P|stored energy all stored energy irrespectve of the original energy source|,0.31,0.07,0.62,872
+33c5813361374d26b5cb62bacec4b8f040726eaab7012930440419f5d68c59b8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOjQAI|,ssen:n:30mw battery|ABNE_P|stored energy all stored energy irrespectve of the original energy source|,0.49,0.06,0.45,852
+ce81aca10ba1e2f38566c7fc368e125baff68e1af0a906801b73cfd3424fb36d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOjQAI|,ssen:n:49 4mw battery|ABNE_P|stored energy all stored energy irrespectve of the original energy source|,0.85,0.09,0.06,841
+4c5044f81a80177e4c85d2bdcb78bd55863ef2a9085e605bb7443d0c521c5f38,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOjQAI|,ssen:n:50mw battery|ABNE_P|stored energy all stored energy irrespectve of the original energy source|,0.8,0.1,0.1,834
+e0f09bbbbdc291c744bc3a99d0e9f8af9801bc955ed18a9cb2babff87e22c9d4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOjQAI|,ssen:n:96mw wind bess|ABNE_P|stored energy all stored energy irrespectve of the original energy source|,0.46,0.35,0.19,823
+e1b30fc042f45e199cd50bc1fa4a82bcc331fff604fe0e1c09823de797b7a1bc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOjQAI|,ssen:n:jamesfield 1 requote|ABNE_P|other|,0.09,0.05,0.86,821
+0d3a8692e23843e3a6e22ea903b18fbf5c7eef733993bd896b15b5209dc6f95e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOjQAI|,ssen:n:jamesfield 2 requote|ABNE_P|other|,0.13,0.45,0.42,821
+ae6e142cf92541ad7015d32314fd52e32b9e21191c572777676d928b8270e761,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOjQAI|,ssen:n:jamesfield farm battery storage 1|ABNE_P|stored energy all stored energy irrespectve of the original energy source|,0.05,0.04,0.91,840
+ac3f4ead98afa04ad7db55be198ca00fd2d00446f48d9312192b3565ff962ca2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOjQAI|,ssen:n:jamesfield farm battery storage 2|ABNE_P|stored energy all stored energy irrespectve of the original energy source|,0.04,0.87,0.09,838
+4e76659956166a6f450efa32b8ebac75188059750bb190ff6cea6018bba26b5d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOjQAI|,ssen:n:jamesfield farm|ABNE_P|solar stored energy all stored energy irrespectve of the original energy source|,0.06,0.65,0.29,845
+8838594197f753c3913a125dce996d1f8368b3d8ba4c9dd25546507114a0bf4c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOjQAI|,ssen:n:with ccm dg tayc 30mw|ABNE_P|solar stored energy all stored energy irrespectve of the original energy source|,0.23,0.21,0.56,846
+b0b9d8196224db5709daaf0cf538b9343ad429e03beeb090482e56373cd4df76,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOkQAI|,ssen:n:49 4mw battery|ABNE_P|stored energy all stored energy irrespectve of the original energy source|,0.88,0.08,0.04,844
+59991d0aa9da6e7c8537c47b1ca882b33a83ce784e756d538ff1e1117ab78430,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOkQAI|,ssen:n:50mw battery|ABNE_P|stored energy all stored energy irrespectve of the original energy source|,0.85,0.1,0.05,837
+63d2d8fed226fdb624626392d12195aee6f20b9b5064f1130154ddd6748e2601,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOkQAI|,ssen:n:96mw wind bess|ABNE_P|stored energy all stored energy irrespectve of the original energy source|,0.63,0.3,0.07,826
+5bc1d13a5de230aa976a02a7219f2840f762b119ff620135e95b00b43d32914d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOkQAI|,ssen:n:jamesfield 2 requote|ABNE_P|other|,0.07,0.06,0.87,824
+6315af8b4dc977c937c9c4b87c55467a85fedbd82e6009450560514c0b84510f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOkQAI|,ssen:n:jamesfield farm battery storage 2|ABNE_P|stored energy all stored energy irrespectve of the original energy source|,0.06,0.09,0.85,841
+36aafdabee0288ed1d051128fc0de487880dcb1e201c4bd3c45ee5ebbd007ac1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iOkQAI|,ssen:n:jamesfield farm|ABNE_P|solar stored energy all stored energy irrespectve of the original energy source|,0.05,0.85,0.1,848
+375b965063eb5ca259816d22c5a628a53dd7c1b9943e7ac6cbf634d18acd9676,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPGQAY|,ssen:n:20mw pv|LUNA_P|solar|,0.22,0.58,0.2,845
+352d7d6cf20c133ed2b3269b7f20dcf0ffd2d3c249f2c5f9b9d9dd2ef6b412c5,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPGQAY|,ssen:n:22mw battery|LUNA_P|stored energy all stored energy irrespectve of the original energy source|,0.67,0.28,0.05,896
+2c1a7b543e18f0957795fd9bd1fcf8d755ae3e1bf12a1421216debed40e89ae9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPGQAY|,ssen:n:29 8mw pv|LUNA_P|solar|,0.43,0.37,0.2,857
+78d907b6dd8f129805d9adc30c3e8c80f5078187dddeb467d11e372a994a6085,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPGQAY|,ssen:n:34 375 mw battery pv ltp|LUNA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.23,0.07,0.7,894
+c09c4306e98e29297d6b4f89e43e60bd1c7f548fdae3d79db43e5470f6d58c22,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPGQAY|,ssen:n:49 97mw bess|LUNA_P|stored energy all stored energy irrespectve of the original energy source|,0.1,0.63,0.27,864
+a9ed7d21b8234dcf5710465725362f8c0a019367ac3555f3af8dcb9c5354a92e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPGQAY|,ssen:n:57 6mw wind 24mw bess|LUNA_P|wind stored energy all stored energy irrespectve of the original energy source|,0.81,0.15,0.04,883
+b1dd5d5528631c7f686d8acc22b2a29bd4cc45f551b3c98e91e5e3496c921e7b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPGQAY|,ssen:n:5mw pv|LUNA_P|solar|,0.28,0.59,0.13,841
+db2df74a3ad84f7d86712957a8ecbf72ab61d0f67b99fbd8e4ce846ef92fdc71,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPGQAY|,ssen:n:75mw wind pv and bess|LUNA_P|other|,0.19,0.52,0.29,865
+c38356faf0d12fb600181a301bfdd8faca6fc24a45fe4827aa549eadf5632537,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPGQAY|,ssen:n:montreathmont|LUNA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.17,0.23,0.6,903
+131ce6d737cbd90dece6aac30acd62299785bcd32434429e5741de37ea2c05d7,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPGQAY|,ssen:n:superceding of erm169|LUNA_P|solar|,0.17,0.41,0.42,863
+f2462b76b96eac159a8c55e34e01372f2111c8edd3931830458777f75aa8bc50,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPSQAY|,ssen:n:49 9mw pv|COUA_P|solar|,0.22,0.08,0.7,875
+683f34a66660a9306d0f719a1b2bc4d11c3dc00136c2e4e78fa853b58d097982,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPSQAY|,ssen:n:49 9mw pv|COUA_P|solar|#2,0.1,0.03,0.87,876
+5160ba926a4ac1f290536ca489f8014ec75c3979e8f424fc6e0d331ecc678723,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPSQAY|,ssen:n:99 56mw pv bess|COUA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.13,0.62,0.25,888
+2cda55e45dc9d5fad2b71dd4cf09105680da072170eef131872dbe208d4a5b12,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPSQAY|,ssen:n:douglasie pv bess|COUA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.12,0.62,0.26,885
+dbda06d3952c4e7b0e6682ecc8dd181b24c85ec9c06297a43dbb228bdfbf7a07,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPxQAI|,ssen:n:37 5mw gen pv batt 16mw export|COUA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.28,0.54,0.18,890
+104c3335abd04fae6c18372e3dd7713ea8fcd12fbc6c7e5d6857393886153894,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPxQAI|,ssen:n:49 9mw bess|COUA_P|stored energy all stored energy irrespectve of the original energy source|,0.06,0.14,0.8,866
+bc252a70e70b40299b1a7dab38f2b8ab31361413884d82fbb8f437412da9ab2a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPxQAI|,ssen:n:49 9mw wind and electricity storage|COUA_P|other stored energy all stored energy irrespectve of the original energy source|,0.48,0.38,0.14,881
+3367fcf4fbf8a881b9d401eb16fa64f65d32fa13b8b88ca4016ba1f6388eb318,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPxQAI|,ssen:n:99 56mw pv bess|COUA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.19,0.7,0.11,872
+369ac154b110a76f13dc3ba3f9c814a45975ff0a2cbe9525c2cdbcc9c8becd05,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPxQAI|,ssen:n:coupar angus battery stor||stored energy all stored energy irrespectve of the original energy source|,0.02,0.02,0.96,848
+6f059eac406dbdf53e839dbecbb4f88cd13f16ca92af8b8be8b3320418171d87,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPxQAI|,ssen:n:douglasie pv bess|COUA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.25,0.71,0.04,869
+b8378209da2ec2737688cea7969f1fd940b6e109b92f8c25dd0d5014b5e59f39,jev-1.14.0,2026-11-25,tec:a0l4L0000005iPxQAI|,ssen:n:pleasance road battery requote|COUA_P|stored energy all stored energy irrespectve of the original energy source|,0.02,0.01,0.97,852
+c983a5fa6667a65d0cec8b86256346b49ac40ad5447221bb6ad72c39545952a2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQ1QAI|,ssen:n:chickerell 132 kv s stn|||,0.12,0.03,0.85,813
+24fae46b91cce9a771fa8dbb8f89557bd15b18d279273104dbd9d44b2460bf6e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQ1QAI|,ssen:n:|CHIC_1|other|,0.87,0.03,0.1,814
+5e40ae00426fee44cd8487fc44d8564a8aca98cff13b879dbaa29fedc76fdd16,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQ1QAI|,ssen:n:|CHIC_1|other|#2,0.86,0.03,0.11,813
+0812ff83964561efc538c216fb094eae72788a342ec2fa188db070e3443ccb42,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQ5QAI|,ssen:n:balmeanach wind farm wind|DUGR_P|wind|,0.8,0.1,0.1,853
+909795c262835e65274ad67149ea27a1eeb1a2209c1505f0e3623c22558be4b5,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQ5QAI|,ssen:n:ben aketil windfarm|DUGR_P|wind|,0.4,0.17,0.43,839
+9429b9f01d6ca042a8442f3ece3169599c6ab762ce827be37a6ae6a07aa80a52,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQ5QAI|,ssen:n:glean eoghainn wind|DUGR_P|wind|,0.17,0.03,0.8,867
+5fab0580b8011d88d79a2a92e369c12cedf43f591a52a97abce58daaa761a882,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQ5QAI|,ssen:n:glean eoghainn wind|DUGR_P|wind|#2,0.21,0.13,0.66,867
+4fc1d2dc5f051de6d6b7e3448110739e9e5aba724a483a510b559e4209156003,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQBQAY|,ssen:n:holes bay battery storage|MANN_1|other|,0.01,0.01,0.98,799
+2557f0b26ef8db386a160940ee349b9209c80f98ac50b1f181cd5c6e98a51a3a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQDQAY|,npg:NPg23-001018|,0.88,0.03,0.09,824
+742a6ba2eebdd6b2b1e85a7612e986fabce09a0e2802ffc45e7d083b3f98eca5,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQDQAY|,npg:n:gelderd lane gas|KIRKB1|fossil gas|,0.95,0.01,0.04,814
+eb9b6cb5c87d83f59fc4d7fbdec38a1e1af124e4a185804eeb401f7fd92d6771,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQDQAY|,npg:n:kirkhaw lane gas|FERRB1|fossil gas|,0.93,0.02,0.05,817
+464d36ca9c815977ad9d923d8204273fb681efe829fa11384047a787b9d87372,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQDQAY|,npg:n:stor green frog ltd|tynemouth|fossil gas|,0.47,0.04,0.49,829
+76fc4e8f7e43a839ef03c598219d8c738bd9239ef209e88209fe4643db0f6d4e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQDQAY|,ssen:n:allington lane||fossil oil|,0.95,0.01,0.04,832
+b7e37a458dd7977badcd060ba72084c89ae71c9c39cf08b86380221161fed233,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:7 2mw gas|LOVE_1|advanced fuel produced via gasification or pyrolysis of biofuel or waste|,0.92,0.03,0.05,865
+1bafdc8ac3b266c702eb837eb4873157cf1ce9d8d09750728db12c0b4b501865,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:7mw gas|LOVE_1|advanced fuel gasification or pyrolysis|,0.93,0.03,0.04,845
+030afcc3decec3ffc757da61674665b7a07eee24ea537f2b878fe636aa17a913,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:7mw gas|LOVE_1|advanced fuel produced via gasification or pyrolysis of biofuel or waste|,0.94,0.03,0.03,858
+fb847134da762bd4752d8153ac316ac20ed76a810287428bd3b9ed66155e14fc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:batley s power station|||,0.52,0.03,0.45,811
+f64405d2fbe4b9b765f47bac68fa4fc6673a6185557c516e117060fcfe215c5e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:down barn farm misd 7373|||,0.12,0.03,0.85,817
+47b1bf701b56ce91a0bb16ef3b700aad8ef9dc691806219ffceff7d48569d106,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:ready|LOVE_1|other|,0.72,0.19,0.09,841
+2c5a0ac1b9e9b9ca57d818a0257dcb8d4d4f4e63ac61dde8dc578173b64c277d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:swan costs hermitage park|LOVE_1|other|,0.76,0.03,0.21,852
+34b5f5defe3d90e8314f48c98fe23766c4ccc872917e8ecf42d3e09d94345c05,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:wymering stor generation|LOVE_1|other|,0.75,0.04,0.21,839
+adb723195383a0f02e791c1be78d9a081e65bea97e61e3f001b7b6cacfd3635f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:|LOVE_1|other|,0.94,0.02,0.04,820
+2475f4422ec89946112c292bfe65728beae0fce68d1053a0ffcb79bc837831ec,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:|LOVE_1|other|#2,0.81,0.04,0.15,807
+f411306d996de18c746870e506b21c2a4e8866396bcc47125c3a59ccbb9ff37e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:|LOVE_1|other|#3,0.66,0.04,0.3,809
+1bf34e2232675e5b23ef7146bce39cbbeda3c64ff4c701642b898766eef4ff4d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:|LOVE_1||,0.95,0.02,0.03,829
+5e5d202323120199250cc5b04e1bb6490ebc03907c99da308c2d5e4071a8ad11,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:|LOVE_1||#2,0.95,0.02,0.03,823
+92ba441cf12d89e28d6ff567ffe52e1c7701db2658256b4fda208534117b6a19,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQJQAY|,ssen:n:|LOVE_1||#3,0.91,0.03,0.06,814
+f94e48862f075313463a67cb8cdf4201fb55a9273fd8ab73b08e5b06d4a1d766,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQRQAY|,ssen:n:200mw bess|LALE1SG003|stored energy all stored energy irrespectve of the original energy source|,0.24,0.06,0.7,875
+df3055b42d31949b809e6333e7cb673310dfadffb492220bc042c20f724d7da6,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQRQAY|,ssen:n:ready 200mw battery|LALE1SG003|stored energy all stored energy irrespectve of the original energy source|,0.04,0.01,0.95,864
+42e368ab6192638da10014025a0b9c77f39e1a144700d0f11238648e4d0a771c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQRQAY|,ssen:n:|LALE1SG003|other|,0.84,0.05,0.11,827
+ee7fbce84480e927630754b346eecc22d8641711740243dd54593fae1a1ca1c0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQUQAY|,npg:n:hunningley bess|west melton section 3|stored energy all stored energy irrespectve of the original energy source|,0.14,0.04,0.82,831
+7598402eb27a262c866728b7aef209355f75c524f736930a8e1e55dfd45c37bc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQXQAY|,ssen:n:49 9mw bess|COUA_P|stored energy all stored energy irrespectve of the original energy source|,0.32,0.49,0.19,900
+dca10f959c7095dfe1425868ce82b3e8c9573cc5a46610eb250f0b7819a57e7f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQXQAY|,ssen:n:49 9mw pv battery|COUA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.18,0.44,0.38,923
+1c6bc7abf30778120e00ebb7e84b8ba528d38302c9cf2f0a2a84267852eef775,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQXQAY|,ssen:n:99 56mw pv bess|COUA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.54,0.23,0.23,906
+aace6582cd7ee3e080ec70713adba3792ca2ab8a6c8c4ceaf1e2b9b961c1f2ee,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQXQAY|,ssen:n:markethill bess|COUA_P|stored energy all stored energy irrespectve of the original energy source|,0.85,0.13,0.02,891
+ba5179df4ab72d8f79c077df8a6b32c5e743adf79d733b31951ec7c5ab75a24d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQqQAI|,ssen:n:brownieleys wind|FIDD_P|wind|,0.68,0.17,0.15,809
+c95500a54b890fd1606bd927351ee61ac6835eddfe974dbbe5206b6f6ecb8c21,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQqQAI|,ssen:n:tullo 2 wind farm export cva|FIDD_P|wind|,0.02,0.06,0.92,815
+a811b54b41008c7086977726458fa0bf6202538259badf13d19c344dfdb823ad,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQqQAI|,ssen:n:tullo wind farm|FIDD_P|wind|,0.04,0.91,0.05,810
+bcee5c0939e95498b2545c6f1755124e51b1ab26a3b3fb91ee45cf78f93c77a9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQqQAI|,ssen:n:windfarm|FIDD_P|wind|,0.76,0.13,0.11,823
+ff5b9601d7ca1c3d7a3e16408ead2d7de9d2ebc9549f844ad65c98e4acae6f83,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQsQAI|,ssen:n:glen dochart|KIIN_P|water flowing water or head of water|,0.31,0.39,0.3,804
+b099144314849a57c97e5d3bbfd310b9709fe92b3dc81d7ffdddcfd7124b5d7a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQsQAI|,ssen:n:lubreoch export cva|CHAR_P||,0.08,0.02,0.9,800
+5a6aa642bfb19104761aca905d38659be4901aa6fe5e9ce80b0da3d70a233833,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQsQAI|,ssen:n:|KIIN_P|hydro to be confirmed|#2,0.57,0.25,0.18,804
+596cdf409f3c7635b4ebe94f76017212bc0d7e817b271056d65f925a39b29f04,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQsQAI|,ssen:n:|KIIN_P|water flowing water or head of water|,0.44,0.3,0.26,808
+b2636263bba0f5b5f9ddadf0083d25551703a0a194df552a1cc9f8dac8b814d6,jev-1.14.0,2026-11-25,tec:a0l4L0000005iQsQAI|,ssen:n:|KIIN_P||,0.76,0.06,0.18,799
+42ea95578a19a4d252fe5fe96bc90ae273ead452a650873f53e2b313e2749235,jev-1.14.0,2026-11-25,tec:a0l4L0000005iR8QAI|,npg:n:stor green frog ltd|tynemouth|fossil gas|,0.58,0.04,0.38,830
+6ef27890152078ecf9b8b3613d6ef5f6abf705da2fd27a912aab00463d173015,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRBQAY|,npg:n:stor green frog ltd|tynemouth|fossil gas|,0.55,0.04,0.41,832
+b710cbe5890005d7992ffd3b8e39585a325b5edb97736287727f88b45df53548,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRLQAY|,ssen:n:blary hill wind generating facility|CAAD_P|wind|,0.92,0.03,0.05,834
+7eb5335c0db67db9ccdcd90fc1ce7072ff6a7ec2c6ce9b900298c2a1d79705c2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRLQAY|,ssen:n:burgar hill repowering wind farm|THUS|wind|,0.72,0.13,0.15,870
+059d5b53ca27c6d5e7d8b7b4c9fad231c3aa178e2d465a6ecc1543c510e347eb,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRLQAY|,ssen:n:cairnmore wind park|TARL_P|wind|,0.8,0.15,0.05,844
+e7e359da222c2651b0c99702addd513e64f4dd9e2597a4040a4cb19864e35aae,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRLQAY|,ssen:n:corsback hill wind farm|THUS|wind|,0.89,0.06,0.05,845
+a6cf597422ee2f260f1277b9bba1fe810624cd62a311a06eb3ac5732d7100179,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRLQAY|,ssen:n:dg thurso|THSO_P|wind|,0.11,0.08,0.81,869
+6f79f1b32a07ef15751b24d141d8882f3150db89a256f85f6a91f56c98257f2f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRLQAY|,ssen:n:hammars hill windfarm||wind|,0.94,0.04,0.02,845
+3f0948ec62b1125e5274bed0e65a299b6f0b20ec8d1de3b9819db9a6c5eba8b8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRLQAY|,ssen:n:stroupster wind farm|THUS|wind|,0.94,0.03,0.03,840
+98d308ee7df344bf2e5e27d288fc66b80b5d0265fbdd8a720cf149541125919f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRLQAY|,ssen:n:tarbuckle hill wind farm|CAIN|wind|,0.83,0.05,0.12,863
+41cb5aacea80867b81d0e0e0fad7df181ad52e24ab8e23b06f944314c1757171,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRLQAY|,ssen:n:wangie hill wind farm|ELGI_P|wind|,0.95,0.02,0.03,844
+dff55b30ee3199d6de7d21487eefc367e1797475d3849363731ba3c873a731d1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRLQAY|,ssen:n:|THUS|hydro to be confirmed|,0.98,0.01,0.01,832
+d56f6c753a96d90b1753dabd0f49bf47838e3ef15b6dc1f1532f9c13066bcebc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRRQAY|,npg:n:burn park farm energy storage|CREB_1|stored energy all stored energy irrespectve of the original energy source|,0.26,0.04,0.7,819
+2372d19917f47d6add4383d17b2e0ced4c9fd7be821e02c4c09475a2cddc7387,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRRQAY|,npg:n:driffield bess|CREB_1|stored energy all stored energy irrespectve of the original energy source|,0.87,0.07,0.06,821
+cfa66f6b2a93526c688f90c9aab924bc97d4986dc2fcda6df05b8e24def9961d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRRQAY|,npg:n:pillswood farm bess 1|CREB_1|stored energy all stored energy irrespectve of the original energy source|,0.02,0.05,0.93,829
+e003f7e47f78b29333437fee6e678c1a96bee836ed761198b5de7cffd95c729d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRRQAY|,npg:n:pillswood farm|CREB_1|stored energy all stored energy irrespective of the original energy source|,0.03,0.81,0.16,821
+d873df97b032a3b4143bb7fc304e42d710363b5aba47b4a463e9b1d26a0ccbe7,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRRQAY|,npg:n:pillswood farm|CREB_1|stored energy all stored energy irrespective of the original energy source|#2,0.01,0.02,0.97,821
+7267eb3c08d1492dfe2c650de3786faf7d6b30c9bdb97262406ace1f5799b719,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRRQAY|,npg:n:southburn house hybrid|CREB_1|solar|,0.52,0.44,0.04,813
+636a20d6942734024a9a22638d07254bc2d79b5df558a18a2551c863268a0753,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRRQAY|,npg:n:white hall solar farm|CREB_1|stored energy all stored energy irrespectve of the original energy source|,0.82,0.06,0.12,819
+a5743a55d8c089b6ba3bcbbe58d672cf3d4de1ef5c8af24ed96906bd64a62f15,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRRQAY|,npg:n:woodmansey hybrid|CREB_1|solar|,0.59,0.37,0.04,812
+673e1801944db811bf2101c054d7df165779eba04361964e9cd147bdcf854687,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRSQAY|,npg:n:burn park farm energy storage|CREB_1|stored energy all stored energy irrespectve of the original energy source|,0.31,0.11,0.58,820
+ec89f35eaef32946a48524df7066738604fcc8356e5e529e3fa78dcc629cf4d2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRSQAY|,npg:n:driffield bess|CREB_1|stored energy all stored energy irrespectve of the original energy source|,0.84,0.1,0.06,822
+74de65a2f4ddb51e7e360be8a8e173941a35d545bc7f56a260a8da44683c21c0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRSQAY|,npg:n:pillswood farm bess 2|CREB_1|stored energy all stored energy irrespectve of the original energy source|,0.02,0.04,0.94,830
+beebd4d735b852c0cc7ef24ac32bcf4317d37cd9f3ed98b7d9a7563cad353da9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRSQAY|,npg:n:pillswood farm|CREB_1|stored energy all stored energy irrespective of the original energy source|,0.01,0.03,0.96,822
+a7d5df61af726dae09efcfd3fc431c6fa962f6e8e09c58bbc2d56156842a30d2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRSQAY|,npg:n:pillswood farm|CREB_1|stored energy all stored energy irrespective of the original energy source|#2,0.06,0.71,0.23,822
+ca2bc77c85942edae8a2b090ee2563e768915503f37d72449baa0fadb0a0455b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRSQAY|,npg:n:southburn house hybrid|CREB_1|solar|,0.58,0.4,0.02,814
+f6f5ae8fef4aa710bce321d35d2c68129eef0c169e2c778ee025088286ef7a49,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRSQAY|,npg:n:white hall solar farm|CREB_1|stored energy all stored energy irrespectve of the original energy source|,0.8,0.1,0.1,820
+69cc06a2a869e07bc0a946546f4dd207a2bf91daa2971445408cf1b409dcca2c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRSQAY|,npg:n:woodmansey hybrid|CREB_1|solar|,0.62,0.35,0.03,813
+139b0c13b5007a109b47977ebdc2fd168e58725c19c30968ac3fea587b0499e5,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRiQAI|,ssen:n:1 065mw export 2mw import|KEIT_P|other|,0.91,0.06,0.03,864
+af83ad683fc8a5bc3f1949a2de2de012a04ed5a3ad94fda12762f32b968b11c0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRiQAI|,ssen:n:auchinderran wind farm|KEIT_P|wind|#2,0.74,0.22,0.04,866
+ff8f57af9844a68791e63d2c17aab6a4748334aeba3f0fee062f4497a58e6fb5,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRiQAI|,ssen:n:cashlie export cva|KEIT_P||,0.67,0.18,0.15,837
+d8d7840e0ef8918e5139e9d31ce1c966d9108fce2f43f3fedbae04c170c085b0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRiQAI|,ssen:n:hill of towie 2 wind farm|KEIT_P|wind|,0.08,0.02,0.9,884
+4206a22b8af5a7e4b25a5b3178f3963df0ece3f2759e82f609728e3ae337a509,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRiQAI|,ssen:n:hill of towie wind farm export cva|KEIT_P|wind|,0.09,0.68,0.23,852
+b8b2a362a1d4a1e4713e089665908d3332f3ab0b87526cdfffc2a91a98e7baa4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRiQAI|,ssen:n:lurg hill wind generating station|KEIT_P|wind|,0.68,0.29,0.03,869
+2ba591b1a1446d26fcca61c5f36ba4038e3a4a23843b110ddf8068bc694d0c13,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRiQAI|,ssen:n:lurghill wind|KEIT_P|wind|,0.95,0.04,0.01,860
+309e454934ed5a5727d390bdcefcd02a5fb3df251c9913a50b6c7a1f7ed13439,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRiQAI|,ssen:n:quality|KEIT_P|other|,0.85,0.08,0.07,853
+83673050e2e7627d7ec2e5d8b127536d37d3ac2310deeee543fd26a3bec3bfa5,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRiQAI|,ssen:n:|KEIT_P||,0.84,0.12,0.04,847
+795f6330dc8645922c0af54058da3c72ab47bed6add979fa5f8774f2f72bd39c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRkQAI|,ssen:n:gordonstown wind farm export cva||wind|,0.07,0.02,0.91,816
+22fcc4bd10ce4518994800cb8b57da5e2c9330568d654c1397e3160d4aa4c070,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRkQAI|,ssen:n:hill of stoneyfield wind|ROTH|wind|,0.71,0.1,0.19,846
+f55f8dd3e2bb382bf17a19ba53aa7d52a95cd85131f63896d8e98b04f91a99c8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRyQAI|,ssen:n:peer|TARL_P|other|,0.12,0.03,0.85,863
+037d58b85c0375170af008b96574b50d19210461925fc154964e1f34f9003d94,jev-1.14.0,2026-11-25,tec:a0l4L0000005iRyQAI|,ssen:n:|TARL_P|water flowing water or head of water|,0.92,0.07,0.01,842
+f1666771c61495e17fce8537b764ecd5070f5789e0aee70fe394dcdcee787186,jev-1.14.0,2026-11-25,tec:a0l4L0000005iS4QAI|,npg:n:hull bank farm bess|creyke beck 2 future|stored energy all stored energy irrespective of the original energy source|,0.97,0.02,0.01,844
+fbf5203bcd9240ecc6557143b06aa991b081bb04a31454c8d0c54cdf6d5762c7,jev-1.14.0,2026-11-25,tec:a0l4L0000005iS5QAI|,npg:NPg23-001353|,0.34,0.04,0.62,810
+210cd7940c4b89d0e5ffa99ab96bee74fd77753ee6490ee2c0edd8756e9b745a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iS5QAI|,npg:NPg23-001366|,0.91,0.04,0.05,824
+701eff3d710730c1acc747af3e54bd2e493d49e8f3b335fa373ae8eb43ef55ab,jev-1.14.0,2026-11-25,tec:a0l4L0000005iS5QAI|,npg:NPg23-002170|,0.31,0.15,0.54,820
+08b66e65f9c2433ef4215327887af3f4b3c374fa27d37c2667e1a55c54df1d5d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iS5QAI|,npg:n:grimsby chp ex huntsman tioxide accepted|GRIW_1|fossil gas|,0.47,0.17,0.36,807
+267cfcadef87e37b0f212cf4a7913948dfc5de21c4274c5008675e31dbde85e0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iS5QAI|,npg:n:grimsby chp ex huntsman tioxide connected|GRIW_1|fossil gas|,0.43,0.15,0.42,807
+750723dc002345e6cdc2ba92fc9a914d8b9f694a3ae355661c444646968faf8b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iS5QAI|,npg:n:grimsby power station ex tioxide|GRIW_1|fossil gas|,0.43,0.12,0.45,828
+64261d30594210aad282734109676f9840c951a80f024508a00068357700cb8b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSHQAY|,ssen:n:26mw wind|CAAD_P|wind|,0.52,0.22,0.26,827
+4d244208dd1ceee755c6db223a97cabd7d5898bf075dd6ea23e7cade1a86ee0d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSHQAY|,ssen:n:30mw wind|CAAD_P|wind|,0.57,0.19,0.24,826
+f673b8ad0d0526a73e8520694f3d05b0f1d2f040e743e242b876111b27a6169d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSHQAY|,ssen:n:allt domhain wind farm|CAAD_P|wind|,0.38,0.15,0.47,848
+fdca525b8673f3b49373500168cb2f4bbd9395c183bc188e3e380b9d434e12cc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSHQAY|,ssen:n:auchadaduie wind|CAAD_P|wind|,0.91,0.06,0.03,839
+9de3e8c7e138ff0660d5f639f7c544181eb55e16aceb0481f30f04023c7b89c4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSHQAY|,ssen:n:auth|CAAD_P|wind|,0.82,0.1,0.08,868
+68e0304c63a97f9f80e4251c0f250d4f6dfe531f7142294e1389b011bb2890dd,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSHQAY|,ssen:n:clachaig wind farm|CAAD_P|wind|#2,0.84,0.08,0.08,868
+1e6bd8bc8b1306b532ee519064d59fe5e82e5f23c251cb6b3660ef6ba8c266fc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSHQAY|,ssen:n:finlarig power station|||,0.97,0.01,0.02,841
+f30cab5c4fa9d2f313e1881962b6055e6bede923684cc1b9f36837457edfa7b9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSHQAY|,ssen:n:glencreggan farm 30mw wind|CAAD_P|wind|,0.78,0.17,0.05,853
+683e866adb8dde64bb917ad0d8402ecc8d8902760659d7a9f15fddfa58ace31b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSHQAY|,ssen:n:narachan wind farm|CAAD_P|wind|,0.08,0.01,0.91,860
+71d7e585ff1cadc1537d90155c434ce419a6581dcef3584b926b443d4851f731,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSHQAY|,ssen:n:sent for auth 60mw|CAAD_P|wind|,0.4,0.21,0.39,845
+388ab76ff8939e1e8a047c82fbfb208c3bb860a58e58ee72ea7f606e960cf4d6,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSHQAY|,ssen:n:wind 72 6mw|CAAD_P|wind|,0.3,0.04,0.66,844
+41b7c959e2cc64f1c0f3320f3680b012711e450eecf1d43ba7ede6467ea9e90d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSKQAY|,ssen:n:farnham battery storgae project|FLEE|stored energy all stored energy irrespectve of the original energy source|,0.3,0.08,0.62,837
+ff96023e6b7af9e828173f657f2ce74cd7180f9c7a3f94528f8e16a54365adac,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSKQAY|,ssen:n:farnham battery storgae project|coxw|stored energy all stored energy irrespectve of the original energy source|,0.14,0.07,0.79,826
+38b36768dbccf2200547f716a1de764ede38e4f70f4b6dfa3ebc68c2ceb238a8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSsQAI|,ssen:n:20mw pv battery|FIDD_P|solar stored energy all stored energy irrespectve of the original energy source|,0.93,0.06,0.01,858
+350d94f9e567f25305e9bc0c548622bec0e22cb3ca4f19b7d9d372bb6986b6d7,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSsQAI|,ssen:n:50 mw bess|FIDD_P|stored energy all stored energy irrespectve of the original energy source|,0.11,0.05,0.84,857
+d8a6742b51829753c3e75dddf675a9f0e48b1126e781dd8967390151ef9a82e0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSsQAI|,ssen:n:meetlaw bess|FIDD_P|other|,0.16,0.02,0.82,857
+5cd03b3b9cdd17e71041e2eccac00c05b266e90f338ffce52f832baf5995f534,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSsQAI|,ssen:n:upper westown farm bess|FIDD_P|stored energy all stored energy irrespectve of the original energy source|,0.49,0.16,0.35,860
+5061f2e83fecc1c196c9f569e3077cf10b791f8a449d80b7d00151f8deba28cc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSsQAI|,ssen:n:with ccm dgen|FIDD_P|solar stored energy all stored energy irrespectve of the original energy source|,0.47,0.39,0.14,871
+e30c72c92aae7c07e68656d7c870f57c54ff0c175b75007da13e4f29df614628,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSuQAI|,ssen:n:49 9mw battery|ROTH|stored energy all stored energy irrespectve of the original energy source|#2,0.41,0.18,0.41,887
+494e3abceb372ef8e3b32a72102610d0aa4c029e18c42ceebdf5d052390847c7,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSuQAI|,ssen:n:50mw battery|ROTH|stored energy all stored energy irrespectve of the original energy source|,0.39,0.18,0.43,890
+f5f57203abeb15b51905add931aeec2f59b99da0a130e8a17ba225ec7ffc6b8f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSuQAI|,ssen:n:63mw bess site|ROTH|stored energy all stored energy irrespectve of the original energy source|,0.28,0.33,0.39,858
+f92a38d9ee01674177e1346885be03780b88ed184e15d6d01b823a82356a005b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSuQAI|,ssen:n:overhill bess|ROTH|stored energy all stored energy irrespectve of the original energy source|,0.32,0.15,0.53,894
+b509d96ba145cd794b6d304d17eeb9db725448707241698f659125191c8f4ea4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSuQAI|,ssen:n:overhill second bess|ROTH|stored energy all stored energy irrespectve of the original energy source|,0.15,0.38,0.47,871
+966b3c30677a5e8130645c5e11540635cf5d4d1948bab8825eeb06f870782d98,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSuQAI|,ssen:n:rothie 3 bess|ROTH|stored energy all stored energy irrespectve of the original energy source|,0.05,0.93,0.02,877
+3da9658293fe9aa1ae52745ce1f62d6a238807508ac596045ea8f87b736929dc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSuQAI|,ssen:n:wardhill farm bess|ROTH|stored energy all stored energy irrespectve of the original energy source|,0.54,0.2,0.26,893
+0ad46fc1b10540526e21efb894153fc18206b9748baf45eb3be00b578c09da4e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSwQAI|,ssen:n:20mw bess|ARBR_P|stored energy all stored energy irrespectve of the original energy source|,0.13,0.12,0.75,839
+7c38c3f07e4dabc4b2f65c9120a0c67c772b691a740edec703da8c20816fe70a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSwQAI|,ssen:n:50mw bess|ARBR_P|stored energy all stored energy irrespectve of the original energy source|,0.14,0.13,0.73,839
+b0a51029fa916dd592ef0e97eea1c48fc7cd2ab08762f3e1465c4d263aa334d9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSwQAI|,ssen:n:abroath bess msid 8771 exp||stored energy all stored energy irrespectve of the original energy source|,0.07,0.19,0.74,847
+befe0e25c0bf617c0d138e4eb6e50fdcbd57ed258368b097eefe85829f9e3723,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSwQAI|,ssen:n:arbroath 2mw battery storage|ARBR_P|stored energy all stored energy irrespectve of the original energy source|,0.53,0.2,0.27,841
+166f88afb9f447ae0d34278a6785559480e31082431da027e15bbfb7535f13af,jev-1.14.0,2026-11-25,tec:a0l4L0000005iSwQAI|,ssen:n:dg tayc|ARBR_P|other|,0.1,0.05,0.85,822
+3e999ee11b554fdc15f1e0cb11cd48020141ab67796bbb1c893f010a9e25500a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iT2QAI|,ssen:n:26mw wind|CAAD_P|wind|,0.69,0.25,0.06,838
+599ce555a5aa89cc5b99e5144ef31275580ac454071d34e0b68c2640105226c0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iT2QAI|,ssen:n:30mw wind|CAAD_P|wind|,0.59,0.28,0.13,837
+7aff38b5b1ac7c0c1f5be360b0f7fb9cbd3a683296ab9fd88735e9515fd5ca56,jev-1.14.0,2026-11-25,tec:a0l4L0000005iT2QAI|,ssen:n:allt domhain wind farm|CAAD_P|wind|,0.75,0.15,0.1,859
+02783a3d4ed44d4b4ea75751fc9cf04b5f698ed796aa08514520b5d238827ad0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iT2QAI|,ssen:n:aultcraggie west pos|BROR_P|other|,0.75,0.11,0.14,851
+1ded83f2f68b12079fe52ce22413c82f217f616f2f65b312deb880ff4e72aebf,jev-1.14.0,2026-11-25,tec:a0l4L0000005iT2QAI|,ssen:n:auth|CAAD_P|wind|,0.67,0.26,0.07,879
+a648109e7545f8b37c080c41258b528d10d6ed8b4a12e9e0d3c3f0eb74a0f034,jev-1.14.0,2026-11-25,tec:a0l4L0000005iT2QAI|,ssen:n:beinn an tuirc 2|CAAD_P|wind|,0.69,0.19,0.12,840
+b61488c5e68f9fd87e3c3044ff4ea59628c84793b45cd873c63d3b0dae3df3d9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iT2QAI|,ssen:n:beinn an tuirc 3 windfarm|CAAD_P|wind|,0.85,0.1,0.05,843
+46d0943de768f1b88a773e49d2751a88a3bb88643c4f69a0ce5b2a07eaa4fc11,jev-1.14.0,2026-11-25,tec:a0l4L0000005iT2QAI|,ssen:n:clachaig wind farm|CAAD_P|wind|#2,0.75,0.14,0.11,879
+68dbd7d189f14a3d4b944952d47f41db032df52b3d46368f2fc1b456148696e7,jev-1.14.0,2026-11-25,tec:a0l4L0000005iT2QAI|,ssen:n:cnoc donn arnicle windfarm|CAAD_P|wind|,0.89,0.08,0.03,842
+5d22ce22602887e4ed3f1164044335148cf0c46dce48077a3891bb39c7c76328,jev-1.14.0,2026-11-25,tec:a0l4L0000005iT2QAI|,ssen:n:sent for auth 60mw|CAAD_P|wind|,0.6,0.24,0.16,856
+68abfc95bac65049a234f0620cfb77c14acf32615468e44e36b68ca4bf55168e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iT2QAI|,ssen:n:west torrisdale wind|CAAD_P|wind|,0.02,0.03,0.95,858
+3216e90baa505ac83f8130616931f08cab8f230d93d8781cf312fc4b7c34b542,jev-1.14.0,2026-11-25,tec:a0l4L0000005iT2QAI|,ssen:n:wind 72 6mw|CAAD_P|wind|,0.77,0.15,0.08,855
+bba0483ffe3070dcb9088dd20480f39a0a383cdf717e56a157651f3709516a14,jev-1.14.0,2026-11-25,tec:a0l4L0000005iTnQAI|,npg:NPg23-001915|,0.74,0.11,0.15,829
+4c12c7c81d67cafc868e3398bf9985ae586e35c6b69ca642a6c38ec7e2f715b5,jev-1.14.0,2026-11-25,tec:a0l4L0000005iTnQAI|,npg:NPg23-001925|,0.77,0.14,0.09,841
+3ed95e5b771f9372f9032d92a509bd77c9762a8a6366f074d028b917ba06f2b9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iTnQAI|,npg:NPg23-001993|,0.08,0.01,0.91,842
+0623c1a02e364b2f333660e32cec05de77c2011dab7ad0940551dc3ee672f23a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU0QAI|,ssen:n:40mw efw|KINT_P|other|,0.03,0.18,0.79,873
+94775792fa8debbec706a2b54ca9dab74504cc5bd4e62327ffcc3b100f1d5465,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU0QAI|,ssen:n:auth|KINT_P|other|,0.78,0.08,0.14,843
+dfe660b8902eaa923835cc490187da9d97cfa0dfa46f4efaeb6b2146f71d337c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU0QAI|,ssen:n:thainstone solar|KINT_P|other|,0.48,0.37,0.15,852
+8850a9f2dbf51613dc40db4c74625e63fe037da8abc6d54c464124b54435224b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU1QAI|,ssen:n:tealing pv cic|MILC_P|solar|,0.38,0.46,0.16,872
+b2e225f532c0c39d730a5d6ce8386cb81037548c81a11219844da9523771ffc7,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU3QAI|,ssen:n:37 5mw gen pv batt 16mw export|COUA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.28,0.22,0.5,923
+721ffa71154673e84d100d5eb7e410b6e8285cdb44651487bf23dccf058116e3,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU3QAI|,ssen:n:49 9mw battery|COUA_P|stored energy all stored energy irrespectve of the original energy source|,0.37,0.43,0.2,913
+64c7fc555bc95a4dccc0fd25f7cc1e62962d2ee6703afdf29e8ada4aca093b56,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU3QAI|,ssen:n:49 9mw bess|COUA_P|stored energy all stored energy irrespectve of the original energy source|,0.03,0.39,0.58,899
+973e52905e1244fd34b464c0e4b6638353bde41fa6c417da6ce336be8b1215df,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU3QAI|,ssen:n:49 9mw pv battery|COUA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.14,0.12,0.74,922
+6195b1ed6a4fd1cb3af2492e5269544edd6b006a76f724eaace8395edae39ce1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU3QAI|,ssen:n:49 9mw pv|COUA_P|solar|,0.27,0.26,0.47,892
+ee95ef37cc452448f60b89f5f7bbf2e68233c1c7045154982be81206e998fe4a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU3QAI|,ssen:n:49 9mw pv|COUA_P|solar|#2,0.14,0.24,0.62,893
+c77a4d519737ccf7dddc831d2d0c7bff94daa51b70f8688143fd07bf92fe670e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU3QAI|,ssen:n:49 9mw wind and electricity storage|COUA_P|other stored energy all stored energy irrespectve of the original energy source|,0.58,0.3,0.12,914
+2ac19cdec032a20a8713a380d43f87f49a8f258ce65bf2edb3a4f89f3aa139ec,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU3QAI|,ssen:n:99 56mw pv bess|COUA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.22,0.39,0.39,905
+cbe96484f9dd34049ebf2bcd8d6fc017d7baa396b08d971918e0b486958e7e5f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU3QAI|,ssen:n:markethill bess|COUA_P|stored energy all stored energy irrespectve of the original energy source|,0.38,0.4,0.22,890
+f22a55dea393c9b62404e57532b3597b8b3083d79225f6aa6eaa7a3651a40fc7,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU5QAI|,ssen:n:1 065mw export 2mw import|KEIT_P|other|,0.9,0.06,0.04,854
+cac41192c7d86be3bfb9ddc88631b0d16bac95304af7fbeec110ec361383e595,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU5QAI|,ssen:n:49 5mw battery|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.42,0.24,0.34,887
+d035c32a2a623c4607b2384cddef8a847b3495b3fa7c88c2b8da5f39e74a86dd,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU5QAI|,ssen:n:50mw battery|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.33,0.23,0.44,863
+2cecbf74679e1e069494fbf3856b1ee34250b8fbee81f7fba8b766c7a206796c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU5QAI|,ssen:n:blackmuir 2 bess|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.38,0.54,0.08,889
+4c029440a829d4b8be43cc3087994260d0d5f378124e7e76f3c92bfd30f31101,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU5QAI|,ssen:n:blackmuir bess|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.28,0.22,0.5,872
+2cbbb31ae8158bfcb2fa68524d870230fa98e1f4ab5038bbf42eeefd566cd80d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU5QAI|,ssen:n:cairdshill quarry bess|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.4,0.12,0.48,867
+de24815917a7783f1f1427b4eb10f3a96911d976688efef957df7af5f29188ef,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU5QAI|,ssen:n:cairdshill quarry bess|KEIT_P|stored energy all stored energy irrespectve of the original energy source|#2,0.16,0.06,0.78,856
+b27cf4d62a671a97364c812e0665d1b75343e48d1ecea12560022190033f8708,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU5QAI|,ssen:n:keith bess blackhillock|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.47,0.28,0.25,894
+a415f81c061c53b441f7c4dafdb0a53c514c9486c3131ec2a7ca0fbb59cc1985,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU5QAI|,ssen:n:keith bess|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.23,0.24,0.53,869
+c55448cab534f5a25eaf34a9d1db0450288879dede6785e84849edcb997c1171,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU5QAI|,ssen:n:quality|KEIT_P|other|,0.23,0.05,0.72,843
+4bddccc7da367d1419ffb60287ed208eb08e43a7b5bf7cfa766f20e08243ef87,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU6QAI|,ssen:n:67 2mw wind 36 3mw battery|BERB|wind stored energy all stored energy irrespectve of the original energy source|,0.13,0.78,0.09,895
+9c47bff405e6655ce5e8c12bca86a7d8b146b89383ae701076a0a9609eb48c0f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU6QAI|,ssen:n:berry burn wind farm cva export||wind|,0.24,0.07,0.69,854
+aa640a9038f2b18573e641013a68748be605cc6bea2f2a64911a0d709aa7ff50,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU6QAI|,ssen:n:peer|BERB|other|,0.78,0.21,0.01,882
+bb2f66e7470b8a8544271655d13f204ea5e4e1b39fec3329d36cfe2c051901a4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iU6QAI|,ssen:n:sent for auth 67 2mw wind 36 3mw battery|BERB|wind stored energy all stored energy irrespectve of the original energy source|,0.06,0.49,0.45,907
+bc8a31f1486a6ecf8fa3604a8cd9a5b67ada5d80dd68512d053d0bcdbface563,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:1 065mw export 2mw import|KEIT_P|other|,0.92,0.05,0.03,858
+1d27fcdb471f8ddf7e288dd85355e499065f59c4a68d4276da30cde3fe7d7235,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:49 5mw battery|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.47,0.1,0.43,891
+f5cff570e554710a72d2998f670a9b2f21caeb5be5ca9036075786fe7aa9c227,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:49 99mw battery|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.1,0.2,0.7,891
+7b645969baddb7e0eb8c1f20612db128c3c78a22258ed5313ccbe23515e49aac,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:50mw battery|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.29,0.07,0.64,867
+f8c3e209cbc0f09f1aad5be0e4d6a5ac5bbf94495574d7366e474cd49b496378,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:blackmuir 2 bess|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.61,0.16,0.23,893
+ff46bf942d348ef7d77aa43c0a2863d4e9dec3442351fec48b38150e2d60292d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:blackmuir bess|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.17,0.11,0.72,876
+872f7bbb2000ef5b35d62b6544bac98fa5383a069055312018ad3b7c0ff75823,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:davidson farm pv and bess|KEIT_P|solar stored energy all stored energy irrespectve of the original energy source|#2,0.71,0.24,0.05,895
+b321a122e6fa6ec4aefcc6b48196f0d4f65d120d6a91c5ca95dcccb7ff9ffa4f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:drum farm bess|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.11,0.14,0.75,873
+649168d968606a9bb0866ad451f959f788e0568c1049dede7e6b7888896546ec,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:drum farm energy storage|KEIT_P|other|,0.09,0.25,0.66,873
+24cb0045c400fabd645b8949719d10662eae958efa13f6fffa614aa7698335cc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:keith bess blackhillock|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.58,0.11,0.31,898
+a8e9ca682ffe3d40d2ddeb0553ae55383d593bedc5789055fa1d8a9134be0287,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:keith bess|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.14,0.16,0.7,873
+945bdf9ff9e39327ec3494bbf519c7ec6caf4ab91c30abc4b99d62f76605b669,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:newtack farm bess|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.25,0.16,0.59,876
+bba990552225758649fd71b4c54dd602adef482f2d53d46566553a59eb7b2c38,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:no coe invocie drum farm bess|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.09,0.19,0.72,891
+07da180e7beed11530ce2ff7d8c8394dc3854324f7a9471859216df28f570d6e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUAQAY|,ssen:n:riverside bungalow farm bess|KEIT_P|stored energy all stored energy irrespectve of the original energy source|,0.28,0.18,0.54,880
+bc34d96f8363e9dd1cdfd0e21bb5496cf7b5cf06d8e040fbae3cc4b2d9d74ed0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUDQAY|,npg:n:shaw hill farm|NEEP_3|stored energy all stored energy irrespectve of the original energy source|,0.92,0.04,0.04,821
+8d4b3e71eae5cf655dbaa1080fa0d6b99dcff9c249fc688ecd56d1bb94d70e18,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUDQAY|,npg:n:whelley hill farm pv|hartmoor|solar|,0.91,0.07,0.02,827
+2eb80e2eb729b4d2ae536ee182bfe5b97a30af7b32531af05f2f78a554ea3659,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUDQAY|,ssen:n:99 9mw battery|MANN_1|stored energy all stored energy irrespectve of the original energy source|,0.34,0.32,0.34,855
+89a46343493be952d6c0da6be78c6bf7833aad5821785a374d629250537fc7ce,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUDQAY|,ssen:n:hawkers hill|||,0.03,0.03,0.94,795
+819ec89179a05723a09a6e1bb35569b5b13120a9cfe1a5efd3412f8547c8d672,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUEQAY|,npg:n:drax bess|DRAX_1|solar|,0.34,0.61,0.05,835
+d518904e1174101391959e21f7c9b1432f8de8f93e6102e63766e7b4c3980379,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUGQAY|,ssen:n:43 2mw wind|BERB|wind|,0.03,0.06,0.91,876
+dea4bab9aff404390eae3ccabac01df1ae8a1346a76db6b3ed782908f2a195bc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUGQAY|,ssen:n:67 2mw wind 36 3mw battery|BERB|wind stored energy all stored energy irrespectve of the original energy source|,0.14,0.84,0.02,891
+1ee5fc17e0794553be54c3424604afdc984b6af71cf7d0fa6a7862dc39c5c771,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUGQAY|,ssen:n:berry burn extension wind farm|BERB|wind|,0.13,0.21,0.66,863
+0a326bf80fe328a1dd69f2bebff73b19ab66f735dae30b1ae7e66dc6d1824ad8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUGQAY|,ssen:n:berry burn wind farm cva export||wind|,0.05,0.93,0.02,850
+70f10760eb6f62a497f282bc075a423457a49d3d2c38cc8d0da3f416f34333b1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUGQAY|,ssen:n:golticlay extension|MYBS_P|wind|,0.91,0.06,0.03,882
+9fa83428e3d5d87afdf50ed3c83dae9921272a744512df2b63417009543d92d4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUPQAY|,ssen:n:36mw wind onshore|ALNE_P|wind|,0.01,0.01,0.98,823
+2f29ad1b00e49853dc71991f3e7e989348c1ddf874ad42671b4c008121acf159,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUPQAY|,ssen:n:coire na cloiche|ALNE_P|wind|,0.54,0.08,0.38,802
+0010fe5c7747721282f48bc8281ed260ced47c929372796db818251533e254e5,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUPQAY|,ssen:n:generating station|ALNE_P|hydro to be confirmed|,0.98,0.01,0.01,819
+a80f25534d5f422d69c63f01f309bf083087583ae2bb49b12b4287a8c68759c4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUPQAY|,ssen:n:glasa hydro generating stations|ALNE_P|water flowing water or head of water|,0.99,0.01,0.0,854
+61a8f536d9344ce31cc5bea4cd34ff455545f603b7bf30d3ca19b20929e6e16c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUPQAY|,ssen:n:novar 2 wind farm|ALNE_P|wind|,0.33,0.25,0.42,805
+964ee45b44817d98b7b3b77a7f34e86f6fed2041e685365a7ab689e635090d79,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUPQAY|,ssen:n:strathrusdale|ALNE_P|wind|,0.79,0.06,0.15,818
+bd85860e45cf082b1826e8092470b9233f646db83d8fc62f9944f0fd3b764d6f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUPQAY|,ssen:n:struie road wind 9mw export|ALNE_P|wind|,0.94,0.05,0.01,820
+f23bd71e14383e5739955a856ac4724c9ba3955c1fc98246834a87c84abec961,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUPQAY|,ssen:n:struie wind generation station|ALNE_P|wind|,0.83,0.1,0.07,806
+d4cef885e77cb2c46656a0ab41c9dd8c14ac78b77f71c6d84031dccbbffb59c2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUUQAY|,ssen:n:auth|FETT|other|,0.02,0.01,0.97,831
+862c1ae9117be301768f3c8ebec77546a36972a5130a19bf02249ed306f0bfb1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUUQAY|,ssen:n:the waters bess|FETT|stored energy all stored energy irrespectve of the original energy source|,0.42,0.14,0.44,872
+59e3783a42acd047f2eb62f6be029564b32bbbc4144c8058e1a3cbbb885afdfd,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUaQAI|,ssen:n:auth|DYCE_P|other|,0.81,0.15,0.04,873
+fb332313c988c9abb676a6c04e686ce8f355bf006de59e0144468ecaf6b00d67,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUaQAI|,ssen:n:peer|DYCE_P|other|,0.3,0.15,0.55,892
+a6e710eeb77bfc0b386b49d46985fa1b07af940a3ec9c95aa17589ffc22da130,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUaQAI|,ssen:n:|DYCE_P|stored energy all stored energy irrespectve of the original energy source|,0.53,0.39,0.08,892
+ef30bb1efc4b2308e4ea0817f250465e8e42a0fe16a77be122702e52d8a09e1b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUaQAI|,ssen:n:|DYCE_P||,0.79,0.14,0.07,848
+637a091aa4a36ca49c6b1e5152868a5812fa50ff9b73eaa7f402125507637702,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUqQAI|,ssen:n:27mw wind|DOUN_P|wind|,0.84,0.08,0.08,818
+ab93bc3aa4160ed977124ddc20aa5818969e4e92d75d2399da801c501edb30c8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUqQAI|,ssen:n:ackron wind farm|DOUN_P|wind|,0.66,0.06,0.28,816
+9985dc648a349abd21d69694f8b61d9750bf134732c07a5081e516cb764addf1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUqQAI|,ssen:n:baillie wind farm cva export||wind|,0.01,0.01,0.98,810
+32820f69d5a97a53f83b6e8fc2838e3bc57cdcdb95cc5dd5f5aaa8075179e25c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUqQAI|,ssen:n:bettyhill phase 2 windfarm|DOUN_P|wind stored energy all stored energy irrespectve of the original energy source|,0.78,0.2,0.02,863
+8581cd823aae5f4789c5cf529078781b4a65d53b3b238c98779f3005e2fb9252,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUqQAI|,ssen:n:bettyhill wind farm|DOUN_P|wind|,0.95,0.03,0.02,818
+e8bfdb364e3c9abc4177ffe70cfe541fddb4666394f94a35bc886b81dd4fa4ae,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUqQAI|,ssen:n:|DOUN_P|wind|,0.86,0.1,0.04,809
+4399109c08b08fa7a95066e176c68b85f57ccaf6f02bf392a9b12c0c1c2833f8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUqQAI|,ssen:n:|DOUN_P|wind|#2,0.85,0.08,0.07,824
+940ef213b1169a6c998c0844852e3981262010c98b608d0c3c4f6a42d006aed8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUsQAI|,ssen:n:hawkers hill|||,0.89,0.03,0.08,799
+58d6cf245f669f74d032ef362bbd023dac8199063888d007d0ad95cfdf36ad29,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUuQAI|,ssen:n:26mw wind|CAAD_P|wind|,0.62,0.21,0.17,814
+8f85d3f82ace8e8a7694944b1a4f5a250def84cb267cc77ca2a1dd2807143f15,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUuQAI|,ssen:n:30mw wind|CAAD_P|wind|,0.57,0.2,0.23,813
+09ac6d25d415b8587200b5c14d5812279dec21f4d9dcb4330f08e09a6a9dfb4a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUuQAI|,ssen:n:beinn an tuirc 2|CAAD_P|wind|,0.01,0.01,0.98,816
+48579444ef9c2dfe30a71e2b103abdad52eda14be048d42c4a4c2b42de6ba9f7,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUuQAI|,ssen:n:beinn an tuirc 3 windfarm|CAAD_P|wind|,0.01,0.98,0.01,819
+88e1b54ed1aef0cc2091a895a879862540e7ad70b3fc2278d61594b06928ae96,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUuQAI|,ssen:n:beinn nan lochan wind|edinbane|wind|,0.94,0.04,0.02,847
+e2ae1b222f93df060b58498b034d3259f3948bf6f44d757b48784a4f537cbbc2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUuQAI|,ssen:n:beinn turic 2 windfarm|CAAD_P|wind|,0.12,0.06,0.82,818
+19eb8685f8ae9bca5d4bc393ea7db908a61fe149100df111707fa19362f136ab,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUuQAI|,ssen:n:beinn turic ii export cva|CLAC_P||,0.02,0.02,0.96,806
+6987eedace0122eea65339667afeb859445407b78125a7ad658dc91a3971b0a5,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUuQAI|,ssen:n:cnoc donn arnicle windfarm|CAAD_P|wind|,0.79,0.09,0.12,818
+408c0cf43548edb37ebe3b25351370eaded485837acb35a0f70698886f54d399,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUuQAI|,ssen:n:west torrisdale wind|CAAD_P|wind|,0.47,0.22,0.31,834
+15f57d7a71e792f42e801a718e18193a911c775d278fb64ad736f229dc9f821b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUuQAI|,ssen:n:wind 72 6mw|CAAD_P|wind|,0.82,0.1,0.08,831
+a8f86c392a5e82f6413ad8d36195e1592639263f24b5dca63e2cf7d18f52a2eb,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUvQAI|,ssen:n:26mw wind|CAAD_P|wind|,0.58,0.22,0.2,814
+7a3ec886d543990dc88e74583b90652f4c2d7a0185df040226805ba70c948a1d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUvQAI|,ssen:n:30mw wind|CAAD_P|wind|,0.62,0.15,0.23,813
+093915a0dc5572fb394eaebf53f7b3faf688719c039e59ed1429becc78cafd25,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUvQAI|,ssen:n:57 6mw wind|TAYN_P|wind|,0.66,0.15,0.19,840
+f50cfa0a52b49ff8d72fd28aee5cd580afeb9f4f6382e68b21c618096b06b95d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUvQAI|,ssen:n:auth|CAAD_P|wind|,0.81,0.08,0.11,855
+6f07aa76b364ee5ce1f75e887738a675c1e2166c2bbaca90234b6cfdae2fe2d2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUvQAI|,ssen:n:beinn an tuirc 3 windfarm|CAAD_P|wind|,0.01,0.01,0.98,819
+0f8d7380e2fd80d36c80d974bb51b381c5547a838b9c1f1054a44a0943cc2454,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUvQAI|,ssen:n:beinn turic ii export cva|CLAC_P||,0.06,0.86,0.08,806
+e6ccefaf92ee4baae757a4fc21912cf9f7351e43c8fc4063df58c70639319e8d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUvQAI|,ssen:n:clachaig wind farm|CAAD_P|wind|#2,0.83,0.07,0.1,855
+08c7c8705f2bc05c1b98c2c60599cbdb8d47f0dee202b96881e40cfb49dcf387,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUvQAI|,ssen:n:cnoc donn arnicle windfarm|CAAD_P|wind|,0.74,0.09,0.17,818
+ec76815dc667e6f3ef2f810134542bdb59f19412e2b2b2a7c92e3823c0748aba,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUvQAI|,ssen:n:sent for auth 60mw|CAAD_P|wind|,0.52,0.2,0.28,832
+0f6f11a6c46e79584be33ff45735c5266c56e18cf2c8a266964eeb1928976c87,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUvQAI|,ssen:n:west torrisdale wind|CAAD_P|wind|,0.25,0.16,0.59,834
+e210e7a8817885b6a55997861cd42e31df08baa242033c5d47023a7c1bbb4980,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUvQAI|,ssen:n:wind 72 6mw|CAAD_P|wind|,0.8,0.1,0.1,831
+346871f6a145e2d0305554a2db3bfb53a79094edfff82c3af09903199f21edae,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUwQAI|,ssen:n:36mw wind onshore|ALNE_P|wind|,0.56,0.16,0.28,826
+ffc8da500183d0dc05ae96db0c7ae20c823b692d5c6ce78049e1621e011b5ec9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUwQAI|,ssen:n:beinn nan lochan wind|edinbane|wind|,0.89,0.05,0.06,841
+2b468459dbb2df060e367e0624f9df364a292d7cb58a3f6d61ec1ab023e989b2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUwQAI|,ssen:n:coire na cloiche|ALNE_P|wind|,0.26,0.05,0.69,805
+6383c7a57a1f536ccb03a9c58f4847d0f0303064ddaf83c301ebea3356ec4cd4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUwQAI|,ssen:n:cre energy|ALNE_P|wind|,0.08,0.02,0.9,801
+02eb77e416aca3fd5bc846e562447d56efab996baa91b7de1708abc156ebc394,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUwQAI|,ssen:n:generating station|ALNE_P|hydro to be confirmed|,0.98,0.01,0.01,822
+b064169646d2a780e978c33af38a40220c1c8b3a53fd9424879e0131dfc51409,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUwQAI|,ssen:n:novar 2 wind farm|ALNE_P|wind|,0.52,0.21,0.27,808
+74cb0e2fe3516f52a6d20186b1999e601d214eba93d5667a5397f574690b4b0e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUwQAI|,ssen:n:strathrusdale|ALNE_P|wind|,0.34,0.06,0.6,821
+0c26c0dd016f11094fd3740e712132985e61f7b4808e60273ea0a833288a8ec8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUwQAI|,ssen:n:struie wind generation station|ALNE_P|wind|,0.71,0.1,0.19,809
+7cfc6457009ba2716c1209da8b7de2beb450749fdb5d687750482aa691b256ef,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUxQAI|,ssen:n:43 2mw wind|BERB|wind|,0.03,0.96,0.01,835
+558cbcc00aaa7ab2f008b4e16611320a73afc1ff199eba1c3d5cb81be0874294,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUxQAI|,ssen:n:67 2mw wind 36 3mw battery|BERB|wind stored energy all stored energy irrespectve of the original energy source|,0.04,0.89,0.07,850
+97ed787f2c9842472704500209afa73486332705b997ec5853d30601ba07dfcb,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUxQAI|,ssen:n:berry burn extension wind farm|BERB|wind|,0.05,0.94,0.01,822
+b408736bdf0c0dc88d2ddae0b15b83f0eee8c79af6552fc13574600814ba4260,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUxQAI|,ssen:n:berry burn wind farm cva export||wind|,0.01,0.01,0.98,809
+cb80bddecd681af67ac5e9a504fa42d0afda3b94b8a0a3754a26052ed9a0c7a1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUxQAI|,ssen:n:peer|BERB|other|,0.72,0.28,0.0,837
+50168d2a3bd23639469030e7247c74b7633df784478777d8ecc86923507a5c16,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUyQAI|,npg:NPg23-002301|,0.71,0.07,0.22,817
+8a233905551b5d3b8b97a80f46a66441f644e0ef7c4e33ec7f67c0b74edf9999,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUyQAI|,npg:n:centrica glanford brigg power station|KEAD_1|fossil gas|,0.65,0.08,0.27,825
+98a178ab212cd6410471798e6acf661998d329b3916191bccb0b29afb5690638,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUyQAI|,npg:n:scawby brook expansion|KEAD_1|fossil gas|,0.55,0.12,0.33,806
+9a59199645b3cfb0a0d4c74b59c12a7f22bbc413ebae5ab5c85d5224356ff219,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:26mw wind|CAAD_P|wind|,0.36,0.13,0.51,805
+5629304093107e78706da3423b3fd906275756e231ac4d59fc3e6d17e0c5fd55,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:30mw wind|CAAD_P|wind|,0.25,0.1,0.65,804
+08366c4c999c0c20f5650e4ac50058c9412c0a19afafd95e9a91cf794508620e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:auth|CAAD_P|wind|,0.85,0.06,0.09,846
+7a36865b6b93c73a086e69f2be3496625bbbd712af7396a3dcd69367c970ab96,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:beinn an tuirc 2|CAAD_P|wind|,0.39,0.44,0.17,807
+209fc31816eded24b1f37416bbf1c785db2a867ae21c499ea04236f1156fc52f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:blary hill wind generating facility|CAAD_P|wind|,0.01,0.01,0.98,811
+14f0509f16791c5749bd566eea27568bf223fa36cf4c55b3c58dda4a606e29a8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:burgar hill|THSO_P|wind|,0.94,0.03,0.03,819
+df2e541bf28e37ee2aee3fb2ab8fdeed419e527c69885614cbbbbc66af91f5a6,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:clachaig wind farm|CAAD_P|wind|#2,0.86,0.05,0.09,846
+770e7304374672eee7213ac7f15e862dfc56bbf3cfb8cbc7325f0005d78dfa0f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:deucheran hill windfarm|CAAD_P|wind|,0.74,0.06,0.2,809
+1c1e47d6c957b5d792d2f37dfc5268d0535a99de4ee0bb05fa634e2df50bf2f1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:dg thurso|THSO_P|wind|,0.95,0.02,0.03,846
+7d6b49cbc7f105e7281456e7d949913282f4c9179b6141d7a0727e014f6fa30b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:finlarig power station|||,0.97,0.01,0.02,819
+6b66ffc77c37400335ba5a8c5f504e206c901131edc8735a9f1dea2bb30740fb,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:hammars hill windfarm||wind|,0.98,0.01,0.01,822
+1210aa65cee91070acd7d78f94d9b61f118d64c701a618084674096b502a4e36,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:tarbuckle hill wind farm|CAIN|wind|,0.93,0.02,0.05,840
+7353a0942472c4879751ae1d2821318aca413c03c7d467f8c7a81f3d46a03fc9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:wangie hill wind farm|ELGI_P|wind|,0.88,0.02,0.1,821
+9d027662263c46af8b63277c044bd2d9b56053a0c05510a5121ed57f461bc2a2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iUzQAI|,ssen:n:wind 72 6mw|CAAD_P|wind|,0.87,0.06,0.07,822
+04114228743f6ffbcf62240d645e3d08dc6ebb41768cecd307dfc33888e1bf5a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV0QAI|,ssen:n:clashindarroch 2 wind farm modapp|CAIN|wind|,0.1,0.88,0.02,834
+3a0ee472f73e2cc67a5639ea9bcf449481b985fbe226df7d9c20b3cd282ec92f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV0QAI|,ssen:n:clashindarroch wind farm 2 addcap|CAIN|wind|,0.04,0.93,0.03,852
+3d4494f0c2fb6a56ef788e6b1ec6350121ab11c27eff0c4447e6c465075a6fa7,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV0QAI|,ssen:n:clashindarroch wind farm export cva||wind|,0.02,0.01,0.97,815
+b198198c709b8bfc9da4f9ddec0e07bf33e171261cc25c3694b1c51349647870,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV1QAI|,ssen:n:cairnborrow ii windfarm|CAIN|wind stored energy all stored energy irrespectve of the original energy source|,0.69,0.25,0.06,897
+531c7cbd76cf3a7365deff8e62a6e0e51580fb3af7822363ae71caeb4f48f856,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV1QAI|,ssen:n:cairnborrow wind energy hub|CAIN|wind|,0.78,0.16,0.06,875
+300f1b3889fdc499bfa9e264f7efdaf9d84a189436b5778046af86e9c2067b8e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV1QAI|,ssen:n:clashindarroch 2 wind farm modapp|CAIN|wind|,0.02,0.08,0.9,864
+17709712c258bb52bbb78a12cbf0bc28023a43be71f1ee91c5d4f040c06150bf,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV1QAI|,ssen:n:clashindarroch wind farm 2 addcap|CAIN|wind|,0.03,0.54,0.43,882
+e510eb7ce330fd118b378ba807a76881b79490486dffa4ead42ce642963bf3b5,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV1QAI|,ssen:n:clashindarroch wind farm export cva||wind|,0.04,0.84,0.12,845
+fea9b3a16ec26e4077ec4f6edae12601017c71e89fe54dadeb62601767ca9cc9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV6QAI|,ssen:n:cashlie export cva|KEIT_P||,0.04,0.02,0.94,797
+94727fa13a05374441cfe625085b8b0d7d5f60574c37530788fdde808e34bbf0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV7QAI|,ssen:n:ceannacroc hydro|CEAN_P|water flowing water or head of water|,0.24,0.31,0.45,826
+2683eeac0a2186d0232e56bc2a4f6783acbfa67d4c5fcf532e18c70b71a91e3e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV7QAI|,ssen:n:|CEAN_P|water|,0.04,0.03,0.93,810
+100daee85c29426a436e5d49689b0010364d36fcb70cdbac039f9ada2e244db0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV8QAI|,ssen:n:fasnakyle power station|FASN_P|water|,0.1,0.49,0.41,809
+4b4d8864600708404dd609cbc4ee2b26663a74c0a2a282960ef6676d427a63b8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV9QAI|,ssen:n:45mw wind|BRAC_P|wind|,0.52,0.1,0.38,823
+d019c735325229c2e696c0d6d03d274f911d171584e2ead8bb64cc1b7a3b9888,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV9QAI|,ssen:n:braes of doune|BRAC|wind|,0.01,0.01,0.98,809
+dad58cf8279a0c16e2e52419d2ef57d8b36dc13abe98610b668d5758a7b7a342,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV9QAI|,ssen:n:cromlet hill wind farm|BRAC_P|wind|,0.51,0.1,0.39,833
+60108edafc9551ae34a614f865f82ba585a346e56633d68e755bffec6f773d11,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV9QAI|,ssen:n:t greenscares wind recost|BRAC_P|wind|,0.87,0.07,0.06,831
+922e627d17cdb335dae479a364831d072915526e32738543fe61b4015c3a2029,jev-1.14.0,2026-11-25,tec:a0l4L0000005iV9QAI|,ssen:n:||wind|,0.6,0.13,0.27,809
+17a2b76edb78d2da7b679b4e9714266971bbc2bfedc83db2056046a2cadb29bf,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVBQAY|,ssen:n:9 999mw wind pv battery add cap|FIDD_P|wind|,0.89,0.05,0.06,843
+0c1284d59e5cf20b2b7f2acb4b0b5fb3edee66ddc25004a1c38f497136f359ed,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVBQAY|,ssen:n:broadwood|FIDD_P|wind|,0.9,0.03,0.07,821
+fdc984bf62ca652d76fc7b51ddca6a7543b4709bdc97304fae5208746f1c15e0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVBQAY|,ssen:n:brotherton wind generating station|FIDD_P|wind|,0.88,0.04,0.08,827
+aa3ff2f68195bb25f616ee43740e8b1d208d0f6ea52054bb9e46f1fa2dd82026,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVBQAY|,ssen:n:brownieleys wind|FIDD_P|wind|,0.01,0.01,0.98,802
+15996a70951d8cb1df755299fa4668e56a20457e261cdba48888e43885f24a81,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVBQAY|,ssen:n:windfarm|FIDD_P|wind|,0.82,0.05,0.13,816
+11a21656524d4ab6ef41fe96652b021c8876373e0149d0a48d2ee69b9b95410f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVCQAY|,ssen:n:25 2mw wind battery|MYBS_P|wind stored energy all stored energy irrespectve of the original energy source|,0.47,0.37,0.16,846
+c95fbe50426c8253baa93b1a84734dc5d53766a5169d58f745bf38b763cd17d8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVCQAY|,ssen:n:26 4mw export and 12mw import wind bess|MYBS_P|wind stored energy all stored energy irrespectve of the original energy source|,0.7,0.22,0.08,870
+2d1bad0c4ca35a5957487d5a0af54194b227c8ccb1f96bb3285091b8832de3c0,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVCQAY|,ssen:n:burn of whilk wind generating station|MYBS_P|wind|,0.01,0.01,0.98,816
+8d8586037b5051f2cf4bd88a764f0dacc1a2ba0dd78be661fb00fbb3fd78ad18,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVCQAY|,ssen:n:causeymire windfarm|MYBS_P|wind|,0.17,0.04,0.79,808
+df365a73a15ec006d073cddbf4593d4f316930eb1cb8005ac814e834e7940286,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVCQAY|,ssen:n:|MYBS_P|wind|,0.43,0.05,0.52,809
+629043fb33428658910d952b2fbb7196c8c28cd524ef6b880d754a1a4686f6fd,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVCQAY|,ssen:n:|MYBS_P|wind|#2,0.2,0.35,0.45,810
+e4414d8f4c1d643dfb08b388e952b47f3d67cb89151c86477ce010b4e997a065,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVFQAY|,ssen:n:coire na cloiche|ALNE_P|wind|,0.01,0.0,0.99,803
+24074d843147e723b66bbdfbaf9b3faca540b3ce05f34dd688983a98469e9778,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVFQAY|,ssen:n:cre energy|ALNE_P|wind|,0.15,0.03,0.82,799
+4689f000fb98d65cccf18104175e6f03d3ded637b0775fa9661283ffd12d6f1f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVFQAY|,ssen:n:generating station|ALNE_P|hydro to be confirmed|,0.98,0.01,0.01,820
+61814b9b8e2895c08feedf64ff360460471a43adef9d6170e9ec54bc384aa22c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVFQAY|,ssen:n:novar 2 wind farm|ALNE_P|wind|,0.41,0.24,0.35,806
+d75fe0bd69b9078198c6ab02b328168be6a25e2db390000a757f3bdff26b2084,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVFQAY|,ssen:n:strathrusdale|ALNE_P|wind|,0.08,0.03,0.89,819
+6b05e03c891ed11ef96fff8d865421c44ac916a2636e1af3fb8e9fe3182695f4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVHQAY|,ssen:n:esso substation north export cva|||,0.65,0.05,0.3,807
+a2025d1955f4e0b0f1afdb3e666cf957b98f08e0766cf5e7e92b2eae0d3e8c6e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVHQAY|,ssen:n:fawley north cogeneration connection|||,0.45,0.06,0.49,809
+6ad9dd8be0acab43e7d5ff11d3576c563b4c10978f7d031916da99b232ec8a08,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVHQAY|,ssen:n:quote to reduce import to 100mw exd149|FAWL_1|other|,0.94,0.02,0.04,848
+cd522d24ef73671f65e551d9c8eb82e64272c91f4d97f4f354628be0ec430079,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVHQAY|,ssen:n:rwe cowes export cva|||,0.09,0.03,0.88,806
+75bbc6016bbe3985ca157a434d21621823906d09bb19a8681592dec3d125fdf7,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVNQAY|,ssen:n:rwe didcot cva export|||,0.3,0.07,0.63,807
+a84cd708c58583a416f4fa3f4acd4dad7e65507c690412881c560f63ade335d4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVWQAY|,npg:NPg23-001444|,0.56,0.06,0.38,791
+0f9854ebed0d03ba90513ad80bf16c8c3989e6c053ca063baa4ad3d922d6cbec,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVXQAY|,npg:NPg23-000954|,0.02,0.18,0.8,808
+ca2346125c4541534b21ed7e99e7a26cadfdf84d1e271c011936924a70e97383,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVXQAY|,npg:NPg23-000960|,0.03,0.77,0.2,808
+8e4f64ee5acfd8224c3275e35b016aed3e7cd2fb15c657e2641249df63db10f1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVXQAY|,npg:NPg23-000965|,0.55,0.08,0.37,818
+8aa0ce33eaeeae9119eed87f90ff7689a2d3d74508962ff16977625888b1590b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVXQAY|,npg:NPg23-003160|,0.78,0.06,0.16,820
+896edafc2e69ff06b73debc71ebb28d3c60fe1ce70f5f2ddcff8bc925960839f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVaQAI|,ssen:n:|QUOI|water|,0.06,0.04,0.9,806
+b578ebc53966ee62c676149860ed2a39c237cdc56137268567a90a94e07b81e8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVbQAI|,ssen:n:sloy power station|SLOY_P|water|,0.11,0.21,0.68,802
+a602786453a075ef37b4d8422f3a019b3d59befe6a82e908fec44c55a2aad361,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVbQAI|,ssen:n:|SLOY_P||,0.7,0.13,0.17,802
+5400761bec8ddf3c7a0afa4f13a72f2601ec37de045a1d7cbc32690bff450f9d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVbQAI|,ssen:n:|SLOY_P||#2,0.74,0.13,0.13,800
+3e5e6ca226f88d0b00d72bcbf632827c36e44e367a62b65148df4c391b11c3bb,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVgQAI|,npg:NPg23-001822|,0.81,0.05,0.14,822
+a932f11c522e6f737066ea984f32615ead28c67fdb576485ca3d295303aa3ecf,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVgQAI|,npg:NPg23-002415|,0.74,0.05,0.21,805
+d13b0182f844f2880a786f8f4d855421a84adc745e139af1be8b6a7c45529bd9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVgQAI|,npg:n:kendale road generation|KEAD_1|fossil gas|,0.84,0.06,0.1,819
+b0cb1e0d35cd63336910c0e76293551734174b341748989172e45ff2066f9e00,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVhQAI|,npg:NPg23-001822|,0.76,0.09,0.15,816
+dc9bf172ba502041137bc5fb54a74f5b5301842b677f77bf3571846ec56a57d1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVhQAI|,npg:NPg23-002415|,0.78,0.07,0.15,799
+066a74cbe071bd97ec52e5a440c77112f63ee2f538d095d4ca6a81b1f83e1e88,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVhQAI|,npg:n:kendale road generation|KEAD_1|fossil gas|,0.76,0.11,0.13,813
+35f684e6fb770dc8d49f747f9372a528531d0387b8b0a9fa4d16b58bc8ff2f65,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVmQAI|,ssen:n:9 9mw export|INNE_P|other|,0.37,0.29,0.34,817
+e51deb85ad61c0085fdfa83a1a7c320bc1e99ade1f4d7240d8f975d68d308c93,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVmQAI|,ssen:n:moy wind farm cva msid 8727 export|INNE_P|wind|,0.02,0.01,0.97,809
+82c78ba99bfa82d10f2f3a91fee0124ac1592e8b2a2befade56ff7233d48c868,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVnQAI|,ssen:n:hill of towie wind farm export cva|KEIT_P|wind|,0.06,0.04,0.9,823
+7631be8d4ba3ba4fae9f5f084d49a9834dc92a7513881627535e19773f54a347,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVrQAI|,npg:NPg23-001018|,0.97,0.01,0.02,813
+63bb5e77555f43c18603adc1d73ae3ab55b2f2c51615d718ac9363afa4406ee4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVrQAI|,npg:n:gelderd lane gas|KIRKB1|fossil gas|,0.96,0.01,0.03,803
+776e2051757350b611753d0c6bbfaccbc6cc83f98a55cefcccc54b3c686a663c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVrQAI|,npg:n:kirkhaw lane gas|FERRB1|fossil gas|,0.99,0.0,0.01,806
+88120b0e10486bcf58cf963daba8fd4169508b03b466802fece83e444236c154,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVrQAI|,ssen:n:20mw|FAWL_1|water flowing water or head of water|,0.99,0.0,0.01,860
+ee9334ba232a987996ff449411d4af22b236d143b5e2ecf071b0c901fb7ffc82,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVrQAI|,ssen:n:allington lane||fossil oil|,0.98,0.01,0.01,821
+15a23fbe80bfe5f395fdfa260ea160619b27702e778ac0d69c0e5db881fa85ea,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVtQAI|,ssen:n:10 5mva mil 14mw diesel ltp chp|COWL_1|engine combustion reciprocating|,0.46,0.09,0.45,829
+7eff42538ddefe6c082de00f60ac9294561155e3542a42592836bae78400c0bb,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVtQAI|,ssen:n:10 5mva mil 14mw diesel ltp chp|COWL_1|fossil oil|,0.82,0.04,0.14,833
+fb8bdbdea8e9bef0f866f0864df3d98177c64855cc5e6c591cb0a016e22cbac4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVtQAI|,ssen:n:49 9mw|COWL_1|other|,0.85,0.05,0.1,828
+479fcbbaad7f9705ef7c939af083e6536478014a0080bd0e29d83b29c7666c07,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVtQAI|,ssen:n:oxfo 20 5mw pv landfill gas add cap|COWL_1|solar biofuel landfill gas|,0.97,0.02,0.01,851
+5d61f5ca73035383130153c59125f1285dd77d53bfbc0753713eedae1ab1aa2b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVtQAI|,ssen:n:sutton courtenay landfill site|COWL_1|biofuel landfill gas|,0.99,0.0,0.01,833
+e18782ad33544b638edcb7fda97b6e888ffda48b2e990a3b244e7efc2a46716d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVtQAI|,ssen:n:wallingford gas fired generation|COWL_1|other|,0.37,0.04,0.59,814
+1d143de34e0842ff82d98ecf385bc5ea0816b65616fb40b722439b9ccad505cf,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVtQAI|,ssen:n:|COWL_1|other|,0.93,0.02,0.05,809
+d974cfd8b650270ff3b076f856dfd13a9db6807661807f90c4d303a1c0f6e595,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVtQAI|,ssen:n:|COWL_1|other|#2,0.95,0.02,0.03,829
+e183b9cdfb71ab74c2db3189d604189075041af78da43e6f3fa055ad82ebfc92,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVtQAI|,ssen:n:|COWL_1|other|#4,0.85,0.03,0.12,799
+d59ea9e1f15f6be590af27a983cf7370f461a182059896f74f5acd94b04d479c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVvQAI|,ssen:n:tullo 2 wind farm export cva|FIDD_P|wind|,0.05,0.39,0.56,805
+6814baec2f6ac83e372ca25357180fd119e5b579b0ab185ca2c1e5213e940f5b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVvQAI|,ssen:n:tullo wind farm|FIDD_P|wind|,0.03,0.01,0.96,800
+b87a27aa4d397de5ba525d2b3b5d239c04c8eda437360aad4ac2f7b73dc5e795,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVwQAI|,ssen:n:67 2mw wind 36 3mw battery|BERB|wind stored energy all stored energy irrespectve of the original energy source|,0.89,0.1,0.01,857
+44cf44d5238a61b191fabfa3f86a6229e14e5c73c5edef783a6d5098f618896b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVwQAI|,ssen:n:hill of gaschyle wind|BERB|wind|,0.05,0.02,0.93,812
+c837562ef8d18dc05224fc0889ff1b293d298b8a7348c6513c9a512c0c861e5c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVwQAI|,ssen:n:peer|BERB|other|,0.9,0.1,0.0,844
+895032e79031b5b5c173f3a1c73079207f5945f14fc6d0480567f8ded676ddd9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVzQAI|,ssen:n:1 065mw export 2mw import|KEIT_P|other|,0.96,0.02,0.02,828
+32698091cc03e27df3969811bcddd62fa5f1852643543a6a3290b11ce65d0553,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVzQAI|,ssen:n:auchinderran wind farm|KEIT_P|wind|#2,0.76,0.1,0.14,830
+395f6b5dbd568286d8a6de1b2459685650661ba6d19f302f1ccbce250b28c8e8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVzQAI|,ssen:n:glens of foudland wind sro|KEIT_P|wind|,0.01,0.0,0.99,813
+cfce8517dde5b06feea6873e51aade31f653365d0702332d9de0dda65e7a6baf,jev-1.14.0,2026-11-25,tec:a0l4L0000005iVzQAI|,ssen:n:|KEIT_P||,0.79,0.12,0.09,811
+31525298cb8d69bfde19549839bf3addeaf1d37ee811981ed3695f76f3150662,jev-1.14.0,2026-11-25,tec:a0l4L0000005iW4QAI|,ssen:n:50mw offshore wind|REDM_P|wind|,0.05,0.02,0.93,813
+481b10d698c78e58dc379480e7a45e9392396a39006d40b23e284e4bea8c8534,jev-1.14.0,2026-11-25,tec:a0l4L0000005iW4QAI|,ssen:n:kincardine offshore windfarm|REDM_P|wind|,0.04,0.01,0.95,825
+c41c608757685a6a8a46d93640671fb19ef39a3310a5aff8ccd9c16c8bd58d0e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iW4QAI|,ssen:n:meikle carewe windfarm|REDM_P|wind|,0.95,0.02,0.03,823
+6d8634875ffcfd56d530e8a46c68b39b686eabbc2d0998e923a28e173f9c8fe4,jev-1.14.0,2026-11-25,tec:a0l4L0000005iW4QAI|,ssen:n:rigifa 20 power plant diesel|REDM_P|other|,0.79,0.07,0.14,817
+cb4ca4cd0a3564c83352ac8171c1dcab42808313457de2a5c64576c95fef8f10,jev-1.14.0,2026-11-25,tec:a0l4L0000005iW4QAI|,ssen:n:with quality spa kincorth bess|REDM_P|other|,0.67,0.31,0.02,830
+29de77def08a6d48996d9e1b02c3cda8c71332fe9e5c108fd3be63613e3c0306,jev-1.14.0,2026-11-25,tec:a0l4L0000005iW4QAI|,ssen:n:|REDM_P|wind|,0.92,0.05,0.03,812
+a722c7d618ae60f0d49d8409b850d99a53cb7d0c0eb7adea6355831fb90d3e8b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWLQAY|,ssen:n:dg tayside|COUA_P|other|,0.25,0.06,0.69,815
+9b53510025c346033b620ea18fc38b3342614c6240923403126c72e763518fcd,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWLQAY|,ssen:n:drumderg wind farm||wind|#2,0.56,0.04,0.4,829
+192f03d3ca00b98b7e97f0e82b6499f5545903c3b7307d70c9bd197cfc3e3fdb,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWLQAY|,ssen:n:tullymurdoch wind export cva|COUA_P|wind|,0.01,0.01,0.98,818
+6983509b4056a89191a5bcfe5ef47c7d8e10b5cecca66d0eb292e372fd94c60d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWLQAY|,ssen:n:tullymurdoch wind|COUA_P|wind|,0.01,0.0,0.99,817
+9140f21a56ece3f6f7cd4b7766055f0f362b7b7e696cb01821f8517983698048,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWVQAY|,ssen:n:ardkinglas|ARDK_P|wind|,0.02,0.01,0.97,808
+d148ab6ae90d88d15af4f944fcd3849fce248b6c74a1edc1f66b934a4943bf55,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWeQAI|,ssen:n:brook farm pv||solar stored energy all stored energy irrespectve of the original energy source|,0.26,0.61,0.13,844
+c0184fe8dd2655151487a81d74e6728dd44defcccf5aea11c693b21a3b97c1b6,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWjQAI|,ssen:n:49 9mw battery|ROTH|stored energy all stored energy irrespectve of the original energy source|#2,0.21,0.08,0.71,900
+ea48da32302d07d613423b4682ad9e021fa63594eb4990ee60aa3a8bcf98ea3f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWjQAI|,ssen:n:50mw battery|ROTH|stored energy all stored energy irrespectve of the original energy source|,0.23,0.09,0.68,903
+91995d6cfed48124344217018318b3a417ee980e2df6b7cedf53637752c65079,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWjQAI|,ssen:n:63mw bess site|ROTH|stored energy all stored energy irrespectve of the original energy source|,0.1,0.13,0.77,871
+31707baceb60e675af255c3403907a7da5465f827a4b6e822563ddc8df50dfbd,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWjQAI|,ssen:n:overhill bess|ROTH|stored energy all stored energy irrespectve of the original energy source|,0.26,0.06,0.68,907
+82a7f10fc3eba3b7f9018aeb33271f74291c52acb3af719615be42f181fae85c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWjQAI|,ssen:n:overhill second bess|ROTH|stored energy all stored energy irrespectve of the original energy source|,0.16,0.27,0.57,884
+4aa28374b942a46f435a22b5d1d0aa34cd86f3af08c58b15a519778e91040db8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWjQAI|,ssen:n:rothie 3 bess|ROTH|stored energy all stored energy irrespectve of the original energy source|,0.1,0.81,0.09,890
+80aab9fe5a3419f82047ca6d913e89e448363850df14de64f32a06870d0f190d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWjQAI|,ssen:n:wardhill farm bess|ROTH|stored energy all stored energy irrespectve of the original energy source|,0.41,0.07,0.52,906
+c52558ceadc905a7b2b53eb7fbdc8f732a1ffed5bdc1aa80b4f28c1ced7c84ae,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWrQAI|,ssen:n:25 2mw wind battery|MYBS_P|wind stored energy all stored energy irrespectve of the original energy source|,0.63,0.3,0.07,883
+41ecdc02c4cc33acae51b17228bdda945601921753e1f6ddbbd224d3d974361d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWrQAI|,ssen:n:26 4mw export and 12mw import wind bess|MYBS_P|wind stored energy all stored energy irrespectve of the original energy source|,0.79,0.17,0.04,907
+ed77fab344dc490b3fcaf3741d23e605c7cab843e9fa6f4df2b8660f1e4940eb,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWrQAI|,ssen:n:camster 2 wind farm|MYBS_P|wind|,0.88,0.07,0.05,866
+6ebc84e46c289056ef4e4cf56f6796724805e17f6ae3cf0032c1e0e04ae4a1c9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWrQAI|,ssen:n:camster windfarm|MYBS_P|wind|,0.88,0.08,0.04,862
+e14a09ccfc6d62cb31d3775155ce7a3ec9847b59408b21e8f75769c57f72c1b9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWrQAI|,ssen:n:causeymire 2 wind|MYBS_P|wind|,0.8,0.14,0.06,877
+2a0c43544f6743fc4d5fe56f413aab2f4a809f7b427a90144453d506fe84e443,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWrQAI|,ssen:n:cogle moss wind|MYBS_P|wind|,0.16,0.17,0.67,876
+841613d9bd19f7af654160858a5d6d262478c0e4e0148959568b14be65b4e0e8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWrQAI|,ssen:n:mybster bess|MYBS_P|other|,0.75,0.23,0.02,872
+1133eb74f162bab75e4f3e35c854f9d8a66ed0752f1b23c76bfbc8f44ff07227,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWrQAI|,ssen:n:n coe invoice camster 2 wind farm|MYBS_P|wind|,0.77,0.16,0.07,886
+fcd1d48fea001030ec1cf59eccd498996b0e3d6794108e783a96d859b0483089,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWrQAI|,ssen:n:|MYBS_P|wind|,0.79,0.16,0.05,846
+d785dced1d36e61e1a640fbf084d162f58ed133584fe4b0972189ca402facba8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWrQAI|,ssen:n:|MYBS_P|wind|#2,0.86,0.1,0.04,847
+7091ef39f469b6490964f7ddeb8fb601383ebc76059a1c1d3c02fd1c46c8fc69,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWtQAI|,ssen:n:49 9mw battery|ALNE_P|stored energy all stored energy irrespectve of the original energy source|,0.57,0.21,0.22,886
+9958d2d51a278adafaa3e44f1b657921a5db0c4bd7c391ff19aaf135d128915e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWtQAI|,ssen:n:50mw battery storage|ALNE_P|stored energy all stored energy irrespectve of the original energy source|,0.07,0.04,0.89,882
+2b9b9b8c16b69e9d574de8dcd5901f6ae9e13d4caa719b60070878214d7a9409,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWtQAI|,ssen:n:contullich bess|ALNE_P|stored energy all stored energy irrespectve of the original energy source|,0.29,0.3,0.41,867
+fd66facc5d5f394036c48180319e16b0342c9b4640679a0bff7590419376c97e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWtQAI|,ssen:n:generating station|ALNE_P|hydro to be confirmed|,0.95,0.04,0.01,847
+512e947658d10fe9f1bfec35ba390611697d378287600e31b6aed3e67103c478,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWwQAI|,ssen:n:49 9mw battery storage|LUNA_P|stored energy all stored energy irrespectve of the original energy source|,0.39,0.11,0.5,875
+2d57aa57b89110fed79ba1516e4c95645b69f82a575f4c0644f61e3f2c40df23,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWwQAI|,ssen:n:49 9mw energy storage|MILC_P|stored energy all stored energy irrespectve of the original energy source|,0.26,0.09,0.65,866
+ba0cd800bb1d8d3dbc4dda5651f6da22c9c2a2110024f301453cebb004e7b63f,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWwQAI|,ssen:n:49 9mw enery storage|MILC_P|stored energy all stored energy irrespectve of the original energy source|,0.17,0.07,0.76,881
+08f4b4262397d0072bdbab6375dc3d53665e067dffe210d186e6d3b7cce73046,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWwQAI|,ssen:n:50mw bess|MILC_P|stored energy all stored energy irrespectve of the original energy source|,0.17,0.04,0.79,844
+ef05387abbe29d4586169d3dca6c3c99c6992aeb319acc86a7801e2a83625bdf,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWwQAI|,ssen:n:old gallows road battery energy storage|BUMU_P|stored energy all stored energy irrespectve of the original energy source|#2,0.8,0.07,0.13,878
+39a18989dbbbaa06bf8c9ecf7d66ea6c06472e515d4f35a35bb7439ae1cfe71b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWwQAI|,ssen:n:ravensby hall bess|MILC_P|stored energy all stored energy irrespectve of the original energy source|,0.44,0.07,0.49,846
+7d5b5543d0da27e3b6e28a1f5299c97309ad5e3424f80f2e441392d3bcc335b1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWwQAI|,ssen:n:|MILC_P|other|,0.91,0.04,0.05,827
+9f83536c59a50189720630841ff53dc92f642a3e3490893f0c546ad7503ce8e1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iWyQAI|,ssen:n:44mw wind|DUNO_P|wind|,0.07,0.05,0.88,849
+6b36a741298d3696b42b7a1d3a98d657fb1d120a12aae6507c28e92e7f14e193,jev-1.14.0,2026-11-25,tec:a0l4L0000005iX9QAI|,ssen:n:peak gen fareham|BOTW_1|other|,0.64,0.12,0.24,816
+6826eb51654433139b26a2d6107fe0a767f1f63b552fd45e7000bd77cc1f23be,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXLQAY|,ssen:n:35mw pv chp add cap|FAWL_1||,0.98,0.01,0.01,865
+7ef84e878f0e1029eca174f0e9de484d5b4499fc1ea3d632da9e5d44a6704383,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXLQAY|,ssen:n:rwe cowes export cva|||,0.71,0.05,0.24,813
+e07f8d0a8ed23642ee90d5931dbd6c48fa8d3c55b110e41c2706c84cd0d2d46d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXOQAY|,ssen:n:20mw pv|ECLA_1|solar|,0.59,0.19,0.22,838
+eb1bcb478bcdf30eae3c6cdf8c93fe5871e310e41e1b61c224929673fbde59df,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXOQAY|,ssen:n:49 9mw bess pv|ECLA_1|solar stored energy all stored energy irrespectve of the original energy source|,0.81,0.14,0.05,878
+898f7550fd3a9925262a16ffb51e9a74aa5eaad8a6fc83069f5a0816fe46a411,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXOQAY|,ssen:n:49 9mw export 50mw pv u k battery|ECLA_1|solar stored energy all stored energy irrespectve of the original energy source|,0.9,0.06,0.04,895
+7396521e48aad4cc66c4c1fd65c604c7e4c7ad2b237992225e934a7f5c7d97f2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXOQAY|,ssen:n:faa419 replacement|ECLA_1|solar|,0.41,0.14,0.45,859
+4ccd4079deb24774b7d7b1d71239beae16108ff4e5fea9653cc759298838dea2,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXOQAY|,ssen:n:ry solar pv and battery 49 9mw export 25mw import|ECLA_1|solar stored energy all stored energy irrespectve of the original energy source|,0.89,0.08,0.03,898
+3acd6d414e180a1d7d7a68315d2190b458a7f5a0e43b37e3ab4721f5e9d4ce2e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXOQAY|,ssen:n:supernova solar farm|COWL_1|solar|,0.91,0.04,0.05,858
+4c595278b67904acfd221b2143fc87459d04277b2bfb3663e4f8ed2514982178,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXPQAY|,ssen:n:49 5mw wind|CASS_P|wind|,0.0,0.0,1.0,845
+9cd09810a960c881c7acc72dbf9dae08264de5b059c1710ad8730c6771ca399e,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXPQAY|,ssen:n:cassley power station|CASS_P|water flowing water or head of water|,0.98,0.01,0.01,839
+6910e7775523d5b1c7132b8672ebf14a4f6e723ca828865fb55c1ea8b3137429,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXPQAY|,ssen:n:cassley power station|CASS_P|water flowing water or head of water|#2,0.98,0.01,0.01,839
+6c3e1a401e63e1373ad3125cf089fee05136d5703ee383a2ae9a0786de5c7fd3,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXPQAY|,ssen:n:kinlochbervie wind farm|CASS_P|wind|,0.35,0.08,0.57,847
+5c050bc70ae440d1e35b6b323e0c4b21488667f90079537ef28890856c51dc07,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXRQAY|,ssen:n:hywind scotland limited|PEHG_P|wind|,0.11,0.13,0.76,815
+ebb099df53fc2c2010aba043d4bf3048a33ebc523ecc61d94485e3d56f5fb406,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXVQAY|,ssen:n:1 065mw export 2mw import|KEIT_P|other|,0.92,0.05,0.03,859
+8f4a6a58e2aa966e6b9d8476bb1875f520d63780af7062543d8a864136795b4b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXVQAY|,ssen:n:46 2mw wind|KEIT_P|wind|,0.05,0.09,0.86,873
+ad551957daeb9313671e3ed92f1772c04463be34bc07f8ff9c124987cdec0bef,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXVQAY|,ssen:n:hill of towie wind farm export cva|KEIT_P|wind|,0.51,0.13,0.36,847
+6bb7355086085f6f3c0dd7f9df0c356c3b0a5e80c4781da3704b467be259e896,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXVQAY|,ssen:n:quality|KEIT_P|other|,0.76,0.07,0.17,848
+d8cbaf8c46bcf530ec46d965b74c81e211113161cf53981b836d88e7d8792209,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXVQAY|,ssen:n:|KEIT_P||,0.86,0.12,0.02,842
+66cf5524da6c48d02e3c848576bd2a509c2be61bf15281b7ca29aa25f0c1975b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXdQAI|,npg:NPg23-003044|,0.94,0.04,0.02,833
+7a6b05a2141701f80cf7a0f1a07974da0f4992cbe73cfe0bbbdfb14483bda1f1,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXhQAI|1,ssen:n:bilbo farm solar|STRI_P|solar|,0.03,0.07,0.9,868
+9466ebebd811f59dead00d5ab02e6676e0d7f5aaf9b07dd29195d09d9dbbd517,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXhQAI|1,ssen:n:frodo bilbo farm solar bess|STRI_P|solar stored energy all stored energy irrespectve of the original energy source|,0.15,0.29,0.56,912
+11c02ab8724d0fffb70897a940ad52daac96705e4da77665026bb892f8b1039c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXhQAI|1,ssen:n:strichen north energy plant|STRI_P|other|,0.26,0.11,0.63,875
+1f324995203b29889d5e5120a825daa90e5ede2f4482d2096150c83b0f6645dc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXmQAI|,npg:NPg15-000177|,0.91,0.05,0.04,835
+4d53e90634e96ae4092348b186798fd5337b1232f6f5d3630d4312759a7e1d3d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXmQAI|,npg:NPg15-000510|,0.85,0.08,0.07,834
+c38c9484769528dc2b5b6d04b1566abdbc6f5dec0614e379ec5ef48f17e649b9,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXmQAI|,npg:NPg15-000531|,0.21,0.03,0.76,837
+e6cdf44ef96eda20e7b855c0f7709022bd3e320c374adab4bacad79cd688baba,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXmQAI|,npg:NPg15-000627|,0.64,0.14,0.22,824
+146a4bee1f7a99110acc03a63a9583eabb767e7b699fabec4f76afa576857926,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXmQAI|,npg:NPg15-000860|,0.87,0.07,0.06,838
+68398a318075a6d459aca3ab3b60c217c4f84c9b65d7174d5a8b444a56f9660c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXmQAI|,npg:NPg15-003279|,0.89,0.06,0.05,838
+feb68bf24959d23d69aaf450b8d2c69f9a46d12d66ce67f58a8396f03db69fd8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXmQAI|,npg:n:california hybrid solar bess|NORT_1|stored energy all stored energy irrespectve of the original energy source|,0.17,0.37,0.46,854
+8f018ee67a293ab6abbe224234137340a962f39a284232eee777c1c10561e313,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXmQAI|,npg:n:hurworth moor pv|NORT_1|solar|,0.45,0.3,0.25,825
+4946877166f801fdca17141f4464ca31a1805db13da5b00ff87cf5a9f1fe4e7b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXmQAI|,npg:n:morton park pv|NORT_1|solar|,0.55,0.2,0.25,823
+50fcdc4ca2b7da09ef7b6c2e766fb3a49262562340e0e09b59cc24d1d45b9b2c,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXmQAI|,npg:n:norton back lane|NORT_1|solar|,0.17,0.42,0.41,842
+398280a7aa56ce395d21bdf26f372f1dbc15c2123adfcac0451710baa8cac7fa,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXmQAI|,npg:n:solar farm and battery|NORT_1|solar|#3,0.4,0.38,0.22,835
+49f407298ee4659a07a1f7d8d6f3bda6873a749cabca034fdff10b52c1e9be31,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXnQAI|,ssen:n:burghfield substation|||,0.14,0.03,0.83,804
+f40d0942811047ba43a20c55ae2ef70f9d59845105f1b15808b6b8201867d9cc,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXpQAI|,ssen:n:dg lairg|LAIR_P|wind|,0.03,0.02,0.95,868
+d4f105b2cb8c3c8c1b2bdf50970c779b1584bc83a50716c7433b0edf2cd99438,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXpQAI|,ssen:n:strath tirry wind farm|LAIR_P|wind|,0.01,0.01,0.98,878
+474012dbf14b63a8c9a2f347bf6b516d669bdc8e388220113e4ff27b00709281,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXzQAI|,ssen:n:67 2mw wind 36 3mw battery|BERB|wind stored energy all stored energy irrespectve of the original energy source|,0.36,0.61,0.03,891
+a9ab0d9d84728cda2117833c41d9037313c647b637b6249b4f132a94b46c598a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iXzQAI|,ssen:n:peer|BERB|other|,0.06,0.07,0.87,878
+8e86df67f0b7653e21dadeffc98e21cedcb10d098a309059bee4fdeb151b556a,jev-1.14.0,2026-11-25,tec:a0l4L0000005iY3QAI|,npg:n:shaftesbury bess|SSHI_3|stored energy all stored energy irrespectve of the original energy source|,0.3,0.41,0.29,853
+1e5551e25f13c7e34ad6fae8133fc944886e5fbf874ace1eddc7b778a5d44a2d,jev-1.14.0,2026-11-25,tec:a0l4L0000005iYKQAY|,ssen:n:45mw pv battery|DYCE_P|solar stored energy all stored energy irrespectve of the original energy source|,0.06,0.03,0.91,903
+61a570ed1b77441cc2ceb1393bf605d4bde26dee92608b34c403deadf58b9aae,jev-1.14.0,2026-11-25,tec:a0l4L0000005iYKQAY|,ssen:n:49 9mw bess dyce gsp|DYCE_P|stored energy all stored energy irrespectve of the original energy source|,0.52,0.21,0.27,888
+a13014054c2775c0f5c13a00da9505467274e47e371a003d01d2d59f0297ad2b,jev-1.14.0,2026-11-25,tec:a0l4L0000005iYKQAY|,ssen:n:auth|DYCE_P|other|,0.75,0.13,0.12,868
+55a0035e4c6c3be9a419f26ba1fef132a404004d8b54fc7b04c653cfbc616d62,jev-1.14.0,2026-11-25,tec:a0l4L0000005iYKQAY|,ssen:n:middleton of potterton bess|DYCE_P|stored energy all stored energy irrespectve of the original energy source|,0.51,0.29,0.2,891
+40996fd088b70db88782b25b0c904031fbe6810ff1628d7ae6ed08e8528b03e8,jev-1.14.0,2026-11-25,tec:a0l4L0000005iYKQAY|,ssen:n:peer|DYCE_P|other|,0.75,0.15,0.1,887
+b2b7663bedca66832b12a7e5ff307e9e27e42ad0e7e3d692ed5495a867da14ef,jev-1.14.0,2026-11-25,tec:a0l4L0000005iYKQAY|,ssen:n:|DYCE_P|stored energy all stored energy irrespectve of the original energy source|,0.52,0.22,0.26,887
+5303ce04fd2b0f84ce73fadf03d76b2089e9d7455a3375263c6332de004d6ad6,jev-1.14.0,2026-11-25,tec:a0l4L0000005iYKQAY|,ssen:n:|DYCE_P||,0.72,0.16,0.12,843
+e329d4753f5fb77da896c2b29d2e8a3636a622942ec47b7f0f5f454f742dcd35,jev-1.14.0,2026-11-25,tec:a0l4L000002yQXEQA2|,ssen:n:50mw battery|KINT_P|stored energy all stored energy irrespectve of the original energy source|,0.11,0.05,0.84,891
+4439d88ef364d3848a81e62c073ebb88ff7633fc3355c780174a552101e9e1da,jev-1.14.0,2026-11-25,tec:a0l4L000002yQXEQA2|,ssen:n:auth|PERS_P|other|,0.94,0.04,0.02,880
+a33d11b5f8a4dfaab642cc7fbe362aaebe4228df046aa3df61f6e9dbfa39af1f,jev-1.14.0,2026-11-25,tec:a0l4L000002yQXEQA2|,ssen:n:auth|PERS_P|other|#2,0.1,0.05,0.85,879
+c671c890c32f1ef67816c1d740991da71fef72233dbb70e353389459cb70ab77,jev-1.14.0,2026-11-25,tec:a0l4L000002yQXEQA2|,ssen:n:persley wwtw|PERS_P|other|,0.18,0.04,0.78,846
+ce8bbafdbe7612fb3b22615d24460d1eea686bf48fd4a03f9d31f8589ab559ac,jev-1.14.0,2026-11-25,tec:a0l4L000002yQXEQA2|,ssen:n:university of aberdeen|PERS_P||,0.64,0.09,0.27,839
+43e0506e8d1293adaa39c67149dc28658e0eebb4d9043a00ef58aee960d2779c,jev-1.14.0,2026-11-25,tec:a0l4L000002yQaDQAU|,npg:NPg15-000544|,0.23,0.52,0.25,842
+5d0c5fb2db0f085d25b8172af3a2e47d872debf05f8ac462b38b6a6faa83f941,jev-1.14.0,2026-11-25,tec:a0l4L000002yQaDQAU|,npg:NPg15-000667|#2,0.92,0.06,0.02,866
+76053ad1f2de3d94e3474b69007d531bd81d20c952a0d9c694728f01ab1239b5,jev-1.14.0,2026-11-25,tec:a0l4L000002yQaDQAU|,npg:n:dewley hill hybrid bess spv|STEN_1|solar|,0.03,0.03,0.94,878
+6ef40f330f70b75887321d117458e55d51044ca2cf440e212b91ab3e323622df,jev-1.14.0,2026-11-25,tec:a0l4L000002yQaDQAU|,npg:n:hill house hybrid|NORT_1|stored energy all stored energy irrespectve of the original energy source|,0.24,0.1,0.66,853
+1ccb612f0b0fce28ce44c5fb393af506a61309c2dc2ecabeb7869682aacedccf,jev-1.14.0,2026-11-25,tec:a0l4L000002yQaDQAU|,npg:n:kirby hill hybrid|KNAR|stored energy all stored energy irrespectve of the original energy source|,0.75,0.08,0.17,854
+ba8e06ac1e7528299994c1d7323ccbf1d7c196f4b5e9e4193ba1acefe09c7a94,jev-1.14.0,2026-11-25,tec:a0l4L000002yQaDQAU|,npg:n:whelley hill farm pv|hartmoor|solar|,0.95,0.03,0.02,871
+ac3869d869802577fde884d094ea9451fd35215541c020388000d4943cb60231,jev-1.14.0,2026-11-25,tec:a0l4L000002yQaDQAU|,npg:n:whiley hill farm|NORT_1|solar storage electrochemical classic batteries lithium ion li ion|,0.95,0.02,0.03,868
+f2c53fc0eba2219df1ad44fed1c63c5d7ee7e19607cecd4259edf54b63c45f57,jev-1.14.0,2026-11-25,tec:a0l8e000000TPASAA4|,ssen:n:49 97mw bess|LUNA_P|stored energy all stored energy irrespectve of the original energy source|,0.11,0.3,0.59,846
+f8888a6815ebaf4d70ad3939d14f27402b19f0b6fdf0769716cc989208682f4e,jev-1.14.0,2026-11-25,tec:a0l8e000000TPASAA4|,ssen:n:49 9mw battery storage|LUNA_P|stored energy all stored energy irrespectve of the original energy source|,0.01,0.03,0.96,876
+302cbd970f29633d9e3c0a2105be56caf987ffb8b37626f0e4e10d99b4c2e8ae,jev-1.14.0,2026-11-25,tec:a0l8e000000TPASAA4|,ssen:n:57 6mw wind 24mw bess|LUNA_P|wind stored energy all stored energy irrespectve of the original energy source|,0.73,0.25,0.02,865
+164a23657a2749a89bfe9559f9c0d369ae64d847839e6a8f6e27bd4d4bfcb272,jev-1.14.0,2026-11-25,tec:a0l8e000000TPASAA4|,ssen:n:75mw wind pv and bess|LUNA_P|other|,0.13,0.79,0.08,847
+0c8c4e247a0eb56c8c297a752203d92f6fc0ab882a7d43ea60cd43f8af3ab38e,jev-1.14.0,2026-11-25,tec:a0l8e000000TPASAA4|,ssen:n:ccm 60mw export carse gray estate bess wind|LUNA_P|wind stored energy all stored energy irrespectve of the original energy source|,0.34,0.62,0.04,882
+5959345d22ce99bbe1ac765fe0d6615ffc1e902e71880a44cbbd8ef021ee74fa,jev-1.14.0,2026-11-25,tec:a0l8e000000TPASAA4|,ssen:n:land off the b9134 bess|LUNA_P|stored energy all stored energy irrespectve of the original energy source|,0.25,0.63,0.12,884
+57c5553171022cc42a7e31729a6f1083139c2cf72cda7036fc7afd1714ed4289,jev-1.14.0,2026-11-25,tec:a0l8e000000TPASAA4|,ssen:n:land off the b9134 electrical energy|LUNA_P|other|,0.41,0.55,0.04,869
+d5b561666118a1b088fee6a1dea9080cfb6711b611282760f8c5711e8d61f074,jev-1.14.0,2026-11-25,tec:a0l8e000000TPASAA4|,ssen:n:old gallows road battery energy storage|BUMU_P|stored energy all stored energy irrespectve of the original energy source|#2,0.92,0.03,0.05,879
+427720314f59b6e5b27d1004687036ff3b03db4998743ccac6c679ce11287a94,jev-1.14.0,2026-11-25,tec:a0l8e000000TPFcAAO|,ssen:n:20mw pv battery|FIDD_P|solar stored energy all stored energy irrespectve of the original energy source|,0.78,0.19,0.03,880
+3fe676422e8944d7fc5b43444486b142fe5f0bf04a17f4411389df2ddd40f32e,jev-1.14.0,2026-11-25,tec:a0l8e000000TPFcAAO|,ssen:n:50 mw bess|FIDD_P|stored energy all stored energy irrespectve of the original energy source|,0.06,0.03,0.91,879
+0fdfb2b422f4f65e7fe5b39d2b51ed6cebf16b4f37d48b3d8db71bd4a77c0b6c,jev-1.14.0,2026-11-25,tec:a0l8e000000TPFcAAO|,ssen:n:meetlaw bess|FIDD_P|other|,0.58,0.12,0.3,879
+703558644592d4ebb8fbbd526dbde141775b8f06e5c08e88f51cddc96844fcbf,jev-1.14.0,2026-11-25,tec:a0l8e000000TPFcAAO|,ssen:n:upper westown farm bess|FIDD_P|stored energy all stored energy irrespectve of the original energy source|,0.38,0.15,0.47,882
+bad1f71bef371e02e096f10b7b241ec41b2f0a602a40d3f6ce074628d44ea4ca,jev-1.14.0,2026-11-25,tec:a0l8e000000TPFcAAO|,ssen:n:with ccm dgen|FIDD_P|solar stored energy all stored energy irrespectve of the original energy source|,0.37,0.42,0.21,893
+c946d4be66d943a0c1e4b8debe2f8a49b30063cc4c91d5d8d827da5d080b91a4,jev-1.14.0,2026-11-25,tec:a0l8e000000TPFmAAO|,ssen:n:50mw add caveats to doco|BROR_P|other|,0.1,0.07,0.83,854
+9e08022cf0c545a8664911d5bb39e323ad8c114f4cf0fa750e975ba10d149dad,jev-1.14.0,2026-11-25,tec:a0l8e000000TPFmAAO|,ssen:n:aultcraggie west pos|BROR_P|other|,0.06,0.16,0.78,842
+3fa30b10815a88527be4a5b2f7b503cf258b54c1de4ea397f09e64c78143fbce,jev-1.14.0,2026-11-25,tec:a0l8e000000TPFmAAO|,ssen:n:crakaig wind energy hub|BROR_P|other|,0.82,0.17,0.01,859
+e3aad83e78a945ecc5907020d32575a55b327f12a22cc64328b650c912a079f7,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,npg:n:atterwith lane|POPP_3|solar storage electrochemical classic batteries lithium ion li ion|,0.82,0.07,0.11,845
+791a90e003ac4715af6e9970bce240b39c3c9b3e21190215d97a3ecca5d58c3f,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,npg:n:cross lane bess|STEN_1|stored energy all stored energy irrespectve of the original energy source|,0.96,0.02,0.02,853
+2e6c5550be14c8890ff0ac98f3117f833e5b5fef29ced426bae08d8417fd2441,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,npg:n:fryston lane bess|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.95,0.01,0.04,860
+fb96fb7f6eb043b3b7951a5785d7d3e53d67b381390d76cd8b5382ae576f2b05,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,npg:n:harperley lane solar bess|STES_1|stored energy all stored energy irrespectve of the original energy source|,0.96,0.03,0.01,861
+39daa7daff9b9bd3fd2ef63d7339aa256ced0e915b67ffead4d5c22e06278d4e,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,npg:n:land on the north west side of elland road|ELLA_1|stored energy all stored energy irrespective of the original energy source|,0.96,0.01,0.03,858
+59a885685a1d882e47436563062d2e7eb9ac2be02f7e5cb21378f9ba9099290d,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,npg:n:land on the west side of horseclose lane|NORT_1|stored energy all stored energy irrespective of the original energy source|,0.92,0.03,0.05,860
+bf261454cdfedaaf9b73eb4a5f301dd67dfc1c93dd2fb9bc131a90c934a5e396,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,npg:n:low moor lane|KNAR|stored energy all stored energy irrespectve of the original energy source|,0.89,0.03,0.08,843
+73c94c8e3bff8f4c12b49bad5033c35ed7ba7992f623f374a7ebc32f93a00df6,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,npg:n:murton lane bess|OSBA_1|stored energy all stored energy irrespectve of the original energy source|,0.97,0.01,0.02,856
+f6769f16bd8fb7932d29d0cd914c47b732c083c0074a50e63dd3b271535b84e3,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,npg:n:salters lane solar farm|HAWP_6|solar|,0.94,0.05,0.01,861
+be919c90c512aa58e0ffc4ae3a56f3333b0880a6d26b92d7effeae2e9a2e8caa,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,npg:n:southeast of church lane bess|HAWP_6|stored energy all stored energy irrespectve of the original energy source|,0.94,0.02,0.04,866
+dc5678274a9d229332f3c46107a682ff52932ebf8f611c3aa944b2a602f95394,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,npg:n:west house hybrid pv bess|NORT_1|solar|,0.85,0.12,0.03,863
+c04a73f862a200ce37959f15dbb338196909fd2d1e634254d2678a3e7cbda933,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,ssen:n:rye common lane grid connection batt|FLEE|stored energy all stored energy irrespectve of the original energy source|,0.87,0.05,0.08,875
+59ca23082c47d36d1997dd88bc64c87ae8ad902676980c48fa0b13fcee789510,jev-1.14.0,2026-11-25,tec:a0l8e000000ViK5AAK|,ssen:n:rye common lane phase 1 and 2 grid connection batt|FLEE|other|,0.86,0.06,0.08,864
+59dd0e27d9dca5fa549341eff598d06b93bebfe205aa34543dba0015268353f6,jev-1.14.0,2026-11-25,tec:a0l8e000000evgBAAQ|,npg:n:nel springfield|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.04,0.02,0.94,835
+e351aaa8d911fba63f5384d86b1a99aecc923bd346c9cf45e5b52af960930fde,jev-1.14.0,2026-11-25,tec:a0l8e000000evgBAAQ|,npg:n:springfield farm|FERRB1|stored energy all stored energy irrespective of the original energy source|#2,0.07,0.03,0.9,835
+8bae7810d847fa33f03fe906ca3ff54042346eaf86b581c85eb66fbb93ed62fa,jev-1.14.0,2026-11-25,tec:a0l8e000000evgGAAQ|,npg:NPg23-003036|,0.12,0.73,0.15,869
+2640a09b5d8b1999e7e3577ef26b8b5c9d6167a4ffe9365904c35b65cbca08e1,jev-1.14.0,2026-11-25,tec:a0l8e000000evgGAAQ|,npg:n:keadby bess|KEAD_1|stored energy all stored energy irrespectve of the original energy source|,0.29,0.34,0.37,857
+74eb80b307ead421a687b9e468050972d6960a9f44d563239f1fd17cb6e4ba5e,jev-1.14.0,2026-11-25,tec:a0l8e000000evgGAAQ|,npg:n:keadby grid bess|KEAD_1|stored energy all stored energy irrespectve of the original energy source|,0.34,0.3,0.36,859
+ec90f569b3c11cba0da67477ed7d19f01e4686c0cab48d0c4488a61532d2a9c3,jev-1.14.0,2026-11-25,tec:a0l8e000000evlRAAQ|,npg:NPg15-002810|,0.89,0.06,0.05,848
+1a1c258e53490b6530503479e03cd156b3b259cf4a0aa1c8fce6cb158082d0a8,jev-1.14.0,2026-11-25,tec:a0l8e000000evlRAAQ|,npg:NPg15-003480|,0.95,0.02,0.03,837
+2495671b12a6cb95e338352fa2951e84e9230d8b3c126b5037b5935a5a258e5c,jev-1.14.0,2026-11-25,tec:a0l8e000000evlRAAQ|,npg:n:addison road hybrid solar pv bess|SPEN_1|solar|,0.97,0.02,0.01,850
+d8ea1e34bc11501200631d0418eeaed360fe72c484c23d35a8026f596d7941e6,jev-1.14.0,2026-11-25,tec:a0l8e000000evlRAAQ|,npg:n:bingley road bess|BRAW_1|stored energy all stored energy irrespectve of the original energy source|,0.95,0.02,0.03,838
+0b4c108015706e8f7a21721695343536af2e5143de9ad9f283860a23877bc65e,jev-1.14.0,2026-11-25,tec:a0l8e000000evlRAAQ|,npg:n:darnell road bess|west melton thorpe marsh|stored energy all stored energy irrespectve of the original energy source|,0.09,0.03,0.88,845
+6154dbc559fed4be6fb4d35475c00c4255673a718dd4ba12f27c1f36724bde4d,jev-1.14.0,2026-11-25,tec:a0l8e000000evlRAAQ|,npg:n:gelderd road bess|KIRKB1|stored energy all stored energy irrespectve of the original energy source|,0.98,0.01,0.01,837
+b0deb1adc8f7177510973764d626aac811322856339ba5aec926f3b97aae368e,jev-1.14.0,2026-11-25,tec:a0l8e000000evlRAAQ|,npg:n:hull road bess|OSBA_1|stored energy all stored energy irrespectve of the original energy source|,0.95,0.02,0.03,835
+0e9532447835d5586eb08179640ef61d4a461626340bdbbc475fef046509b93b,jev-1.14.0,2026-11-25,tec:a0l8e000000evlRAAQ|,npg:n:land off|west melton thorpe marsh|stored energy all stored energy irrespective of the original energy source|,0.08,0.02,0.9,842
+3122d9d94ce7d753bd8628eb621b0f4f9e1a64058632de8955876bcdeb544e3b,jev-1.14.0,2026-11-25,tec:a0l8e000000evlRAAQ|,npg:n:west of barnsdale road|FERRA2|stored energy all stored energy irrespective of the original energy source|,0.81,0.04,0.15,840
+92e879929f7ab5184f87757de7d25417d00ba036da5b7001aad56683f9053ea6,jev-1.14.0,2026-11-25,tec:a0l8e000000evlRAAQ|,npg:n:whaley road bess|west melton section 3|stored energy all stored energy irrespectve of the original energy source|,0.76,0.11,0.13,839
+9fbaff6013f32cf05215d56031f1ba31b15b2c9955b0c5fb38f938ad9125d7f3,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2EAAQ|,npg:NPg15-003480|,0.92,0.03,0.05,838
+670219ef172c7105df941e45295f46fd684422f649cbb6cfaf582f5d1e92ea74,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2EAAQ|,npg:n:addison road hybrid solar pv bess|SPEN_1|solar|,0.94,0.05,0.01,851
+96c5f99a3601f6912e207446920d9f96b596e5ab57c393559a5cb38265554bc4,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2EAAQ|,npg:n:bingley road bess|BRAW_1|stored energy all stored energy irrespectve of the original energy source|,0.98,0.01,0.01,839
+40a1db47b2f259bbfbfff04f95dfb3796816217a8dec4eadf0ea6cfe5c93b6eb,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2EAAQ|,npg:n:carlisle street bess|pitsmoor 3 4|stored energy all stored energy irrespectve of the original energy source|,0.27,0.14,0.59,844
+86c07a800e88aec4811021be36d2dc22b30ff6733fbabb146a1c7165985b82e6,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2EAAQ|,npg:n:darnell road bess|west melton thorpe marsh|stored energy all stored energy irrespectve of the original energy source|,0.78,0.05,0.17,846
+27dbd9c8c8a7bd0c40dce240656ce1239ec4a3a7b94b76364386cdacf5197303,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2EAAQ|,npg:n:hull road bess|OSBA_1|stored energy all stored energy irrespectve of the original energy source|,0.94,0.03,0.03,836
+c75adab6f0cf49fe40c187f5948705124d1cc16e98a165e8b5ffbcefd7bf5390,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2EAAQ|,npg:n:keats road bess|STEN_1|stored energy all stored energy irrespectve of the original energy source|,0.95,0.03,0.02,837
+cffc2f9ae66a491d296e83c8d9e6e9cd1c267da094c090d1e40bb7f5f129a9b8,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2EAAQ|,npg:n:land off|west melton thorpe marsh|stored energy all stored energy irrespective of the original energy source|,0.86,0.03,0.11,843
+699d0af2f8e161adc444705e22075fe3fdee32f9be3c96d8d035071a3f03df59,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2EAAQ|,npg:n:west of barnsdale road|FERRA2|stored energy all stored energy irrespective of the original energy source|,0.86,0.03,0.11,841
+96c0750c375c3897269ff4b1afacb33cd4f2586f18f72e2001645cb55e156a39,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2EAAQ|,npg:n:whaley road bess|west melton section 3|stored energy all stored energy irrespectve of the original energy source|,0.92,0.04,0.04,840
+87b8a003ff68c3f0952ca20f1c7ec358eacd501dad5bffad75ffef11c0735f8c,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2OAAQ|,npg:n:carlisle street bess|pitsmoor 3 4|stored energy all stored energy irrespectve of the original energy source|,0.81,0.11,0.08,843
+0c6ed97f2d8b162753b40c637a85f81d9bb89f276c79949b03db6edf668b4b53,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2OAAQ|,npg:n:institute street|SPEN_1|stored energy all stored energy irrespectve of the original energy source|,0.88,0.06,0.06,827
+fa6746b3b03631f1824c8e06a62b31cb4ec90680514bfe148dff91ad5dd12913,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2OAAQ|,npg:n:petre street bess|pitsmoor 3 4|stored energy all stored energy irrespectve of the original energy source|,0.02,0.01,0.97,841
+af7a12ded77f7404c62f292285144940737173de068f44d0b86bae2c6bddd00f,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2OAAQ|,npg:n:petre street generation|pitsmoor 3 4|stored energy all stored energy irrespectve of the original energy source|,0.28,0.13,0.59,842
+9fb33870f0ce352a97492fdff0adc0559a85f716d9318ccb97b95fef9c5b44a9,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2OAAQ|,npg:n:terry street hybrid|WIBA_3|stored energy all stored energy irrespectve of the original energy source|,0.9,0.07,0.03,826
+149b04324ec9855989ec14a200aa3c45d730a9b86c36da7ca406e9dbaeac154e,jev-1.14.0,2026-11-25,tec:a0l8e000000ew2OAAQ|,npg:n:washington street bess|WBOL_6|stored energy all stored energy irrespectve of the original energy source|,0.93,0.03,0.04,837
+7fda6c0d44cf867e9a4a70adc984c2dc31441bba3f9c7888142870e2282114be,jev-1.14.0,2026-11-25,tec:a0l8e000000eww4AAA|,ssen:n:20mw battery|MYBS_P|stored energy all stored energy irrespectve of the original energy source|,0.49,0.42,0.09,880
+c6fe42e44eb1331e7196a8c4f70b9e7c93654f522c03862daeeeeecd7336ed4d,jev-1.14.0,2026-11-25,tec:a0l8e000000eww4AAA|,ssen:n:25 2mw wind battery|MYBS_P|wind stored energy all stored energy irrespectve of the original energy source|,0.5,0.47,0.03,869
+a35d07d6377d6b666236695f9a088e7ceb3811dc25cc986d74ddeea755f6fd73,jev-1.14.0,2026-11-25,tec:a0l8e000000eww4AAA|,ssen:n:26 4mw export and 12mw import wind bess|MYBS_P|wind stored energy all stored energy irrespectve of the original energy source|,0.37,0.53,0.1,893
+7630ecdb8f8796f7d5db323cf190417cdcb12c362c51f13638649bd149f1b0f9,jev-1.14.0,2026-11-25,tec:a0l8e000000eww4AAA|,ssen:n:mybster bess farm|MYBS_P|stored energy all stored energy irrespectve of the original energy source|,0.36,0.56,0.08,881
+6bb57759dba4552cb30cf70c278a17ee592fcb5d64ff80b30d557c3f548192d8,jev-1.14.0,2026-11-25,tec:a0l8e000000eww4AAA|,ssen:n:mybster ii bess|MYBS_P|stored energy all stored energy irrespectve of the original energy source|,0.2,0.26,0.54,878
+3c6f82c98dff2af36b3d5a4aed7e3dee68c958a4d423ba58995b0bb46fb627c1,jev-1.14.0,2026-11-25,tec:a0l8e000000eww4AAA|,ssen:n:olgrinmore farm bess|MYBS_P|stored energy all stored energy irrespectve of the original energy source|,0.23,0.26,0.51,852
+6947b56ea18f9178824e7fdd72472ad897de8c82da8c058030b7ccc9207ce0b3,jev-1.14.0,2026-11-25,tec:a0l8e000000eww4AAA|,ssen:n:spittal bess|MYBS_P|stored energy all stored energy irrespectve of the original energy source|,0.05,0.24,0.71,867
+cd3d8b886be029d649fa1b4781ba30192ec039674b6cc1e02b6adff43de744d6,jev-1.14.0,2026-11-25,tec:a0l8e000000exYDAAY|,ssen:n:50mw add caveats to doco|BROR_P|other|,0.71,0.16,0.13,873
+f23749187bb6edc4355fedf113c4562a14a1b84844e70abff7f190faebdf6a8d,jev-1.14.0,2026-11-25,tec:a0l8e000000exYDAAY|,ssen:n:aultcraggie west pos|BROR_P|other|,0.54,0.24,0.22,861
+6f9df2241dc746183fd981296146e100271377d0b5c8794253e20975c3eaf1db,jev-1.14.0,2026-11-25,tec:a0l8e000000exYDAAY|,ssen:n:crakaig wind energy hub|BROR_P|other|,0.06,0.21,0.73,878
+589b98a43934de59907a865d43fde1bc54c27231a9df4600fd2e3700e9f37031,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xbAAA|,ssen:n:peak gen fareham|BOTW_1|other|,0.79,0.07,0.14,816
+21add8fb064262e2bff2ef7f5651936281211c95bee1f5cebf9d14899fa29ffe,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xbAAA|,ssen:n:peakgen bracknell|FLEE|other|,0.06,0.02,0.92,818
+85bb667d10a1f0a0fe7eaeb6d187be4e6671375681f31657aca87b7ec5477464,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xgAAA|,ssen:n:peak gen fareham|BOTW_1|other|,0.91,0.05,0.04,809
+7e1132c41b6bf7bf1f3a24305739f0549a8b656d708c79a4a5ee5f3b2b71e8f7,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xlAAA|,ssen:n:peak gen fareham|BOTW_1|other|,0.92,0.04,0.04,814
+f161217431fb61f8e3d60f0e99e59065d6d281b14e4187f49120ab96ed33e4b4,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xqAAA|,ssen:n:7mw solar|NURS_1|other|,0.97,0.02,0.01,846
+0d4d588e2dfb0d25c1ea6bdbe5286210d397dd77348ca8fb13d7c7e761faa17e,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xqAAA|,ssen:n:allington lane||fossil oil|,0.83,0.05,0.12,826
+c87d7b23361373d2502027b5d7c4e07563cb9ae4e9526291b05e9f3c6b40e4fb,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xqAAA|,ssen:n:ocean gate|NURS_1|other|,0.81,0.04,0.15,812
+c8d807a186ea51748815fb0ed39de8aec621e72f487bc83f51e92dc348a2d338,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xqAAA|,ssen:n:peak gen fareham|BOTW_1|other|,0.03,0.02,0.95,812
+9597254368ec22ea86ce59b8d23dc3c705c4021182724fde7a77ca6ed28345f0,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xqAAA|,ssen:n:peakgen makro fareham|BOTW_1|fossil oil|,0.12,0.04,0.84,818
+a8183b65a29caf371c3f013495e2ea0ab79e84a4da0b2d2a0ef08f1c26797910,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xqAAA|,ssen:n:|NURS_1|biofuel landfill gas|,0.94,0.02,0.04,820
+dc06c89bf630aab9a8834f19c6eea816d299dc90428a04864b85c14c205d45f6,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xqAAA|,ssen:n:|NURS_1|other|,0.95,0.03,0.02,853
+62ddcfeb2770bfaec1c0ee23e1137e17e2d5b8e9fad04d50e2a4cd7f12f28e42,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xqAAA|,ssen:n:|NURS_1||,0.11,0.04,0.85,805
+b2e0537545d54bfda3907033990c3ce72ad8a18f2cf7ea12e7e8ce877dd45062,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xqAAA|,ssen:n:|NURS_1||#3,0.16,0.03,0.81,793
+08e3f88158af872b3181af74a41e4282f267b1403b7f613ae9e2d3084a28cb45,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xvAAA|,ssen:n:7mw solar|NURS_1|other|,0.98,0.02,0.0,839
+923f756af667c675f01d3c1ff0c6af3093150f41675c0a6ffc373773c0f2abf9,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xvAAA|,ssen:n:allington lane||fossil oil|,0.88,0.03,0.09,819
+38ac3b33a2a3f6246f89a2c8895e81712a00839b3d345df203709ac0ab48efd7,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xvAAA|,ssen:n:peak gen fareham|BOTW_1|other|,0.58,0.25,0.17,805
+f9f41d9aae24a828fe2dd8e8fb175558a7c0e3d7f18a09ab54cd0b6c8a23c079,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xvAAA|,ssen:n:|NURS_1|biofuel landfill gas|,0.95,0.02,0.03,813
+feff7582149303d1a54d971ba250ed28b2778c3c4707606d970539395f7302eb,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xvAAA|,ssen:n:|NURS_1|other|,0.97,0.02,0.01,846
+05394413bfc7119a41aaffce8685a39638abf7b08d32184a52c4fb2a11cd277b,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xvAAA|,ssen:n:|NURS_1||,0.33,0.04,0.63,798
+a01f8513d83ca5757017bca25f8590d1e12122393c72762220e5d4a8cc5c00cb,jev-1.14.0,2026-11-25,tec:a0l8e000000f4xvAAA|,ssen:n:|NURS_1||#3,0.46,0.05,0.49,786
+faf5790d890712ac2dcd3b42cc250be6a5f1c458780bcbf97445d2256665ea4b,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:7 2mw gas|LOVE_1|advanced fuel produced via gasification or pyrolysis of biofuel or waste|,0.91,0.04,0.05,862
+b43eadd10a34592bb2c7639d2abb7b8a86eb5ffa4e5d18f35f4ca4f2e64f52bc,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:7mw gas|LOVE_1|advanced fuel gasification or pyrolysis|,0.93,0.04,0.03,842
+59983edc081c8928a2851c9d3a9e97709b1c020830187e4fc46162e86f6e15dd,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:7mw gas|LOVE_1|advanced fuel produced via gasification or pyrolysis of biofuel or waste|,0.92,0.04,0.04,855
+9eea36785ea476094020b59f23a89b1cf79f7246ea98af723c7d167e65dff917,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:am havant lorry park 5mw gas|LOVE_1|other|,0.83,0.08,0.09,842
+e4b2ffcba097367306e894e0adac5960e073a0542892bfcc178adebae54779ec,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:batley s power station|||,0.57,0.04,0.39,808
+5d7953337e5f36452f3480b3614052c86006cad8b94cc129142d55aecb40cab8,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:down barn farm misd 7373|||,0.46,0.04,0.5,814
+21fee4bbcb42110402a7d15d463dcd68d985fcefc9c116b95a5f561c6f4585a6,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:havant lorry park 5mw gas|LOVE_1|other|,0.86,0.07,0.07,839
+4b67e445a874049ce44d319947aba8832bd6c9ffa1c5056579c5657ce6c1bd41,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:peak gen fareham|BOTW_1|other|,0.38,0.23,0.39,816
+9aea21ee803d3cdd50389080eb86ea7f0808104db09f902efb258ec7dd043e23,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:swan costs hermitage park|LOVE_1|other|,0.85,0.05,0.1,849
+9ab956c6526744df6bb374967db9e535b422a708571c612a50f85776a000c11c,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:wymering stor generation|LOVE_1|other|,0.7,0.05,0.25,836
+80d04141d5ab06bc5890d04cb43868fa4240cdf559673dcb474546344fa79ccf,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:|LOVE_1|other|,0.93,0.02,0.05,817
+973563418586c17aefcfa11de79d72086be61362126b6b0ab695a32a1537de94,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:|LOVE_1|other|#2,0.74,0.05,0.21,804
+738a038eb98ad5db4a54f404978a08b4ef95b089bcb8c75afd25da543ce61b13,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:|LOVE_1|other|#3,0.53,0.08,0.39,806
+f888c69ed2603f0ffc4349b439bb26d46876a9080ed7049e54162251f7640e10,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:|LOVE_1||,0.94,0.02,0.04,826
+baca5ed3b9aa8543a010853a8832b58200c55fecaa97a28c98a4914eb7e9f39e,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:|LOVE_1||#2,0.97,0.02,0.01,820
+f6bf3250e39202dfed0f3480ebacc0355ef94c69250c4cd6be01fb09212bce5c,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y0AAA|,ssen:n:|LOVE_1||#3,0.9,0.03,0.07,811
+18072a6ec0b30de235974816bb367229622edfa0b2eea613d86bc131540f6e30,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y5AAA|,ssen:n:peak gen fareham|BOTW_1|other|,0.93,0.03,0.04,812
+c447258a8dea36671b1a2062cb7e14f2fa99ab2caeaa1b0801a5a6116bf6e696,jev-1.14.0,2026-11-25,tec:a0l8e000000f4y5AAA|,ssen:n:peakgen makro fareham|BOTW_1|fossil oil|,0.82,0.1,0.08,818
+51f114fdcc0ba9e5f565604b5e3b803a301c8c20b9321433cf9a84e15bac5443,jev-1.14.0,2026-11-25,tec:a0l8e000000f64bAAA|,npg:n:butt lane bess|GRIW_1|stored energy all stored energy irrespectve of the original energy source|,0.88,0.02,0.1,859
+95eb7b4af9657c26f1e42756a6f8523dac5aa1b34c0141981b55fe3d69af8191,jev-1.14.0,2026-11-25,tec:a0l8e000000f6bLAAQ|,npg:n:old hill farm|LACK_6|stored energy all stored energy irrespectve of the original energy source|,0.65,0.09,0.26,846
+3cd19816936db7bb74ba18faab2e95a2878e3803be1c0abff407ccca0b447333,jev-1.14.0,2026-11-25,tec:a0l8e000000f7gMAAQ|,ssen:n:49 9mw wind|FAUG_P|wind|,0.07,0.05,0.88,883
+1351e511b2327c4046775bafcfe9609159b9b2b689bdebe82f6c9af2113ddb27,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:18mw bess|NURS_1|stored energy all stored energy irrespectve of the original energy source|,0.11,0.1,0.79,832
+cfc7b48c9fa19d9568047356aa8540cc72ceb0dfda730f4a451b990e2009deef,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:49 9mw battery|NURS_1|stored energy all stored energy irrespectve of the original energy source|,0.72,0.18,0.1,867
+07d9533eac83033b52a8331261d619ee52f8b21ddad8038934d43f2e4d4641f7,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:49 9mw battery|NURS_1|stored energy all stored energy irrespectve of the original energy source|#2,0.68,0.23,0.09,869
+f4f20aa46310969025644fb9ac986a2d0f7c9a7347207c4e7627e1b588f21cd5,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:5 88mw bess|NURS_1|stored energy all stored energy irrespectve of the original energy source|,0.27,0.49,0.24,852
+db4894d14b3c1fa4d671d76b3e32de393fa82a1f46ce9e612f3b1f2043e020b6,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:50mw battery|NURS_1|stored energy all stored energy irrespectve of the original energy source|#2,0.72,0.17,0.11,864
+0135f830bc6262b4f4e1738bccc8b64458c7facc30996931a2cbb92adb9bedc0,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:60mw battery|NURS_1|stored energy all stored energy irrespectve of the original energy source|,0.89,0.08,0.03,870
+3b04566cfef392b5cc4b2cb5e1abbb155c5ce1fd8298957b0d5910f9373b89e9,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:7mw solar|NURS_1|other|,0.72,0.26,0.02,847
+a0eeef43c6ab2665110ceb3f1e4ae1aac2b72582faea7c081c74af302398b137,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:99 9mw bess|NURS_1|stored energy all stored energy irrespectve of the original energy source|,0.85,0.12,0.03,869
+e2b53c3230a8f97bcca710e25eee72437b351bc82af6fde4ff1111a1730bbcea,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:allington lane||fossil oil|,0.55,0.1,0.35,827
+c01c18d624defd28d4957a6d94b331fcd9d06316e712a4310e59bcc70e3056b5,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:pv bess 50mw|NURS_1|solar stored energy all stored energy irrespectve of the original energy source|,0.65,0.26,0.09,856
+567c2238bee4496a423f680b3fc289b936c15ca2b87e9fb0d3e0728907c28511,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:russell farm|NURS_1|stored energy all stored energy irrespectve of the original energy source|,0.41,0.04,0.55,844
+96c577a559612751f342e3e28d96c745668acc1e57ff07b3ebdbf75530c63018,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:|NURS_1|biofuel landfill gas|,0.95,0.03,0.02,821
+4a15f31a668b06eda60247e36d88f38fffb07e64f521fa23e2102ee2c16a9348,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:|NURS_1|other|,0.74,0.13,0.13,854
+1284076eea6b3b1cf292447231497fa65b0776946112a2f7cd393ad090c53e2f,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:|NURS_1|solar stored energy all stored energy irrespectve of the original energy source|,0.71,0.18,0.11,824
+ea2374a028ba3a491965a719f674be61348a263e2a1a078fcc7d0e51322e5bfb,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:|NURS_1||,0.19,0.18,0.63,806
+155d736d18525fe4f6a8858aef2c959cdfdfd9919e55d4783a1c8e869561cbc7,jev-1.14.0,2026-11-25,tec:a0l8e000000f8AeAAI|,ssen:n:|NURS_1||#3,0.16,0.04,0.8,794
+a5bf59b5b828d0c508af42ad4092fbe76268155f6579052b1e35ad3b9361b4a8,jev-1.14.0,2026-11-25,tec:a0l8e0000010wNzAAI|,ssen:n:20mw pv|ARBR_P|solar|,0.85,0.07,0.08,840
+fe00016c9f2d6c7a35de46268123216997b0be3a812605032a09017d7d670b85,jev-1.14.0,2026-11-25,tec:a0l8e0000010wNzAAI|,ssen:n:9 9mw pv|ARBR_P|solar|,0.87,0.06,0.07,841
+c440bc7fc43be33b1a2ee3c41d7fa3c4241d01347c387de03cc53070bf1c68a7,jev-1.14.0,2026-11-25,tec:a0l8e0000010wNzAAI|,ssen:n:angus 30mw export|ARBR_P|solar|,0.51,0.16,0.33,828
+daf468630bb5577c90b5e2549cb3d44ddcb15ef8c87dde5767e1878cc72b0911,jev-1.14.0,2026-11-25,tec:a0l8e0000010wNzAAI|,ssen:n:craigend pv farm|ARBR_P|solar|,0.08,0.04,0.88,845
+5964c04eed667bac4c4779a2c6d518dcbd8fbd2c0939033b9ea90dd07eb56a4e,jev-1.14.0,2026-11-25,tec:a0l8e0000010wNzAAI|,ssen:n:lochaber farm 50mw pv bess|ARBR_P|solar stored energy all stored energy irrespectve of the original energy source|,0.46,0.08,0.46,871
+f1d179ea94702c778d4afb51662c6e8923542da361aff3112222b906e01ceb48,jev-1.14.0,2026-11-25,tec:a0l8e0000010wNzAAI|,ssen:n:new mains of guynd pv|ARBR_P|solar|,0.95,0.03,0.02,840
+66c9cf58a03ace5f840630683d547cae3b43a39ca717f9afe4b7d00f9ad4d8e9,jev-1.14.0,2026-11-25,tec:a0l8e0000010wNzAAI|,ssen:n:new mains of guynd pv||solar|,0.89,0.06,0.05,827
+7318556f2d58f374d3a40944815efbe6710ef7f0ddeb3b46c7a9f3d70620acb5,jev-1.14.0,2026-11-25,tec:a0l8e0000010wNzAAI|,ssen:n:with ccm 30mw export 60mw installed|ARBR_P|solar stored energy all stored energy irrespectve of the original energy source|,0.49,0.32,0.19,865
+270d67f651e63940e5c529f783d877779e66409093adaa29deb2bbd4e245672b,jev-1.14.0,2026-11-25,tec:a0l8e0000010wVtAAI|,ssen:n:auth|ELGI_P|other|,0.21,0.08,0.71,826
+cf95626bf63e81744e2be608d660927bb7ef9e3feb77f99859b7db81a7b13424,jev-1.14.0,2026-11-25,tec:a0l8e0000010wVtAAI|,ssen:n:elgin bess farm|ELGI_P|stored energy all stored energy irrespectve of the original energy source|,0.59,0.25,0.16,867
+1cc106fb9ed4ecf0eae3fe8ed9ed24ca337e6b2b7753d09478154e789f30b8c4,jev-1.14.0,2026-11-25,tec:a0l8e0000010wVtAAI|,ssen:n:elgin bess requote|ELGI_P|stored energy all stored energy irrespectve of the original energy source|,0.03,0.02,0.95,866
+0c4364d0c09ad15482a8a3d8d62c519cfeaa57f2a3e80205231fbb7a531fb3fb,jev-1.14.0,2026-11-25,tec:a0l8e0000010wWmAAI|,ssen:n:49 5mw battery|CHAR_P|stored energy all stored energy irrespectve of the original energy source|,0.4,0.03,0.57,873
+26ebe8ac944a732938b424f7cd0ee48f89e15b794519684e5944ce583a9371fe,jev-1.14.0,2026-11-25,tec:a0l8e0000010wWmAAI|,ssen:n:49 9mw battery|CHAR_P|stored energy all stored energy irrespectve of the original energy source|,0.49,0.07,0.44,891
+8f043cfcde46d9794777d3ffe7ae704024664cc39921da430db20c71404d892f,jev-1.14.0,2026-11-25,tec:a0l8e0000010wWmAAI|,ssen:n:grange of berryhill 45mw pv|CHAR_P|solar stored energy all stored energy irrespectve of the original energy source|,0.81,0.14,0.05,880
+b4692dcc6a092b7cbd3167a167a60d679f98e3ba982524a89e8572dcf59f20e0,jev-1.14.0,2026-11-25,tec:a0l8e0000010wWmAAI|,ssen:n:west gourdie bess|CHAR_P|stored energy all stored energy irrespectve of the original energy source|,0.72,0.06,0.22,873
+96291dedca63e40413b8398a304838bb8e6d848a4021aaa9720258636e900e0b,jev-1.14.0,2026-11-25,tec:a0l8e0000010wWmAAI|,ssen:n:west gourdie bess|CHAR_P|stored energy all stored energy irrespectve of the original energy source|#2,0.67,0.05,0.28,871
+defccb33fa9c7af24a74a7b62a7d189ed35010e193bcacb6fa8dc05c130994bf,jev-1.14.0,2026-11-25,tec:a0l8e0000010wjdAAA|,npg:n:bluebell battery bank|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.06,0.02,0.92,839
+b24ded237100c9cb37673afe6e51636f76a77c489e1175431db08b97d8d5f1e3,jev-1.14.0,2026-11-25,tec:a0l8e0000010wkqAAA|,npg:n:200mw bess at land to west of stocking lane|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.13,0.03,0.84,875
+1f1608671ca6effae89984ef10200a88857009e9e0e29e6a62680e2a88b72706,jev-1.14.0,2026-11-25,tec:a0l8e0000010wkqAAA|,npg:n:bluebell battery bank|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.32,0.17,0.51,845
+14fbdd2f0938369d81ce211f771c77bd822e23f9b9b87719dbf8be554031abb6,jev-1.14.0,2026-11-25,tec:a0l8e0000010wkqAAA|,npg:n:elawan energy bess whinmoor|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.7,0.18,0.12,862
+254fc3cbae075b9a1fe3adad63e049dcb3f0df7227b054612a33156449eedeb1,jev-1.14.0,2026-11-25,tec:a0l8e0000010wkqAAA|,npg:n:ferrybridge bess|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.63,0.19,0.18,858
+0baff2ec6b28d5aeb0a98f372c430eddad9c920e51b804e8c44c62370c98910a,jev-1.14.0,2026-11-25,tec:a0l8e0000010wkqAAA|,npg:n:nel conway2 bess|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.5,0.45,0.05,855
+d0cf64d1b3eb95423c03f498d01f5e3ce12d684f93d1ad15af17356312e95f3c,jev-1.14.0,2026-11-25,tec:a0l8e0000010wkqAAA|,npg:n:nel hunter|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.21,0.17,0.62,840
+d36395dd65ed06f40886faddc05c78544e7871c2a38ca02dbd86cc0c14024c85,jev-1.14.0,2026-11-25,tec:a0l8e0000010wkqAAA|,npg:n:nel springfield|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.35,0.28,0.37,843
+4df27dec1530567003ceebd76f2ab048e0864816b084b2ca2d424c1f7a122ec2,jev-1.14.0,2026-11-25,tec:a0l8e0000010wkqAAA|,npg:n:springfield farm|FERRB1|stored energy all stored energy irrespective of the original energy source|#2,0.49,0.15,0.36,843
+248b5fdc7f9a8a584ea4075416ff108ad3734b6e15fbe0fe21edd3bb288e2b41,jev-1.14.0,2026-11-25,tec:a0l8e0000010wkqAAA|,npg:n:sunny dairy farm energy park|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.8,0.12,0.08,856
+45590706d8c0b7349b9f0022d3959395dc86e69aa383e273ef87ec88f3ffc123,jev-1.14.0,2026-11-25,tec:a0l8e0000010x1DAAQ|,ssen:n:blary hill wind generating facility|CAAD_P|wind|,0.93,0.02,0.05,841
+2c59ecc2246cc3bccbe62c092c36ba84f1e4ccbd96d4c6308180a94527bcd2f4,jev-1.14.0,2026-11-25,tec:a0l8e0000010x1DAAQ|,ssen:n:clashindarroch wind farm export cva||wind|,0.56,0.06,0.38,840
+b2cbe934447aafd6cb570921c4c5c07f49d26287d2229860c9d6518ffdb578d9,jev-1.14.0,2026-11-25,tec:a0l8e0000010x1DAAQ|,ssen:n:tarbuckle hill wind farm|CAIN|wind|,0.15,0.01,0.84,870
+d633daede00971ff3adcbe48fd0f19524c6c27ba3fd3bda54817dd320e90da68,jev-1.14.0,2026-11-25,tec:a0l8e0000010xRkAAI|,ssen:n:49 99mw bess|BEAU_P|stored energy all stored energy irrespectve of the original energy source|,0.03,0.01,0.96,890
+57dc00bce361a892db2827f88c49175600bea83c50874b0e3e6a385fd87506cd,jev-1.14.0,2026-11-25,tec:a0l8e0000010xRkAAI|,ssen:n:49 9mw battery|BEAU_P|stored energy all stored energy irrespectve of the original energy source|,0.03,0.01,0.96,863
+6f9bf6a0a0756df3f7220ace6d9edea640ab326eac8e86141c0c0c0b82d08e24,jev-1.14.0,2026-11-25,tec:a0l8e0000011xZWAAY|,ssen:n:25mw battery|BRID_P|stored energy all stored energy irrespectve of the original energy source|,0.7,0.19,0.11,851
+0a64fae7af92e43fc9b34fddd98740e0a188a95f1b22d4e5cac3516d0362cace,jev-1.14.0,2026-11-25,tec:a0l8e0000011xZWAAY|,ssen:n:49 9mw battery|BRID_P|stored energy all stored energy irrespectve of the original energy source|,0.17,0.05,0.78,871
+6c6ed489f042199ace691b3113836ffab1906b02c19c6e4f47018a393023aab5,jev-1.14.0,2026-11-25,tec:a0l8e0000011xZWAAY|,ssen:n:sp 49 99mw battery|BRID_P|stored energy all stored energy irrespectve of the original energy source|,0.13,0.14,0.73,878
+48d78c084aff118449bdb610d1814e2f2a37dfe2753df459e68a8fa1675da44f,jev-1.14.0,2026-11-25,tec:a0l8e0000011z1iAAA|,ssen:n:49 9mw battery|NAIR_P|stored energy all stored energy irrespectve of the original energy source|,0.16,0.22,0.62,866
+5422e1a696788aa1a9fccb2e2040bf79d100c4a3a3aa55136c916bdd6b59c42e,jev-1.14.0,2026-11-25,tec:a0l8e0000011z1iAAA|,ssen:n:65mw bess|NAIR_P|stored energy all stored energy irrespectve of the original energy source|,0.25,0.43,0.32,863
+1f59eb11183b5792c2c9d3da4300694d35201506e8d7ad7c021e46c25977970a,jev-1.14.0,2026-11-25,tec:a0l8e0000011z1iAAA|,ssen:n:blackpark farm additional costs|NAIR_P|other|,0.16,0.46,0.38,866
+a2ba7ba1fd0f3d7d1ea11f8634e0ececdcb8e4f9a88f33d5da8ab7fed911a0fe,jev-1.14.0,2026-11-25,tec:a0l8e0000011z1iAAA|,ssen:n:nathaniel 50mw battery|NAIR_P|stored energy all stored energy irrespectve of the original energy source|,0.31,0.33,0.36,878
+2911ce3b4f78744e692c04b3faf15fa5c184c3be7269bbc4d1bd3fe7b934ab03,jev-1.14.0,2026-11-25,tec:a0l8e0000011z1iAAA|,ssen:n:new mill|NAIR_P|other|,0.96,0.03,0.01,855
+8faf95c0128f22f0396b453add85550e69363ea02adfa9d3c165151389926ec2,jev-1.14.0,2026-11-25,tec:a0l8e0000011z1iAAA|,ssen:n:newton of millfield solar wind and storage|MACD_P|other|,0.28,0.68,0.04,852
+358a56996496c69d5eb01b80649a87a6262238593ff4174668e0c2633aea1766,jev-1.14.0,2026-11-25,tec:a0l8e0000011z1iAAA|,ssen:n:newton of park bess 2|NAIR_P|stored energy all stored energy irrespectve of the original energy source|,0.01,0.01,0.98,884
+031bec95c59b2dfb79d401fcbfe1cdcb0cdc1890113cf4eff9511191d6f97c3f,jev-1.14.0,2026-11-25,tec:a0l8e0000011z1iAAA|,ssen:n:newton of park bess 2|NAIR_P|stored energy all stored energy irrespectve of the original energy source|#2,0.03,0.03,0.94,895
+17028e76b9e01a9325aca8eff0ad962c6b27fc79abd17b8eade6ef16d2e1e357,jev-1.14.0,2026-11-25,tec:a0l8e0000011z1iAAA|,ssen:n:sp 49 9mw battery|NAIR_P|stored energy all stored energy irrespectve of the original energy source|,0.25,0.4,0.35,896
+b54a60dc98f83a76084848cb4d099cbe304b2a40759dfc357ea387955f6ae880,jev-1.14.0,2026-11-25,tec:a0l8e0000011z1iAAA|,ssen:n:sp nairn bess 49 9mw battery|NAIR_P|stored energy all stored energy irrespectve of the original energy source|,0.13,0.37,0.5,890
+5fe5a6ac5931e29c86b4c4c8ce5fae629e9f39da61018a21a9618d8e26247135,jev-1.14.0,2026-11-25,tec:a0l8e0000012012AAA|,ssen:n:20mw bess|RANN_P|stored energy all stored energy irrespectve of the original energy source|,0.07,0.02,0.91,860
+2abec07cad18f3a47b651c6489309eb4310893fd955475f621c5585b697eda14,jev-1.14.0,2026-11-25,tec:a0l8e0000012012AAA|,ssen:n:allt shallain hydro|RANN_P|hydro to be confirmed|,0.97,0.02,0.01,840
+e52c12e4a3a918a34c9c5af3b3e22c7b3ea46710e3604b3f96969f0013dd2637,jev-1.14.0,2026-11-25,tec:a0l8e000001201HAAQ|,npg:n:nel hunter|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.03,0.02,0.95,840
+57ff41b4a7cee48c068203081f0206a9dc2d427722a288525feb763fa20f1d3b,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:NPg23-002811|,0.76,0.07,0.17,865
+1887a6c32097f99926d3b9ff36e707380e0fe919161072d7d2d11cc533e17eea,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:atterwith lane|POPP_3|solar storage electrochemical classic batteries lithium ion li ion|,0.54,0.23,0.23,855
+112e968d0026b03c227f9ca88a5d2741f884e8a7ce614b75f580dc6789b85e37,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:cross lane bess|STEN_1|stored energy all stored energy irrespectve of the original energy source|,0.83,0.06,0.11,863
+86abebff712bdbcc021a215a7e06e3c54998d025bdf6705d2d39da74ca54a567,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:fryston lane bess|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.1,0.03,0.87,870
+d4221d86fd7738aaa7c0865f5b5d6bbfeff1017900a999bcf98f11af917a6dff,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:harperley lane solar bess|STES_1|stored energy all stored energy irrespectve of the original energy source|,0.86,0.09,0.05,871
+d1177f553e6e92a5ac5e4cb5afeab6ed6be7fe4f5b9f899b1c6519fa7e7b9300,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:land on the west side of horseclose lane|NORT_1|stored energy all stored energy irrespective of the original energy source|,0.8,0.07,0.13,870
+e6de6b39cbf7b5dc03c49015a281330b4f59a2c502b6d716f991ace328b5c474,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:lane side bess|BRAW_1|stored energy all stored energy irrespectve of the original energy source|,0.43,0.14,0.43,862
+7ba19bd876ce45aae62e4557c2a191672a6694bcfddb514845e5bbc2ae78a2e5,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:long lane bess|CREB_1|stored energy all stored energy irrespectve of the original energy source|,0.92,0.04,0.04,863
+4c488537f286fafa3c46e203ba6d7b31fa5b4f30aa3365006e9f37d9a33a5a47,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:low moor lane|KNAR|stored energy all stored energy irrespectve of the original energy source|,0.53,0.11,0.36,853
+347af1fed3828a14c645fd4d0215c9141849501a66058c07bcd61ae57d87aeb4,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:murton lane bess|OSBA_1|stored energy all stored energy irrespectve of the original energy source|,0.8,0.07,0.13,866
+a20718b16e31ca23ca23f7ed90bf8f2c1f6afc56cea8e844d3c00ebfa60139f6,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:norton back lane|NORT_1|solar|,0.82,0.11,0.07,856
+9f035cbadd2fce4d831809a05e61d0362a579eab11aae3776c16049a0d16042d,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:salters lane solar farm|HAWP_6|solar|,0.77,0.18,0.05,871
+99822e7b15ba21696e2e4587d104e211ed2cc751994432b69a146dbaf4c4c81c,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:salton lane hybrid|OSBA_1|solar|,0.84,0.14,0.02,855
+d402119a357585063b7df3f99763586c83283c55a80ac6ef0a2cf647bc8e8e62,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,npg:n:southeast of church lane bess|HAWP_6|stored energy all stored energy irrespectve of the original energy source|,0.76,0.05,0.19,876
+92937c89185ea43c8b6024eae7f3b0a99b7c2750573837d0381904c59f3ddce4,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,ssen:n:99 9mw bess titchfield lane|BOTW_1|stored energy all stored energy irrespectve of the original energy source|,0.99,0.0,0.01,893
+a5a77e4972b4ff21212dee784444921ba79e70c0f496d2f7424444a15c44a4bb,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,ssen:n:auth im 70mw battery|bramley basi|stored energy all stored energy irrespectve of the original energy source|,0.84,0.08,0.08,903
+80e46fb264579cfd7959c1eed3b27a07477a417260373ab44b40639ef288db22,jev-1.14.0,2026-11-25,tec:a0l8e00000120IqAAI|,ssen:n:rye common lane grid connection batt|FLEE|stored energy all stored energy irrespectve of the original energy source|,0.88,0.05,0.07,885
+d6791ad38ff11f48081223f8aaa30b25f74037c276aac39b77bb7025f457da88,jev-1.14.0,2026-11-25,tec:a0l8e0000012eIpAAI|,npg:NPg23-003461|,0.07,0.07,0.86,838
+1260f32f2db61d627b8e53c928157507a88c33b752c64e151ba61ec3137a77c1,jev-1.14.0,2026-11-25,tec:a0l8e0000012eoKAAQ|,ssen:n:cairnborrow ii windfarm|CAIN|wind stored energy all stored energy irrespectve of the original energy source|,0.16,0.55,0.29,896
+a790cc00d4db8e32f098612bb2befd79c91dd956a1d2ff31033f220e2064b063,jev-1.14.0,2026-11-25,tec:a0l8e0000012eoKAAQ|,ssen:n:cairnborrow wind energy hub|CAIN|wind|,0.03,0.28,0.69,874
+81033c12317ebc1b353e991cef997bd6e1481dffc8b6409ee818e26615c89065,jev-1.14.0,2026-11-25,tec:a0l8e0000012eoKAAQ|,ssen:n:cairnborrow|KEIT_P|wind|,0.17,0.56,0.27,852
+d64aabaf34ecbdcc2db65188369904cbf8288fc5f20412ad3b23105a9f8eca2d,jev-1.14.0,2026-11-25,tec:a0l8e0000012eoKAAQ|,ssen:n:clashindarroch 2 wind farm modapp|CAIN|wind|,0.71,0.22,0.07,863
+095f81b6cbd3c7a5137a7779e7ec787d2948f8239b17d628de8d7ceb089a4a44,jev-1.14.0,2026-11-25,tec:a0l8e0000012eoKAAQ|,ssen:n:clashindarroch wind farm 2 addcap|CAIN|wind|,0.72,0.25,0.03,881
+9101f5218d07c08dc018149ad638269bbd1019a029a37441cebff563a261ef9c,jev-1.14.0,2026-11-25,tec:a0l8e0000012eoKAAQ|,ssen:n:clashindarroch wind farm export cva||wind|,0.63,0.23,0.14,844
+1ab2fca7cee846a08f889a47571742e56ba41943c5fce7114f54e543438b0b10,jev-1.14.0,2026-11-25,tec:a0l8e0000012eoKAAQ|,ssen:n:tarbuckle hill wind farm|CAIN|wind|,0.68,0.2,0.12,874
+f68b7f0ce409f71a6cb32f6b16a4a3163a06f53690ded8a9fc25cc5b72534625,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:100mw bess|MITY_1|stored energy all stored energy irrespectve of the original energy source|,0.82,0.11,0.07,841
+a8a9f1145e9e50d89daeb4f2dbf1d2be11f3f68dd17a36d711ee87968f3592a1,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:35mw exp 12mw imp pv bess|MITY_1|solar stored energy all stored energy irrespectve of the original energy source|,0.29,0.54,0.17,832
+9d15bd9675dadf2dce5b7fe3da4471cfb30e6e9983c13d299f52dd49fa0052c6,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:49 9mw pv and bess|MITY_1|solar stored energy all stored energy irrespectve of the original energy source|,0.38,0.53,0.09,832
+ad8a19b8d0e8cae5493c6faf1ec15e56ca7529ae34df018de5320b78665de690,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:49 9mw pv battery|MITY_1|solar stored energy all stored energy irrespectve of the original energy source|,0.66,0.29,0.05,849
+d7055bfced0d7407a2c7ad671783b67b8ae029a058d21897b40f7914b1b77ad8,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:bess|MITY_1|stored energy all stored energy irrespectve of the original energy source|,0.21,0.11,0.68,820
+7027002c2d7105bf65d5a32e7dd21a061f20232734bf39b99c9f92fba660b615,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:catsbrain farm export|||,0.09,0.03,0.88,797
+cbccf5c394d7611ff8e3c86e050c314991df743b576403016ed5b0b32fd7e38b,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:catsbrain farm firm battery storage|MITY_1|other|,0.71,0.05,0.24,827
+6132765e0e90493fb439a5f329719a67145037ed5be9d541e7c9d6189bfcef6f,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:catsbrain farm firm stratton st margar|MITY_1|other|,0.18,0.21,0.61,829
+58f616658b29c0ee681d09ed45ed4e4e3284d126951b939616f7c7fe53a4dcef,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:marlborough road|MITY_1|other|,0.85,0.09,0.06,820
+3bb24a88fa35db2801a934b090faf9249e1954cb75379a9a972363d425dae881,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:pv and battery|MITY_1|solar stored energy all stored energy irrespectve of the original energy source|,0.78,0.19,0.03,865
+8ba11b0337279721014269432e606428ab5bb6a277ba31e2c360b34fa5cfcc5d,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:the common battery|MITY_1|stored energy all stored energy irrespectve of the original energy source|,0.79,0.13,0.08,858
+97504e1ef8e4e7066a7a93d7de12d808dbf274f133f267216984f114ffc3992a,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:|MITY_1|other|,0.51,0.1,0.39,791
+dd9acaf79418f619e622c67dd6b7f23dd35a43728044a8f2774c436b3bcc0df5,jev-1.14.0,2026-11-25,tec:a0l8e0000012etfAAA|,ssen:n:|MITY_1|other|#3,0.49,0.1,0.41,794
+24ac9d25cad6a052f15a15ec1cfa245da18eac40c52bb9ca18e0c139752a4647,jev-1.14.0,2026-11-25,tec:a0l8e0000012gLdAAI|,ssen:n:37 5mw gen pv batt 16mw export|COUA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.75,0.25,0.0,893
+ded97b265a403c4de8d0b8fc3f0fdf8f8ec1807f4540e1615f793b17ff20646b,jev-1.14.0,2026-11-25,tec:a0l8e0000012gLdAAI|,ssen:n:49 9mw battery|COUA_P|stored energy all stored energy irrespectve of the original energy source|,0.49,0.43,0.08,883
+01cc763d45c87faf89fd9bb14278704ba7b0e8b99587ad63bd08db9a00875440,jev-1.14.0,2026-11-25,tec:a0l8e0000012gLdAAI|,ssen:n:49 9mw bess|COUA_P|stored energy all stored energy irrespectve of the original energy source|,0.06,0.66,0.28,869
+d2283cd162ca6629b16199976accabbb20a04220891b6d431e62d297f8aba7d8,jev-1.14.0,2026-11-25,tec:a0l8e0000012gLdAAI|,ssen:n:49 9mw wind and electricity storage|COUA_P|other stored energy all stored energy irrespectve of the original energy source|,0.09,0.17,0.74,884
+62de67f3927a46e7ae75700168c301ce51c97e7876f9a73196b9ba3ea0e640cd,jev-1.14.0,2026-11-25,tec:a0l8e0000012gLdAAI|,ssen:n:99 56mw pv bess|COUA_P|solar stored energy all stored energy irrespectve of the original energy source|,0.5,0.45,0.05,875
+c4883a278a12dd70ee10fbfde360e821799d34a55849133be5815b9a7a3c7427,jev-1.14.0,2026-11-25,tec:a0l8e0000012gLdAAI|,ssen:n:arkhill extension wind farm|COUA_P|wind|,0.79,0.19,0.02,867
+705742d31d8c79a081d448caaef3f47d40aae472521a13467240e60d94cc650a,jev-1.14.0,2026-11-25,tec:a0l8e0000012gLdAAI|,ssen:n:markethill bess|COUA_P|stored energy all stored energy irrespectve of the original energy source|,0.44,0.46,0.1,860
+9bd98114bd25a1cbe9cd23cafeedcc7ccbd902704a1cedabd98ed398f6d68287,jev-1.14.0,2026-11-25,tec:a0l8e0000012gYMAAY|,npg:n:maxwell street hull|SALT_1|stored energy all stored energy irrespectve of the original energy source|,0.21,0.05,0.74,826
+2a23d1c4ea79a0a8677eef99a16a14ffcbb4680d6c8cce8057cd26fed02fdfcf,jev-1.14.0,2026-11-25,tec:a0l8e0000012gYMAAY|,npg:n:nel limes bess|SALT_1|stored energy all stored energy irrespectve of the original energy source|,0.43,0.29,0.28,836
+43e500e3baa01d91975a304b5694635ca1ad63caa283a1766574ffec91103123,jev-1.14.0,2026-11-25,tec:a0l8e0000012gYMAAY|,npg:n:nel suggit bess|SALT_1|stored energy all stored energy irrespectve of the original energy source|,0.05,0.02,0.93,838
+d91c08cea50b58a84ff2977c4ba6951654732da889b070afe871207313a70eaf,jev-1.14.0,2026-11-25,tec:a0l8e0000012gYQAAY|,npg:n:nel limes bess|SALT_1|stored energy all stored energy irrespectve of the original energy source|,0.09,0.04,0.87,845
+969bd29350a9f632bb230f98fdadad7db7af7635ba493475b00f55b3eeb928db,jev-1.14.0,2026-11-25,tec:a0l8e0000012gbeAAA|,npg:NPg23-002180|,0.44,0.19,0.37,852
+250a951340ccdd8b8092ac6b471c9030a81bc06730c67dd0bfc7d82af505fa62,jev-1.14.0,2026-11-25,tec:a0l8e0000012gbeAAA|,npg:NPg23-002189|,0.07,0.01,0.92,855
+d3125c406577fdfba681434f13cad2a6b314b397487e8db749d1116c1d540c51,jev-1.14.0,2026-11-25,tec:a0l8e0000012gbeAAA|,npg:NPg23-002253|,0.79,0.12,0.09,852
+18e7f45256a12dea2806a7ef0ef6553b33df7226b02bc42b6df5a1008fa0455f,jev-1.14.0,2026-11-25,tec:a0l8e0000012gbeAAA|,npg:NPg23-002438|,0.8,0.11,0.09,850
+9e9146009a3722535349974c8cf8efa28026d1e85d2d33367c06cb8a945c26f2,jev-1.14.0,2026-11-25,tec:a0l8e0000012gbeAAA|,npg:NPg23-002945|,0.85,0.08,0.07,837
+9d466c58cb06d54252ddb21e30ed01106575e334bc6f8f99f72841822f5e5b66,jev-1.14.0,2026-11-25,tec:a0l8e0000012gbeAAA|,npg:n:grimsby solar farm|GRIW_1|solar|,0.36,0.24,0.4,854
+9146998578a0b70aef2c11c3619cfc70917d7b11b8a3e10a9a5efd3e04f4b72b,jev-1.14.0,2026-11-25,tec:a0l8e0000012gc3AAA|,npg:n:butt lane bess|GRIW_1|stored energy all stored energy irrespectve of the original energy source|,0.94,0.02,0.04,858
+c34eb426ea8ad77d52ade4c69757ce2a1456986ba9a083a608150dfae2b92663,jev-1.14.0,2026-11-25,tec:a0l8e0000012gc3AAA|,npg:n:chapel lane bess|KEAD_1|stored energy all stored energy irrespectve of the original energy source|,0.9,0.05,0.05,857
+764b2d8584d2ab32231220fc0870006ab7d0a158d4e78aa3f0261e1461fd4e9c,jev-1.14.0,2026-11-25,tec:a0l8e0000012gc3AAA|,npg:n:moat lane bess|THUR_6|stored energy all stored energy irrespectve of the original energy source|,0.95,0.03,0.02,861
+2d6aefdf6f723b4378d1ac55098b4ece1cfa7ebeb5faa5b69d53cd831b85a713,jev-1.14.0,2026-11-25,tec:a0l8e0000012gc8AAA|,npg:NPg23-002880|,0.98,0.01,0.01,861
+92f62c5fdcd1502b0070eabe1f3e30881d6ea0f203026fb3d5aaa685b0ae4454,jev-1.14.0,2026-11-25,tec:a0l8e0000012gc8AAA|,npg:n:laughton road bess|THUR_6|stored energy all stored energy irrespective of the original energy source|,0.98,0.01,0.01,864
+210fb416319e02341f4942eb57f84fb78ce4711aaca7de3f56c09fcf6b120a26,jev-1.14.0,2026-11-25,tec:a0l8e0000012gtuAAA|,npg:n:butt lane bess|GRIW_1|stored energy all stored energy irrespectve of the original energy source|,0.02,0.01,0.97,862
+9914d962289a22728167d70199c34f994ae456eb1dd78d226c455c21b56ffefe,jev-1.14.0,2026-11-25,tec:a0l8e0000012hmTAAQ|,npg:NPg23-002369|,0.03,0.04,0.93,841
+7e3d7f7c62e3f2ae782d5b6c360d99421c8ffb97a65d3e84e2044f8e88bcdc70,jev-1.14.0,2026-11-25,tec:a0l8e0000012hmTAAQ|,npg:n:doughty road pv|GRIW_1|solar|,0.73,0.16,0.11,838
+1cf88f0b0767ab57d3dfcda59f7c5889455e3bbc602daeb55a18043fa1db6879,jev-1.14.0,2026-11-25,tec:a0l8e0000012hmYAAQ|,ssen:n:20mw pv|ARBR_P|solar|,0.74,0.21,0.05,866
+272b2f6b7b9e0bb02a66fedf762f59fb5ab8e029e1c97d1da678c8e2a038b205,jev-1.14.0,2026-11-25,tec:a0l8e0000012hmYAAQ|,ssen:n:9 9mw pv|ARBR_P|solar|,0.83,0.13,0.04,867
+3538eadb77a00baa75afa053a7d964df1286316f54d12d0cb0faaeaa39f73da6,jev-1.14.0,2026-11-25,tec:a0l8e0000012hmYAAQ|,ssen:n:angus 30mw export|ARBR_P|solar|,0.39,0.42,0.19,854
+691002d976a08e309c7ea91887fdf21f7e516941fa46275670cdbc6c04c055a5,jev-1.14.0,2026-11-25,tec:a0l8e0000012hmYAAQ|,ssen:n:dg tayc arbroath gsp fauldielaw|ARBR_P|solar|,0.58,0.15,0.27,873
+cab6f55f393641bf430779bed3f93b2caae137825581ecce0e1bd99083a1a4cc,jev-1.14.0,2026-11-25,tec:a0l8e0000012hmYAAQ|,ssen:n:lochaber farm 50mw pv bess|ARBR_P|solar stored energy all stored energy irrespectve of the original energy source|,0.53,0.09,0.38,897
+888d291d474bd71fb0f91c1588a302688526feaa7897ef12c16e6a1ba3fc56ac,jev-1.14.0,2026-11-25,tec:a0l8e0000012hmYAAQ|,ssen:n:with ccm 30mw export 60mw installed|ARBR_P|solar stored energy all stored energy irrespectve of the original energy source|,0.56,0.32,0.12,891
+29d379fd6930e5bb187f726672a003760825b1fde8948ed0489602caa9e9cf43,jev-1.14.0,2026-11-25,tec:a0l8e0000012hoyAAA|,ssen:n:hill of stoneyfield wind|ROTH|wind|,0.03,0.27,0.7,866
+aaa38ac41514e8a871d0290f13e0e21fe56321463d8fa4b070d136f76a7f9c25,jev-1.14.0,2026-11-25,tec:a0l8e0000012hwbAAA|,ssen:n:50mw wind pv battery|SHIN_P|wind solar|,0.79,0.17,0.04,875
+fa4b8135b3912bc3f989fad61c0c379e8eed6e534c29597bba3db4a97a6a79be,jev-1.14.0,2026-11-25,tec:a0l8e0000012hwbAAA|,ssen:n:strath oykel wind farm 77 6mw|SHIN_P|wind|,0.0,0.15,0.85,861
+0675175d1538c896a2f1b5a278a315d0d5f3f7d8334560c2ed27d57e4db0c64b,jev-1.14.0,2026-11-25,tec:a0l8e0000012hwbAAA|,ssen:n:with ccm|SHIN_P|wind|,0.39,0.27,0.34,842
+817069007e631104dfdfd5fffa96542b726a9bd54be0cbc96d700db64d7c6107,jev-1.14.0,2026-11-25,tec:a0l8e0000012i3xAAA|,npg:n:dewley hill hybrid bess spv|STEN_1|solar|,0.96,0.03,0.01,866
+f3128f2ddbfdb564f6254a191fffb8932b4195091d3cd63f9a1c35456abc7562,jev-1.14.0,2026-11-25,tec:a0l8e0000012jL0AAI|,npg:NPg15-002942|,0.57,0.26,0.17,842
+bc200b278cfc095d241dc2757c83cf32992f098190a8c4e3e6b4408911739a26,jev-1.14.0,2026-11-25,tec:a0l8e0000012jL5AAI|,ssen:n:auth|FETT|other|,0.15,0.09,0.76,844
+3c8e5a7cbd5ef8e697a30c84d5f12dadf9ff752d2227bf567400dbe88c721292,jev-1.14.0,2026-11-25,tec:a0l8e0000012jL5AAI|,ssen:n:craigneil wind farm 42mw|FETT|wind|,0.01,0.0,0.99,863
+f349835bd6a8db0f7be59c92058ccf7683d8023900f2c29d85b3d083511dca02,jev-1.14.0,2026-11-25,tec:a0l8e0000012jL5AAI|,ssen:n:fetteresso wind 37mw|FETT|wind|,0.54,0.12,0.34,878
+f4448f0ae32b7d6c9c61529969cdf26c7d069e54a850478ae52e1051ee404c37,jev-1.14.0,2026-11-25,tec:a0l8e0000012jL5AAI|,ssen:n:melmannoch hill wind farm|FETT|wind|,0.53,0.08,0.39,879
+9300bc709933665e5440a64579b291546e7e75dffd7f96a09eb1f31c230e0c06,jev-1.14.0,2026-11-25,tec:a0l8e0000012jUBAAY|,npg:n:coast road bess|tynemouth|stored energy all stored energy irrespectve of the original energy source|,0.99,0.0,0.01,860
+47a4dff4ef722084f756e37419c1934edc10b5367e2e0b0d4283459a8cdde252,jev-1.14.0,2026-11-25,tec:a0l8e0000012jUBAAY|,npg:n:staithes road|SALT_1|stored energy all stored energy irrespectve of the original energy source|,0.9,0.03,0.07,846
+f2c841f875277c9485baf4a09344f14badd7a22b08db1ff169030029c33dfcaa,jev-1.14.0,2026-11-25,tec:a0l8e0000012kiGAAQ|,ssen:n:50mw offshore wind|PEHG_P|wind|,0.02,0.01,0.97,845
+304e41833ead456c495cf07b900f0f15840e1914910f22e8d2c02e509e6b4878,jev-1.14.0,2026-11-25,tec:a0l8e0000012kiGAAQ|,ssen:n:60mw peterhead grange|PEHG_P|other|,0.36,0.13,0.51,833
+0c5ea0f303093716a9ac8761c36a60828b0c76a65dea6cef425ec2c636764d1b,jev-1.14.0,2026-11-25,tec:a0l8e0000012kkqAAA|,ssen:n:45mw wind|BRAC_P|wind|,0.46,0.34,0.2,843
+4b24c42894729e6b786671ab5815af1f83df9f2044399210a699667e5ed3e999,jev-1.14.0,2026-11-25,tec:a0l8e0000012kkqAAA|,ssen:n:49 9mw battery|BRAC_P|stored energy all stored energy irrespectve of the original energy source|#3,0.41,0.56,0.03,865
+004ee9b4a3a1604218901534be1f01aedcd890a2113e033fca65f8d690ca841d,jev-1.14.0,2026-11-25,tec:a0l8e0000012kkqAAA|,ssen:n:49 9mw bess|BRAC_P|stored energy all stored energy irrespectve of the original energy source|,0.04,0.77,0.19,851
+e640308f123e988353d5f0e93f68cc0f03ee005c2f029bb186bc3bef9bbfae6c,jev-1.14.0,2026-11-25,tec:a0l8e0000012kkqAAA|,ssen:n:60mw bess|BRAC_P|stored energy all stored energy irrespectve of the original energy source|,0.06,0.72,0.22,849
+3a595dca63e6e1727d56d60db68297ca64e4155691860808966974bd9b553dda,jev-1.14.0,2026-11-25,tec:a0l8e0000012kkqAAA|,ssen:n:doco 63mw bess|BRAC_P|stored energy all stored energy irrespectve of the original energy source|,0.05,0.52,0.43,853
+21f425f3d3eaad0de8652ea4b613d39cdc0275ee36e5bf142d33122d69edc58a,jev-1.14.0,2026-11-25,tec:a0l8e0000012kkqAAA|,ssen:n:windburn wind farm 75mw wind 35mw bess|BRAC_P|wind|,0.01,0.05,0.94,864
+ab2e652affd633f582ceef854844e5ed4bb4bea50e8c680b69f666ecf11a7de0,jev-1.14.0,2026-11-25,tec:a0l8e0000012kkqAAA|,ssen:n:|LUNA_P|stored energy all stored energy irrespectve of the original energy source|,0.2,0.57,0.23,836
+d78405480ea93c0bbd7ca4938ff74fb56cd4cbbe4a017b0f55a18383f1cdf74c,jev-1.14.0,2026-11-25,tec:a0l8e0000012kkqAAA|,ssen:n:||wind|,0.69,0.21,0.1,829
+d4b53301b35100bfa3a4609d242857a79ce12bcfe142b78e559cd0825310cac5,jev-1.14.0,2026-11-25,tec:a0l8e0000012kptAAA|,ssen:n:36mw wind onshore|ALNE_P|wind|,0.56,0.32,0.12,851
+34fb9f5ea3ea1f0b0df56cc15f4b9db8685ab25697e2a1065b802bf1f0345793,jev-1.14.0,2026-11-25,tec:a0l8e0000012kptAAA|,ssen:n:generating station|ALNE_P|hydro to be confirmed|,0.98,0.01,0.01,847
+8ec3637c86b82fb1fedb9e03690992db46f0b1f292ba9d0d32d7ad0a72b6b367,jev-1.14.0,2026-11-25,tec:a0l8e0000012kptAAA|,ssen:n:novar 2 wind farm|ALNE_P|wind|,0.02,0.03,0.95,833
+c127918a371c19844638ef750048adb64a4c81973e84b187ea2a68ef56b2fc4b,jev-1.14.0,2026-11-25,tec:a0l8e0000012kptAAA|,ssen:n:novar wind farm a meall an turc|ALNE_P|wind|,0.13,0.83,0.04,846
+8db8da1e43e4db9cf80f4297267a18873ee786030135e5c61e6c3eb46c37b35e,jev-1.14.0,2026-11-25,tec:a0l8e0000012kptAAA|,ssen:n:novar wind farm b beandealt|ALNE_P|wind|,0.19,0.74,0.07,846
+c48486de62141620074d95324a127a9911867587f05f8a9ced6ebe1329a446b8,jev-1.14.0,2026-11-25,tec:a0l8e0000012kptAAA|,ssen:n:novar wind farm|ALNE_P|wind|,0.03,0.68,0.29,850
+91b638527105cc53e03880eeb7c1f98bea5e1332889bcdcd0476575537d3af8b,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:25 2mw wind battery|MYBS_P|wind stored energy all stored energy irrespectve of the original energy source|,0.72,0.19,0.09,887
+60f2f51afc5a096224a84191d9e91a743e5bd3287981a2280fc2dc86a5f1184c,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:26 4mw export and 12mw import wind bess|MYBS_P|wind stored energy all stored energy irrespectve of the original energy source|,0.54,0.27,0.19,911
+1f2d5bf2a5eb9029ae96e92bb513993bdfa037b8517cc7fcd7c60241a814d777,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:achairn windfarm|MYBS_P|wind|,0.92,0.04,0.04,863
+b54fb37af4605078e0e182e519a7e8ca426c8fc8859c9dc0d9ce4824550fbd63,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:camster 2 wind farm|MYBS_P|wind|,0.75,0.11,0.14,870
+20856f45419245fe091785423b870c05a2d07da45de18684474c636831781bb8,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:camster windfarm|MYBS_P|wind|,0.84,0.1,0.06,866
+5cbc70a5e201098ad2631a39df5d666d81989f8451f3fbe8c73fd75ebc0527a1,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:causeymire 2 wind|MYBS_P|wind|,0.12,0.04,0.84,881
+95d6cbed180284c94e6d5097b153479a5b857759da884c0dd03e138e74bb0363,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:causeymire windfarm|MYBS_P|wind|,0.05,0.88,0.07,849
+7e0f7010ab5d57b9000e77591b167ab17076d2fa035fdcd46003596b07783ad9,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:cogle moss wind|MYBS_P|wind|,0.67,0.17,0.16,880
+ec4f1b6c52a166d70685d58b3b6c5173a9b6ee6bf94501a36b4ec6a57cbe688b,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:mybster bess|MYBS_P|other|,0.67,0.29,0.04,876
+89b92983f7c04325000a2cf0091016026a33c7083df642888d25d8cf8f8f824e,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:n coe invoice camster 2 wind farm|MYBS_P|wind|,0.67,0.16,0.17,890
+21b0ab932c4557f57fad5f7fada59529336f4bf2a6177a42454859038acc438d,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:rumster wind|MYBS_P|wind|,0.95,0.03,0.02,863
+ff3eeb82388d330d5f53c04eda3c84438e747da38af058cb9cd435503b88ee8e,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:stemster wind farm|MYBS_P|wind|,0.68,0.19,0.13,886
+3b70829eb5c592c8b6d4005016c5815d3ec407b145fa965fe2dbb8aee7981682,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:|MYBS_P|wind|,0.17,0.63,0.2,850
+f5657a6aca3256c92ee3cd96a7a19d3e20b791abb8c65d3572c9658c62b7625f,jev-1.14.0,2026-11-25,tec:a0l8e0000012kqcAAA|,ssen:n:|MYBS_P|wind|#2,0.7,0.2,0.1,851
+38260035fc360f1171f772f514810bae052fb762842268a228f6fba82a2ffbf6,jev-1.14.0,2026-11-25,tec:a0l8e000001HntMAAS|,npg:n:nep bransholme bess|CREB_1|stored energy all stored energy irrespectve of the original energy source|,0.07,0.02,0.91,858
+3a71e67dce2c96c2af95ae9ea148e9266b2de6ef2fdced74db027b9e316e0228,jev-1.14.0,2026-11-25,tec:a0l8e000001HntMAAS|,npg:n:nep bransholme bess|GRIW_1|stored energy all stored energy irrespective of the original energy source|,0.06,0.09,0.85,858
+654481572e745d5289106a6d6a124cf77ce5bb81c9ad81d9c23cd2bd72b15b05,jev-1.14.0,2026-11-25,tec:a0l8e000001HoL3AAK|,ssen:n:50mw wind|TAYN_P|wind|,0.77,0.12,0.11,856
+bfde12deb06da7a56b3a52abc939df53473663bd85240a3cfce76a3335d2aeb7,jev-1.14.0,2026-11-25,tec:a0l8e000001HoL3AAK|,ssen:n:57 6mw wind|TAYN_P|wind|,0.07,0.16,0.77,872
+5d6239ed85178df8796ccc9f2b30eb36d5247fc119eba55cd7428d67fffbeaa1,jev-1.14.0,2026-11-25,tec:a0l8e000001HoL3AAK|,ssen:n:66mw wind|TAYN_P|wind|,0.42,0.31,0.27,863
+a8a5401ee0bc27a6851f149379e368536f15046acf0760efbdddc3bd4ee14199,jev-1.14.0,2026-11-25,tec:a0l8e000001HoL3AAK|,ssen:n:beinn ghlas windfarm|TAYN_P|wind|,0.4,0.17,0.43,859
+1bb1a8830cab7c2f121826445bbcb212982cbf1798657f210d7150a80a123745,jev-1.14.0,2026-11-25,tec:a0l8e000001HoL3AAK|,ssen:n:beinn nan lochan wind|edinbane|wind|,0.6,0.14,0.26,879
+8e0096dc394a07d931767bf3c9afb55efb93846149f37a6f385500fab963046e,jev-1.14.0,2026-11-25,tec:a0l8e000001HoL3AAK|,ssen:n:eas a ghaill hydro|TAYN_P|hydro to be confirmed|,0.97,0.01,0.02,863
+ad8f2b88a86fd841a93be0c224546879d8f28fae252da763c8371347c5af36df,jev-1.14.0,2026-11-25,tec:a0l8e000001HoL3AAK|,ssen:n:export||water flowing water or head of water|,0.96,0.02,0.02,854
+a32350588d63f732b75c24ee59c11c83b67d1c5076f66badb4cb01686e972ea5,jev-1.14.0,2026-11-25,tec:a0l8e000001Hr31AAC|,ssen:n:strichen north energy plant|STRI_P|other|,0.1,0.07,0.83,838
+a8838d740411af4eb2ad265540cbf3b0706d7c4a3994a786b84890279343e3e7,jev-1.14.0,2026-11-25,tec:a0l8e000001Hr31AAC|,ssen:n:strichen south energy plant|STRI_P|other|,0.62,0.34,0.04,820
+1ea551a34d2a79dcdf9cc28b98c64c9214f0f029b3d957175951e1fb38a2f39d,jev-1.14.0,2026-11-25,tec:a0l8e000001HrCyAAK|,ssen:n:40mw wind|SHIN_P|wind|,0.01,0.01,0.98,854
+ed424d0742566236abd78771d91731af1fe04f8ef8deedbacd5705dd655caed8,jev-1.14.0,2026-11-25,tec:a0l8e000001HrCyAAK|,ssen:n:rosehall windfarm|SHIN_P|wind|,0.96,0.02,0.02,844
+3fdfe9555970e86bd8ea52c9494947bda440dae4b7795327ab8efe1332d65001,jev-1.14.0,2026-11-25,tec:a0l8e000001HrDhAAK|,ssen:n:38 34mw wind|CLAC_P|wind|,0.08,0.51,0.41,864
+ad2f124320fa38806d019405c45e4b5240ea7b494fe14f8283e2f554a5b2e9ad,jev-1.14.0,2026-11-25,tec:a0l8e000001HrZ3AAK|,npg:NPg23-002158|,0.74,0.04,0.22,839
+346b1818dba5463d58f952472c86894ebef8da6663e1b8037fb208c4c9dda431,jev-1.14.0,2026-11-25,tec:a0l8e000001HrZ3AAK|,npg:n:hill house hybrid|NORT_1|stored energy all stored energy irrespectve of the original energy source|,0.45,0.28,0.27,838
+70c126fa372afd83fcf92b5460b5506fd3362aca97c417d4f0f249cf8043cd65,jev-1.14.0,2026-11-25,tec:a0l8e000001HrZ3AAK|,ssen:n:|COWL_1|other|#3,0.92,0.03,0.05,851
+a8c79c855119432dcd1008beb898dbf43744927bb14795a2e635dae00586ca39,jev-1.14.0,2026-11-25,tec:a0l8e000001HrmUAAS|,ssen:n:49 9mw bess|GRUB_P|stored energy all stored energy irrespectve of the original energy source|,0.25,0.08,0.67,884
+0ac7eff2e2bc94000971d42d1c3b5d4e7cc8f767d5717caafb63eb14ff36e133,jev-1.14.0,2026-11-25,tec:a0l8e000001HrmUAAS|,ssen:n:achanalt battery energy storage system|GRUB_P|stored energy all stored energy irrespectve of the original energy source|,0.02,0.01,0.97,879
+75bdee5fa7cedc67c401d983762f2a8db55f6f2bb3511697510a18bb1f2cd65d,jev-1.14.0,2026-11-25,tec:a0l8e000001HrmUAAS|,ssen:n:achanalt power station|GRUB_P||,0.56,0.35,0.09,835
+6d56d25d29e62e413cb48c1418ebef4484015c02b1f985e161ad0290495f85bf,jev-1.14.0,2026-11-25,tec:a0l8e000001HrmUAAS|,ssen:n:badachro hydro|GRUB_P|water flowing water or head of water|,0.96,0.02,0.02,844
+fa372f45779ba5d965a178c922ddd33de1e7ea1ef3b9c1dbf3e0ea7f85351529,jev-1.14.0,2026-11-25,tec:a0l8e000001HrmUAAS|,ssen:n:chonais hydro|GRUB_P|water flowing water or head of water|,0.97,0.02,0.01,844
+5daf41ac75ddc3e4d3360893cf04b37a8f0602394ad9e25eee3e8d1703bd7ff2,jev-1.14.0,2026-11-25,tec:a0l8e000001HrmUAAS|,ssen:n:garbhaig hydro addcap|GRUB_P|hydro to be confirmed|,0.98,0.02,0.0,866
+0fb6cf909be243cc9e5c10ebb29116a5baf7db96936a2acfe12a9bde5f2c0b4d,jev-1.14.0,2026-11-25,tec:a0l8e000001HrmUAAS|,ssen:n:garbhaig hydro auxiliary|GRUB_P|water flowing water or head of water|,0.95,0.04,0.01,850
+4b5b6d1c884abacf99b054746bcc07fd749e0f4c4d42716318815dd651183bf9,jev-1.14.0,2026-11-25,tec:a0l8e000001HrmUAAS|,ssen:n:grudie bridge 49 4mw bess|GRUB_P|stored energy all stored energy irrespectve of the original energy source|,0.14,0.08,0.78,874
+deb07f03b44e652e2db2c079b4181cc5d8132e4d8882ac3ee7c006ea4089aedd,jev-1.14.0,2026-11-25,tec:a0l8e000001HrmUAAS|,ssen:n:grudie bridge 50mw bess|GRUB_P|stored energy all stored energy irrespectve of the original energy source|,0.34,0.1,0.56,884
+7ee9c0c33818eef1322dae68bf9a0d748f41efcb38da9272531c77276a104535,jev-1.14.0,2026-11-25,tec:a0l8e000001HrmUAAS|,ssen:n:|GRUB_P|water flowing water or head of water|,0.96,0.03,0.01,830
+3d77ff82045b9d2ebdc120e4e67f87e1a12f0828907d394c6c272501efbeadb2,jev-1.14.0,2026-11-25,tec:a0l8e000001HxRcAAK|,ssen:n:43mw battery|KIIN_P|stored energy all stored energy irrespectve of the original energy source|,0.09,0.09,0.82,879
+05e0f679e6ab7d7a81b12d6aadbc018386aba1fda1e2e62b52cff5bbadbfd0cd,jev-1.14.0,2026-11-25,tec:a0l8e000001HxRcAAK|,ssen:n:49 4mw battery|KIIN_P|stored energy all stored energy irrespectve of the original energy source|,0.53,0.1,0.37,856
+66a5e1c8b2aad316643baef019ac5a01be591b85a30f792097641f4e9f834d9e,jev-1.14.0,2026-11-25,tec:a0l8e000001HxRcAAK|,ssen:n:5 6mw bess replacing 5 6mw biomass|KIIN_P|stored energy all stored energy irrespectve of the original energy source|,0.74,0.1,0.16,875
+2ee145a1533b201616350e9f8ceac4065f240592778e1853a76a3a3271212503,jev-1.14.0,2026-11-25,tec:a0l8e000001HxRcAAK|,ssen:n:morenish|KIIN_P|stored energy all stored energy irrespectve of the original energy source|,0.75,0.07,0.18,871
+ac9f7592b495ffe3814c7469a9dca22625b44f614f0920e9994a67797e175f77,jev-1.14.0,2026-11-25,tec:a0l8e000001HxRcAAK|,ssen:n:|KIIN_P|hydro to be confirmed|#2,0.97,0.02,0.01,823
+fe24743c52eced8d060de2c65de54459e25af6d28a95714adbb9a1b1a323910c,jev-1.14.0,2026-11-25,tec:a0l8e000001HxRcAAK|,ssen:n:|KIIN_P|water flowing water or head of water|,0.97,0.02,0.01,827
+6724d4d9f4632796c26637b3715001f62094a9cf8df8e8f4d7d420a5bb39280d,jev-1.14.0,2026-11-25,tec:a0l8e000001HxRcAAK|,ssen:n:|KIIN_P||,0.94,0.03,0.03,818
+5a5f766f7cf6def5e43008a35f90285b8cb3d01e0b5ba7f8a7cd649e27e31db7,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxa9AAC|,npg:NPg23-002262|,0.97,0.01,0.02,861
+2d56b701ac5f37bf6d47e90cd1eb5749ade79579a9ad95684c3975397c17793c,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxa9AAC|,npg:NPg23-002502|,0.99,0.01,0.0,866
+27048dcbc157cc994843aaba1b2ed693ea7e1829de87c5a78dc06e3640719c63,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxa9AAC|,npg:NPg23-002880|,0.97,0.01,0.02,858
+fd9222da52a35c4594358f7734d01ae1e53b77c2cd659c1116b7fe82fccbd271,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxa9AAC|,npg:n:barlby road bess|DRAX_1|stored energy all stored energy irrespectve of the original energy source|,0.91,0.04,0.05,857
+3cd834d55462debeed3edc00563e6480ed6cf0100eca4c7660e7612ea506e32e,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxa9AAC|,npg:n:coast road bess|tynemouth|stored energy all stored energy irrespectve of the original energy source|,0.98,0.01,0.01,858
+540081f0fec52c927b45dd8a58b3d653701a5c7442e95605fc688708392a43e5,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxa9AAC|,npg:n:elland road bess|ELLA_1|stored energy all stored energy irrespectve of the original energy source|,0.97,0.01,0.02,858
+e74038f4205cf5196e435c0e7e29fe0e67dda2ebad9d866e4699e9ee7b388f69,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxa9AAC|,npg:n:old allen road bess|BRAW_1|stored energy all stored energy irrespectve of the original energy source|,0.95,0.02,0.03,856
+e7602ce44fdb357c3d2133fd2b8a2db42f67ccf5ca40de52a4f8c6ac08e904d3,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxa9AAC|,npg:n:shelley road bess|STEN_1|stored energy all stored energy irrespectve of the original energy source|,0.95,0.02,0.03,857
+e42e8e845a7b70566f3cc8772271d5a2b86626e41775f9fa18d53752c1c97783,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxa9AAC|,npg:n:station road east bess|CAMB_01|stored energy all stored energy irrespectve of the original energy source|,0.98,0.01,0.01,856
+7c6563380047153efd6219aa2569e3a6f7060fe965230c033c7d10d85d7f948a,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxa9AAC|,ssen:n:100mw pv battery|NURS_1|solar stored energy all stored energy irrespectve of the original energy source|,0.92,0.04,0.04,888
+23d5fb4b19ad98a05e6d9fafe3a9f6304726d92362692448af3c0afa5b63fce2,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxa9AAC|,ssen:n:99 9mw bess christchurch road storage|MANN_1|stored energy all stored energy irrespectve of the original energy source|,0.92,0.03,0.05,887
+9d280ba4965a889b75b1d543895b7e5e3575afcc066b22474085d6dffadb3f38,jev-1.14.0,2026-11-25,tec:a0l8e000001HxbRAAS|,npg:NPg23-001053|,0.95,0.03,0.02,835
+421f7a5f07fb2e6840a8f90ea9d87e63cc51e83e932180000c4800d8f0c419a6,jev-1.14.0,2026-11-25,tec:a0l8e000001HxbRAAS|,npg:NPg23-002542|,0.18,0.02,0.8,839
+05481cbc2e409897ca94b7962a0ad5a013f8c107240575d234462dc1ba00cf8c,jev-1.14.0,2026-11-25,tec:a0l8e000001HxbRAAS|,npg:n:bradley renewables pgf|CREB_1|solar|,0.85,0.05,0.1,844
+c7cb4230baf597aedbf0ea9a6f98b7e037f880850276fb54620b8e34d0b8f24c,jev-1.14.0,2026-11-25,tec:a0l8e000001HxbRAAS|,npg:n:harmony energy storage bess|CREB_1|stored energy all stored energy irrespectve of the original energy source|,0.67,0.3,0.03,855
+1b123c1913fffd517d3b2f0f05cb80b311586434d37b4467b06b1cf64c90836d,jev-1.14.0,2026-11-25,tec:a0l8e000001HxbRAAS|,npg:n:harmony energy storage|CREB_1|solar|,0.88,0.05,0.07,840
+f445067a8b52b909581a58820d71ba29fa7f5481e483d9f80f873302838931a2,jev-1.14.0,2026-11-25,tec:a0l8e000001HxbRAAS|,npg:n:hedon salads pv|CREB_1|solar|,0.86,0.08,0.06,828
+2df7d6d6313cd5afffc745f85ca4dd48d91288dfbcaf9b924e58d0b3458b21b7,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxc5AAC|,ssen:n:49 9mw|REDM_P|solar stored energy all stored energy irrespectve of the original energy source|,0.37,0.53,0.1,860
+715a3e98616c6416ca20a77a9c87d340b07bf48381bdc7042914f2bc8342882b,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxc5AAC|,ssen:n:greenbank crescent|||,0.94,0.03,0.03,823
+8cf92cd1864cf838e54ae341f7a2a7df18acfb46dc502cbdbb792007165780fc,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxc5AAC|,ssen:n:rigifa 20 power plant diesel|REDM_P|other|,0.69,0.08,0.23,827
+e19b12240b6065a732ae626738e7fc1067b0e811fd84dcbd19852dd70f011a50,jev-1.14.0,2026-11-25,tec:a0l8e000001Hxc5AAC|,ssen:n:with quality spa kincorth bess|REDM_P|other|,0.02,0.01,0.97,840
+d8f68b45aa3fdfb14ad853a43700e03643ae4d9ffbeb82083b845b3dfdbb4ae9,jev-1.14.0,2026-11-25,tec:a0l8e000001HxceAAC|,ssen:n:20mw bess|ARBR_P|stored energy all stored energy irrespectve of the original energy source|,0.4,0.48,0.12,848
+a0214074ab32e2679872ba14653340e98c7a54eb9a2618773f7b09b1e524bf48,jev-1.14.0,2026-11-25,tec:a0l8e000001HxceAAC|,ssen:n:20mw pv|ARBR_P|solar|,0.89,0.08,0.03,845
+3ffe0919db11516e1dacb949fc63bea37d49bb27919895a7779267ccac20b5f2,jev-1.14.0,2026-11-25,tec:a0l8e000001HxceAAC|,ssen:n:49 9mw bess|ARBR_P|stored energy all stored energy irrespectve of the original energy source|,0.1,0.09,0.81,866
+4477656f24d78ec3f5aa92317be79a30d7f18a954b1090c1bf7a5b61e71901b1,jev-1.14.0,2026-11-25,tec:a0l8e000001HxceAAC|,ssen:n:49 9mw bess|ARBR_P|stored energy all stored energy irrespectve of the original energy source|#2,0.3,0.25,0.45,867
+2795c0ccf07b04f2bcab7b84de7ae42d64ca5a4cc5f565b75393353444305b77,jev-1.14.0,2026-11-25,tec:a0l8e000001HxceAAC|,ssen:n:50mw battery|ARBR_P|stored energy all stored energy irrespectve of the original energy source|,0.83,0.1,0.07,879
+ef24f409c638ddabda6db6c6c78c8a44c68d615ad18681748649c6949d04fff2,jev-1.14.0,2026-11-25,tec:a0l8e000001HxceAAC|,ssen:n:50mw bess|ARBR_P|stored energy all stored energy irrespectve of the original energy source|,0.1,0.26,0.64,848
+0e76352d5192f4768e5553f7e37a2bf624db14ad585dceb4dde00905f32cd752,jev-1.14.0,2026-11-25,tec:a0l8e000001HxceAAC|,ssen:n:9 9mw pv|ARBR_P|solar|,0.92,0.05,0.03,846
+0423baa505ed25823b79639246600d72fd40c2855bc7a62cd2016c2f7f00cf81,jev-1.14.0,2026-11-25,tec:a0l8e000001HxceAAC|,ssen:n:arbroath 2mw battery storage|ARBR_P|stored energy all stored energy irrespectve of the original energy source|,0.72,0.26,0.02,850
+653e1856886aaea43e8bb9acb9526475f3b58c375b36df00f4bba1697b3a37d8,jev-1.14.0,2026-11-25,tec:a0l8e000001HxceAAC|,ssen:n:dg tayc arbroath gsp fauldielaw|ARBR_P|solar|,0.54,0.24,0.22,852
+93abb08925b0526e1db900017ac757e1b187ad6d62095262dc9f1d079d46f0ef,jev-1.14.0,2026-11-25,tec:a0l8e000001HxceAAC|,ssen:n:lochaber farm 50mw pv bess|ARBR_P|solar stored energy all stored energy irrespectve of the original energy source|,0.06,0.01,0.93,876
+6d89876edd99a8698cd7a5414e7dfd0e0e4d38a4946dba30673c7924637dae64,jev-1.14.0,2026-11-25,tec:a0l8e000001HxceAAC|,ssen:n:quality 49 5mw bess|ARBR_P|stored energy all stored energy irrespectve of the original energy source|,0.18,0.29,0.53,855
+c8fe70271883f531e8109ec882058a6a029acd7398af8dbdf04d66538764a968,jev-1.14.0,2026-11-25,tec:a0l8e000001HxceAAC|,ssen:n:with ccm 30mw export 60mw installed|ARBR_P|solar stored energy all stored energy irrespectve of the original energy source|,0.52,0.13,0.35,870
+e5e7aef030f1700c84914e400b56924afe610069c76d5b65cbc6a2673cb33475,jev-1.14.0,2026-11-25,tec:a0l8e000001HxmMAAS|,ssen:n:29 9mw bess|ALNE_P|stored energy all stored energy irrespectve of the original energy source|,0.4,0.31,0.29,870
+1819b171d49caa1b12de58e145686f4df80d7f62a6e3fd9114e344b6bdfe8aaa,jev-1.14.0,2026-11-25,tec:a0l8e000001HxmMAAS|,ssen:n:49 9mw battery|ALNE_P|stored energy all stored energy irrespectve of the original energy source|,0.47,0.39,0.14,887
+572709ea8dd71e298a33dcdf108e937f051348d4884ab0c570bca90f47a27b70,jev-1.14.0,2026-11-25,tec:a0l8e000001HxmMAAS|,ssen:n:contullich bess|ALNE_P|stored energy all stored energy irrespectve of the original energy source|,0.03,0.07,0.9,868
+4283ca652e3f67068d5ad0c4b2760311f4ab5df37b7b2634658796f17adc62d9,jev-1.14.0,2026-11-25,tec:a0l8e000001HxmMAAS|,ssen:n:generating station|ALNE_P|hydro to be confirmed|,0.97,0.03,0.0,848
+cb33e94ec98bef936e0393ad61a1503c32a9fd1756b2a1e55a13d3ba7b655c6c,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDszIAG|,npg:n:nel conway2 bess|FERRB1|stored energy all stored energy irrespectve of the original energy source|,0.12,0.04,0.84,857
+8b01be7556fb65f54b40ba5ee360111d0d4e1b81ae4f2d9121e1320cea607205,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDvoIAG|,ssen:n:99 9mw bess christchurch road storage|MANN_1|stored energy all stored energy irrespectve of the original energy source|,0.76,0.15,0.09,888
+fd9e908b6244ca258dea581e9c397f247b6cf300f28a6959a918f9dec70caa58,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDwDIAW|,npg:NPg23-001992|,0.83,0.06,0.11,820
+f51b4093ee0512b5a89d80e902b74f32838864bf6c891d8fb9e0c158d5db1c07,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDwDIAW|,npg:NPg23-002158|,0.04,0.01,0.95,838
+abf4dd3dc416a7610790d9ac34050fd5d505f426d653f3a1859480b19ef44094,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDwDIAW|,npg:NPg23-002188|,0.73,0.18,0.09,837
+672fe854b63fa09b553a32da1e562229b6c5ba5d11428b5a52273fc34230401f,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDwDIAW|,npg:NPg23-002529|,0.86,0.05,0.09,840
+32f2c7d7d1bf6d24c995f3f48f808a4dca5bf42ee7580068b916271a85f1e2a5,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDwDIAW|,npg:n:carr house farm pv|CREB_1|solar|,0.96,0.02,0.02,835
+73e98fc64e74101e5cbb8f955a5a67677ce020d84921316cc1c7f2295f5db735,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDwDIAW|,npg:n:hill house hybrid|NORT_1|stored energy all stored energy irrespectve of the original energy source|,0.5,0.23,0.27,837
+75f39cd7219a339e8856d6107f096fe11803181e35820d8fcd7e361244348e81,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDwDIAW|,npg:n:melton west buisness park hybrid|CREB_1|solar|,0.86,0.12,0.02,845
+ce09f0051f72249b6ed547aeb7d5007c7470b9d676a04b768ff0917b3a7205b1,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDwDIAW|,npg:n:southburn house hybrid|CREB_1|solar|,0.71,0.22,0.07,841
+137b8ab90a2244916e27d7224c09354133dbf7d11298b8e47d7d5024330db266,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDwDIAW|,ssen:n:qc auth|MELK_1|other|,0.99,0.0,0.01,854
+6aec496f7d34b2f459f5f5f21d1cbe04f3a92dc4e25bc80b88cc4cc2d2c12d5d,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDwDIAW|,ssen:n:|COWL_1|other|#3,0.96,0.01,0.03,850
+99f0a090d160726f6ae3b8093ad9179ee198c589087c2ea89ca18878846c3f68,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDyEIAW|,ssen:n:costa head wind|THSO_P|wind|,0.87,0.07,0.06,858
+6796dc597d06b2a0afe8be5b7e55ee9f15be22c6bf4838c7d2544588691dc992,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDyEIAW|,ssen:n:costa head wind||wind|,0.55,0.19,0.26,828
+1940d9dda93f8f881213ae6ae55f9dc211572bd6d5c490a09640a85fc69b7de7,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDyEIAW|,ssen:n:hesta head wind|FLEE|wind|,0.06,0.01,0.93,842
+64aecb6e0ab9a920aa8eb9261a675d8f846134763901815de7d5e17506dc6ae4,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDyEIAW|,ssen:n:hesta head wind|THSO_P|wind|,0.02,0.01,0.97,856
+a98d7705411d3bb9494d6a6c988ad270bdbc49c2071f7c8c30acf8256dfbd076,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDyEIAW|,ssen:n:hesta head wind||wind|,0.02,0.01,0.97,826
+3638cd3681e002d2e6add33de415b9ce493fd497ffcacb19f3f333471d67ba0e,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDyOIAW|,ssen:n:costa head wind|THSO_P|wind|,0.06,0.01,0.93,854
+9a130ff540405e36ee00c3c438ec41233b246213f329d1d98359f830ef226a08,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDyOIAW|,ssen:n:costa head wind||wind|,0.02,0.01,0.97,824
+13d9cc7c55966883589ac1b9a101a7bb3c4c42214f4b45575dbc7fa5fdb80a48,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDyOIAW|,ssen:n:hesta head wind|FLEE|wind|,0.69,0.14,0.17,838
+536b2567ffe57aac19a9ae7e9a9ff8088a68b4e8af1f717902e18d7f524dbd71,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDyOIAW|,ssen:n:hesta head wind|THSO_P|wind|,0.64,0.16,0.2,852
+271716bfa13060d376ddd9227b2da54b5b9ffec49432c3037212a05e4a1b07c2,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDyOIAW|,ssen:n:hesta head wind||wind|,0.57,0.22,0.21,822
+24e3267f195a9fa0d961ff425d7604d7ad696a2c0e3d6543d18ef64f37d97474,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDysIAG|,ssen:n:50mw bess|MILC_P|stored energy all stored energy irrespectve of the original energy source|,0.49,0.38,0.13,862
+bbd2d78201759d0d49d082e6a9950205c56322322be0a1e154c88a7f11ebbd44,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDysIAG|,ssen:n:claverhouse gas|MILC_P|other|,0.91,0.05,0.04,862
+4034b5ac27316bef024cbc37b61e3d1ce4d9c2e0c8a8a9dbde9fcd5bff7f10a6,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDysIAG|,ssen:n:dg tayc|MILC_P|other|,0.08,0.38,0.54,866
+6387ef57f4a86ae4a9c4ec9feeee444451dd3b94d4be461926d7457f73780eca,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDysIAG|,ssen:n:|MILC_P|other|,0.86,0.07,0.07,845
+d0f4193a0b78fa05f7acb661e13d1887c015027116f1acea7d2ad4abd5c91394,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:NPg15-000301|,0.85,0.1,0.05,822
+320f718b47669a6f1f64ee55f8e927e3dc9bc31a077dbb8357cdb40eca6375cb,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:NPg15-002780|,0.26,0.16,0.58,846
+802756173504865f1fba94d4b0172c014be8d962f7d39a4e255e5be9ecbc821b,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:NPg15-003292|,0.25,0.69,0.06,837
+5814617631ca7471e728d2f7bf27570eedad6108a3f6fcdebbd3986be4625877,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:n:annfield energy park|STES_1|stored energy all stored energy irrespectve of the original energy source|,0.47,0.26,0.27,846
+91e49b8a7dbe197a568cc3b2eaad0203589ecce9d50b2ddc8e038f7e428aef0a,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:n:birtley bess|STES_1|stored energy all stored energy irrespectve of the original energy source|,0.27,0.16,0.57,849
+52a6621829ccee0486802351e7bd4fea06aa7ffd46d2c14a9f73ba8484fd6dec,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:n:chopwell hybrid|STES_1|solar|,0.06,0.85,0.09,837
+e3447a759d3fb89f247fddfc6d6fff130ef5a5c015f4e14ed68ff69ffc266f12,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:n:dents hall bess|STES_1|stored energy all stored energy irrespectve of the original energy source|,0.72,0.18,0.1,847
+a007a10c4ff0a3179ee531edb45df329495f4ef33065634f4df9e84bfd1cecc4,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:n:harperley lane solar bess|STES_1|stored energy all stored energy irrespectve of the original energy source|,0.21,0.69,0.1,853
+e20d6cdbfc7d16b41a07fb73692fc8be6d6b7354fc88647b950a47b186dddeab,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:n:maiden hill farm bess|STES_1|stored energy all stored energy irrespectve of the original energy source|,0.62,0.19,0.19,848
+8ea6abaac80431243446a62ea3081e5c64b1ee478ad940e0db62afc048bc0547,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:n:newburn bridge bess|STES_1|stored energy all stored energy irrespectve of the original energy source|,0.24,0.07,0.69,846
+4e6519d6cb796c447ff014ffb130befafec82a9a5562d855682193d433a7db71,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:n:newcastle battery storage|STES_1|stored energy all stored energy irrespectve of the original energy source|,0.36,0.22,0.42,846
+8b5263f664368dd2c893167a9d98c3489611d97446606f0383681832569a06ea,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:n:pea farm bess|STES_1|stored energy all stored energy irrespective of the original energy source|,0.81,0.13,0.06,846
+eb3d9b2815dc9d170a2e93ea05a072d52f3ef8ba75d5b79faf4e6d33cb1dd6f6,jev-1.14.0,2026-11-25,tec:a0lJ9000000PDzHIAW|,npg:n:woody close farm hybrid|STES_1|stored energy all stored energy irrespectve of the original energy source|,0.42,0.48,0.1,849
+9ebdebb8a5e68c32f8061927b043c43d52fb62e1a5b2f16a2263afe78800e8f6,jev-1.14.0,2026-11-25,tec:a0lJ9000000PEAsIAO|,npg:NPg23-002696|,0.14,0.04,0.82,826
+0418843ee79ad184544180ea28be1dc67a7f1326ae54ca398321d18c7d824687,jev-1.14.0,2026-11-25,tec:a0lJ9000000PEAsIAO|,npg:n:brocklesby|GRIW_1|solar|,0.46,0.2,0.34,818
+9c72a0918b1ccdd69b67e048ffb27616edf8f85e903b9fc2fb4863328e114088,jev-1.14.0,2026-11-25,tec:a0lJ9000000PEAsIAO|,npg:n:bsb transport bess|GRIW_1|stored energy all stored energy irrespectve of the original energy source|,0.36,0.04,0.6,826
+fa3999e55e721cc1ec421177bee1d7dd38686134e3310b2c2a16faaf59e97667,jev-1.14.0,2026-11-25,tec:a0lJ9000000PEAsIAO|,npg:n:nel dibdin bess|GRIW_1|stored energy all stored energy irrespectve of the original energy source|,0.46,0.05,0.49,831
+7624d1de7adb09c525bdff4cd617c2d6a3fcd3c6ccf94f1fba88dd270549cbf5,jev-1.14.0,2026-11-25,tec:a0lJ9000000PEAsIAO|,npg:n:netherlands way volta|GRIW_1|fossil gas|,0.29,0.05,0.66,817
+d3c382c64a4da5786b781487966c18e5f28e1c0565f8e7428f1bf01cbb8d60a1,jev-1.14.0,2026-11-25,tec:a0lJ9000000PEDSIA4|,ssen:n:witney bypass 150mw bess|COWL_1|stored energy all stored energy irrespectve of the original energy source|,0.12,0.09,0.79,884
+420ebb1b15de96930781f7dd6e15a9b38b69a8896551f7e3647ccff4af11f31d,jev-1.14.0,2026-11-25,tec:a0lJ9000000PEENIA4|,npg:NPg15-000471|,0.91,0.06,0.03,851
+85edac099f160ed34332cfd0307300fda788a9959eb5d51e9e1759d8acf5839b,jev-1.14.0,2026-11-25,tec:a0lJ9000000PEENIA4|,npg:NPg15-002784|,0.81,0.14,0.05,850
+47ee0dbc4c0afcca8e044ec6edb4f77d0b270238b9f2b44d8cf95fab01b35d8b,jev-1.14.0,2026-11-25,tec:a0lJ9000000PEENIA4|,npg:NPg15-002810|,0.71,0.26,0.03,875
+4d39a5debbfb3125e46ab02b64e93ed4f919cc9748ffdc2abfc6bf75b478834c,jev-1.14.0,2026-11-25,tec:a0lJ9000000PEENIA4|,npg:n:harehill farm hybrid|hartmoor|solar|,0.6,0.27,0.13,866
+06f446e523806b5a6e4af61529d5ad6489c411154f69a889451f908a2e0138a7,jev-1.14.0,2026-11-25,tec:a0lJ9000000PEENIA4|,npg:n:high barnes farm hybrid|hartmoor|stored energy all stored energy irrespectve of the original energy source|,0.74,0.18,0.08,862
+dda783d6907202976bd581e7e559985511f694c3eec0d5ab99989a4e9f26f222,jev-1.14.0,2026-11-25,tec:a0lJ9000000PEENIA4|,npg:n:martindale farm hybrid|hartmoor|stored energy all stored energy irrespectve of the original energy source|,0.17,0.13,0.7,867
+6e1fde78c956aa9bc6000944723a6f3b05025f81c2dbfee84320922c8672c6be,jev-1.14.0,2026-11-25,tec:a0lJ9000000PExwIAG|,npg:NPg23-003036|,0.06,0.08,0.86,869
+81708728aff7f85d1db91ea5a56b02738104812a6a62cddea36fad9d03f57952,jev-1.14.0,2026-11-25,tec:a0lJ9000000PFEsIAO|,npg:n:thurcroft bess|THUR_6|stored energy all stored energy irrespective of the original energy source|#2,0.25,0.34,0.41,861
+9951531ee815870f9ccb7b118c3e873053b9b6d96f2a5ad272898239feeb34d1,jev-1.14.0,2026-11-25,tec:a0lJ9000000PFEsIAO|,npg:n:thurcroft bess|THUR_6|stored energy all stored energy irrespectve of the original energy source|,0.19,0.14,0.67,861
+cea56502424785938b10aea029537661abfcf0ac416ee032c2b40f5f61d3605b,jev-1.14.0,2026-11-25,tec:a0lJ9000000PFJUIA4|,npg:n:coast road bess|tynemouth|stored energy all stored energy irrespectve of the original energy source|,0.97,0.01,0.02,865
+0938502da0500290bfc942bad6ea1087ef9d222c2dbcee0fa13277994a391b9a,jev-1.14.0,2026-11-25,tec:a0lJ9000000PFobIAG|,npg:NPg15-002867|,0.39,0.24,0.37,857
+35bd7810a3fa6f5420c3cb5e1c6ca68e2c5d0e4d8cd9561a7b5ef2e80e4c7c8c,jev-1.14.0,2026-11-25,tec:a0lJ9000000PFobIAG|,npg:NPg15-003244|,0.95,0.04,0.01,860
+10a1ecf7aab0c52f3b8751be66766f04c17dbe24b032d3514fac6a7123e0e566,jev-1.14.0,2026-11-25,tec:a0lJ9000000PFobIAG|,npg:NPg15-003323|,0.88,0.08,0.04,858
+7dcade3530acbd7564b7720b26b5cbc1d821a3315f72f8876bf20210f075c87b,jev-1.14.0,2026-11-25,tec:a0lJ9000000PFobIAG|,npg:NPg15-003593|,0.52,0.34,0.14,845
+a10ea709d76bfbabf779a331d797528af7aa410ed96be22e37c213810d582182,jev-1.14.0,2026-11-25,tec:a0lJ9000000PFobIAG|,npg:n:clock and grimeston farm solar bess|OSBA_1|stored energy all stored energy irrespectve of the original energy source|,0.51,0.34,0.15,882
+61c8f229363e62de45456178985d514ff337539e762ceafa8d8cc85003772344,jev-1.14.0,2026-11-25,tec:a0lJ9000000PFobIAG|,npg:n:sheriff hutton 80mw hybrid|OSBA_1|solar|,0.59,0.28,0.13,866
+af19775c67a1a8ef95bc3c12abff63300da4c423ccbf3a6063b18a6fba600d91,jev-1.14.0,2026-11-25,tec:a0lJ9000000PGmHIAW|,ssen:n:49 9mw bess macduff|MACD_P|stored energy all stored energy irrespectve of the original energy source|,0.05,0.02,0.93,876
+bd659755dcd573aede07b25f6d0d010bf31e46aa7447acae302997ff171972e3,jev-1.14.0,2026-11-25,tec:a0lJ9000000PGmHIAW|,ssen:n:49 9mw pv bess|MACD_P|solar stored energy all stored energy irrespectve of the original energy source|,0.27,0.61,0.12,881
+065c71e412b7648ca7eec3d199291a2ed37bcf1e62ccea0fd260e5cf92057891,jev-1.14.0,2026-11-25,tec:a0lJ9000000PGmHIAW|,ssen:n:auth|MACD_P|other|,0.35,0.11,0.54,858
+b0d3ecf3b16da50fac66ce460fb1bdde26ac949b2422e2683c31d234c730929d,jev-1.14.0,2026-11-25,tec:a0lJ9000000PGmHIAW|,ssen:n:deyhill bess|MACD_P|stored energy all stored energy irrespectve of the original energy source|,0.33,0.15,0.52,868
+efdd894306c3218f8d50e5420c6895cbd0943e72c16f60b1a57420c9270d75a1,jev-1.14.0,2026-11-25,tec:a0lJ9000000PGmHIAW|,ssen:n:markethill|MACD_P||,0.9,0.04,0.06,842
+4901fbed0da0a8a6a8032c10b6902da46e2f5de3de2dc7e22fb91ae6b7422b38,jev-1.14.0,2026-11-25,tec:a0lJ9000000PH5LIAW|,npg:n:hill house hybrid|NORT_1|stored energy all stored energy irrespectve of the original energy source|,0.72,0.24,0.04,844
+bcd18a5542f0fe4e99c1ae2858e0f9c2b08287d6ec546ec67bf668dc3298e784,jev-1.14.0,2026-11-25,tec:a0lJ9000000PH5LIAW|,npg:n:hopewell house hybrid solar bess|KNAR|solar|,0.92,0.06,0.02,865
+d1057668b78f196f02c6481492c4ffd7b8211f39f4e1aaced0dd8f80112c5e03,jev-1.14.0,2026-11-25,tec:a0lJ9000000PH5LIAW|,npg:n:porch house farm bess|SPEN_1|stored energy all stored energy irrespectve of the original energy source|,0.92,0.04,0.04,861
+a52a238220a69aa9d4f3205832a92e4a171e44c8ecfacbb5d1364332f33bb6c6,jev-1.14.0,2026-11-25,tec:a0lJ9000000PH5LIAW|,npg:n:west house hybrid pv bess|NORT_1|solar|,0.86,0.13,0.01,864
+aa56210408d42089c029635c287ff48e5bcb97465d34ff41a2bf8d83a7580dee,jev-1.14.0,2026-11-25,tec:a0lJ9000000PH5LIAW|,ssen:n:qc auth|MELK_1|other|,0.94,0.02,0.04,861
+4bbbdde9b083c01b541b16ea4d669262dcffd7b05a327caddd58c31869ac5317,jev-1.14.0,2026-11-25,tec:a0lJ9000000PH5LIAW|,ssen:n:|COWL_1|other|#3,0.88,0.04,0.08,857
+e6fcd2203fe767896b0b9dbfbeef2842f8f736ea51b01975b8cf92ba0cfca0f0,jev-1.14.0,2026-11-25,tec:a0lJ9000000PMW3IAO|,ssen:n:49 9mw bess colaboll|LAIR_P|stored energy all stored energy irrespectve of the original energy source|,0.24,0.06,0.7,847
+5b9f9c2d5fde6096c929df7afd8908192dfc84f520a6e022e436b77579900413,jev-1.14.0,2026-11-25,tec:a0lJ9000000PMW3IAO|,ssen:n:dalchork farm bess|LAIR_P|stored energy all stored energy irrespectve of the original energy source|,0.3,0.07,0.63,862
+3ae6b56cbb1a85ab474acf439f6e911f5fa81ee03f8ec88fdf66139eac117b55,jev-1.14.0,2026-11-25,tec:a0lJ9000000PMW3IAO|,ssen:n:dg lairg gsp|LAIR_P|stored energy all stored energy irrespectve of the original energy source|,0.05,0.04,0.91,863
+066edb635c0a64d75263e02556ee09a435caabdcd1f133391e8000aff2d12e37,jev-1.14.0,2026-11-25,tec:a0lJ9000000PMW3IAO|,ssen:n:lairg bess 50mw battery|LAIR_P|stored energy all stored energy irrespectve of the original energy source|,0.1,0.05,0.85,861
+0b361243f87ffb5157f89b079f50a2b5cfdb47641b86b0b78b5ad0dc0ca30ab2,jev-1.14.0,2026-11-25,tec:a0lJ9000000PNyAIAW|,ssen:n:27mw wind|DOUN_P|wind|,0.58,0.26,0.16,871
+bf7084e263609c34fefa5fbeed14b3c8ae956614610b6f2b898386956a12170c,jev-1.14.0,2026-11-25,tec:a0lJ9000000PNyAIAW|,ssen:n:34mw bess|DOUN_P|stored energy all stored energy irrespectve of the original energy source|,0.6,0.38,0.02,905
+8abb836ace546a2d42dd70a2715e914439df4f0c7221b4c986b8fb7d67ec8467,jev-1.14.0,2026-11-25,tec:a0lJ9000000PNyAIAW|,ssen:n:49 9mw battery storage|DOUN_P|stored energy all stored energy irrespectve of the original energy source|,0.62,0.23,0.15,910
+ac9030c6acf63a6e659f40d0fab3c736ae40a8fc0a4921825a11c40bc555c689,jev-1.14.0,2026-11-25,tec:a0lJ9000000PNyAIAW|,ssen:n:melvich wind energy hub|DOUN_P|solar stored energy all stored energy irrespectve of the original energy source|,0.04,0.49,0.47,896
+393aad28f5ecaf62caddff17d14e6fb81826e9f5c6fc36376facf4c3b67e9793,jev-1.14.0,2026-11-25,tec:a0lJ9000000PNyAIAW|,ssen:n:melvich wind energy hub|DOUN_P|wind stored energy all stored energy irrespectve of the original energy source|,0.01,0.39,0.6,913
+1168839e42e1db8e76771fe6e20033261df190a04d75fe0d6a14b15f28b6edb9,jev-1.14.0,2026-11-25,tec:a0lJ9000000PNyAIAW|,ssen:n:|DOUN_P|wind|,0.73,0.21,0.06,862
+23fef9c786d1586a84a60f20529cfc6e0efa1b82ab11520f51ae4f9a30b29230,jev-1.14.0,2026-11-25,tec:a0lJ9000000PNyAIAW|,ssen:n:|DOUN_P|wind|#2,0.53,0.38,0.09,877
+b43563cf22f5113beed33e3d614b2eea2745993b31d058a9674d319d998982e6,jev-1.14.0,2026-11-25,tec:a0lJ9000000POB6IAO|,ssen:n:26mw wind|CAAD_P|wind|,0.4,0.33,0.27,846
+55828d76edd321164fd5d689927af26bf0a02ad38fde939d1802534cc72c37ec,jev-1.14.0,2026-11-25,tec:a0lJ9000000POB6IAO|,ssen:n:30mw wind|CAAD_P|wind|,0.31,0.38,0.31,845
+320202b6e4bfca6d4de211eded59b740ec9d2e7c86c6d2aff99c90a223013d03,jev-1.14.0,2026-11-25,tec:a0lJ9000000POB6IAO|,ssen:n:allt domhain wind farm|CAAD_P|wind|,0.39,0.24,0.37,867
+458e5041fe283830d560336a2e0513c995162383d64b4db3545f55a26ffabc06,jev-1.14.0,2026-11-25,tec:a0lJ9000000POB6IAO|,ssen:n:beinn an tuirc 3 windfarm|CAAD_P|wind|,0.52,0.24,0.24,851
+e5996c3a6baec8af9050559afe696fe26a72cfc8126234a4311a29fe19a3429f,jev-1.14.0,2026-11-25,tec:a0lJ9000000POB6IAO|,ssen:n:finlarig power station|||,0.96,0.02,0.02,860
+b51a03d3e981c89c39f110da75b49d589d79aed611f52daff00b700741e0a07a,jev-1.14.0,2026-11-25,tec:a0lJ9000000POB6IAO|,ssen:n:glencreggan farm 30mw wind|CAAD_P|wind|,0.58,0.31,0.11,872
+cb48b98ea52d372eb132ed910ea8b7673bf7e6c959b2340c65d298313c6fd6ba,jev-1.14.0,2026-11-25,tec:a0lJ9000000POB6IAO|,ssen:n:narachan wind farm|CAAD_P|wind|,0.6,0.26,0.14,879
+ce24020ed3d90211d4eac82b3b970faa2a904ea8733acdc8f155280566f49311,jev-1.14.0,2026-11-25,tec:a0lJ9000000POB6IAO|,ssen:n:sent for auth 60mw|CAAD_P|wind|,0.03,0.02,0.95,864
+5e938d9a9662d58f7500a1c78046124b8873de1bb9084298e138ce9650b752e8,jev-1.14.0,2026-11-25,tec:a0lJ9000000POB6IAO|,ssen:n:west torrisdale wind|CAAD_P|wind|,0.51,0.34,0.15,866
+946a40b7c214207c7b7bf36e9bc43025a53116224cc28dc01f482779790c6cb1,jev-1.14.0,2026-11-25,tec:a0lJ9000000POB6IAO|,ssen:n:wind 72 6mw|CAAD_P|wind|,0.42,0.21,0.37,863
+f863656ac9c501d96a8d04a8fdb60e9064eea5dd6fba083e4de2b2213df01380,jev-1.14.0,2026-11-25,tec:a0lJ9000000POFuIAO|,ssen:n:26mw wind|CAAD_P|wind|,0.27,0.31,0.42,851
+04d3b7be407fdca7b2814ceef0e70a059d51813ab9f9df5540d61580fa9590ce,jev-1.14.0,2026-11-25,tec:a0lJ9000000POFuIAO|,ssen:n:30mw wind|CAAD_P|wind|,0.26,0.33,0.41,850
+cad9c3b242962273bffcb698d7910d0d3806219c283383b8307e95ac296b8afe,jev-1.14.0,2026-11-25,tec:a0lJ9000000POFuIAO|,ssen:n:allt domhain wind farm|CAAD_P|wind|,0.0,0.0,1.0,872
+7e220919de54f0514c98caa0041d285caf9f45c33f8a90397cb32d99c45c6a07,jev-1.14.0,2026-11-25,tec:a0lJ9000000POFuIAO|,ssen:n:auth|CAAD_P|wind|,0.62,0.31,0.07,892
+a74374af1b00d7bda37b82a4ad00e128cc4bd51e13aa34fdd79d83fe837d6936,jev-1.14.0,2026-11-25,tec:a0lJ9000000POFuIAO|,ssen:n:clachaig wind farm|CAAD_P|wind|#2,0.7,0.24,0.06,892
+a6b6a3300ee1646f87521d5867d692b2da6bbf03ea0d489cf4d2526ad8694d0a,jev-1.14.0,2026-11-25,tec:a0lJ9000000POFuIAO|,ssen:n:narachan wind farm|CAAD_P|wind|,0.69,0.2,0.11,884
+032a9c85537b3981eb51f3e934f998c645d9d57fd1d447c753dfc1a824c94de9,jev-1.14.0,2026-11-25,tec:a0lJ9000000POFuIAO|,ssen:n:sent for auth 60mw|CAAD_P|wind|,0.23,0.17,0.6,869
+5dd6db96ed5036ffc371cd94672b899f3c3f9b98f6c9803c91e0a880a630bea7,jev-1.14.0,2026-11-25,tec:a0lJ9000000POFuIAO|,ssen:n:wind 72 6mw|CAAD_P|wind|,0.51,0.15,0.34,868
+8eb6f0513f3108979aeedad42e17907fa93c0ee2b5a9e87c541c068e42ed788b,jev-1.14.0,2026-11-25,tec:a0lJ9000000POkcIAG|,ssen:n:20mva pv charleston gsp|CHAR_P|solar|,0.16,0.04,0.8,855
+81143c511f43e9aec1179a8f5e04b5596602c311c195c736015d6848009d44bd,jev-1.14.0,2026-11-25,tec:a0lJ9000000POkcIAG|,ssen:n:charleston solar 20mw pv|CHAR_P|solar|,0.41,0.06,0.53,882
+6d7d4937f773a2e4ee32286071a8685c5112a7be7f3be4400f8ce8a49ceba058,jev-1.14.0,2026-11-25,tec:a0lJ9000000blQPIAY|,ssen:n:9 9mw export|INNE_P|other|,0.44,0.38,0.18,864
+8ab0a3fdae6172e763dce10d1c670f6f1fff23f24fb01bbc3eca5a14c52ae4c0,jev-1.14.0,2026-11-25,tec:a0lJ9000000blQPIAY|,ssen:n:daviot windfarm and bess|INNE_P|wind stored energy all stored energy irrespectve of the original energy source|,0.04,0.32,0.64,889
+2df444d9d6f659f4ec595ff86e749caaff5a878f330574bc00938840b39ac918,jev-1.14.0,2026-11-25,tec:a0lJ9000000blQPIAY|,ssen:n:dont send needs authorised|INNE_P|stored energy all stored energy irrespectve of the original energy source|,0.66,0.28,0.06,898
+42b8aab749d73e5f0cd4e5ad1c005965eb9700b3a4a6c7e9a732ceda2b6bc66a,jev-1.14.0,2026-11-25,tec:a0lJ9000000blQUIAY|,ssen:n:52 8mw wind high brenfield 1|PORA_P|wind|,0.02,0.01,0.97,869
+039f0711036d97e7bee0d0923a067f477134b9dbd8879bde10214b7cbdb8cd11,jev-1.14.0,2026-11-25,tec:a0lJ9000000blQZIAY|,ssen:n:52 8mw wind high brenfield 2|PORA_P|wind|,0.13,0.19,0.68,857
+b838bf2be340cbda3378575ae358c510ca31790f04d421e2ea364bffba42afb6,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:NPg15-000109|,0.85,0.1,0.05,840
+0cac4c4a3dec6de0e619a8be19994f33a5e365c24e8ecee28c2e959538a8cfb1,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:NPg15-000135|,0.86,0.1,0.04,847
+0d1accbfcd6dbdb7ecd2691cb6a018e1c291b23097e9a64cc6624bfa95a49fdb,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:NPg15-000442|,0.76,0.13,0.11,847
+7851715ab596c10aa8b0d1cc5f2e4d3ae4f90d717014a197c017bb550a02d664,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:NPg15-000469|,0.73,0.18,0.09,828
+8859fba77293c1119cbc6f6746f3f26a59ed144d4a65e49c2c916e4780bf295a,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:NPg15-000493|,0.53,0.42,0.05,828
+9e9c02afab1453aca568fa39117c6eff94442bbf55d13fb550cf461b3e674375,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:NPg15-000531|,0.84,0.12,0.04,840
+cec07a3b2eff680485e042f145c1b6e3b2da2fac8beb292d679ec98177f81974,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:NPg15-002942|,0.63,0.27,0.1,853
+c5e01f06a0b14dccce051f9fea77451015b4c1b92babb681b76cf3a010f8cceb,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:hayton house farm|FERRB1|solar|,0.74,0.09,0.17,859
+8bee34dc356b0ed701b03a3f15da1e4b80cef152f323988bae1d614adb33d281,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:hill house hybrid|NORT_1|stored energy all stored energy irrespectve of the original energy source|,0.17,0.16,0.67,842
+5c2d5eeecf629bcdb70058daf68cd95a268765f80497d6c2e281e558f66af44c,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:hook house farm hybrid|NORT_1|solar|,0.59,0.2,0.21,839
+ad67e9977ff3d5b2d95ae2c95e8263c1a1e7f051af1786f00d9a7e1272bee699,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:hopewell house hybrid solar bess|KNAR|solar|,0.58,0.09,0.33,863
+fbf0666195e0945889f2cecea31094ce9a412804b6e0c16efc93d1eb6743bf70,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:hutton bonville solar|NORT_1|solar|,0.74,0.13,0.13,843
+31e16fa6d66dee969fb1044969c976ccafc33c94d9a179151fd18ea5f0485f60,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:land on the west side of horseclose lane|NORT_1|stored energy all stored energy irrespective of the original energy source|,0.43,0.28,0.29,859
+4e75e922089d058a46d45ae3304e531c0cf8d92e15ddc687d170b8d065fb2bab,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:low brockholme farm|NORT_1|solar|,0.82,0.13,0.05,843
+f6cb2b4ac82306e5b28d866058df74db6d69eb007dd023c8ef29d75943f75efa,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:maiden hill farm bess|STES_1|stored energy all stored energy irrespectve of the original energy source|,0.54,0.25,0.21,855
+59672513d8e4dc475c940a87644fbd844f83064995efc2a4bc3062db0cdfbbe5,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:middlefield farm|NORT_1|stored energy all stored energy irrespectve of the original energy source|,0.48,0.22,0.3,856
+4d1ff1ce63eec841536d7721f2ebf1d586ac819e3448aa4c64ad9611b8a0e7b2,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:porch house farm bess|SPEN_1|stored energy all stored energy irrespectve of the original energy source|,0.82,0.12,0.06,859
+e7916723e82b0d75f3f353d00bc6ea1f8d671c3afe97d98406772aa6b283f4f5,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:salisbury house bess|KEAD_1|stored energy all stored energy irrespectve of the original energy source|,0.71,0.14,0.15,855
+0e4d8439e6af1d8373185dde3601dcfc3bb8f65179d730a6944011d925b3dca7,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:solar farm and battery|NORT_1|solar|#3,0.63,0.14,0.23,838
+84aab45cb4fec25957c49bc58c952b8c21ef7fe66b9fac290b5b3ff668259ead,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:thornley bess|NORT_1|stored energy all stored energy irrespectve of the original energy source|,0.63,0.24,0.13,854
+5ee4ebee3f6ec3055b8c3578dee125ad0a9ac72cdf4d2f8cf19824f5a590c2a4,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:west house hybrid pv bess|NORT_1|solar|,0.36,0.16,0.48,862
+b26a04b974b537c694ee52383162a287377e2478adfb7ec3d14eea847e5239f0,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:whiley hill farm|NORT_1|solar storage electrochemical classic batteries lithium ion li ion|,0.49,0.24,0.27,857
+da4dd1879375ccaf71738b368a959076d8be833f7cfa4919cdb482c10779d408,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,npg:n:yafforth farm pv|NORT_1|solar|,0.79,0.17,0.04,840
+8d96739b9fae2a8d86bbc11330bc73efbc079b15de79782638763e6e4564cc63,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,ssen:n:99 9mw battery|MANN_1|stored energy all stored energy irrespectve of the original energy source|#2,0.82,0.1,0.08,887
+0e4dd52dc69bb8c075a9c95261492fde5612e6b85d5644f71f30952767c23c48,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,ssen:n:auth qc 99 9mw bess|MELK_1|stored energy all stored energy irrespectve of the original energy source|,0.93,0.04,0.03,892
+fc4dbde5a1d52f955c179619fb248e3849491804c3f3e954ece2aab200314953,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,ssen:n:field house pv generation||solar|,0.99,0.01,0.0,851
+ce698775556f57e34b7569b4149c45846ce809280aca4cfcd00a56e3776ba8ed,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,ssen:n:qc auth|MELK_1|other|,0.87,0.06,0.07,859
+3d21dd685b50efe89c8588d8efdeb3bd5735e6a23dee24797360d30f6cf9234d,jev-1.14.0,2026-11-25,tec:a0lJ9000000blZ0IAI|,ssen:n:|COWL_1|other|#3,0.92,0.04,0.04,855
+4348b432c456e968028ad52b79954a62ce98fbb6b16cebfc146d06230b0a3968,jev-1.14.0,2026-11-25,tec:a0lJ9000000blamIAA|,ssen:n:30 155mw bess|ABNE_P|solar|,0.29,0.59,0.12,838
+c043c3965084287fbb7d8af632c1181c5011e627b36397ca8496c1be14cd38ed,jev-1.14.0,2026-11-25,tec:a0lJ9000000blamIAA|,ssen:n:carey farm pv recost|ABNE_P|solar|,0.78,0.19,0.03,866
+6de65f6cfb4e0c270888ed8a8d948ae8cdeca9a1b41e0abe156895510dafe770,jev-1.14.0,2026-11-25,tec:a0lJ9000000blamIAA|,ssen:n:jamesfield 2 requote|ABNE_P|other|,0.68,0.2,0.12,848
+5febdbe5a1ddd6f32b9266ed11bf9733c6545974e5b9c27548ec19c0820284af,jev-1.14.0,2026-11-25,tec:a0lJ9000000blamIAA|,ssen:n:jamesfield farm|ABNE_P|solar stored energy all stored energy irrespectve of the original energy source|,0.75,0.2,0.05,872
+5edfd56d3f335ea82e383a363e185880271d5c205f56156b555b841be7d17b13,jev-1.14.0,2026-11-25,tec:a0lJ9000000blamIAA|,ssen:n:shire end 20mw pv|ABNE_P|solar|,0.13,0.03,0.84,864
+f8ce36136c767fc8eb7a251e6f02551bccb01629786487bdcb9e6c5fffc62acb,jev-1.14.0,2026-11-25,tec:a0lJ9000000blnBIAQ|,npg:NPg23-002498|,0.63,0.08,0.29,849
+aa4280de653655186cfea38510a4f9db82a81563967135c176c4336122ec4bc2,jev-1.14.0,2026-11-25,tec:a0lJ9000000blnBIAQ|,npg:n:burnby grange|CREB_1|solar|,0.48,0.2,0.32,830
+8ef1bb2e91a3baba9865e59c62e18d43312228d3c71544470c50b9606d8a25f2,jev-1.14.0,2026-11-25,tec:a0lJ9000000blnBIAQ|,npg:n:overton grange hybrid|POPP_3|stored energy all stored energy irrespectve of the original energy source|,0.64,0.2,0.16,845
+62f503884d6e2ebf58c6797d5124b9c16c86dfb149e45d98d9f3c85f6770bbac,jev-1.14.0,2026-11-25,tec:a0lJ9000000blnBIAQ|,npg:n:overton grange road|POPP_3|solar|,0.5,0.31,0.19,834
+70f1cb503b32af429608575f164d85b76e51b160a648e1133258eb885b4502d2,jev-1.14.0,2026-11-25,tec:a0lJ9000000blnBIAQ|,ssen:n:49 9mw pv|BOTW_1|solar|,0.95,0.02,0.03,880
+00d0e229d613195c419938104dda02d1c8d79985500b06e4a02f17c2ba60f35d,jev-1.14.0,2026-11-25,tec:a0lJ9000000bltyIAA|,npg:NPg15-000051|,0.86,0.11,0.03,840
+1fd2b52ecb12160cf62e853b1664c2394808791e4c4cb31029308b38a863436c,jev-1.14.0,2026-11-25,tec:a0lJ9000000bltyIAA|,npg:n:salters lane solar farm|HAWP_6|solar|,0.49,0.16,0.35,857

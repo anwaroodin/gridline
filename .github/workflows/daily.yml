@@ -38,12 +38,15 @@ jobs:
           done
           # main may have moved (a merged PR) while this ran; PRs never touch archive/
           git pull --rebase && git push
-      # data/ is not committed; the ID ledger is, so project IDs survive every rebuild
-      - name: Rebuild and commit the project ID ledger
+      # data/ is not committed; the ID ledger and Jev's answers are, so project IDs and links
+      # survive every rebuild. Without the TypeSafe secret, new pairs are decided by the rules.
+      - name: Rebuild and commit project IDs and Jev answers
+        env:
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
         run: |
           uv run --locked gridline diff
-          git add archive/project_ids.csv
-          git diff --quiet --cached || git commit -m "archive: project IDs $(date -u +%F)"
+          git add archive/project_ids.csv reference/jev_answers.csv
+          git diff --quiet --cached || git commit -m "archive: project IDs and matches $(date -u +%F)"
           git pull --rebase && git push
       - run: uv run --locked gridline check # fail loudly if a source has no new release for too long
       - if: steps.fetch.outcome == 'failure'

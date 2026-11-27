@@ -517,3 +517,259 @@ def test_project_ids_are_stable():
         minted, [(("tec", "B|"), ("ssen", "S2|"), "rule", 0.9, "")], ledger2
     )
     assert moved["ssen", "S2|"] == moved["tec", "B|"] != moved["tec", "A|"]
+
+
+def ver(register, key, **kw):
+    """A register row's only version, as diff() hands it to match()."""
+    v = {**dict.fromkeys(gridline.VERSION_SCHEMA), "register": register, "key": key}
+    return {**v, "valid_from": date(2026, 11, 19), **kw}
+
+
+def tec_ver(name, site, mw, status, **kw):
+    return ver(
+        "tec",
+        f"{name}|",
+        project_name=name,
+        connection_site=site,
+        mw_total=mw,
+        status=status,
+        agreement_type="Embedded",
+        host_to="SHET",
+        **kw,
+    )
+
+
+def ssen_ver(name, site, mw, status, **kw):
+    connected = mw if status == "connected" else 0
+    return ver(
+        "ssen",
+        f"n:{name}",
+        project_name=name,
+        connection_site=site,
+        mw_total=mw,
+        mw_connected=connected,
+        status=status,
+        **kw,
+    )
+
+
+MATCH_ROWS = [
+    tec_ver(
+        "Achanalt Battery Storage",
+        "Grudie Bridge GSP",
+        49.9,
+        "Scoping",
+        plant_type="Energy Storage System",
+        customer_name="ADTEK LIMITED",
+    ),
+    ssen_ver(
+        "ACHANALT BATTERY ENERGY STORAGE SYSTEM",
+        "GRUDIE BRIDGE",
+        49.9,
+        "accepted to connect",
+        plant_type="STORED ENERGY",
+        customer_name="ADTEK LTD",
+    ),
+    tec_ver(
+        "Beinn an Tuirc 2", "Carradale 1 GSP", 43.7, "Built", plant_type="Wind Onshore"
+    ),
+    tec_ver(
+        "Beinn an Tuirc 3", "Carradale 1 GSP", 50.0, "Built", plant_type="Wind Onshore"
+    ),
+    ssen_ver("BEINN AN TUIRC 2", "CARRADALE", 43.7, "connected", plant_type="WIND"),
+    ssen_ver(
+        "BEINN AN TUIRC 3 WINDFARM", "CARRADALE", 47.5, "connected", plant_type="WIND"
+    ),
+    # the TEC row is a new scheme at Scoping; the ECR row is the farm built years ago
+    tec_ver(
+        "Novar 2 Wind Farm", "Alness GSP", 43.2, "Scoping", plant_type="Wind Onshore"
+    ),
+    ssen_ver(
+        "NOVAR 2 WIND FARM",
+        "ALNESS",
+        36.8,
+        "connected",
+        plant_type="WIND",
+        customer_name="JOHN SMITH",
+    ),
+]
+
+
+def jev_reply(p_same, p_related=None):
+    """A Jev answer as the API returns it."""
+    p_related = 1 - p_same if p_related is None else p_related
+    probs = {"0": round(1 - p_same - p_related, 2), "1": p_related, "2": p_same}
+    return {
+        "model": gridline.JEV_MODEL,
+        "usage": {"input_tokens": 1000},
+        "answers": {"link_state": {"probabilities": probs}},
+    }
+
+
+def linked(edges):
+    return sorted((a[1], b[1], method) for a, b, method, *_ in edges)
+
+
+def test_match_tec_to_ecr(tmp_path, monkeypatch):
+    monkeypatch.setattr(gridline, "ANSWERS", tmp_path / "jev_answers.csv")
+    monkeypatch.setattr(gridline, "OVERRIDES", tmp_path / "overrides.csv")
+    # no key: rule links stand, the rest are possible, and the build still runs
+    monkeypatch.setattr(gridline, "jev_key", lambda: None)
+    edges, possible, _, counts = gridline.match(MATCH_ROWS)
+    assert linked(edges) == [
+        (
+            "Achanalt Battery Storage|",
+            "n:ACHANALT BATTERY ENERGY STORAGE SYSTEM",
+            "rule",
+        ),
+        ("Beinn an Tuirc 2|", "n:BEINN AN TUIRC 2", "rule"),
+        ("Beinn an Tuirc 3|", "n:BEINN AN TUIRC 3 WINDFARM", "rule"),
+    ]
+    assert counts["jev asked now"] == 0 and not (tmp_path / "jev_answers.csv").exists()
+    novar = [x for x in possible if x[0][1] == "Novar 2 Wind Farm|"]
+    assert [(x[1][1], x[2]) for x in novar] == [("n:NOVAR 2 WIND FARM", None)]
+    assert "rules only" in novar[0][3] and "TEC row not started" in novar[0][3]
+
+    # with a key: Jev is asked once per pair, and its answers are kept for the next build
+    calls = []
+
+    def fake_post(body, key):
+        calls.append(json.loads(body))
+        return jev_reply(0.95, 0.03)
+
+    monkeypatch.setattr(gridline, "jev_key", lambda: "test-key")
+    monkeypatch.setattr(gridline, "jev_post", fake_post)
+    edges, possible, _, counts = gridline.match(MATCH_ROWS)
+    asked = len(calls)
+    assert asked == counts["jev asked now"] > 0
+    # a person's name is never sent; a company's is
+    sent = [c["state"]["ecr"].get("customer") for c in calls]
+    assert "ADTEK LTD" in sent and "JOHN SMITH" not in sent
+    assert "test-key" not in (tmp_path / "jev_answers.csv").read_text()
+    # even at P(same) 0.95 the built Novar is not linked to the new scheme
+    assert [x[2] for x in possible if x[0][1] == "Novar 2 Wind Farm|"] == [0.95]
+    assert "n:NOVAR 2 WIND FARM" not in {b[1] for _, b, *_ in edges}
+    # cached answers: a rebuild makes no request at all, and gives the same links
+    monkeypatch.setattr(gridline, "jev_post", lambda *a: pytest.fail("network call"))
+    assert linked(gridline.match(MATCH_ROWS)[0]) == linked(edges)
+
+    # overrides beat rules and Jev; one that names no row stops the build
+    (tmp_path / "overrides.csv").write_text(
+        "action,a,b,why\n"
+        "separate,tec:Achanalt Battery Storage|,ssen:n:ACHANALT BATTERY ENERGY STORAGE SYSTEM,test\n"
+        "link,tec:Novar 2 Wind Farm|,ssen:n:NOVAR 2 WIND FARM,test\n"
+        "link,tec:Beinn an Tuirc 3|,ssen:n:BEINN AN TUIRC 2,test\n"
+    )
+    edges, possible, apart, _ = gridline.match(MATCH_ROWS)
+    # BEINN AN TUIRC 2 goes where the override says, not also to its rule match
+    assert linked(edges) == [
+        ("Beinn an Tuirc 3|", "n:BEINN AN TUIRC 2", "override"),
+        ("Beinn an Tuirc 3|", "n:BEINN AN TUIRC 3 WINDFARM", "rule"),
+        ("Novar 2 Wind Farm|", "n:NOVAR 2 WIND FARM", "override"),
+    ]
+    assert ("ssen", "n:ACHANALT BATTERY ENERGY STORAGE SYSTEM") in apart
+    assert not any(x[1][1].startswith("n:ACHANALT") for x in possible)
+    (tmp_path / "overrides.csv").write_text(
+        "action,a,b,why\nlink,tec:Gone|,ssen:n:X,test\n"
+    )
+    with pytest.raises(SystemExit, match="no such row"):
+        gridline.match(MATCH_ROWS)
+
+
+def test_each_ecr_row_goes_to_its_best_match(tmp_path, monkeypatch):
+    """Two batteries at one GSP: Jev is a little surer of the crossed pair, but the names decide."""
+    monkeypatch.setattr(gridline, "ANSWERS", tmp_path / "jev_answers.csv")
+    monkeypatch.setattr(gridline, "jev_key", lambda: "test-key")
+
+    def fake_post(body, key):
+        b = json.loads(body)["state"]
+        crossed = ("west" in b["tec"]["name"].lower()) != (
+            "west" in b["ecr"]["name"].lower()
+        )
+        return jev_reply(0.96 if crossed else 0.87)
+
+    monkeypatch.setattr(gridline, "jev_post", fake_post)
+    site = "Braco West 275/33kV GSP Substation"
+    rows = [
+        tec_ver(
+            "Braco Battery",
+            site,
+            49.9,
+            "Consents Approved",
+            plant_type="Energy Storage System",
+        ),
+        tec_ver(
+            "Braco West BESS",
+            site,
+            49.9,
+            "Consents Approved",
+            plant_type="Energy Storage System",
+        ),
+        ssen_ver(
+            "BRACO BATTERY",
+            "BRACO WEST GRID",
+            49.9,
+            "accepted to connect",
+            plant_type="STORED ENERGY",
+        ),
+        ssen_ver(
+            "BRACO WEST BESS",
+            "BRACO WEST GRID",
+            49.9,
+            "accepted to connect",
+            plant_type="STORED ENERGY",
+        ),
+    ]
+    assert [(a, b) for a, b, _ in linked(gridline.match(rows)[0])] == [
+        ("Braco Battery|", "n:BRACO BATTERY"),
+        ("Braco West BESS|", "n:BRACO WEST BESS"),
+    ]
+
+
+def test_rows_with_the_same_fields_share_one_answer(tmp_path, monkeypatch):
+    """Two ECR rows alike in every field Jev sees send one request; both pairs get its answer."""
+    monkeypatch.setattr(gridline, "ANSWERS", tmp_path / "jev_answers.csv")
+    monkeypatch.setattr(gridline, "jev_key", lambda: "test-key")
+    posts = []
+
+    def fake_post(body, key):
+        posts.append(body)
+        return jev_reply(0.6)
+
+    monkeypatch.setattr(gridline, "jev_post", fake_post)
+    tec = tec_ver(
+        "Kincorth BESS",
+        "Craigiebuckler GSP",
+        49.9,
+        "Scoping",
+        plant_type="Energy Storage System",
+    )
+    one = ssen_ver(
+        "KINCORTH",
+        "CRAIGIEBUCKLER",
+        45.0,
+        "accepted to connect",
+        plant_type="STORED ENERGY",
+    )
+    two = {**one, "key": "n:KINCORTH#2"}
+    edges, possible, _, _ = gridline.match([tec, one, two])
+    assert len(posts) == 1
+    probs = [x[3] for x in edges] + [x[2] for x in possible]
+    assert probs == [0.6, 0.6]
+
+
+def test_answers_survive_a_failed_request(tmp_path, monkeypatch):
+    """Answers cost money: those that arrived are saved even when a later request fails."""
+    monkeypatch.setattr(gridline, "ANSWERS", tmp_path / "jev_answers.csv")
+    monkeypatch.setattr(gridline, "OVERRIDES", tmp_path / "overrides.csv")
+    monkeypatch.setattr(gridline, "jev_key", lambda: "test-key")
+
+    def fake_post(body, key):
+        if "BEINN AN TUIRC 3" in body:
+            raise RuntimeError("Jev answered HTTP 500")
+        return jev_reply(0.9)
+
+    monkeypatch.setattr(gridline, "jev_post", fake_post)
+    with pytest.raises(RuntimeError):
+        gridline.match(MATCH_ROWS)
+    assert len(gridline.read_answers()) > 0

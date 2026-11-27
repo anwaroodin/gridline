@@ -117,7 +117,8 @@ print(
 | `data/project_version.parquet` | version of a register row, valid from `valid_from` until `valid_to` (empty = current) |
 | `data/event.parquet` | change between two consecutive releases |
 | `data/project.parquet` | project, under a Gridline ID (`GL-` + 8 characters) that never changes: name, technology, MW, status, gate and date from its TEC row if it has one, else its newest register row |
-| `data/project_link.parquet` | register row (`register` + `key`) and the project it belongs to, with `method` (`id`: its own row or a shared official ID) |
+| `data/project_link.parquet` | register row (`register` + `key`) and the project it belongs to, with `method` (`id`: its own row or a shared official ID; `rule`, `jev` or `override`: matched to a TEC project), `confidence` (Jev's P(same)) and `evidence` |
+| `data/possible_match.parquet` | a TEC project and an ECR row that may be the same project but aren't linked, with Jev's `probability` (empty when Jev wasn't asked) and the evidence |
 | `archive/project_ids.csv` (committed) | the ID ledger: every register row ever seen and the ID it was given, so rebuilds keep IDs. Two projects that merge keep the older ID; the other is kept as `merged_into` |
 
 Every output is also written as CSV beside the Parquet file (`data/event.csv`, ...).
@@ -155,6 +156,12 @@ Every event and version carries `project_id` (the Gridline ID), `register` (`tec
   with the same numbers in it (so *Farm 2* is never *Farm 3*), else the only row each side with
   the same GSP, technology, capacity, date and status. A match continues the old row, with a
   `renamed` event if the name changed. Two rows that both carry their own ID are never joined.
+- **TEC projects are matched to ECR rows** automatically. Rules score each pair (name, GSP,
+  capacity, company, phase numbers); TypeSafe's Jev model (`jev-1.14.0`) judges the unsure ones;
+  a built ECR row is never linked to a TEC project that hasn't started. Jev's answers are
+  committed in [`reference/jev_answers.csv`](reference/jev_answers.csv), so `gridline diff` asks
+  only about new pairs and a rebuild without `TYPESAFE_API_KEY` gives the same links. Without the
+  key, new pairs are decided by the rules alone. Corrections go in `reference/overrides.csv`.
 - GSP names are compared by GSP ID from [`reference/gsp.csv`](reference/gsp.csv): NESO's GSP
   lookup plus aliases for other spellings, so a register that renames its GSPs (SSEN switched from
   codes such as `MELK` to names such as `MELKSHAM GSP` in October 2023) keeps its rows' keys.
