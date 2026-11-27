@@ -6,10 +6,13 @@ committed). `diff` replays every archived release in publication order and write
 data/project_version.parquet (each row with valid_from / valid_to) and data/event.parquet (typed
 changes between releases). TEC rows are matched on Project ID + Stage, ECR rows on the DNO's
 row ID. `low_confidence` marks rows that key cannot match one-to-one: no ID (name-based fallback
-key) or a key repeated within one release.
+key) or a key repeated within one release. A row that leaves a release while another arrives
+with the same export meter number (MPAN) or a near-identical name at the same GSP continues as one
+row (`renamed` when its name changed), also low_confidence.
 """
 
 import csv
+import difflib
 import hashlib
 import io
 import json
@@ -86,9 +89,10 @@ ECR_COLS = {
     "unique id": "project_id",  # SSEN
     "ecrid": "project_id",  # NPg CSV
     "unique site identifier": "project_id",  # NPg workbooks from May 2026, same IDs
+    "export mpan msid": "mpan",  # the export meter: links a row renamed between releases
 }
 # no ID column in the XLSX history; archive() still refuses a release that loses IDs
-ECR_REQUIRED = set(ECR_COLS.values()) - {"customer_name", "project_id"}
+ECR_REQUIRED = set(ECR_COLS.values()) - {"customer_name", "project_id", "mpan"}
 # the template's many spellings of "no value", after norm()
 MISSING = {
     "",
@@ -702,6 +706,89 @@ def stage_splits(prev: dict, cur: dict) -> dict[str, list[str]]:
     return keys
 
 
+def name_numbers(name: str | None) -> set[str]:
+    """The numbers in a name: "Beinn an Tuirc 2" and "Beinn an Tuirc 3" are two projects."""
+    return set(re.findall(r"\d+", norm(name)))
+
+
+def relink(prev: dict, cur: dict, gone: set, new: set) -> dict[str, str]:
+    """{new key: old key} for rows that left (`gone`) and arrived (`new`) in one release but
+    are one row under another name or GSP spelling: the same export meter number (MPAN or
+    MSID, at least 4 digits) where it is unique on both sides, even if the GSP changed or was
+    filled in; else the same GSP and a name at least 85% alike with the same numbers in it,
+    one-to-one, best name first and closest capacity breaking ties (rows with no name: the
+    same technology and capacity); else the one row on each side with the same GSP, technology,
+    capacity, date and status. Two rows that both carry their own ID are never relinked: the IDs
+    decide."""
+    own_id = lambda r: r["project_id"] and not r.get("borrowed_id")
+    pairs = {}
+    mpans = [defaultdict(list), defaultdict(list)]
+    for side, rows, keys in ((0, prev, gone), (1, cur, new)):
+        for k in keys:
+            m = rows[k].get("mpan") or ""
+            if len(re.sub(r"\D", "", m)) >= 4:  # not "0" or "BP_BESS"
+                mpans[side][m].append(k)
+    for m, olds in mpans[0].items():
+        o = olds[0]
+        if (
+            len(olds) == 1
+            and len(mpans[1].get(m, ())) == 1
+            and not (own_id(prev[o]) and own_id(cur[mpans[1][m][0]]))
+        ):
+            pairs[mpans[1][m][0]] = o
+    by_gsp = defaultdict(list)
+    for n in new - pairs.keys():
+        by_gsp[gsp(cur[n]["connection_site"])].append(n)
+    found = []
+    # ponytail: all pairs within one GSP; fine at a few hundred rows per release
+    for o in gone - set(pairs.values()):
+        a = prev[o]
+        for n in by_gsp.get(gsp(a["connection_site"]), ()):
+            b = cur[n]
+            if own_id(a) and own_id(b):
+                continue
+            if not (a["project_name"] and b["project_name"]):
+                # a row with no site name (redacted): same technology and exact capacity
+                same = not (a["project_name"] or b["project_name"]) and (
+                    norm(a["plant_type"]) == norm(b["plant_type"])
+                    and a["mw_total"] is not None
+                    and a["mw_total"] == b["mw_total"]
+                )
+                ratio = 1.0 if same else 0.0
+            elif name_numbers(a["project_name"]) != name_numbers(b["project_name"]):
+                continue
+            else:
+                ratio = difflib.SequenceMatcher(
+                    None, norm(a["project_name"]), norm(b["project_name"])
+                ).ratio()
+            if ratio >= 0.85:
+                mw = abs((a["mw_total"] or 0) - (b["mw_total"] or 0))
+                found.append((-ratio, mw, o, n))
+    used = set(pairs.values())
+    for _, _, o, n in sorted(found):
+        if o not in used and n not in pairs:
+            pairs[n] = o
+            used.add(o)
+    # last: one row each side with the same GSP, technology, capacity, date and status (SSEN
+    # replaced names like "49.9MW BATTERY" with site names in Dec 2025)
+    # ponytail: two different projects alike in all five, one leaving as the other arrives,
+    # would be joined; add the location (eastings) to the key if that shows up
+    prints = [defaultdict(list), defaultdict(list)]
+    for side, rows, keys in ((0, prev, gone - used), (1, cur, new - pairs.keys())):
+        for k in keys:
+            r = rows[k]
+            if r["mw_total"] is not None and not own_id(r):
+                f = (gsp(r["connection_site"]), norm(r["plant_type"]), r["mw_total"])
+                prints[side][*f, r["effective_from"], r["status"]].append(k)
+    for f, olds in prints[0].items():
+        if len(olds) == 1 and len(prints[1].get(f, ())) == 1:
+            o, n = olds[0], prints[1][f][0]
+            a, b = (name_numbers(r["project_name"]) for r in (prev[o], cur[n]))
+            if not (a and b and a != b):  # "Farm 2" is not "Farm 3"
+                pairs[n] = o
+    return pairs
+
+
 def add_event(
     events: list[dict],
     where: dict,
@@ -740,8 +827,14 @@ def build(
     borrow_ids(snapshots)
     events, versions, open_versions = [], [], {}
     prev, prev_id = None, None
+    moved = {}  # key in a release -> the older key its row continues
     for sid, published, rows in snapshots:
         cur = index(rows)
+        for k in [k for k in cur if k in moved]:
+            # ponytail: if the old key itself comes back, it keeps its key and this row
+            # stays under its own
+            if moved[k] not in cur:
+                cur[moved[k]] = {**cur.pop(k), "key": moved[k], "low_confidence": True}
         where = {
             "snapshot_id": sid,
             "prev_snapshot_id": prev_id,
@@ -750,6 +843,14 @@ def build(
         if prev is not None:
             splits = stage_splits(prev, cur)
             linked = {k for ks in splits.values() for k in ks}
+            left = prev.keys() - cur.keys() - splits.keys()
+            arrived = cur.keys() - prev.keys() - linked
+            for n, o in sorted(relink(prev, cur, left, arrived).items()):
+                cur[o] = {**cur.pop(n), "key": o, "low_confidence": True}
+                moved[n] = o
+                a, b = prev[o]["project_name"], cur[o]["project_name"]
+                if norm(a) != norm(b):
+                    add_event(events, where, cur[o], "renamed", "project_name", a, b)
             for old, new in sorted(splits.items()):
                 add_event(
                     events, where, prev[old], "stage_split", "key", old, ";".join(new)
