@@ -23,10 +23,13 @@ import math
 import os
 import re
 import sys
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from collections import Counter, defaultdict
 from collections.abc import Iterator
+from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, date, datetime, timedelta
 from functools import cache
 from pathlib import Path
@@ -1124,7 +1127,10 @@ def projects(
                 "status": b["status"],
                 "gate": b["gate"],
                 "effective_from": b["effective_from"],
-                "gsp_id": gsp(b["connection_site"]) or None,
+                "gsp_id": (site_gsp if best[0] in TRANSMISSION else gsp)(
+                    b["connection_site"]
+                )
+                or None,
                 "registers": ";".join(sorted({k[0] for k in ks})),
                 "source_ids": ";".join(
                     sorted(
@@ -1142,6 +1148,489 @@ def projects(
             }
         )
     return out, links, ids
+
+
+# Matching: a TEC row that connects through a DNO ("Embedded") and that DNO's ECR row for the
+# same project. Rules score each pair; TypeSafe's Jev model judges the unsure ones. Its answers
+# are committed in reference/jev_answers.csv, so a rebuild needs no key and gives the same links.
+JEV_URL = "https://api.typesafe.ai/v1/systemone"
+JEV_MODEL = "jev-1.14.0"
+ANSWERS = REFERENCE / "jev_answers.csv"
+ANSWER_COLS = (
+    "request",
+    "model",
+    "asked",
+    "tec",
+    "ecr",
+    "p_different",
+    "p_related",
+    "p_same",
+    "tokens",
+)
+OVERRIDES = REFERENCE / "overrides.csv"
+POSSIBLE_SCHEMA = {
+    "project_id": pl.String,  # the TEC row's project
+    "register": pl.String,  # the ECR row
+    "key": pl.String,
+    "other_project_id": pl.String,  # the ECR row's own project
+    "probability": pl.Float64,  # Jev's P(same project); empty when Jev wasn't asked
+    "evidence": pl.String,
+}
+# DNO registers by transmission area: SHET is north of Scotland, NGET England and Wales.
+# ponytail: SPT (south Scotland) waits for SPEN's register
+AREA = {"SHET": ("ssen",), "NGET": ("ssen", "npg")}
+# words that say nothing about which project a name means
+NAME_STOP = set(
+    "ltd limited plc llp the and of at on land farm farms solar pv park parks bess battery "  # noqa: SIM905
+    "batteries storage energy energies wind windfarm windfarms turbine turbines project "
+    "scheme site substation power generation renewable renewables hybrid centre center hub "
+    "grid system systems co uk development developments array estate cva export import "
+    "generating station facility hydro gas chp plant".split()
+)
+SITE_STOP = {
+    "gsp",
+    "grid",
+    "supply",
+    "point",
+    "substation",
+    "sub",
+    "bsp",
+    "primary",
+    "connection",
+    "node",
+    "new",
+    "ss",
+}
+# a customer name is sent to Jev only if it reads like an organisation: a private person's
+# name (some ECR rows name one) never leaves the machine. Unsure means dropped.
+COMPANY = re.compile(
+    r"\b(ltd|limited|plc|llp|llc|lp|inc|cic|co|company|corporation|group|holdings?|energy|energies"
+    r"|power|solar|wind|renewables?|green|farms?|estates?|council|trust|university|college|nhs"
+    r"|partners|partnership|services|developments?|storage|bess|properties|investments?|capital"
+    r"|association|society|water|utilities|networks?|distribution|generation|infrastructure|uk)\b"
+)
+STARTED = {"built", "under construction commissioning"}
+LEVELS = [
+    (
+        "They are two different projects: different places, different developers, or different "
+        "schemes that just share a word in their names or connect at the same substation."
+    ),
+    (
+        "They are closely related but may not be the same project: another phase or stage of the "
+        "same scheme (for example 'Farm 2' and 'Farm 3'), an extension of an existing site, a "
+        "sibling site nearby, or one part of a hybrid site (the wind part and the battery part)."
+    ),
+    "They are one and the same project, described by two different registers.",
+]
+CONTEXT = (
+    "Record `tec` comes from the national transmission register (TEC), which lists projects "
+    "that need a transmission agreement, including large projects that connect to a local "
+    "distribution network ('Embedded'). Record `ecr` comes from a distribution network "
+    "operator's Embedded Capacity Register. The same project is often named differently in the "
+    "two registers: a developer's scheme name in one and a site address or company name in the "
+    "other, upper or lower case, with or without 'Ltd', 'Solar Farm', 'BESS'. The connection "
+    "site is a substation (a grid supply point, GSP); many projects share one. Rules: a "
+    "different phase or stage number ('2' vs '3', 'Phase 1' vs 'Phase 2') means a different "
+    "project; an 'Extension' is a separate project from the original site; a hybrid site's "
+    "wind, solar and battery parts may be listed as separate rows; 49.9 MW is a very common "
+    "size, so equal capacity on its own is weak evidence. Capacities and dates can drift between "
+    "registers by a few percent or a few months for the same project."
+)
+DNO_NAME = {
+    "ssen": "SSEN (Scottish and Southern Electricity Networks)",
+    "npg": "Northern Powergrid",
+}
+
+
+def match_name(s: str | None) -> str:
+    """A name with MW mentions and generic words removed; numbers stay ("Farm 2")."""
+    s = re.sub(r"\b\d+(\s\d+)?\s?mw[a-z]*\b", " ", norm(s))
+    return " ".join(w for w in s.split() if w not in NAME_STOP)
+
+
+def techs(plant: str | None) -> set[str]:
+    s, out = (plant or "").lower(), set()
+    for tech, pattern in (
+        ("solar", r"solar|photo|pv"),
+        ("wind", r"wind"),
+        ("bess", r"storage|batter|stored|pump"),
+        ("gas", r"gas|ccgt|ocgt|chp|reciprocat|diesel|oil|fossil|engine|thermal"),
+        ("hydro", r"hydro(?!.*pump)"),
+        ("bio", r"bio|waste|landfill|anaerob"),
+        ("demand", r"demand"),
+    ):
+        if re.search(pattern, s):
+            out.add(tech)
+    return out or {"other"}
+
+
+def site_gsp(site: str | None) -> str:
+    """GSP ID of a TEC connection site ("Melksham B 132kV Substation" -> MELK_1): the longest
+    leading run of words the GSP lookup knows, else the cleaned name."""
+    s = re.sub(r"\d+(\s?/\s?\d+)*\s?kv\b", " ", (site or "").lower())
+    words = [w for w in norm(s).split() if w not in SITE_STOP and not w.isdigit()]
+    for n in range(len(words), 0, -1):
+        if " ".join(words[:n]) in gsp_ids():
+            return gsp_ids()[" ".join(words[:n])]
+    return " ".join(words)
+
+
+def company(name: str | None) -> str | None:
+    return name if name and COMPANY.search(norm(name)) else None
+
+
+def side(register: str, key: str, v: dict) -> dict:
+    """The fields matching uses, from a row's newest version."""
+    return {
+        "register": register,
+        "key": key,
+        "name": v["project_name"],
+        "site": v["connection_site"],
+        "plant": v["plant_type"],
+        "mw": v["mw_total"] or v["mw_connected"],
+        "connected": v["mw_connected"],
+        "status": v["status"],
+        "gate": v["gate"],
+        "date": v["effective_from"],
+        "customer": company(v["customer_name"]),
+        "host": v["host_to"],
+    }
+
+
+def company_alike(a: str | None, b: str | None) -> bool:
+    """ADTEK LIMITED and ADTEK LTD."""
+    return bool(
+        a and b and difflib.SequenceMatcher(None, norm(a), norm(b)).ratio() >= 0.8
+    )
+
+
+def similar(a: str, b: str) -> float:
+    if not a or not b:
+        return 0.0
+    ta, tb = set(a.split()), set(b.split())
+    return max(len(ta & tb) / len(ta | tb), difflib.SequenceMatcher(None, a, b).ratio())
+
+
+def mw_within(a: float | None, b: float | None, share: float) -> bool:
+    return bool(a and b and abs(a - b) <= share * max(a, b))
+
+
+def same_tech(t: dict, e: dict) -> bool:
+    """A shared technology; a row whose technology is "other" or blank could be anything."""
+    a, b = techs(t["plant"]), techs(e["plant"])
+    return bool(a & b) or "other" in a | b
+
+
+def blocked(t: dict, e: dict) -> bool:
+    """Worth scoring: the ECR's DNO serves the TEC row's area, a shared technology, and the
+    same GSP or a shared distinctive name word (a "Connection Node" site names no GSP)."""
+    if e["register"] not in AREA.get(t["host"], ()) or not same_tech(t, e):
+        return False
+    g = gsp(e["site"])
+    # SSEN serves both: north of Scotland GSP IDs end _P, southern England _1 or _6
+    if e["register"] == "ssen" and g.endswith(
+        ("_1", "_6") if t["host"] == "SHET" else "_P"
+    ):
+        return False
+    if site_gsp(t["site"]) == g:
+        return True
+    words = {w for w in match_name(t["name"]).split() if len(w) >= 4}
+    return bool(words & set(match_name(e["name"]).split()))
+
+
+def score(t: dict, e: dict) -> tuple[float, bool, str]:
+    """(points, phase numbers clash, evidence). Name likeness 0-1 counts 4, the same GSP 1.5,
+    MW within 10% 1.5 (25%: 0.7), the same company 1; phase numbers that differ cost 3."""
+    sim = similar(match_name(t["name"]), match_name(e["name"]))
+    a, b = name_numbers(match_name(t["name"])), name_numbers(match_name(e["name"]))
+    clash = bool(a and b and not a & b)
+    pts, why = 4 * sim, [f"name {sim:.2f}"]
+    if site_gsp(t["site"]) == gsp(e["site"]):
+        pts += 1.5
+        why.append("same GSP")
+    if mw_within(t["mw"], e["mw"], 0.1):
+        pts += 1.5
+        why.append("MW within 10%")
+    elif mw_within(t["mw"], e["mw"], 0.25):
+        pts += 0.7
+        why.append("MW within 25%")
+    if company_alike(t["customer"], e["customer"]):
+        pts += 1
+        why.append("same company")
+    if clash:
+        pts -= 3
+        why.append("phase numbers differ")
+    if t["date"] and t["date"] == e["date"]:
+        why.append("same date")
+    return round(pts, 2), clash, "; ".join(why)
+
+
+def rule(pts: float, clash: bool) -> str:
+    if clash:
+        return "maybe" if pts >= 4 else "no"
+    return "link" if pts >= 6 else "maybe" if pts >= 4 else "no"
+
+
+def jev_request(t: dict, e: dict) -> str:
+    """The request body for one pair: no IDs, no keys, no person's name."""
+
+    def clean(d):
+        return {k: v for k, v in d.items() if v not in (None, "", [])}
+
+    state = {
+        "tec": clean(
+            {
+                "name": t["name"],
+                "connection_site": t["site"],
+                "technology": t["plant"],
+                "mw": t["mw"],
+                "status": t["status"],
+                "gate": t["gate"],
+                "connection_date": t["date"] and str(t["date"]),
+                "customer": t["customer"],
+                "transmission_owner_area": t["host"],
+            }
+        ),
+        "ecr": clean(
+            {
+                "name": e["name"],
+                "grid_supply_point": e["site"],
+                "technology": e["plant"],
+                "mw": e["mw"],
+                "status": e["status"],
+                "connection_date": e["date"] and str(e["date"]),
+                "customer": e["customer"],
+                "network_operator": DNO_NAME.get(e["register"], e["register"]),
+            }
+        ),
+    }
+    question = {
+        "type": "score",
+        "instructions": "How do the project described in `tec` and the project described in "
+        "`ecr` relate? " + CONTEXT,
+        "criteria": LEVELS,
+    }
+    return json.dumps(
+        {"model": JEV_MODEL, "state": state, "questions": {"link_state": question}},
+        sort_keys=True,
+        default=str,
+    )
+
+
+def jev_key() -> str | None:
+    """TYPESAFE_API_KEY from ./.env, else the environment. Never printed or logged."""
+    env = Path(".env")
+    if env.exists():
+        for line in env.read_text(encoding="utf-8-sig").splitlines():
+            name, sep, value = line.strip().removeprefix("export ").partition("=")
+            if (
+                sep
+                and name.strip() == "TYPESAFE_API_KEY"
+                and value.strip().strip("'\"")
+            ):
+                return value.strip().strip("'\"")
+    return os.environ.get("TYPESAFE_API_KEY") or None
+
+
+def jev_post(body: str, key: str) -> dict:
+    """One request; the key goes only in the Authorization header. Retries when rate-limited."""
+    req = urllib.request.Request(
+        JEV_URL,
+        data=body.encode(),
+        method="POST",
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+    )
+    for attempt in range(5):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return json.load(r)
+        except urllib.error.HTTPError as err:
+            if err.code != 429 or attempt == 4:
+                raise RuntimeError(f"Jev answered HTTP {err.code}") from None
+            time.sleep(float(err.headers.get("retry-after") or 2**attempt))
+
+
+def read_answers() -> dict[str, dict]:
+    if not ANSWERS.exists():
+        return {}
+    with ANSWERS.open(encoding="utf-8", newline="") as f:
+        return {r["request"]: r for r in csv.DictReader(f)}
+
+
+def jev_answers(asks: dict[str, tuple], answers: dict[str, dict]) -> int:
+    """Ask Jev about each {request hash: (tec ref, ecr ref, body)} not yet answered, add the
+    answers to `answers` and reference/jev_answers.csv. Returns how many were asked; 0 when
+    the key is missing (those pairs are decided by the rules alone)."""
+    todo = {h: a for h, a in asks.items() if h not in answers}
+    if not todo:
+        return 0
+    key = jev_key()
+    if not key:
+        print(
+            f"notice: TYPESAFE_API_KEY not set; {len(todo)} new pairs decided by rules only"
+        )
+        return 0
+    try:
+        with ThreadPoolExecutor(6) as pool:
+            got = pool.map(lambda a: jev_post(a[2], key), todo.values())
+            for (h, (tec, ecr, _)), out in zip(todo.items(), got):
+                p = out["answers"]["link_state"]["probabilities"]
+                answers[h] = {
+                    "request": h,
+                    "model": out["model"],
+                    "asked": date.today().isoformat(),
+                    "tec": tec,
+                    "ecr": ecr,
+                    "p_different": p["0"],
+                    "p_related": p["1"],
+                    "p_same": p["2"],
+                    "tokens": out["usage"]["input_tokens"],
+                }
+    finally:  # a failed request still keeps the answers already paid for
+        with ANSWERS.open("w", encoding="utf-8", newline="") as f:
+            w = csv.DictWriter(f, ANSWER_COLS, lineterminator="\n")
+            w.writeheader()
+            w.writerows(
+                sorted(
+                    answers.values(), key=lambda r: (r["tec"], r["ecr"], r["request"])
+                )
+            )
+    print(f"asked Jev about {len(todo)} pairs")
+    return len(todo)
+
+
+def decide(t: dict, e: dict, p_same: float | None) -> tuple[str | None, str, str]:
+    """(outcome: "link", "possible" or None, method, evidence) for one scored pair.
+
+    Rules first. With Jev's P(same): a rule link stands at 0.5 or more; a rule "maybe" becomes
+    a link at 0.9 or more and is dropped under 0.3; a rule "no" is possible only at 0.9 or
+    more. Without an answer, rule links stand and "maybe" is possible. Never a link: a built
+    ECR row with a TEC row that hasn't started (Novar 2 is a new farm beside the built one)."""
+    pts, clash, why = score(t, e)
+    r = rule(pts, clash)
+    why = f"rules {pts} ({why})"
+    if p_same is None:
+        out, method = {"link": "link", "maybe": "possible"}.get(r), "rule"
+        why += "; rules only, Jev not asked"
+    else:
+        why += f"; Jev P(same) {p_same:.2f}"
+        out = {
+            "link": "link" if p_same >= 0.5 else "possible",
+            "maybe": "link" if p_same >= 0.9 else None if p_same < 0.3 else "possible",
+            "no": "possible" if p_same >= 0.9 else None,
+        }[r]
+        method = "rule" if r == "link" else "jev"
+    built = e["status"] == "connected" or (e["connected"] or 0) > 0
+    started = norm(t["status"]) in STARTED or (t["connected"] or 0) > 0
+    if out == "link" and built and not started:
+        out, why = "possible", why + "; ECR row built, TEC row not started"
+    return out, method, why
+
+
+def asked(t: dict, e: dict) -> bool:
+    """Pairs worth a Jev question: every rule link and maybe, near-miss rule "no"s, and ECR
+    rows at the same GSP named only by size and technology ("67.2MW WIND & 36.3MW BATTERY")."""
+    pts, clash, _ = score(t, e)
+    placeholder = not match_name(e["name"]) and site_gsp(t["site"]) == gsp(e["site"])
+    return rule(pts, clash) != "no" or pts >= 3 or placeholder
+
+
+def read_overrides(lineage: dict) -> list[tuple]:
+    """reference/overrides.csv rows (action, row a, row b, why); rows are named
+    `register:key` or `register:source ID`. A name that matches no row stops the build."""
+    if not OVERRIDES.exists():
+        return []
+    ref = {f"{k[0]}:{k[1]}": k for k in lineage}
+    for k, vs in lineage.items():
+        if vs[-1]["project_id"]:
+            ref.setdefault(f"{k[0]}:{vs[-1]['project_id']}", k)
+    out = []
+    with OVERRIDES.open(encoding="utf-8", newline="") as f:
+        for r in csv.DictReader(f):
+            missing = [x for x in (r["a"], r["b"]) if x not in ref]
+            if missing or r["action"] not in ("link", "separate"):
+                sys.exit(
+                    f"reference/overrides.csv: no such row {missing} or action {r['action']!r}"
+                )
+            out.append((r["action"], ref[r["a"]], ref[r["b"]], r["why"]))
+    return out
+
+
+def rank(p: float | None, pts: float) -> float:
+    """Which link an ECR row keeps, best first: Jev's probability plus the rule points out
+    of 8, so the better name wins a near tie (Braco Battery and Braco West BESS at one GSP)."""
+    return (p or 0) + pts / 8
+
+
+def match(versions: list[dict]) -> tuple[list[tuple], list[tuple], set, dict]:
+    """(edges for projects(), possible pairs (tec row, ecr row, P(same), evidence), rows an
+    override set apart, counts). Each ECR row links to at most one TEC row, its best; a TEC
+    row may link to several ECR rows (a hybrid's wind and battery rows)."""
+    lineage = lineages(versions)
+    # a Directly Connected project never appears in an ECR
+    tec = [
+        side(*k, vs[-1])
+        for k, vs in lineage.items()
+        if k[0] in TRANSMISSION
+        and vs[-1]["host_to"] in AREA
+        and vs[-1]["agreement_type"] in ("Embedded", None)
+    ]
+    ecr = [side(*k, vs[-1]) for k, vs in lineage.items() if k[0] not in TRANSMISSION]
+    by_reg = defaultdict(list)
+    for e in ecr:
+        by_reg[e["register"]].append(e)
+    pairs = [
+        (t, e)
+        for t in tec
+        for reg in AREA[t["host"]]
+        for e in by_reg[reg]
+        if blocked(t, e)
+    ]
+    answers = read_answers()
+    ref = lambda r: f"{r['register']}:{r['key']}"
+    asks, hashes = {}, {}
+    for t, e in pairs:
+        if asked(t, e):
+            body = jev_request(t, e)
+            # two rows with the same fields send the same request: one answer serves both
+            h = hashes[ref(t), ref(e)] = hashlib.sha256(body.encode()).hexdigest()
+            asks[h] = (ref(t), ref(e), body)
+    new = jev_answers(asks, answers)
+    found = []
+    for t, e in pairs:
+        a = answers.get(hashes.get((ref(t), ref(e))))
+        p = None if a is None else float(a["p_same"])
+        out, method, why = decide(t, e, p)
+        if out:
+            found.append((out, p, score(t, e)[0], t, e, method, why))
+    overrides = read_overrides(lineage)
+    apart = {frozenset((a, b)) for act, a, b, _ in overrides if act == "separate"}
+    # an override link replaces whatever the matcher found for that ECR row
+    forced = {
+        b: (a, b, "override", 1.0, why) for act, a, b, why in overrides if act == "link"
+    }
+    edges, possible, taken = list(forced.values()), [], set(forced)
+    for out, p, pts, t, e, method, why in sorted(
+        found, key=lambda f: (f[0] != "link", -rank(f[1], f[2]))
+    ):
+        a, b = (t["register"], t["key"]), (e["register"], e["key"])
+        if frozenset((a, b)) in apart:
+            continue
+        if out == "link" and b not in taken:
+            taken.add(b)
+            edges.append((a, b, method, p, why))
+        else:
+            possible.append((a, b, p, why))
+    linked = {b for _, b, *_ in edges}
+    possible = [x for x in possible if x[1] not in linked]
+    counts = {
+        "tec rows": len(tec),
+        "pairs scored": len(pairs),
+        "jev questions": len(asks),
+        "jev asked now": new,
+        "jev tokens": sum(int(answers[h]["tokens"]) for h in asks if h in answers),
+    }
+    return edges, possible, {b for x in apart for b in x}, counts
 
 
 def diff() -> None:
@@ -1166,8 +1655,16 @@ def diff() -> None:
         versions += [{**x, "register": name} for x in v]
     if not all_snaps:
         sys.exit("no snapshots yet, run `gridline fetch` first")
-    project, links, ids = projects(versions)
+    edges, possible, apart, counts = match(versions)
+    project, links, ids = projects(versions, edges, apart)
+    print("matching:", ", ".join(f"{v} {k}" for k, v in counts.items()))
+    # a link kept from an earlier build can put both rows in one project already
+    rows = [
+        (ids[a], *b, ids[b], p, why) for a, b, p, why in possible if ids[a] != ids[b]
+    ]
+    print(f"matching: {len(edges)} links, {len(rows)} possible matches")
     save("source_snapshot", pl.concat(all_snaps), SNAP_SCHEMA)
+    save("possible_match", rows, POSSIBLE_SCHEMA)
     save("project", [[p[c] for c in PROJECT_SCHEMA] for p in project], PROJECT_SCHEMA)
     save("project_link", [[x[c] for c in LINK_SCHEMA] for x in links], LINK_SCHEMA)
     # `project_id` is now the Gridline ID; the register's own ID becomes `source_id`
