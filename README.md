@@ -123,6 +123,26 @@ print(
 
 Every output is also written as CSV beside the Parquet file (`data/event.csv`, ...).
 
+Columns of the project tables:
+
+| Table | Column | Meaning |
+|---|---|---|
+| `project` | `project_id` | Gridline ID, `GL-` + 8 characters |
+| | `name`, `plant_type`, `mw_total`, `status`, `gate`, `effective_from` | from the project's TEC or Embedded Register row if it has one, else its newest DNO row |
+| | `gsp_id` | GSP ID from `reference/gsp.csv`, or the cleaned site name |
+| | `registers`, `source_ids` | the registers it appears in, and their own IDs as `register:ID`; both `;`-separated |
+| | `members` | how many register rows belong to it |
+| | `first_seen` | publication date of the first release any of its rows appears in |
+| | `live` | one of its rows is in its register's newest release |
+| `project_link` | `project_id`, `register`, `key`, `source_id` | which project a register row belongs to |
+| | `method` | `id` (the row itself, or a shared official ID), `rule`, `jev` or `override` |
+| | `confidence` | Jev's P(same project) for a matched row; empty for `id`, and for `rule` when Jev wasn't asked |
+| | `evidence` | rule points and the facts behind them, Jev's answer, or the override's reason |
+| `possible_match` | `project_id` | the TEC or Embedded Register row's project |
+| | `register`, `key`, `other_project_id` | the DNO row and the project it is in now |
+| | `probability` | Jev's P(same project); empty when Jev wasn't asked |
+| | `evidence` | as in `project_link` |
+
 | Event | Meaning |
 |---|---|
 | `added` | the row appears for the first time |
@@ -136,7 +156,75 @@ Every output is also written as CSV beside the Parquet file (`data/event.csv`, .
 | `gate_assigned` | the Gate column was set or changed (Gate 1 / Gate 2 under connections reform) |
 | `connected` | MW Connected (ECR: already-connected capacity) rose above 0 for the first time |
 
-Every event and version carries `project_id` (the Gridline ID), `register` (`tec`, `ssen`, `npg`), `key`, `source_id` (the register's own ID, such as a TEC Project ID or SSEN Unique ID) and `low_confidence`; events also carry `project_number`, `old_value` and `new_value`.
+Every event and version carries `project_id` (the Gridline ID), `register` (`tec`, `embedded`, `ssen`, `npg`), `key`, `source_id` (the register's own ID, such as a TEC Project ID or SSEN Unique ID) and `low_confidence`; events also carry `project_number`, `old_value` and `new_value`.
+
+## How projects are matched
+
+A TEC row for an embedded project and the DNO register row for the same site never share an ID,
+and are often named differently (*Clayfords Energy Storage* in TEC, *CLAYFORDS ENERGY STORAGE* in
+SSEN's register; *Fettereso BESS* and *THE WATERS BESS*). `gridline diff` links them so one
+project has one Gridline ID across registers. Every step runs on each rebuild:
+
+1. **Which rows.** TEC rows with Agreement Type "Embedded", and every row of NESO's Embedded
+   Register, whose transmission owner is SHET (matched to SSEN) or NGET (SSEN and NPg). The
+   other ECRs are matched once their sources are archived.
+2. **Blocking.** A pair is scored only if both rows are in the same network area (SSEN north or
+   south), have a compatible technology (an ECR row marked "other" or blank fits any), and share
+   a GSP or a name word of 4 or more letters.
+3. **Rules.** Points for name similarity (up to 4), the same GSP (1.5), capacity within 10% (1.5)
+   or 25% (0.7) and the same company (1). A different phase number (*Farm 2* and *Farm 3*) takes
+   3 off. 6 or more is a rule link, 4 to 6 is unsure.
+4. **Jev.** Unsure pairs, and rule links, go to TypeSafe's Jev model (`jev-1.14.0`), which
+   returns how likely the two rows are the same project, a related one (another phase, an
+   extension) or a different one. Only register fields are sent: names, sites, technology,
+   MW, status, dates, the network, and the customer only when it looks like a company. No IDs
+   and no person's name. A rule link stays a link at P(same) 0.5 or more; an unsure pair
+   becomes a link at 0.9 or more and is dropped under 0.3. Anything in between is a **possible
+   match**, published with its probability rather than linked.
+5. **Guard.** A connected ECR row is never linked to a TEC project that hasn't started building
+   (not Built or Under Construction, no connected MW): the TEC row is usually a new phase. The
+   pair becomes a possible match instead.
+6. **Assignment.** Each ECR row links to at most one TEC project, its best pair (P(same) plus
+   rule points out of 8). A TEC project may link to several ECR rows, such as a hybrid site's
+   wind and battery rows.
+7. **Sticky IDs.** A row keeps the Gridline ID it had on the last rebuild
+   ([`archive/project_ids.csv`](archive/project_ids.csv)). When two projects are linked, the
+   older ID wins.
+
+Jev's answers are kept in [`reference/jev_answers.csv`](reference/jev_answers.csv), keyed by the
+sha256 of the exact request, so each pair is asked once and a rebuild needs no key and no network.
+Set `TYPESAFE_API_KEY` (in `.env` or the environment; a repository secret for the daily Action)
+to ask about new pairs. Without it, new pairs are decided by the rules alone and their evidence
+says so.
+
+### Corrections
+
+`reference/overrides.csv` beats the rules and Jev. Columns `action,a,b,why`, where `action` is
+`link` or `separate` and `a`, `b` name rows as `register:key` or `register:source_id`:
+
+```csv
+action,a,b,why
+separate,tec:<TEC Project ID>,ssen:<SSEN Unique ID>,a later phase of the built farm
+link,tec:<TEC Project ID>,npg:<ecrid>,same developer and site under another name
+```
+
+A `link` replaces whatever the matcher linked that ECR row to; `separate` also undoes a link
+kept from an earlier build. A row that no longer exists stops the build, so a stale correction
+is never silently dropped.
+
+### How good it is
+
+[`reference/labels.csv`](reference/labels.csv) holds about 470 pairs labelled by hand with the
+evidence. A test rebuilds every decision from it and fails if, among pairs not marked unsure:
+
+| Measure | Bar | Now |
+|---|---|---|
+| Links that are the same project | 97% | 98.6% of 142 |
+| True pairs linked or listed as possible | 90% | 98.4% of 189 |
+| Pairs found by hand that blocking scores at all | 85% | 5 of 5 |
+
+The labels are one person's judgement from public fields. A possible match is a lead to check,
+not a fact.
 
 ## Data and archive
 
@@ -156,12 +244,8 @@ Every event and version carries `project_id` (the Gridline ID), `register` (`tec
   with the same numbers in it (so *Farm 2* is never *Farm 3*), else the only row each side with
   the same GSP, technology, capacity, date and status. A match continues the old row, with a
   `renamed` event if the name changed. Two rows that both carry their own ID are never joined.
-- **TEC projects are matched to ECR rows** automatically. Rules score each pair (name, GSP,
-  capacity, company, phase numbers); TypeSafe's Jev model (`jev-1.14.0`) judges the unsure ones;
-  a built ECR row is never linked to a TEC project that hasn't started. Jev's answers are
-  committed in [`reference/jev_answers.csv`](reference/jev_answers.csv), so `gridline diff` asks
-  only about new pairs and a rebuild without `TYPESAFE_API_KEY` gives the same links. Without the
-  key, new pairs are decided by the rules alone. Corrections go in `reference/overrides.csv`.
+- **TEC projects are matched to ECR rows** automatically; see
+  [How projects are matched](#how-projects-are-matched).
 - GSP names are compared by GSP ID from [`reference/gsp.csv`](reference/gsp.csv): NESO's GSP
   lookup plus aliases for other spellings, so a register that renames its GSPs (SSEN switched from
   codes such as `MELK` to names such as `MELKSHAM GSP` in October 2023) keeps its rows' keys.
@@ -190,7 +274,8 @@ Every event and version carries `project_id` (the Gridline ID), `register` (`tec
 - [x] Phase 0: TEC register archive and events
 - [ ] Phase 1: the six DNO Embedded Capacity Registers (SSEN and NPg with history; UKPN, SPEN and
   ENWL waiting for API keys; NGED deferred until its licence allows redistribution)
-- [ ] Planned: cross-register project matching
+- [x] Cross-register project matching: TEC and NESO's Embedded Register to SSEN and NPg
+- [ ] Planned: match the other ECRs once archived, and REPD
 - [ ] Planned: REST API
 - [ ] Planned: web app with map, project history and reform view
 - [ ] Planned: delivery-risk model
@@ -223,3 +308,6 @@ Data, by source:
   Source: [Embedded Capacity Register](https://northernpowergrid.opendatasoft.com/explore/dataset/embedded-capacity-register/).
   Its export includes derived location fields: Contains OS data © Crown copyright and database
   right. Office for National Statistics licensed under the Open Government Licence v.3.0.
+- **Matching:** `probability`, `confidence` and the `jev` method come from TypeSafe's Jev model
+  (`jev-1.14.0`), a model's judgement from the register fields above, not data from any
+  register. The hand labels in `reference/labels.csv` are Gridline's.
