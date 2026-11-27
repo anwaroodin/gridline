@@ -400,3 +400,33 @@ def test_key_gated_sources(tmp_path, monkeypatch):
     gridline.fetch(["ukpn"])
     assert {h["Authorization"] for _, h in calls} == {"Apikey secret-123"}
     assert "secret-123" not in gridline.manifest("ukpn")["source"][0]
+
+
+def test_gsp_renamed_by_the_register_keeps_the_key():
+    # SSEN switched from GSP codes to names in Oct 2023
+    assert gridline.gsp("MELK") == gridline.gsp("MELKSHAM GSP") == "MELK_1"
+    assert gridline.gsp("BERB2") == gridline.gsp("BERRYBURN GRID")  # not in NESO's list
+    # SSEN's old BRAC is Braco, a different GSP from Braco West
+    assert gridline.gsp("BRAC") != gridline.gsp("BRACO WEST GRID")
+    assert gridline.gsp("Somewhere New GSP") == "somewhere new"  # unknown: its name
+    d1, d2 = date(2023, 9, 15), date(2023, 10, 15)
+    site = {"project_name": "Rosebank Farm", "plant_type": "SOLAR", "mw_total": 5.0}
+    old = [row(**site, connection_site="MELK")]
+    new = [row(**site, connection_site="MELKSHAM GSP")]
+    assert kinds([("s1", d1, old), ("s2", d2, new)]) == []
+
+
+def test_npg_workbook_site_id_and_repeated_names():
+    # NPg workbooks since May 2026 carry the CSV's ID as "Unique Site Identifier"
+    blob = (FIX / "npg-ecr-1mw-13-november-2026.csv").read_bytes()
+    blob = blob.replace(b"ecrid,", b"Unique Site Identifier,", 1)
+    assert parse_ecr(blob)[0]["project_id"].startswith("NPg")
+    # two rows, one name: the ID is borrowed by capacity, not by file order
+    d1, d2 = date(2026, 4, 14), date(2026, 5, 14)
+    a, b = (
+        row(project_name="Pillswood Farm", mw_total=49.9),
+        row(project_name="Pillswood Farm", mw_total=20.0),
+    )
+    old = [a, b]
+    new = [{**b, "project_id": "N2"}, {**a, "project_id": "N1"}]
+    assert kinds([("s1", d1, old), ("s2", d2, new)]) == []

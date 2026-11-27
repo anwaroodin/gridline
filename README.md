@@ -138,9 +138,14 @@ Every event carries `register` (`tec`, `ssen`, `npg`), `low_confidence`, `projec
   2023 and NPg's from January 2022 (release
   [`history-ecr-2022-2026`](https://github.com/anwaroodin/gridline/releases/tag/history-ecr-2022-2026)).
   Their manifest rows are committed and point at the Release asset; `gridline diff` downloads each
-  file once into `data/cache/` and refuses it if its sha256 differs from the manifest. Workbooks
-  have no row ID, so a history row takes the ID of the row with the same site, GSP and technology
-  in the current CSVs where exactly one matches (`low_confidence`); the rest are matched by name.
+  file once into `data/cache/` and refuses it if its sha256 differs from the manifest. Most
+  workbooks have no row ID, so a history row takes the ID of the row with the same site, GSP and
+  technology in the current CSVs where exactly one matches, or the one with the same capacity
+  when a site name repeats (`low_confidence`); the rest are matched by name. NPg workbooks from
+  May 2026 carry the ID as "Unique Site Identifier".
+- GSP names are compared by GSP ID from [`reference/gsp.csv`](reference/gsp.csv): NESO's GSP
+  lookup plus aliases for other spellings, so a register that renames its GSPs (SSEN switched from
+  codes such as `MELK` to names such as `MELKSHAM GSP` in October 2023) keeps its rows' keys.
 - `.gitattributes` marks the archive `-text`, so git never rewrites line endings. A changed byte
   would change the file's sha256.
 - A [daily GitHub Action](.github/workflows/daily.yml) runs `fetch` and `diff` and commits any new
@@ -185,7 +190,9 @@ Data, by source:
 
 - **NESO (`tec`):** Contains data from the National Energy System Operator (NESO), published under
   the [NESO Open Data Licence](https://www.neso.energy/data-portal/neso-open-licence). Source:
-  [TEC Register](https://www.neso.energy/data-portal/transmission-entry-capacity-tec-register).
+  [TEC Register](https://www.neso.energy/data-portal/transmission-entry-capacity-tec-register) and
+  the GSP lookup in `reference/gsp.csv`
+  ([GIS Boundaries for GB Grid Supply Points](https://www.neso.energy/data-portal/gis-boundaries-gb-grid-supply-points)).
 - **SSEN (`ssen`):** Contains data from SSEN Distribution, licensed under
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Source:
   [Embedded Capacity Register](https://data.ssen.co.uk/dataset/655eb750-7b3f-4c55-93b6-9bc4c26a57ab).

@@ -22,6 +22,7 @@ import urllib.request
 from collections import Counter, defaultdict
 from collections.abc import Iterator
 from datetime import UTC, date, datetime, timedelta
+from functools import cache
 from pathlib import Path
 
 import fastexcel
@@ -30,6 +31,9 @@ import polars as pl
 DATA = Path("data")  # derived Parquet, gitignored
 # archive/<source>/<sha256>.csv + snapshots.csv, committed: the registers keep no history
 ARCHIVE = Path("archive")
+# hand-kept lookup tables, committed; found from the package so tests can chdir
+# ponytail: assumes a source checkout (src/gridline); ship them as package data if installed
+REFERENCE = Path(__file__).resolve().parents[2] / "reference"
 CKAN = "https://api.neso.energy/api/3/action/package_show?id=transmission-entry-capacity-tec-register"
 SSEN_CKAN = "https://data-api.ssen.co.uk/api/3/action/package_show?id=embedded_capacity_register"
 NPG = "https://northernpowergrid.opendatasoft.com/api/explore/v2.1/catalog/datasets/embedded-capacity-register"
@@ -80,7 +84,8 @@ ECR_COLS = {
     "energy source 2": "source_2",
     "energy source 3": "source_3",
     "unique id": "project_id",  # SSEN
-    "ecrid": "project_id",  # NPg
+    "ecrid": "project_id",  # NPg CSV
+    "unique site identifier": "project_id",  # NPg workbooks from May 2026, same IDs
 }
 # no ID column in the XLSX history; archive() still refuses a release that loses IDs
 ECR_REQUIRED = set(ECR_COLS.values()) - {"customer_name", "project_id"}
@@ -561,26 +566,63 @@ def norm(s: str | None) -> str:
     return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
 
 
+def site_key(s: str | None) -> str:
+    """norm() without a trailing "GSP" or "Grid": "MELKSHAM GSP" -> "melksham"."""
+    words = norm(s).split()
+    while len(words) > 1 and words[-1] in ("gsp", "grid"):
+        words.pop()
+    return " ".join(words)
+
+
+@cache
+def gsp_ids() -> dict[str, str]:
+    """site_key(name) -> GSP ID, from reference/gsp.csv: NESO's GSP lookup plus aliases for
+    other spellings, such as the codes SSEN used until Sept 2023 ("MELK" -> MELK_1)."""
+    path = REFERENCE / "gsp.csv"
+    if not path.exists():
+        return {}
+    with path.open(encoding="utf-8") as f:
+        return {site_key(r["name"]): r["gsp_id"] for r in csv.DictReader(f)}
+
+
+def gsp(site: str | None) -> str:
+    """The GSP ID of a connection site, or its site_key() if the lookup doesn't know it."""
+    k = site_key(site)
+    return gsp_ids().get(k, k)
+
+
 def name_key(r: dict) -> str:
-    """Fallback key for a row without an ID."""
-    fields = ("project_name", "connection_site", "plant_type", "stage")
-    return "n:" + "|".join(norm(r[c]) for c in fields)
+    """Fallback key for a row without an ID. The site is its GSP ID, so a register that
+    renames its GSPs (SSEN, Oct 2023) doesn't re-key every row."""
+    parts = (
+        norm(r["project_name"]),
+        gsp(r["connection_site"]),
+        norm(r["plant_type"]),
+        norm(r["stage"]),
+    )
+    return "n:" + "|".join(parts)
 
 
 def borrow_ids(snapshots: list[tuple[str, date, list[dict]]]) -> None:
     """Give a row without an ID the ID of the row with the same name key in another
     release, when exactly one ID has that key. The SSEN and NPg workbooks (history) have
     no ID column while their CSVs do, so without this every project would look removed and
-    re-added the month the format changed. Borrowed IDs are low_confidence.
-    ponytail: exact-key match only; Splink-style matching is Phase 2."""
+    re-added the month the format changed. Borrowed IDs are low_confidence. Two rows can
+    share a name key (one site, two connections): then the capacity must match too.
+    ponytail: exact-key match only"""
     ids = defaultdict(set)
     for _, _, rows in snapshots:
         for r in rows:
             if r["project_id"]:
                 ids[name_key(r)].add(r["project_id"])
+                ids[name_key(r), r["mw_total"]].add(r["project_id"])
     for _, _, rows in snapshots:
         for r in rows:
-            found = ids.get(name_key(r), ()) if not r["project_id"] else ()
+            if r["project_id"]:
+                continue
+            found = ids.get(name_key(r), ())
+            if len(found) > 1:
+                found = ids.get((name_key(r), r["mw_total"]), ())
             if len(found) == 1:
                 r["project_id"], r["borrowed_id"] = next(iter(found)), True
 
