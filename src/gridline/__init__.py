@@ -44,6 +44,8 @@ ARCHIVE = Path("archive")
 # ponytail: assumes a source checkout (src/gridline); ship them as package data if installed
 REFERENCE = Path(__file__).resolve().parents[2] / "reference"
 CKAN = "https://api.neso.energy/api/3/action/package_show?id=transmission-entry-capacity-tec-register"
+# embedded projects in Scotland with a transmission agreement, in the TEC format; none are in TEC
+EMBEDDED_CKAN = "https://api.neso.energy/api/3/action/package_show?id=embedded-register"
 SSEN_CKAN = "https://data-api.ssen.co.uk/api/3/action/package_show?id=embedded_capacity_register"
 NPG = "https://northernpowergrid.opendatasoft.com/api/explore/v2.1/catalog/datasets/embedded-capacity-register"
 # 1 MW+ registers behind a free portal account; the key goes in a header, never the URL
@@ -204,7 +206,7 @@ LINK_SCHEMA = {
     "evidence": pl.String,
 }
 # transmission-side registers: a project's name and status come from these first
-TRANSMISSION = ("tec",)
+TRANSMISSION = ("tec", "embedded")
 
 
 def http(url: str, headers: dict | None = None) -> bytes:
@@ -514,6 +516,14 @@ SOURCES = {
         "find": lambda: ckan(CKAN, "tec-register"),
         "parse": parse_tec,
         "stale_days": 14,  # NESO publishes about twice a week
+        "gone": "withdrawn",
+    },
+    "embedded": {
+        "find": lambda: ckan(EMBEDDED_CKAN, "embedded-register"),
+        "parse": parse_tec,
+        # ponytail: NESO doesn't state how often; the Nov 2026 file was 23 Nov, one day
+        # before its upload. Tighten once a few releases show the rhythm
+        "stale_days": 31,
         "gone": "withdrawn",
     },
     "ssen": {

@@ -24,12 +24,12 @@ Contains data from the National Energy System Operator (NESO), published under t
 
 ## labels.csv
 
-About 400 pairs of a TEC row and an ECR row, labelled by hand: `same`, `related` (another
+About 470 pairs of a TEC row and an ECR row, labelled by hand: `same`, `related` (another
 phase, a part of the site, or an older row) or `different`, with `unsure` set where the label
 is a guess, and the `evidence` it rests on (names, capacity, dates, companies). It holds every
 link and possible match of a full build, a random sample of rejected pairs, the rejected pairs
-closest to a match, and pairs found by hand for TEC rows the matcher missed
-(`stratum`). Each row keeps both rows' fields, so `pytest` rebuilds every decision without
+closest to a match, a sample of NESO Embedded Register pairs, and pairs found by hand for TEC
+rows the matcher missed (`stratum`). Each row keeps both rows' fields, so `pytest` rebuilds every decision without
 downloading anything, and fails if link precision falls under 97%, review recall (true pairs
 linked or listed as possible) under 90%, or blocking recall (pairs found by hand that the
 matcher scores at all) under 85%.
