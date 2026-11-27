@@ -5,6 +5,8 @@ PRO-003518 gate -> 2; PRO-000026 -> Under Construction; PRO-001624-1 connected 2
 PRO-000398 -> Built with 0 MW (no `connected`) and MW Increase "TBC"; PRO-003578 removed;
 PRO-002010 gets a second line with the same Project ID and blank Stage; one new PV row with no Project ID."""
 
+import csv
+import hashlib
 import json
 from datetime import date
 from pathlib import Path
@@ -773,3 +775,60 @@ def test_answers_survive_a_failed_request(tmp_path, monkeypatch):
     with pytest.raises(RuntimeError):
         gridline.match(MATCH_ROWS)
     assert len(gridline.read_answers()) > 0
+
+
+def test_match_quality():
+    """reference/labels.csv: TEC/ECR pairs labelled by hand with the evidence. Rebuilds each
+    decision from the stored fields and Jev's committed answers, and fails below the bar.
+    Pairs labelled unsure are left out."""
+    fields = ("name", "site", "plant", "mw", "connected", "status", "gate", "date")
+    fields += ("customer", "host", "register", "key")
+
+    def side(r, prefix):
+        x = {f: r[f"{prefix}_{f}"] or None for f in fields}
+        for f in ("mw", "connected"):
+            x[f] = x[f] and float(x[f])
+        x["date"] = x["date"] and date.fromisoformat(x["date"])
+        return x
+
+    answers = gridline.read_answers()
+    pairs = []
+    with (gridline.REFERENCE / "labels.csv").open(encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if r["unsure"]:
+                continue
+            t, e = side(r, "tec"), side(r, "ecr")
+            body = gridline.jev_request(t, e)
+            a = answers.get(hashlib.sha256(body.encode()).hexdigest())
+            p = a and float(a["p_same"])
+            blocked = gridline.blocked(t, e)
+            pairs.append(
+                {
+                    "label": r["label"],
+                    "stratum": r["stratum"],
+                    "blocked": blocked,
+                    "out": gridline.decide(t, e, p)[0] if blocked else None,
+                    "ecr": e["key"],
+                    "rank": gridline.rank(p, gridline.score(t, e)[0]),
+                }
+            )
+    # as in match(): an ECR row keeps only its best link (here, among the labelled pairs)
+    best = {}
+    for x in pairs:
+        if x["out"] == "link":
+            best[x["ecr"]] = max(best.get(x["ecr"], x["rank"]), x["rank"])
+    for x in pairs:
+        if x["out"] == "link" and x["rank"] < best[x["ecr"]]:
+            x["out"] = None
+    links = [x["label"] for x in pairs if x["out"] == "link"]
+    same = [x for x in pairs if x["label"] == "same"]
+    hunted = [x["blocked"] for x in same if x["stratum"] == "hunted"]
+    precision = links.count("same") / len(links)  # automatic links that are right
+    review = sum(x["out"] is not None for x in same) / len(same)  # linked or possible
+    blocking = sum(hunted) / len(hunted)  # pairs found by hand that blocking scores
+    print(f"precision {precision:.1%} of {len(links)}")
+    print(f"review recall {review:.1%} of {len(same)}")
+    print(f"blocking recall {blocking:.1%} of {len(hunted)}")
+    assert precision >= 0.97
+    assert review >= 0.90
+    assert blocking >= 0.85
