@@ -26,9 +26,9 @@ a complete and consistent picture of the queue. Gridline keeps the history.
   | Source | Register | Cadence |
   |---|---|---|
   | `tec` | NESO [TEC Register](https://www.neso.energy/data-portal/transmission-entry-capacity-tec-register) | about twice a week |
+  | `embedded` | NESO [Embedded Register](https://www.neso.energy/data-portal/embedded-register): embedded projects in Scotland with a transmission agreement, in the TEC format (none of them are in TEC) | not stated |
   | `ssen` | SSEN Distribution [Embedded Capacity Register](https://data.ssen.co.uk/dataset/655eb750-7b3f-4c55-93b6-9bc4c26a57ab), 1 MW and above | monthly |
   | `npg` | Northern Powergrid [Embedded Capacity Register](https://northernpowergrid.opendatasoft.com/explore/dataset/embedded-capacity-register/), 1 MW and over | monthly |
-
   | `ukpn` | UK Power Networks Embedded Capacity Register, 1 MW and above | monthly, needs `UKPN_API_KEY` |
   | `spen` | SP Energy Networks Embedded Capacity Register, over 1 MW | monthly, needs `SPEN_API_KEY` |
   | `enwl` | SP Electricity North West Embedded Capacity Register, 1 MW and above | monthly, needs `ENWL_API_KEY` |
@@ -207,10 +207,11 @@ Code: [Apache-2.0](LICENSE).
 
 Data, by source:
 
-- **NESO (`tec`):** Contains data from the National Energy System Operator (NESO), published under
-  the [NESO Open Data Licence](https://www.neso.energy/data-portal/neso-open-licence). Source:
-  [TEC Register](https://www.neso.energy/data-portal/transmission-entry-capacity-tec-register) and
-  the GSP lookup in `reference/gsp.csv`
+- **NESO (`tec`, `embedded`):** Contains data from the National Energy System Operator (NESO),
+  published under the [NESO Open Data Licence](https://www.neso.energy/data-portal/neso-open-licence).
+  Source: [TEC Register](https://www.neso.energy/data-portal/transmission-entry-capacity-tec-register),
+  [Embedded Register](https://www.neso.energy/data-portal/embedded-register) and the GSP lookup in
+  `reference/gsp.csv`
   ([GIS Boundaries for GB Grid Supply Points](https://www.neso.energy/data-portal/gis-boundaries-gb-grid-supply-points)).
 - **SSEN (`ssen`):** Contains data from SSEN Distribution, licensed under
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Source:

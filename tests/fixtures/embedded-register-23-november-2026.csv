@@ -1,0 +1,6 @@
+﻿Project Name,Customer Name,Connection Site,Stage,MW Connected,MW Increase / Decrease,Cumulative Total Capacity (MW),MW Effective From,Project Status,HOST TO,Plant Type,Project ID,Project Number,Gate
+180/181 Clynelish Muir BESS,Opdenergy UK 19 Limited,BRORA 132/33KV GRID SUPPLY POINT SUBSTATION,,0,50,50,31/10/2030,Scoping,SHET,Energy Storage System,a0l8e0000011zr5AAA,PRO-003597,1
+Abbotshaugh Reserve Power Facility,SP DISTRIBUTION PLC,Bainsford 132/33kV,,20,0,20,,Built,SPT,CCGT (Combined Cycle Gas Turbine),a0l4L0000005iN1QAI,PRO-001213,
+Abercorn Street Gas,SP DISTRIBUTION PLC,Paisley GSP,,22.5,0,22.5,,Built,SPT,Gas Reciprocating,a0l4L0000005ifIQAQ,PRO-000706,
+Aberdour Solar Farm,SP DISTRIBUTION PLC,Inverkeithing 132/33kV,,0,25,25,30/06/2026,Scoping,SPT,PV Array (Photo Voltaic/solar),a0l4L0000005iZTQAY,PRO-001989,
+Abernethy GSP (DNO) (Industrial Estate Friarton Road),Scottish Hydro Electric Power Distribution Plc,Abernethy GSP,,0,0.14,0.14,31/08/2023,Scoping,SHET,PV Array (Photo Voltaic/solar),a0l8e000000TPIlAAO,PRO-003249,

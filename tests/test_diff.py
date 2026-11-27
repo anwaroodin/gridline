@@ -832,3 +832,43 @@ def test_match_quality():
     assert precision >= 0.97
     assert review >= 0.90
     assert blocking >= 0.85
+
+
+def test_embedded_register(tmp_path, monkeypatch):
+    """embedded-register-23-november-2026.csv: the first 5 rows of NESO's Embedded Register
+    (embedded projects in Scotland with a transmission agreement), verbatim."""
+    blob = (FIX / "embedded-register-23-november-2026.csv").read_bytes()
+    rows = parse_tec(blob)
+    assert len(rows) == 5
+    r = rows[0]
+    assert (r["project_name"], r["project_number"], r["host_to"], r["gate"]) == (
+        "180/181 Clynelish Muir BESS",
+        "PRO-003597",
+        "SHET",
+        "1",
+    )
+    assert r["mw_total"] == 50 and r["effective_from"] == date(2030, 10, 31)
+    url = "https://api.neso.energy/dataset/x/resource/y/download/embedded-register-23-november-2026.csv"
+    res = [{"format": "CSV", "url": url}, {"format": "PDF", "url": "guidance.pdf"}]
+    blobs = {
+        gridline.EMBEDDED_CKAN: json.dumps({"result": {"resources": res}}).encode(),
+        url: blob,
+    }
+    monkeypatch.setattr(gridline, "http", lambda u, h=None: blobs[u])
+    monkeypatch.chdir(tmp_path)
+    gridline.fetch(["embedded"])
+    assert gridline.manifest("embedded")["published"].to_list() == [date(2026, 11, 23)]
+    # its rows are matched to ECR rows like TEC rows: Clynelish Muir is in SSEN's north
+    monkeypatch.setattr(gridline, "ANSWERS", tmp_path / "jev_answers.csv")
+    monkeypatch.setattr(gridline, "jev_key", lambda: None)
+    clynelish = ver("embedded", f"{r['project_id']}|", **r)
+    ssen = ssen_ver(
+        "CLYNELISH MUIR BESS",
+        "BRORA",
+        50.0,
+        "accepted to connect",
+        plant_type="STORED ENERGY",
+    )
+    assert linked(gridline.match([clynelish, ssen])[0]) == [
+        (clynelish["key"], "n:CLYNELISH MUIR BESS", "rule")
+    ]
