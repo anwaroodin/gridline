@@ -1,0 +1,2 @@
+snapshot_id,source,fetched_at,published,sha256,raw_path,rows
+089388934e71,https://spenergynetworks.opendatasoft.com/api/explore/v2.1/catalog/datasets/embedded-capacity-register/exports/csv?delimiter=%2C,2026-11-28T03:24:38.995008,2026-11-26,089388934e71f31df5d556004c3e90fdb641426295733635f4de18bf68b7425a,archive/spen/089388934e71f31df5d556004c3e90fdb641426295733635f4de18bf68b7425a.csv,849
