@@ -1,0 +1,2 @@
+snapshot_id,source,fetched_at,published,sha256,raw_path,rows
+ec612987c5c3,https://api.neso.energy/dataset/4b0e109c-aa23-45ac-86c1-0bda557d1aab/resource/68b6f3a1-e1bf-403b-9062-0269fc758d77/download/embedded-register-26-november-2026.csv,2026-11-28T03:24:31.796709,2026-11-26,ec612987c5c354447027891e6b18bc9eb99088d6bf4e70182a12c2b0aef628e0,archive/embedded/ec612987c5c354447027891e6b18bc9eb99088d6bf4e70182a12c2b0aef628e0.csv,555
