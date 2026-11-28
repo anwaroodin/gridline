@@ -1,0 +1,2 @@
+snapshot_id,source,fetched_at,published,sha256,raw_path,rows
+2751123b6732,https://electricitynorthwest.opendatasoft.com/api/explore/v2.1/catalog/datasets/enwl-embedded-capacity-register-2-1mw-and-above/exports/csv?delimiter=%2C,2026-11-28T03:24:40.342080,2026-10-20,2751123b67327e80ccdea28ff94321bbde8764f0510a24527a8c9cb869db891c,archive/enwl/2751123b67327e80ccdea28ff94321bbde8764f0510a24527a8c9cb869db891c.csv,568
