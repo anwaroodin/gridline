@@ -1,0 +1,2 @@
+snapshot_id,source,fetched_at,published,sha256,raw_path,rows
+ae2c3d0774e0,https://ukpowernetworks.opendatasoft.com/api/explore/v2.1/catalog/datasets/ukpn-embedded-capacity-register/exports/csv?delimiter=%2C,2026-11-28T03:24:37.415203,2026-11-13,ae2c3d0774e0f679f7d4c742f04ebff49137058952c682e3c9a7c694f67361ff,archive/ukpn/ae2c3d0774e0f679f7d4c742f04ebff49137058952c682e3c9a7c694f67361ff.csv,1028
